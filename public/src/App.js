@@ -14,7 +14,7 @@ const App = () => (
       <Route path='/builds' component={Builds} exact />
       <Route path='/tools' component={ToolsList} exact />
       <Route path='/tools/:toolName' component={Tool} exact />
-      <Route path='/' render={() =>{ window.location.replace('/') }} />
+      <Route path='/' render={() => { window.location.replace('/') }} />
     </Switch>
     <Footer />
   </div>
