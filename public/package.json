@@ -11,6 +11,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "standard": "standard --verbose | snazzy",
+    "standard-fix": "standard --fix --verbose | snazzy"
+  },
+  "standard": {
+    "globals": [
+      "it",
+      "fetch"
+    ]
   }
 }
