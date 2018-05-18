@@ -17,7 +17,7 @@
   },
   "standard": {
     "ignore": [
-      "client/"
+      "public/"
     ]
   }
 }
