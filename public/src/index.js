@@ -1,16 +1,22 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
+import { render } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import registerServiceWorker from './registerServiceWorker'
 
-class App extends Component {
-  render () {
-    return <div className='app'>Hello world!</div>
-  }
-}
+import App from './App'
+import reducer from './reducers'
+
+const store = createStore(reducer)
 
 // Render app ---------------------------------------------
-ReactDOM.render(
-  <App />,
+render(
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 )
 registerServiceWorker()
