@@ -15,6 +15,7 @@
     "standard": "standard --verbose | snazzy",
     "standard-fix": "standard --fix --verbose | snazzy"
   },
+  "proxy": "http://localhost:3001",
   "standard": {
     "globals": [
       "it",
