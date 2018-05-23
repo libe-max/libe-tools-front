@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "standard": "standard --verbose | snazzy",
-    "standard-fix": "standard --fix --verbose | snazzy"
+    "standard-fix": "standard --fix --verbose | snazzy",
+    "nodemon": "nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -19,5 +20,8 @@
     "ignore": [
       "public/"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
   }
 }
