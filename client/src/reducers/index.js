@@ -7,8 +7,26 @@ const someReducer = (state = {}, action) => {
   }
 }
 
+const inputValue = (state = true, action) => {
+  switch (action.type) {
+    case 'TOGGLE_INPUT':
+      return !state
+    default:
+      return state
+  }
+}
+
+const bundles = (state = [], action) => {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
-  someReducer
+  someReducer,
+  inputValue,
+  bundles
 })
 
 export default reducer

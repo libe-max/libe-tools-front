@@ -1,10 +1,10 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-import Header from './containers/Header'
-import Footer from './containers/Footer'
-import Builds from './layouts/Builds'
-import ToolsList from './layouts/ToolsList'
-import Tool from './layouts/Tool'
+import { Route, Switch, Redirect } from 'react-router-dom'
+import Builds from './containers/Builds'
+import ToolsList from './containers/ToolsList'
+import ToolPage from './containers/ToolPage'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App = () => (
   <div id='app'>
@@ -12,9 +12,11 @@ const App = () => (
     <Switch>
       <Route path='/'component={ToolsList} exact />
       <Route path='/builds' component={Builds} exact />
-      <Route path='/tools' component={ToolsList} exact />
-      <Route path='/tools/:toolName' component={Tool} exact />
-      <Route path='/' render={() => { window.location.replace('/') }} />
+      <Route
+        path='/tools/dumb-image-creator'
+        render={() => <ToolPage type='dumb-image' />}
+        exact />
+      <Route path='/' render={() => <Redirect to='/' />} />
     </Switch>
     <Footer />
   </div>
