@@ -1,45 +1,30 @@
 const express = require('express')
+const moment = require('moment')
 const router = express.Router()
 
 /* Get all modules of a specific type */
-router.all('/:appName/list', (req, res, next) => {
-  const appName = req.params.appName
-  res.json({
-    err: null,
-    data: [{
-      type: appName,
-      name: 'Some bundle name',
-      _id: '1234',
-      settings: {
-        tut: 'tut',
-        lol: 'lol'
-      }
-    },{
-      type: appName,
-      name: 'Some bundle name',
-      _id: '1235',
-      settings: {
-        tut: 'tut',
-        lol: 'lol'
-      }
-    }]
+router.all('/get-all-bundles', (req, res, next) => {
+  const collection = req.db.collection('bundles')
+  collection.find({}, (e, docs) => {
+    if (!e) res.json({err: null, data: docs})
+    else res.json({err: e, data: null})
   })
 })
 
 /* Creation of a new module */
-router.all('/:appName/create', (req, res, next) => {
-  const appName = req.params.appName
-  res.json({
-    err: null,
-    data: {
-      type: appName,
-      name: 'Some bundle name',
-      _id: '1234',
-      settings: {
-        tut: 'tut',
-        lol: 'lol'
-      }
-    }
+router.all('/:type/create', (req, res, next) => {
+  const type = req.params.type
+  const now = moment().valueOf()
+  const newBundle = {
+    type,
+    name: null,
+    settings_history: [],
+    created_on: now
+  }
+  const collection = req.db.collection('bundles')
+  collection.insert(newBundle, (e, docs) => {
+    if (!e) res.json({err: null, data: docs})
+    else res.json({err: e, data: null})
   })
 })
 
@@ -47,9 +32,7 @@ router.all('/:appName/create', (req, res, next) => {
 router.all('/*', (req, res, next) => {
   res.json({
     data: null,
-    err: {
-      message: `There is nothing to ${req.method} on ${req.url}`
-    }
+    err: `There is nothing to ${req.method} on ${req.url}`
   })
 })
 
