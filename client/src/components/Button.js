@@ -8,5 +8,6 @@ export default class Button extends Component {
       <div {...props}>
         Button
       </div>
+    )
   }
 }

@@ -15,5 +15,6 @@ export default class BlockTitle extends Component {
       <BlockTitle {...props}>
         {this.props.children}
       </BlockTitle>
+    )
   }
 }
