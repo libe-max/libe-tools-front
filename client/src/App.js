@@ -1,15 +1,15 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
-
-const HomePage = <div>Home page</div>
+import { Route, Switch, Redirect } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import ComponentsPage from './pages/ComponentsPage'
 
 const App = () => (
   <div id='app'>
-    <Header />
     <Switch>
       <Route path='/'component={HomePage} exact />
+      <Route path='/components' component={ComponentsPage} exact />
+      <Route path='/' render={() => <Redirect to='/' />} />
     </Switch>
-    <Footer />
   </div>
 )
 
