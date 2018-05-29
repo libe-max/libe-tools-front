@@ -25,7 +25,7 @@ export default class Header extends Component {
             title='Logo de libération' />
         </Link>
         <Link to='/'>Home</Link>
-        <Link to='/builds'>List of all builds</Link>
+        <Link to='/all-bundles'>List of all modules</Link>
       </Wrapper>
     )
   }

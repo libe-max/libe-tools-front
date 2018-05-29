@@ -1,41 +1,49 @@
 import { connect } from 'react-redux'
+import {
+  getBundlesRequest,
+  getBundlesSuccess,
+  getBundlesFailure,
+  createBundleRequest,
+  createBundleSucess,
+  createBundleFailure } from '../actions/actionCreators'
 import ToolPageComponent from '../components/ToolPage'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
+  const pathname = window.location.pathname
+  const toolType = pathname.split('/tools/')[1]
   return {
-    bundles: state.bundles.filter(bundle => bundle.type === ownProps.type),
-    type: ownProps.type
+    type: toolType,
+    loading: state.bundles.fetching,
+    error: state.bundles.error,
+    bundles: state.bundles.list.filter(bundle => {
+      return bundle.type === toolType
+    })
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
+  const pathname = window.location.pathname
+  const toolType = pathname.split('/tools/')[1]
   return {
-    createNewBundle: () => {
-      dispatch({
-        type: 'CREATE_BUNDLE_FETCH',
-        bundleType: ownProps.type
-      })
-      fetch(`/api/${ownProps.type}/create`)
+    fetchBundles: () => {
+      dispatch(getBundlesRequest())
+      fetch(`/api/get-all-bundles`)
         .then(r => r.json())
         .then(res => {
-          if (!res.err) {
-            dispatch({
-              type: 'CREATE_BUNDLE_SUCCESS',
-              bundle: res.data
-            })
-          } else {
-            dispatch({
-              type: 'CREATE_BUNDLE_FAILURE',
-              error: res.err
-            })
-          }
+          if (!res.err) dispatch(getBundlesSuccess(res.data))
+          else dispatch(getBundlesFailure(res.err))
         })
-        .catch(err => {
-          dispatch({
-            type: 'CREATE_BUNDLE_REQUEST_FAILURE',
-            error: err
-          })
+        .catch(err => { dispatch(getBundlesFailure(err)) })
+    },
+    createNewBundle: () => {
+      dispatch(createBundleRequest(toolType))
+      fetch(`/api/${toolType}/create`)
+        .then(r => r.json())
+        .then(res => {
+          if (!res.err) dispatch(createBundleSucess(res.data))
+          else dispatch(createBundleFailure(res.err))
         })
+        .catch(err => { dispatch(createBundleFailure(err)) })
     }
   }
 }

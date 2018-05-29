@@ -1,15 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
+import styled from 'styled-components'
 import Button from './Button'
 import BundlesList from './BundlesList'
 
-const ToolPage = ({type, createNewBundle, bundles}) => (
-  <div>
-    <Button
-      text={`Create a new ${type.replace(/-/, ' ')} module`}
-      onClick={createNewBundle} />
-    <BundlesList
-      bundles={bundles} />
-  </div>
-)
+export default class ToolPage extends Component {
+  // componentDidMount () {
+  //   this.props.fetchBundles()
+  // }
 
-export default ToolPage
+  render () {
+    const createNewBundle = this.props.createNewBundle
+    const ToolPage = styled.div`padding: 0 2rem;`
+    return (
+      <ToolPage>
+        <Button text='New module' onClick={createNewBundle} />
+        <BundlesList />
+      </ToolPage>
+    )
+  }
+
+  // render () {
+  //   const createNewBundle = this.props.createNewBundle
+  //   const fetchBundles = this.props.fetchBundles
+  //   const type = this.props.type
+  //   const loading = this.props.loading
+  //   const error = this.props.error
+  //   const bundles = this.props.bundles
+  //   const ToolPage = styled.div`
+  //     padding: 0 2rem;
+  //   `
+  //   return (
+  //     <ToolPage>
+  //       <Button text='New module' onClick={createNewBundle} />
+  //       <BundlesList
+  //         bundles={bundles}
+  //         loading={loading}
+  //         error={error}
+  //         fetchBundles={fetchBundles} />
+  //     </ToolPage>
+  //   )
+  // }
+}
