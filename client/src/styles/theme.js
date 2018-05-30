@@ -28,8 +28,7 @@ injectGlobal`@font-face {
   font-style: italic;
 }`
 
-const baseUnit = .5
-const units = val => `${baseUnit * val}rem`
+const units = val => `${8 * val}px`
 const fonts = {
   brand: 'LibeSans Semi Condensed',
   main: 'Zurich'
