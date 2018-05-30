@@ -7,12 +7,13 @@ export default class ShadowBar extends Component {
     const ShadowBar = styled.div`
       width: 100%;
       display: flex;
+      box-sizing: border-box;
       box-shadow: ${props => props.theme.shadows.medium};
       padding: ${props => props.theme.units(2)};
     `
     return (
       <ShadowBar {...props}>
-        {this.props.children}
+        {props.children}
       </ShadowBar>
     )
   }

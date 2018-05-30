@@ -8,12 +8,12 @@ export default class BlockTitle extends Component {
       font-size: ${props => props.theme.units(2.5)};
       line-height: ${props => props.theme.units(3)};
       font-family: ${props => props.theme.fonts.main};
-      color: ${props => props.theme.colors.black};
+      color: ${props => props.theme.colors.text};
       font-weight: 600;
     `
     return (
       <BlockTitle {...props}>
-        {this.props.children}
+        {props.children}
       </BlockTitle>
     )
   }

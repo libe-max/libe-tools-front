@@ -2,8 +2,38 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import MainTitle from '../components/MainTitle'
 import BlockTitle from '../components/BlockTitle'
+import Button from '../components/Button'
 import Header from '../components/Header'
 import LibeToolThumb from '../components/LibeToolThumb'
+import LibeBundleThumb from '../components/LibeBundleThumb'
+
+const CpRow = ({title, children}) => {
+  const CpRow = styled.div`
+    width: 100%;
+    padding: ${props => props.theme.units(2)} 0;
+    > #title {
+      font-weight: 600;
+      padding: ${props => props.theme.units(1)};
+      background: ${props => props.theme.colors.shadedBg};
+      font-family: ${props => props.theme.fonts.main};
+      color: ${props => props.theme.colors.lightText};
+      margin-bottom: ${props => props.theme.units(1)};
+    }
+    > #content {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  `
+  return (
+    <CpRow>
+      {title ? <div id='title'>{title}</div> : null}
+      <div id='content'>{children}</div>
+    </CpRow>
+  )
+}
 
 const CpBx = ({title, width, children}) => {
   const CpBx = styled.div`
@@ -15,13 +45,14 @@ const CpBx = ({title, width, children}) => {
       ${props => props.theme.units(1)};
     > #title {
       font-family: ${props => props.theme.fonts.main};
-      color: ${props => props.theme.colors.grey};
+      color: ${props => props.theme.colors.lightText};
       margin-bottom: ${props => props.theme.units(1)};
+      width: 100%;
     }
   `
   return (
     <CpBx>
-      <div id='title'>{title}</div>
+      {title ? <div id='title'>{title}</div> : null}
       <div>{children}</div>
     </CpBx>
   )
@@ -32,10 +63,32 @@ export default class ComponentsPage extends Component {
     const ComponentsPage = styled.div``
     return (
       <ComponentsPage>
-        <CpBx title='Main title'><MainTitle>The quick brown fox</MainTitle></CpBx>
-        <CpBx title='Block title'><BlockTitle>The quick brown fox</BlockTitle></CpBx>
-        <CpBx title='Header'><Header /></CpBx>
-        <CpBx title='Libé tool thumb'><LibeToolThumb /></CpBx>
+        <CpRow title='Text levels'>
+          <CpBx title='Main title'><MainTitle>The quick brown fox</MainTitle></CpBx>
+          <CpBx title='Block title'><BlockTitle>The quick brown fox</BlockTitle></CpBx>
+        </CpRow>
+        <CpRow title='Buttons'>
+          <CpBx title='Button primary' width={1/4}><Button primary>Click me!</Button></CpBx>
+          <CpBx title='Button primary minor' width={1/4}><Button primary minor>Click me!</Button></CpBx>
+          <CpBx title='Button primary dangerous' width={1/4}><Button primary dangerous>Click me!</Button></CpBx>
+          <CpBx title='Button primary minor dangerous' width={1/4}><Button primary minor dangerous>Click me!</Button></CpBx>
+          <CpBx title='Button' width={1/4}><Button>Click me!</Button></CpBx>
+          <CpBx title='Button minor' width={1/4}><Button minor>Click me!</Button></CpBx>
+          <CpBx title='Button dangerous' width={1/4}><Button dangerous>Click me!</Button></CpBx>
+          <CpBx title='Button minor dangerous' width={1/4}><Button minor dangerous>Click me!</Button></CpBx>
+          <CpBx title='Button link' width={1/4}><Button link>Click me!</Button></CpBx>
+          <CpBx title='Button link minor' width={1/4}><Button link minor>Click me!</Button></CpBx>
+          <CpBx title='Button link dangerous' width={1/4}><Button link dangerous>Click me!</Button></CpBx>
+          <CpBx title='Button link minor dangerous' width={1/4}><Button link minor dangerous>Click me!</Button></CpBx>
+        </CpRow>
+        <CpRow title='Compound components'>
+          <CpBx title='Header'><Header /></CpBx>
+          <CpBx title='Libé tool thumb' width={1/2}><LibeToolThumb /></CpBx>
+          <CpBx title='Libé bundle thumb' width={1/2}>
+            <LibeBundleThumb loading />
+            <LibeBundleThumb />
+          </CpBx>
+        </CpRow>
       </ComponentsPage>
     )
   }

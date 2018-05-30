@@ -39,15 +39,30 @@ const fonts = {
   main: 'Zurich'
 }
 
-const colors = {
+const rawColors = {
   black: '#1B1B1F',
   grey: '#7B7B80',
-  lightGrey: '#DDDDDD'
+  lightGrey: '#DDDDDD',
+  shadedWhite: '#F2F2F2',
+  white: '#FFFFFF',
+  red: '#FF0043',
+  blue: '#00B9E7'
+}
+
+const colors = {
+  text: rawColors.black,
+  lightText: rawColors.grey,
+  clearText: rawColors.white,
+  dangerText: rawColors.red,
+  borders: rawColors.lightGrey,
+  shadedBg: rawColors.shadedWhite,
+  action: rawColors.blue,
 }
 
 const shadows = {
-  medium: `0 0 ${units(1)} ${units(.25)} ${hexToRgba(colors.black, .2)}`,
-  small: `0 ${units(.25)} ${units(.5)} 0 ${hexToRgba(colors.black, .1)}`
+  medium: `0 0 ${units(1)} ${units(.25)} ${hexToRgba(rawColors.black, .2)}`,
+  small: `0 ${units(.25)} ${units(.5)} 0 ${hexToRgba(rawColors.black, .1)}`,
+  neat: `0 ${units(3/8)} 0 0 ${hexToRgba(rawColors.black, .1)}`
 }
 
 const theme = {

@@ -8,11 +8,11 @@ export default class MainTitle extends Component {
       font-size: ${props => props.theme.units(3)};
       line-height: ${props => props.theme.units(4)};
       font-family: ${props => props.theme.fonts.brand};
-      color: ${props => props.theme.colors.black};
+      color: ${props => props.theme.colors.text};
     `
     return (
       <MainTitle {...props}>
-        {this.props.children}
+        {props.children}
       </MainTitle>
     )
   }

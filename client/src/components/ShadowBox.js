@@ -11,12 +11,12 @@ export default class ShadowBox extends Component {
       overflow: hidden;
       border:
         ${props => props.theme.units(.25)}
-        ${props => props.theme.colors.lightGrey}
+        ${props => props.theme.colors.borders}
         solid;
     `
     return (
       <ShadowBox {...props}>
-        {this.props.children}
+        {props.children}
       </ShadowBox>
     )
   }

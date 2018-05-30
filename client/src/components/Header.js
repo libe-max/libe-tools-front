@@ -9,7 +9,10 @@ export default class Header extends Component {
   render () {
     const props = this.props
     const Header = styled.div`
-      display: flex;
+      > div {
+        display: flex;
+        align-items: center;
+      }
       > div > img {
         height: ${props => props.theme.units(7)};
       }
