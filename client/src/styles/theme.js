@@ -45,6 +45,7 @@ const rawColors = {
   lightGrey: '#DDDDDD',
   shadedWhite: '#F2F2F2',
   white: '#FFFFFF',
+  shadedBlack: '#333333',
   red: '#FF0043',
   blue: '#00B9E7'
 }
@@ -57,6 +58,7 @@ const colors = {
   borders: rawColors.lightGrey,
   clearBg: rawColors.white,
   shadedBg: rawColors.shadedWhite,
+  dimBg: rawColors.shadedBlack,
   action: rawColors.blue,
 }
 

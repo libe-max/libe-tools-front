@@ -10,6 +10,7 @@ export default class Button extends Component {
       line-height: ${props => props.theme.units(3)};
       font-style: ${props.dangerous ? 'italic' : null};
       font-weight: 400;
+      height: ${props => props.theme.units(4)};
       background: ${props => {
         if (props.minor && props.dangerous) return props.theme.colors.shadedBg
         else if (props.dangerous) return props.theme.colors.dangerText
@@ -41,6 +42,7 @@ export default class Button extends Component {
       font-weight: 600;
       line-height: ${props => props.theme.units(3)};
       border-radius: ${props => props.theme.units(3)};
+      height: ${props => props.theme.units(6)};
       padding:
         ${props => props.theme.units(1.5)}
         ${props => props.theme.units(3)};
@@ -61,21 +63,15 @@ export default class Button extends Component {
       }
     `
     if (props.primary) return (
-      <PrimaryButton
-        onClick={props.handleClick}
-        {...props}>
+      <PrimaryButton {...props}>
         {props.children}
       </PrimaryButton>)
     else if (props.link) return (
-      <LinkButton
-        onClick={props.handleClick}
-        {...props}>
+      <LinkButton {...props}>
         {props.children}
       </LinkButton>)
     else return (
-      <Button
-        onClick={props.handleClick}
-        {...props}>
+      <Button {...props}>
         {props.children}
       </Button>
     )

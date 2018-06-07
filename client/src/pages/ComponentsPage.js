@@ -91,23 +91,24 @@ export default class ComponentsPage extends Component {
           <CpBx title='Button link minor dangerous' width={1/4}><Button link minor dangerous>Click me!</Button></CpBx>
         </CpRow>
         <CpRow title='Inputs'>
-          <CpBx title='Text input with label' width={1/4}>
+          <CpBx title='Text input' width={1/4}>
             <TextInput
               label='Label'
               placeholder='Placeholder' />
           </CpBx>
-          <CpBx title='File input with label' width={1/4}>
+          <CpBx title='File input empty' width={1/4}>
             <FileInput
               label='Label'
               placeholder='Choisir un fichier' />
           </CpBx>
-          <CpBx title='File input with label' width={1/4}>
+          <CpBx title='File input with image' width={1/4}>
             <FileInput
               label='Label'
               placeholder='Choisir un fichier'
+              src='https://upload.wikimedia.org/wikipedia/commons/d/d7/F-15C_carrying_AIM-9X_maneuvers_into_a_vertical_climb.jpg'
               src='https://i2.wp.com/www.shannakress.com/wp-content/uploads/image207.jpg' />
           </CpBx>
-          <CpBx title='File input with label' width={1/4}>
+          <CpBx title='File input with file' width={1/4}>
             <FileInput
               label='Label'
               placeholder='Choisir un fichier'
