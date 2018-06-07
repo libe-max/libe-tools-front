@@ -43,6 +43,7 @@ export default class FileInput extends Component {
       > div {
         box-sizing: border-box;
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         cursor: pointer;
         flex-grow: 1;
@@ -59,7 +60,6 @@ export default class FileInput extends Component {
         #filename {
           color: ${p => p.theme.colors.text};
           max-height: 24px;
-          width: fit-content !important;
         }
         #placeholder {
           color: ${p => p.theme.colors.lightText};
