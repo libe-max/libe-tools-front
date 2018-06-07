@@ -105,8 +105,7 @@ export default class ComponentsPage extends Component {
             <FileInput
               label='Label'
               placeholder='Choisir un fichier'
-              src='https://upload.wikimedia.org/wikipedia/commons/d/d7/F-15C_carrying_AIM-9X_maneuvers_into_a_vertical_climb.jpg'
-              src='https://i2.wp.com/www.shannakress.com/wp-content/uploads/image207.jpg' />
+              src='https://upload.wikimedia.org/wikipedia/commons/d/d7/F-15C_carrying_AIM-9X_maneuvers_into_a_vertical_climb.jpg' />
           </CpBx>
           <CpBx title='File input with file' width={1/4}>
             <FileInput
