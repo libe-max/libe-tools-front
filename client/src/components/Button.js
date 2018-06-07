@@ -8,6 +8,7 @@ export default class Button extends Component {
       font-family: ${props => props.theme.fonts.main};
       font-size: ${props => props.theme.units(2)};
       line-height: ${props => props.theme.units(3)};
+      font-style: ${props.dangerous ? 'italic' : null};
       font-weight: 400;
       background: ${props => {
         if (props.minor && props.dangerous) return props.theme.colors.shadedBg
@@ -25,7 +26,7 @@ export default class Button extends Component {
         ${props => props.theme.units(.5)}
         ${props => props.theme.units(2)};
       border-radius: ${props => props.theme.units(2)};
-      box-shadow: ${props => props.theme.shadows.neat};
+      box-shadow: ${props => props.minor ? null : props.theme.shadows.neat};
       cursor: pointer;
       border: none;
       box-sizing: border-box;
