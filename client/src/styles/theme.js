@@ -55,6 +55,7 @@ const colors = {
   clearText: rawColors.white,
   dangerText: rawColors.red,
   borders: rawColors.lightGrey,
+  clearBg: rawColors.white,
   shadedBg: rawColors.shadedWhite,
   action: rawColors.blue,
 }
