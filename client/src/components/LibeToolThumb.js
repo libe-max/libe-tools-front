@@ -10,56 +10,46 @@ export default class LibeToolThumb extends Component {
   render () {
     const props = this.props
     const LibeToolThumb = styled.div`
-      > [rel='shdBx'] > [rel='img'] {
+      #image {
         width: 100%;
-        height: ${props => props.theme.units(20)};
+        height: ${p => p.theme.units(20)};
       }
-      > [rel='shdBx'] > [rel='ctntWrppr'] {
-        padding: ${props => props.theme.units(2)};
-      }
-      > [rel='shdBx'] > [rel='ctntWrppr'] > [rel='blckTtl'] {
-        margin-bottom: ${props => props.theme.units(1)};
-      }
-      > [rel='shdBx'] > [rel='ctntWrppr'] > [rel='prgrph'] {
-        margin-bottom: ${props => props.theme.units(2)};
-      }
-      > [rel='shdBx'] > [rel='ctntWrppr'] > [rel='actnsWrppr'] {
+      #content { padding: ${p => p.theme.units(2)}; }
+      #title { margin-bottom: ${p => p.theme.units(1)}; }
+      #description { margin-bottom: ${p => p.theme.units(2)}; }
+      #actions {
         display: flex;
         justify-content: space-between;
       }
-      > [rel='shdBx'] > [rel='ctntWrppr'] > [rel='actnsWrppr'] > button:first-child {
-        margin-right: ${props => props.theme.units(2)};
-      }
+      #actions > button:first-child { margin-right: ${p => p.theme.units(2)}; }
     `
-    return (
-      <LibeToolThumb {...props}>
-        <ShadowBox rel='shdBx'>
-          <Image
-            src='/images/libe-tool-thumb-image.jpg'
-            position='top left'
-            alt='Tool thumbnail'
-            title='Tool thumbnail'
-            rel='img' />
-          <div rel='ctntWrppr'>
-            <BlockTitle
-              rel='blckTtl'>
-              Libé box
-            </BlockTitle>
-            <Paragraph
-              rel='prgrph'>
-              Lorem ipsum dolor sit amet consectutor...
-            </Paragraph>
-            <div rel='actnsWrppr'>
-              <Button minor>
-                Voir tous
-              </Button>
-              <Button>
-                Éditer un nouveau module
-              </Button>
-            </div>
+    return <LibeToolThumb {...props}>
+      <ShadowBox>
+        <Image
+          src='/images/libe-tool-thumb-image.jpg'
+          position='top left'
+          alt='Tool thumbnail'
+          title='Tool thumbnail'
+          id='image' />
+        <div id='content'>
+          <BlockTitle
+            id='title'>
+            Libé box
+          </BlockTitle>
+          <Paragraph
+            id='description'>
+            Lorem ipsum dolor sit amet consectutor...
+          </Paragraph>
+          <div id='actions'>
+            <Button minor>
+              Voir tous
+            </Button>
+            <Button>
+              Éditer un nouveau module
+            </Button>
           </div>
-        </ShadowBox>
-      </LibeToolThumb>
-    )
+        </div>
+      </ShadowBox>
+    </LibeToolThumb>
   }
 }
