@@ -11,7 +11,7 @@ import Button from './Button'
 export default class LibeBundleThumb extends Component {
   render () {
     const props = this.props
-    
+
     /* * * * * * * * * * * * * * * * * *
      *
      *  Css declarations
@@ -23,9 +23,9 @@ export default class LibeBundleThumb extends Component {
       padding: ${p => p.theme.units(2)};
       box-sizing: border-box;
       border-radius: ${p => p.theme.units(1)};
-      background: ${p => props.loading ?
-        p.theme.colors.shadedBg :
-        'transparent'};
+      background: ${p => props.loading
+    ? p.theme.colors.shadedBg
+    : 'transparent'};
       #image {
         width: ${p => p.theme.units(7)};
         height: ${p => p.theme.units(6)};
@@ -51,7 +51,7 @@ export default class LibeBundleThumb extends Component {
       width: 100%;
       height: 100%;
       background: ${p => p.theme.colors.borders};
-      border-radius: ${p => p.theme.units(.5)};
+      border-radius: ${p => p.theme.units(0.5)};
     `
     const TitlesPlaceholder = styled.div`
       color: ${p => p.theme.colors.text};
@@ -78,7 +78,7 @@ export default class LibeBundleThumb extends Component {
         background: ${p => p.theme.colors.borders};
       }
       > *:first-child {
-        margin-bottom: ${p => p.theme.units(.75)};
+        margin-bottom: ${p => p.theme.units(0.75)};
         width: 40%;
       }
       > *:last-child {
@@ -107,10 +107,10 @@ export default class LibeBundleThumb extends Component {
     const readableUpdated = makeReadable(props.updated)
     const readablePublished = makeReadable(props.published)
     const MetaTxt = <span>
-      {props.type}, par {props.author}<br/>
-      Créé le {readableCreated}{props.published ?
-      `, publié le ${readablePublished}` :
-      `, mis à jour le ${readableUpdated}`}
+      {props.type}, par {props.author}<br />
+      Créé le {readableCreated}{props.published
+        ? `, publié le ${readablePublished}`
+        : `, mis à jour le ${readableUpdated}`}
     </span>
 
     /* * * * * * * * * * * * * * * * * *
@@ -143,21 +143,21 @@ export default class LibeBundleThumb extends Component {
         </ImageSlot>
         <TitleSlot>
           <TitlesPlaceholder>
-            <div></div>
-            <div></div>
+            <div />
+            <div />
           </TitlesPlaceholder>
         </TitleSlot>
       </ImageAndTitle>
       <MetaPlaceHolder>
-        <div></div>
-        <div></div>
+        <div />
+        <div />
       </MetaPlaceHolder>
     </Wrapper>
 
     // Loaded bundle
     const LoadedBundle = <ShadowBox>
       <Wrapper
-        innerRef={n => this.wrapper = n}
+        innerRef={n => { this.wrapper = n }}
         onMouseEnter={handleHover.bind(this)}
         onMouseLeave={handleRollout.bind(this)}>
         <ImageAndTitle>
@@ -166,7 +166,7 @@ export default class LibeBundleThumb extends Component {
               id='image'
               position='center'
               src={props.image} />
-            </ImageSlot>
+          </ImageSlot>
           <TitleSlot>
             <ParagraphTitle>
               {props.title}

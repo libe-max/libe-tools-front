@@ -22,7 +22,7 @@ export default class TextInput extends Component {
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         border-bottom-style: solid;
-        border-bottom-width: ${p => p.theme.units(.25)};
+        border-bottom-width: ${p => p.theme.units(0.25)};
         border-bottom-color: ${p => p.theme.colors.borders};
       }
       input::placeholder {

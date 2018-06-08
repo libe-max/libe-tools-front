@@ -10,7 +10,7 @@ export default class ShadowBox extends Component {
       box-sizing: border-box;
       overflow: hidden;
       border:
-        ${p => p.theme.units(.25)}
+        ${p => p.theme.units(0.25)}
         ${p => p.theme.colors.borders}
         solid;
     `

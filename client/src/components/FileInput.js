@@ -53,7 +53,7 @@ export default class FileInput extends Component {
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         border-style: solid;
-        border-width: ${p => p.theme.units(.25)};
+        border-width: ${p => p.theme.units(0.25)};
         border-color: ${p => p.theme.colors.borders};
         border-radius: ${p => p.theme.units(2.5)};
         overflow: hidden;
@@ -80,12 +80,12 @@ export default class FileInput extends Component {
       <div onClick={this.triggerFileWindow}>
         <div
           id='filename'
-          ref={n => this.filename = n}>
+          ref={n => { this.filename = n }}>
           {state.filename}
         </div>
         <div
           id='placeholder'
-          ref={n => this.placeholder = n}>
+          ref={n => { this.placeholder = n }}>
           {props.placeholder || 'Choose a file...'}
         </div>
       </div>
@@ -93,20 +93,20 @@ export default class FileInput extends Component {
         minor
         id='cancel-button'
         onClick={this.cancelFileSelect}
-        innerRef={n => this.cancelButton = n}>
+        innerRef={n => { this.cancelButton = n }}>
         x
       </Button>
       <Button
         id='upload-button'
         onClick={() => alert('upload!')}
-        innerRef={n => this.uploadButton = n}>
+        innerRef={n => { this.uploadButton = n }}>
         ↑
       </Button>
       <input
         id='input'
         type='file'
-        ref={n => this.input = n}
-        onChange={this.handleFileChange}/>
+        ref={n => { this.input = n }}
+        onChange={this.handleFileChange} />
     </FakeInputWrapper>
 
     /* * * * * * * * * * * * * * * * * * *
@@ -132,7 +132,7 @@ export default class FileInput extends Component {
         bottom: 0;
         left: 0;
         right: 0;
-        background: ${p => hexToRgba(p.theme.colors.dimBg, .8)};
+        background: ${p => hexToRgba(p.theme.colors.dimBg, 0.8)};
       }
       &:hover #actions { display: flex; }
     `
@@ -167,7 +167,7 @@ export default class FileInput extends Component {
         display: inline-block;
         margin-right: ${p => p.theme.units(1)};
         padding: ${p => p.theme.units(1)};
-        border-radius: ${p => p.theme.units(.5)};
+        border-radius: ${p => p.theme.units(0.5)};
         color: ${p => p.theme.colors.lightText};
         font-family: ${p => p.theme.fonts.main};
         font-size: ${p => p.theme.units(1.75)};
@@ -244,7 +244,7 @@ export default class FileInput extends Component {
       #current-file {
         display: ${!props.src || state.filename ? 'none' : 'block'};
       }
-      #fake-input {
+      #fake-input {
         display: ${!props.src || state.filename ? 'flex' : 'none'};
       }
     `

@@ -20,4 +20,4 @@ export default class InputLabel extends Component {
       {props.children}
     </Wrapper>
   }
-} 
+}

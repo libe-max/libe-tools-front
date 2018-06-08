@@ -12,19 +12,19 @@ export default class Button extends Component {
       font-weight: 400;
       height: ${p => p.theme.units(4)};
       background: ${p => {
-        if (props.minor && props.dangerous) return p.theme.colors.shadedBg
-        else if (props.dangerous) return p.theme.colors.dangerText
-        else if (props.minor) return p.theme.colors.shadedBg
-        else return p.theme.colors.action
-      }};
+    if (props.minor && props.dangerous) return p.theme.colors.shadedBg
+    else if (props.dangerous) return p.theme.colors.dangerText
+    else if (props.minor) return p.theme.colors.shadedBg
+    else return p.theme.colors.action
+  }};
       color: ${p => {
-        if (props.minor && props.dangerous) return p.theme.colors.dangerText
-        else if (props.dangerous) return p.theme.colors.clearText
-        else if (props.minor) return p.theme.colors.lightText
-        else return p.theme.colors.clearText
-      }}
+    if (props.minor && props.dangerous) return p.theme.colors.dangerText
+    else if (props.dangerous) return p.theme.colors.clearText
+    else if (props.minor) return p.theme.colors.lightText
+    else return p.theme.colors.clearText
+  }}
       padding:
-        ${p => p.theme.units(.5)}
+        ${p => p.theme.units(0.5)}
         ${p => p.theme.units(2)};
       border-radius: ${p => p.theme.units(2)};
       box-shadow: ${p => props.minor ? null : p.theme.shadows.neat};
@@ -49,10 +49,10 @@ export default class Button extends Component {
     `
     const LinkButton = Button.extend`
       color: ${p => {
-        if (props.dangerous) return p.theme.colors.dangerText
-        else if (props.minor) return p.theme.colors.lightText
-        else return p.theme.colors.action
-      }};
+    if (props.dangerous) return p.theme.colors.dangerText
+    else if (props.minor) return p.theme.colors.lightText
+    else return p.theme.colors.action
+  }};
       padding: 0;
       box-shadow: none;
       text-decoration: underline;
@@ -60,14 +60,18 @@ export default class Button extends Component {
       background: transparent;
       :hover { box-shadow: none; }
     `
-    if (props.primary) return <PrimaryButton {...props}>
-      {props.children}
-    </PrimaryButton>
-    else if (props.link) return <LinkButton {...props}>
-      {props.children}
-    </LinkButton>
-    else return <Button {...props}>
-      {props.children}
-    </Button>
+    if (props.primary) {
+      return <PrimaryButton {...props}>
+        {props.children}
+      </PrimaryButton>
+    } else if (props.link) {
+      return <LinkButton {...props}>
+        {props.children}
+      </LinkButton>
+    } else {
+      return <Button {...props}>
+        {props.children}
+      </Button>
+    }
   }
 }

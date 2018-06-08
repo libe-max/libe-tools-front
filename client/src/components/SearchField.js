@@ -8,7 +8,7 @@ export default class SearchField extends Component {
     const Wrapper = styled.div`
       #input input {
         border-style: solid;
-        border-width: ${p => p.theme.units(.25)};
+        border-width: ${p => p.theme.units(0.25)};
         border-color: ${p => p.theme.colors.borders};
         border-radius: ${p => p.theme.units(2.5)};
         background: ${p => p.theme.colors.shadedBg};
