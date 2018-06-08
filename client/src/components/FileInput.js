@@ -235,10 +235,6 @@ export default class FileInput extends Component {
       { props.label ? <InputLabel>Label</InputLabel> : null }
       <FakeInput placeholder={props.placeholder} />
       <CurrentFile src={props.src} />
-      { /*!props.src || state.filename ?
-        <FakeInput placeholder={props.placeholder} /> :
-        <CurrentFile src={props.src} />
-      */ }
     </Wrapper>
   }
 }
