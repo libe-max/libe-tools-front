@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import 'moment/locale/fr'
 import ShadowBox from './ShadowBox'
+import Paragraph from './Paragraph'
 import Image from './Image'
 import Button from './Button'
 
@@ -87,12 +88,6 @@ export default class LibeBundleThumb extends Component {
       > *:last-child {
         width: 60%;
       }
-    `
-    const MetaData = styled.div`
-      color: ${p => p.theme.colors.lightText};
-      font-family: ${p => p.theme.fonts.main};
-      font-size: ${p => p.theme.units(1.75)};
-      line-height: ${p => p.theme.units(2)};
     `
     const Actions = styled.div`
       display: none;
@@ -180,9 +175,9 @@ export default class LibeBundleThumb extends Component {
             {props.title}
           </TitleSlot>
         </ImageAndTitle>
-        <MetaData id='meta'>
+        <Paragraph light small>
           {MetaTxt}
-        </MetaData>
+        </Paragraph>
         <Actions id='actions'>
           <Button
             minor
