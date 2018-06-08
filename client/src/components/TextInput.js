@@ -8,6 +8,9 @@ export default class TextInput extends Component {
     const Wrapper = styled.div`
       width: 100%;
       box-sizing: border-box;
+      #label {
+        display: ${props.label ? 'block' : 'none'};
+      }
       input {
         width: 100%;
         box-sizing: border-box;
@@ -26,9 +29,11 @@ export default class TextInput extends Component {
         color: ${p => p.theme.colors.lightText};
       }
     `
-
     return <Wrapper {...props}>
-      {props.label ? <InputLabel>Label</InputLabel> : null}
+      <InputLabel
+        id='label'>
+        Label
+      </InputLabel>
       <input
         type='text'
         placeholder={props.placeholder} />
