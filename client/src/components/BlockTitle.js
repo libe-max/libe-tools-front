@@ -5,10 +5,10 @@ export default class BlockTitle extends Component {
   render () {
     const props = this.props
     const BlockTitle = styled.div`
-      font-size: ${props => props.theme.units(2.5)};
-      line-height: ${props => props.theme.units(3)};
-      font-family: ${props => props.theme.fonts.main};
-      color: ${props => props.theme.colors.text};
+      font-size: ${p => p.theme.units(2.5)};
+      line-height: ${p => p.theme.units(3)};
+      font-family: ${p => p.theme.fonts.main};
+      color: ${p => p.theme.colors.text};
       font-weight: 600;
     `
     return (
