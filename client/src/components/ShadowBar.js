@@ -8,13 +8,11 @@ export default class ShadowBar extends Component {
       width: 100%;
       display: flex;
       box-sizing: border-box;
-      box-shadow: ${props => props.theme.shadows.medium};
-      padding: ${props => props.theme.units(2)};
+      box-shadow: ${p => p.theme.shadows.medium};
+      padding: ${p => p.theme.units(2)};
     `
-    return (
-      <ShadowBar {...props}>
-        {props.children}
-      </ShadowBar>
-    )
+    return <ShadowBar {...props}>
+      {props.children}
+    </ShadowBar>
   }
 }
