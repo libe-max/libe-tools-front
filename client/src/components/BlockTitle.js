@@ -11,10 +11,9 @@ export default class BlockTitle extends Component {
       color: ${p => p.theme.colors.text};
       font-weight: 600;
     `
-    return (
-      <BlockTitle {...props}>
-        {props.children}
-      </BlockTitle>
+    return <BlockTitle {...props}>
+      {props.children}
+    </BlockTitle>
     )
   }
 }
