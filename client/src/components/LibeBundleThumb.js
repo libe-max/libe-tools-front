@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import moment from 'moment'
 import 'moment/locale/fr'
 import ShadowBox from './ShadowBox'
+import ParagraphTitle from './ParagraphTitle'
 import Paragraph from './Paragraph'
 import Image from './Image'
 import Button from './Button'
@@ -45,11 +46,6 @@ export default class LibeBundleThumb extends Component {
       flex-shrink: 1;
       width: 100%;
       align-self: center;
-      color: ${p => p.theme.colors.text};
-      font-family: ${p => p.theme.fonts.main};
-      font-size: ${p => p.theme.units(2)};
-      line-height: ${p => p.theme.units(3)};
-      font-weight: 600;
     `
     const ImgPlaceholder = styled.div`
       width: 100%;
@@ -172,7 +168,9 @@ export default class LibeBundleThumb extends Component {
               src={props.image} />
             </ImageSlot>
           <TitleSlot>
-            {props.title}
+            <ParagraphTitle>
+              {props.title}
+            </ParagraphTitle>
           </TitleSlot>
         </ImageAndTitle>
         <Paragraph light small>
