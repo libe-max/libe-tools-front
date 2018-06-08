@@ -14,6 +14,5 @@ export default class BlockTitle extends Component {
     return <BlockTitle {...props}>
       {props.children}
     </BlockTitle>
-    )
   }
 }
