@@ -5,6 +5,7 @@ import BlockTitle from '../components/BlockTitle'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import FileInput from '../components/FileInput'
+import SearchField from '../components/SearchField'
 import Header from '../components/Header'
 import LibeToolThumb from '../components/LibeToolThumb'
 import LibeBundleThumb from '../components/LibeBundleThumb'
@@ -95,6 +96,10 @@ export default class ComponentsPage extends Component {
             <TextInput
               label='Label'
               placeholder='Placeholder' />
+          </CpBx>
+          <CpBx width={3/4} />
+          <CpBx title='Search field' width={1/4}>
+            <SearchField placeholder='Chercher un truc' />
           </CpBx>
           <CpBx title='File input empty' width={1/4}>
             <FileInput
