@@ -11,7 +11,7 @@ export default class Image extends Component {
       background-repeat: ${props.repeat ? props.repeat : 'no-repeat'};
       height: ${props.height ? `${props.height}px` : 'fit-content'};
       width: ${props.width ? `${props.width}px` : 'auto'};
-      > img {
+      #image {
         width: 100%;
         display: block;
         box-sizing: border-box;
@@ -19,10 +19,8 @@ export default class Image extends Component {
         opacity: 0;
       }      
     `
-    return (
-      <Image {...props}>
-        <img {...props} />
-      </Image>
-    )
+    return <Image {...props}>
+      <img id='image' {...props} />
+    </Image>
   }
 }
