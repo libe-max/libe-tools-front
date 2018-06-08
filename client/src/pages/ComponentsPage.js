@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import MainTitle from '../components/MainTitle'
 import BlockTitle from '../components/BlockTitle'
+import ParagraphTitle from '../components/ParagraphTitle'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import FileInput from '../components/FileInput'
@@ -74,8 +75,9 @@ export default class ComponentsPage extends Component {
     return (
       <ComponentsPage>
         <CpRow title='Text levels'>
-          <CpBx title='Main title'><MainTitle>The quick brown fox</MainTitle></CpBx>
-          <CpBx title='Block title'><BlockTitle>The quick brown fox</BlockTitle></CpBx>
+          <CpBx title='Main title'><MainTitle level={4}>The quick brown fox</MainTitle></CpBx>
+          <CpBx title='Block title'><BlockTitle level={1}>The quick brown fox</BlockTitle></CpBx>
+          <CpBx title='Paragraph title'><ParagraphTitle level={8}>The quick brown fox</ParagraphTitle></CpBx>
         </CpRow>
         <CpRow title='Buttons'>
           <CpBx title='Button primary' width={1/4}><Button primary>Click me!</Button></CpBx>
