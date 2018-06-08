@@ -5,15 +5,13 @@ export default class MainTitle extends Component {
   render () {
     const props = this.props
     const MainTitle = styled.h1`
-      font-size: ${props => props.theme.units(3)};
-      line-height: ${props => props.theme.units(4)};
-      font-family: ${props => props.theme.fonts.brand};
-      color: ${props => props.theme.colors.text};
+      font-size: ${p => p.theme.units(3)};
+      line-height: ${p => p.theme.units(4)};
+      font-family: ${p => p.theme.fonts.brand};
+      color: ${p => p.theme.colors.text};
     `
-    return (
-      <MainTitle {...props}>
-        {props.children}
-      </MainTitle>
-    )
+    return <MainTitle {...props}>
+      {props.children}
+    </MainTitle>
   }
 }
