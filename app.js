@@ -3,13 +3,14 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const monk = require('monk')
 
 const indexRouter = require('./routes/index')
 const apiRouter = require('./routes/api')
 
 const app = express()
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
@@ -18,6 +19,21 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'client')))
+
+// Simulate latency
+app.use((req, res, next) => {
+  const delay = Math.floor(Math.random() * 800) + 200
+  setTimeout(next, delay)
+})
+
+// Database
+const db = monk('localhost:27017/libetools')
+app.use((req, res, next) => {
+  req.db = db
+  next()
+})
+
+// Routes
 
 app.use('/', indexRouter)
 app.use('/api', apiRouter)

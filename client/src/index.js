@@ -3,19 +3,25 @@ import { render } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import registerServiceWorker from './registerServiceWorker'
-
+import { ThemeProvider } from 'styled-components'
+// Components
 import App from './App'
 import reducer from './reducers'
-
-const store = createStore(reducer)
+// Styles
+import 'normalize.css'
+import './styles/style.css'
+import theme from './styles/theme'
+// Service worker
+import registerServiceWorker from './registerServiceWorker'
 
 // Render app ---------------------------------------------
 render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+  <Provider store={createStore(reducer)}>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 )
