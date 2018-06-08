@@ -17,7 +17,6 @@ export default class Header extends Component {
         height: ${props => props.theme.units(7)};
       }
       #title {
-        margin-top: ${props => props.theme.units(1.5)};
         margin-left: ${props => props.theme.units(2)};
       }
     `
