@@ -9,12 +9,16 @@ export default class Header extends Component {
   render () {
     const props = this.props
     const Header = styled.div`
+      background: ${p => p.theme.colors.clearBg};
       #shadow-bar {
         display: flex;
         align-items: center;
       }
       #logo {
         height: ${props => props.theme.units(7)};
+        @media screen and (max-width: ${p => p.theme.breakpoints.medium}) {
+          height: ${props => props.theme.units(4)};
+        }
       }
       #title {
         margin-left: ${props => props.theme.units(2)};
