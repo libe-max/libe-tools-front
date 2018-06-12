@@ -10,6 +10,7 @@ export default class LibeToolThumb extends Component {
   render () {
     const props = this.props
     const LibeToolThumb = styled.div`
+      width: 100%;
       #image {
         width: 100%;
         height: ${p => p.theme.units(20)};
@@ -41,11 +42,11 @@ export default class LibeToolThumb extends Component {
             Lorem ipsum dolor sit amet consectutor...
           </Paragraph>
           <div id='actions'>
-            <Button minor>
+            <Button tabIndex='-1' minor>
               Voir tous
             </Button>
-            <Button>
-              Éditer un nouveau module
+            <Button tabIndex='-1'>
+              Créer
             </Button>
           </div>
         </div>
