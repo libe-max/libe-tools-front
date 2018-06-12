@@ -14,6 +14,10 @@ export default class MainTitle extends Component {
         font-weight: 600;
         margin: 0;
         padding: 0
+        @media screen and (max-width: ${p => p.theme.breakpoints.medium}) {
+          font-size: ${p => p.theme.units(2.75)};
+          line-height: ${p => p.theme.units(3)};
+        }
       }
     `
     return <MainTitle {...props}>
