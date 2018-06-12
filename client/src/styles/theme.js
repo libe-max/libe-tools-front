@@ -68,11 +68,17 @@ const shadows = {
   neat: `0 ${units(3 / 8)} 0 0 ${hexToRgba(rawColors.black, 0.1)}`
 }
 
+const breakpoints = {
+  wide: '1370px',
+  medium: '980px'
+}
+
 const theme = {
+  units,
   fonts,
   colors,
   shadows,
-  units
+  breakpoints
 }
 
 export default theme
