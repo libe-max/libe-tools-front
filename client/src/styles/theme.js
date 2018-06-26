@@ -1,42 +1,11 @@
 import { injectGlobal } from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
 
-injectGlobal`@font-face {
-  font-family: 'LibeSans Semi Condensed';
-  src: url('/fonts/libe-sans-semi-condensed/LibeSansSemiCondensed-Bold.otf');
-}`
-
-injectGlobal`@font-face {
-  font-family: 'Zurich';
-  src: url('/fonts/zurich-bt/Zurich-BT.ttf');
-  font-weight: 400;
-}`
-
-injectGlobal`@font-face {
-  font-family: 'Zurich';
-  src: url('/fonts/zurich-bt/Zurich-Italic-BT.ttf');
-  font-weight: 400;
-  font-style: italic;
-}`
-
-injectGlobal`@font-face {
-  font-family: 'Zurich';
-  src: url('/fonts/zurich-bt/Zurich-Bold-BT.ttf');
-  font-weight: 600;
-}`
-
-injectGlobal`@font-face {
-  font-family: 'Zurich';
-  src: url('/fonts/zurich-bt/Zurich-Bold-Italic-BT.ttf');
-  font-weight: 600;
-  font-style: italic;
-}`
-
 const units = val => `${8 * val}px`
 
 const fonts = {
-  brand: 'LibeSans Semi Condensed',
-  main: 'Zurich'
+  brand: 'Libe-Sans-Semicondensed',
+  main: 'Synthese'
 }
 
 const rawColors = {

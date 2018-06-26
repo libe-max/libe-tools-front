@@ -9,7 +9,7 @@ import App from './App'
 import reducer from './reducers'
 // Styles
 import 'normalize.css'
-import './styles/style.css'
+import './styles/fonts.css'
 import theme from './styles/theme'
 // Service worker
 import registerServiceWorker from './registerServiceWorker'
