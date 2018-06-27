@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 import 'moment/locale/fr'
-import ShadowBox from './ShadowBox'
-import ParagraphTitle from './ParagraphTitle'
-import Paragraph from './Paragraph'
-import Image from './Image'
-import Button from './Button'
+import ShadowBox from '../../boxes/ShadowBox'
+import ParagraphTitle from '../../text-levels/ParagraphTitle'
+import Paragraph from '../../text-levels/Paragraph'
+import Image from '../Image'
+import Button from '../../buttons/Button'
 
 export default class LibeBundleThumb extends Component {
   render () {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Heading from './Heading'
+import Heading from '../Heading'
 
 export default class ParagraphTitle extends Component {
   render () {

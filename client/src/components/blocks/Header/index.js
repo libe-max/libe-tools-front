@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import ShadowBar from './ShadowBar'
-import Image from './Image'
-import MainTitle from './MainTitle'
+import ShadowBar from '../../boxes/ShadowBar'
+import Image from '../Image'
+import MainTitle from '../../text-levels/MainTitle'
 
 export default class Header extends Component {
   render () {

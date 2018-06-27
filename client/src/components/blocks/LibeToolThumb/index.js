@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import ShadowBox from './ShadowBox'
-import Image from './Image'
-import BlockTitle from './BlockTitle'
-import Paragraph from './Paragraph'
-import Button from './Button'
+import ShadowBox from '../../boxes/ShadowBox'
+import Image from '../Image'
+import BlockTitle from '../../text-levels/BlockTitle'
+import Paragraph from '../../text-levels/Paragraph'
+import Button from '../../buttons/Button'
 
 export default class LibeToolThumb extends Component {
   render () {

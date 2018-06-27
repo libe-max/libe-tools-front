@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
-import ShadowBox from './ShadowBox'
-import InputLabel from './InputLabel'
-import Button from './Button'
-import Image from './Image'
+import ShadowBox from '../../boxes/ShadowBox'
+import InputLabel from '../../text-levels/InputLabel'
+import Button from '../../buttons/Button'
+import Image from '../../blocks/Image'
 
 export default class FileInput extends Component {
   constructor () {

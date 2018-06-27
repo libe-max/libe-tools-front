@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import InputLabel from './InputLabel'
+import InputLabel from '../../text-levels/InputLabel'
 
 export default class TextInput extends Component {
   render () {
