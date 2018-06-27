@@ -5,7 +5,7 @@ const units = val => `${8 * val}px`
 
 const fonts = {
   brand: 'Libe-Sans-Semicondensed',
-  main: 'Synthese'
+  easy: 'Synthese'
 }
 
 const rawColors = {

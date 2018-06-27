@@ -9,7 +9,7 @@ export default class BlockTitle extends Component {
       h1, h2, h3, h4, h5, h6, span {
         font-size: ${p => p.theme.units(2.5)};
         line-height: ${p => p.theme.units(3)};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         color: ${p => p.theme.colors.text};
         font-weight: 600;
         margin: 0;

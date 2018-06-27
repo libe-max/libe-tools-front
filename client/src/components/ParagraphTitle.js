@@ -8,7 +8,7 @@ export default class ParagraphTitle extends Component {
     const BlockTitle = styled.div`
       h1, h2, h3, h4, h5, h6, span {
         color: ${p => p.theme.colors.text};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         font-weight: 600;

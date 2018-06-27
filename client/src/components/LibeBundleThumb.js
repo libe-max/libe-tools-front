@@ -55,7 +55,7 @@ export default class LibeBundleThumb extends Component {
     `
     const TitlesPlaceholder = styled.div`
       color: ${p => p.theme.colors.text};
-      font-family: ${p => p.theme.fonts.main};
+      font-family: ${p => p.theme.fonts.easy};
       font-size: ${p => p.theme.units(2)};
       line-height: ${p => p.theme.units(3)};
       font-weight: 600;

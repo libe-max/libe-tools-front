@@ -19,7 +19,7 @@ const CpRow = ({title, children}) => {
       font-weight: 600;
       padding: ${props => props.theme.units(1)};
       background: ${props => props.theme.colors.shadedBg};
-      font-family: ${props => props.theme.fonts.main};
+      font-family: ${props => props.theme.fonts.easy};
       color: ${props => props.theme.colors.lightText};
       margin-bottom: ${props => props.theme.units(1)};
     }
@@ -52,7 +52,7 @@ const CpBx = ({title, width, children}) => {
       ${props => props.theme.units(2)} 
       ${props => props.theme.units(1)};
     > #title {
-      font-family: ${props => props.theme.fonts.main};
+      font-family: ${props => props.theme.fonts.easy};
       color: ${props => props.theme.colors.lightText};
       margin-bottom: ${props => props.theme.units(2)};
       width: 100%;

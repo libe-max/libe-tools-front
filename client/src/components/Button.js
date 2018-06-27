@@ -5,7 +5,7 @@ export default class Button extends Component {
   render () {
     const props = this.props
     const Button = styled.button`
-      font-family: ${p => p.theme.fonts.main};
+      font-family: ${p => p.theme.fonts.easy};
       font-size: ${p => p.theme.units(2)};
       line-height: ${p => p.theme.units(3)};
       font-style: ${props.dangerous ? 'italic' : null};

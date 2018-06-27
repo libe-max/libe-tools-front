@@ -18,7 +18,7 @@ export default class TextInput extends Component {
         height: ${p => p.theme.units(5)};
         padding: 0 ${p => p.theme.units(1)};
         color: ${p => p.theme.colors.text};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         border-bottom-style: solid;

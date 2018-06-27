@@ -49,7 +49,7 @@ export default class FileInput extends Component {
         flex-grow: 1;
         height: ${p => p.theme.units(5)};
         padding: 0 ${p => p.theme.units(2)};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         border-style: solid;
@@ -169,7 +169,7 @@ export default class FileInput extends Component {
         padding: ${p => p.theme.units(1)};
         border-radius: ${p => p.theme.units(0.5)};
         color: ${p => p.theme.colors.lightText};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         font-size: ${p => p.theme.units(1.75)};
         line-height: ${p => p.theme.units(2)};
         font-weight: 600;
@@ -177,7 +177,7 @@ export default class FileInput extends Component {
       }
       #sourceName {
         color: ${p => p.theme.colors.text};
-        font-family: ${p => p.theme.fonts.main};
+        font-family: ${p => p.theme.fonts.easy};
         font-size: ${p => p.theme.units(2)};
         line-height: ${p => p.theme.units(3)};
         font-weight: 400;
