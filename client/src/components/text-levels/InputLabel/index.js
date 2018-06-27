@@ -1,22 +1,22 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import Wrapper from './style'
+
+/*
+ *   Input label component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   Label for inputs
+ *
+ *   PROPS
+ *   children
+ *
+ */
 
 export default class InputLabel extends Component {
   render () {
     const props = this.props
-    const Wrapper = styled.label`
-      display: block;
-      box-sizing: border-box;
-      color: ${p => p.theme.colors.lightText};
-      font-family: ${p => p.theme.fonts.easy};
-      font-size: ${p => p.theme.units(1.5)};
-      line-height: ${p => p.theme.units(2)};
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: ${p => p.theme.units(1)};
-    `
-
-    return <Wrapper {...props}>
+    return <Wrapper {...props} className='input-label'>
       {props.children}
     </Wrapper>
   }

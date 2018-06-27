@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-
 import ShadowBar from '../../boxes/ShadowBar'
 import Image from '../Image'
 import MainTitle from '../../text-levels/MainTitle'
@@ -15,13 +14,13 @@ export default class Header extends Component {
         align-items: center;
       }
       #logo {
-        height: ${props => props.theme.units(7)};
+        height: ${p => p.theme.units(7)};
         @media screen and (max-width: ${p => p.theme.breakpoints.medium}) {
-          height: ${props => props.theme.units(4)};
+          height: ${p => p.theme.units(4)};
         }
       }
       #title {
-        margin-left: ${props => props.theme.units(2)};
+        margin-left: ${p => p.theme.units(2)};
       }
     `
     return <Header {...props}>

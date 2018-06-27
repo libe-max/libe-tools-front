@@ -1,19 +1,29 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import Wrapper from './style'
+
+/*
+ *   Paragraph component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   Component for usual text
+ *
+ *   VARIANTS
+ *   small, light
+ *
+ *   PROPS
+ *   small, light, children
+ *
+ */
 
 export default class Paragraph extends Component {
   render () {
     const props = this.props
-    const Paragraph = styled.p`
-      margin: 0;
-      padding: 0;
-      font-family: ${p => p.theme.fonts.easy};
-      line-height: ${p => props.small ? p.theme.units(2) : p.theme.units(3)};
-      font-size: ${p => props.small ? p.theme.units(1.75) : p.theme.units(2)};
-      color: ${p => props.light ? p.theme.colors.lightText : p.theme.colors.text};
-    `
-    return <Paragraph {...props}>
+    let classes = 'paragraph'
+    if (props.small) classes += ' paragraph_small'
+    if (props.light) classes += ' paragraph_light'
+    return <Wrapper {...props} className={classes}>
       {props.children}
-    </Paragraph>
+    </Wrapper>
   }
 }

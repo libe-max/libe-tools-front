@@ -6,6 +6,8 @@ import InputLabel from '../../text-levels/InputLabel'
 import Button from '../../buttons/Button'
 import Image from '../../blocks/Image'
 
+// [WIP] Split this file and separate styles
+
 export default class FileInput extends Component {
   constructor () {
     super()
