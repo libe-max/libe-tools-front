@@ -20,7 +20,9 @@ import Wrapper from './style'
 export default class Image extends Component {
   render () {
     const props = this.props
-    const style = {
+    const alt = props.alt || 'no-description'
+    const title = props.title || null
+    const wrapperStyle = {
       backgroundImage: `url(${props.src})`,
       backgroundSize: props.contain ? 'contain' : 'cover',
       backgroundPosition: props.position || 'center',
@@ -28,8 +30,16 @@ export default class Image extends Component {
       height: props.height ? `${props.height}px` : null,
       width: props.width ? `${props.width}px` : null
     }
-    return <Wrapper {...props} className='image' style={style}>
-      <img {...props} />
+    const imgStyle = {
+      height: props.height ? `${props.height}px` : null,
+      width: props.width ? `${props.width}px` : null
+    }
+    return <Wrapper style={wrapperStyle} className='image'>
+      <img
+        src={props.src}
+        style={imgStyle}
+        alt={alt}
+        title={title} />
     </Wrapper>
   }
 }

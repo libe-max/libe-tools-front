@@ -16,7 +16,7 @@ import Wrapper from './style'
 export default class InputLabel extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='input-label'>
+    return <Wrapper className='input-label'>
       {props.children}
     </Wrapper>
   }

@@ -22,7 +22,7 @@ export default class Paragraph extends Component {
     let classes = 'paragraph'
     if (props.small) classes += ' paragraph_small'
     if (props.light) classes += ' paragraph_light'
-    return <Wrapper {...props} className={classes}>
+    return <Wrapper className={classes}>
       {props.children}
     </Wrapper>
   }

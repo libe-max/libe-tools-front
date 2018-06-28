@@ -17,7 +17,7 @@ import Wrapper from './style'
 export default class BlockTitle extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='block-title'>
+    return <Wrapper className='block-title'>
       <Heading level={props.level || 3}>
         {props.children}
       </Heading>

@@ -15,7 +15,8 @@ const CpRow = ({title, children}) => {
   const CpRow = styled.div`
     width: 100%;
     padding: ${props => props.theme.units(2)} 0;
-    > #title {
+
+    .component-row__title {
       font-weight: 600;
       padding: ${props => props.theme.units(1)};
       background: ${props => props.theme.colors.shadedBg};
@@ -23,7 +24,8 @@ const CpRow = ({title, children}) => {
       color: ${props => props.theme.colors.lightText};
       margin-bottom: ${props => props.theme.units(1)};
     }
-    > #content {
+
+    .component-row__content {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
@@ -31,16 +33,14 @@ const CpRow = ({title, children}) => {
       justify-content: flex-start;
     }
   `
-  return (
-    <CpRow>
-      <div
-        id='title'
-        style={{display: title ? 'block' : 'none'}}>
-        {title}
-      </div>
-      <div id='content'>{children}</div>
-    </CpRow>
-  )
+  return <CpRow className='component-row'>
+    <div
+      className='component-row__title'
+      style={{display: title ? 'block' : 'none'}}>
+      {title}
+    </div>
+    <div className='component-row__content'>{children}</div>
+  </CpRow>
 }
 
 const CpBx = ({title, width, children}) => {
@@ -51,22 +51,22 @@ const CpBx = ({title, width, children}) => {
     padding: 
       ${props => props.theme.units(2)} 
       ${props => props.theme.units(1)};
-    > #title {
+    
+    .component-box__title {
       font-family: ${props => props.theme.fonts.easy};
       color: ${props => props.theme.colors.lightText};
       margin-bottom: ${props => props.theme.units(2)};
       width: 100%;
     }
-    > div > * {
+
+    .component-box__content > * {
       margin-bottom: ${props => props.theme.units(2)};
     }
   `
-  return (
-    <CpBx>
-      {title ? <div id='title'>{title}</div> : null}
-      <div>{children}</div>
-    </CpBx>
-  )
+  return <CpBx className='component-box'>
+    {title ? <div className='component-box__title'>{title}</div> : null}
+    <div className='component-box__content'>{children}</div>
+  </CpBx>
 }
 
 export default class ComponentsPage extends Component {
@@ -109,7 +109,6 @@ export default class ComponentsPage extends Component {
           </CpBx>
           <CpBx title='File input empty' width={1 / 4}>
             <FileInput
-              label='Label'
               placeholder='Choisir un fichier' />
           </CpBx>
           <CpBx title='File input with image' width={1 / 4}>
@@ -127,8 +126,14 @@ export default class ComponentsPage extends Component {
         </CpRow>
         <CpRow title='Compound components'>
           <CpBx title='Header'><Header /></CpBx>
-          <CpBx title='Libé tool thumb' width={1 / 3}><LibeToolThumb /></CpBx>
+          <CpBx title='Libé tool thumb' width={1 / 3}>
+            <LibeToolThumb
+              title='Libé box'
+              image='/images/libe-tool-thumb-image.jpg'
+              description='Lorem ipsum dolor sit amet consectutor' />
+          </CpBx>
           <CpBx title='Libé bundle thumb' width={1 / 3}>
+            <LibeBundleThumb loading />
             <LibeBundleThumb loading />
             <LibeBundleThumb
               title='Financements libyens : ces témoignages qui pointent la campagne Sarkozy'
@@ -144,6 +149,12 @@ export default class ComponentsPage extends Component {
               created={1521590400000}
               updated={1521676800000}
               published={1521776800000}
+              image='http://images.freeimages.com/images/previews/250/some-image-1302910.jpg' />
+            <LibeBundleThumb
+              title='Financements libyens : ces témoignages qui pointent la campagne Sarkozy'
+              type='Témoignage'
+              author='Aurélie Delmas'
+              created={1521590400000}
               image='http://images.freeimages.com/images/previews/250/some-image-1302910.jpg' />
           </CpBx>
         </CpRow>

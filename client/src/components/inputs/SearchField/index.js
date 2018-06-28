@@ -17,7 +17,7 @@ import Wrapper from './style'
 export default class SearchField extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='search-field'>
+    return <Wrapper className='search-field'>
       <TextInput placeholder={props.placeholder} />
     </Wrapper>
   }

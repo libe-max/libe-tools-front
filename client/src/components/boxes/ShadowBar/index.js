@@ -16,7 +16,7 @@ import Wrapper from './style'
 export default class ShadowBar extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='shadow-bar'>
+    return <Wrapper className='shadow-bar'>
       {props.children}
     </Wrapper>
   }

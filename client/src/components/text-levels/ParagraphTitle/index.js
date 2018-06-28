@@ -17,7 +17,7 @@ import Wrapper from './style'
 export default class ParagraphTitle extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='paragraph-title'>
+    return <Wrapper className='paragraph-title'>
       <Heading level={props.level || 5}>
         {props.children}
       </Heading>

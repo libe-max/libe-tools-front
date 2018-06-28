@@ -17,7 +17,7 @@ import Wrapper from './style'
 export default class MainTitle extends Component {
   render () {
     const props = this.props
-    return <Wrapper {...props} className='main-title'>
+    return <Wrapper className='main-title'>
       <Heading level={props.level || 1}>
         {props.children}
       </Heading>

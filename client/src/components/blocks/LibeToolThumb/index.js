@@ -1,56 +1,43 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import ShadowBox from '../../boxes/ShadowBox'
-import Image from '../Image'
+import Image from '../../images/Image'
 import BlockTitle from '../../text-levels/BlockTitle'
 import Paragraph from '../../text-levels/Paragraph'
 import Button from '../../buttons/Button'
+import Wrapper from './style'
+
+/*
+ *   Libé tool thumb component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   A block displaying information about tools for users
+ *   to build bundles
+ *
+ *   PROPS
+ *   title, description, image
+ *
+ */
 
 export default class LibeToolThumb extends Component {
   render () {
     const props = this.props
-    const LibeToolThumb = styled.div`
-      width: 100%;
-      #image {
-        width: 100%;
-        height: ${p => p.theme.units(20)};
-      }
-      #content { padding: ${p => p.theme.units(2)}; }
-      #title { margin-bottom: ${p => p.theme.units(1)}; }
-      #description { margin-bottom: ${p => p.theme.units(2)}; }
-      #actions {
-        display: flex;
-        justify-content: space-between;
-      }
-      #actions > button:first-child { margin-right: ${p => p.theme.units(2)}; }
-    `
-    return <LibeToolThumb {...props}>
+    return <Wrapper className='libe-tool-thumb'>
       <ShadowBox>
         <Image
-          src='/images/libe-tool-thumb-image.jpg'
+          src={props.image}
           position='top left'
           alt='Tool thumbnail'
-          title='Tool thumbnail'
-          id='image' />
-        <div id='content'>
-          <BlockTitle
-            id='title'>
-            Libé box
-          </BlockTitle>
-          <Paragraph
-            id='description'>
-            Lorem ipsum dolor sit amet consectutor...
-          </Paragraph>
-          <div id='actions'>
-            <Button tabIndex='-1' minor>
-              Voir tous
-            </Button>
-            <Button tabIndex='-1'>
-              Créer
-            </Button>
+          title='Tool thumbnail' />
+        <div className='libe-tool-thumb__content'>
+          <BlockTitle>{props.title}</BlockTitle>
+          <Paragraph>{props.description}</Paragraph>
+          <div className='libe-tool-thumb__actions'>
+            <Button tabIndex='-1' minor>Voir tous</Button>
+            <Button tabIndex='-1'>Créer</Button>
           </div>
         </div>
       </ShadowBox>
-    </LibeToolThumb>
+    </Wrapper>
   }
 }
