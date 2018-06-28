@@ -1,264 +1,60 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import hexToRgba from 'hex-to-rgba'
-import ShadowBox from '../../boxes/ShadowBox'
 import InputLabel from '../../text-levels/InputLabel'
 import Button from '../../buttons/Button'
-import Image from '../../blocks/Image'
-
-// [WIP] Split this file and separate styles
+import Image from '../../images/Image'
+import Wrapper from './style'
 
 export default class FileInput extends Component {
   constructor () {
     super()
-    this.state = { filename: null }
-    this.handleFileChange = this.handleFileChange.bind(this)
-    this.cancelFileSelect = this.cancelFileSelect.bind(this)
-    this.triggerFileWindow = this.triggerFileWindow.bind(this)
-  }
-
-  handleFileChange () {
-    const files = this.input.files
-    if (files && files[0]) this.setState({ filename: files[0].name })
-    else this.setState({ filename: null })
-  }
-
-  cancelFileSelect () {
-    this.setState({ filename: null })
-  }
-
-  triggerFileWindow () {
-    this.input.click()
+    this.state = { file: null }
   }
 
   render () {
     const props = this.props
     const state = this.state
-    /* * * * * * * * * * * * * * * * * * *
-     *
-     *  Fake file input
-     *
-     * * * * * * * * * * * * * * * * * * */
-    const FakeInputWrapper = styled.div`
-      display: flex;
-      align-items: center;
-      > div {
-        box-sizing: border-box;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        cursor: pointer;
-        flex-grow: 1;
-        height: ${p => p.theme.units(5)};
-        padding: 0 ${p => p.theme.units(2)};
-        font-family: ${p => p.theme.fonts.easy};
-        font-size: ${p => p.theme.units(2)};
-        line-height: ${p => p.theme.units(3)};
-        border-style: solid;
-        border-width: ${p => p.theme.units(0.25)};
-        border-color: ${p => p.theme.colors.borders};
-        border-radius: ${p => p.theme.units(2.5)};
-        overflow: hidden;
-        #filename {
-          color: ${p => p.theme.colors.text};
-          display: ${state.filename ? 'block' : 'none'};
-          max-height: 24px;
-        }
-        #placeholder {
-          color: ${p => p.theme.colors.lightText};
-          display: ${state.filename ? 'none' : 'block'};
-        }
-      }
-      #cancel-button,
-      #upload-button { margin-left: ${p => p.theme.units(1)}; }
-      #cancel-button { display: ${state.filename ? 'block' : 'none'}; }
-      #upload-button {
-        flex-grow: 0;
-        display: ${state.filename ? 'block' : 'none'};
-      }
-      #input { display: none; }
-    `
-    const FakeInput = props => <FakeInputWrapper {...props}>
-      <div onClick={this.triggerFileWindow}>
-        <div
-          id='filename'
-          ref={n => { this.filename = n }}>
-          {state.filename}
-        </div>
-        <div
-          id='placeholder'
-          ref={n => { this.placeholder = n }}>
-          {props.placeholder || 'Choose a file...'}
-        </div>
-      </div>
-      <Button
-        minor
-        id='cancel-button'
-        onClick={this.cancelFileSelect}
-        innerRef={n => { this.cancelButton = n }}>
-        x
-      </Button>
-      <Button
-        id='upload-button'
-        onClick={() => alert('upload!')}
-        innerRef={n => { this.uploadButton = n }}>
-        ↑
-      </Button>
-      <input
-        id='input'
-        type='file'
-        ref={n => { this.input = n }}
-        onChange={this.handleFileChange} />
-    </FakeInputWrapper>
 
-    /* * * * * * * * * * * * * * * * * * *
-     *
-     *  Current file display
-     *
-     * * * * * * * * * * * * * * * * * * */
-    // Image file
-    const ImageFileWrap = styled.div`
-      position: relative;
-      overflow: hidden;
-      #image {
-        max-height: 300px;
-        border-radius: ${p => p.theme.units(1)};
-        background-color: ${p => p.theme.colors.dimBg};
-      }
-      #actions {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: ${p => hexToRgba(p.theme.colors.dimBg, 0.8)};
-      }
-      &:hover #actions { display: flex; }
-    `
-    const ImageFile = props => <ImageFileWrap {...props}>
-      <Image
-        id='image'
-        contain={1}
-        src={props.src} />
-      <div id='actions'>
-        <Button onClick={this.triggerFileWindow}>
-          Modifier
-        </Button>
-      </div>
-    </ImageFileWrap>
+    /* Interactions */
+    const showFilesExplorer = e => this.input.click()
+    const handleFileChange = e => this.setState({ file: this.input.files[0] || null })
 
-    // Non-image file
-    const srcName = props.src ? props.src
-      .split('/')
-      .slice(-1)[0] : ''
-    const srcExtension = props.src ? props.src
+    /* Assign classes to component */
+    const isImg = src => src
       .split('.')
-      .slice(-1)[0] : ''
-    const DocFileWrap = styled.div`
-      box-sizing: border-box;
-      padding: ${p => p.theme.units(1)};
-      #file {
-        display: flex;
-        align-items: center;
-      }
-      #extension {
-        box-sizing: border-box;
-        display: inline-block;
-        margin-right: ${p => p.theme.units(1)};
-        padding: ${p => p.theme.units(1)};
-        border-radius: ${p => p.theme.units(0.5)};
-        color: ${p => p.theme.colors.lightText};
-        font-family: ${p => p.theme.fonts.easy};
-        font-size: ${p => p.theme.units(1.75)};
-        line-height: ${p => p.theme.units(2)};
-        font-weight: 600;
-        background-color: ${p => p.theme.colors.shadedBg};
-      }
-      #sourceName {
-        color: ${p => p.theme.colors.text};
-        font-family: ${p => p.theme.fonts.easy};
-        font-size: ${p => p.theme.units(2)};
-        line-height: ${p => p.theme.units(3)};
-        font-weight: 400;
-      }
-      #actions {
-        display: none;
-        justify-content: space-between;
-      }
-      &:hover #file { display: none; }
-      &:hover #actions { display: flex; }
-    `
-    const DocFile = props => {
-      const handleClick = () => window.open(props.src, '_blank')
-      const showFiles = this.triggerFileWindow
-      return <ShadowBox {...props}>
-        <DocFileWrap>
-          <div id='file'>
-            <div id='extension'>.{srcExtension}</div>
-            <div id='sourceName'>{srcName}</div>
-          </div>
-          <div id='actions'>
-            <Button
-              minor
-              onClick={handleClick}>
-              Télécharger
-            </Button>
-            <Button
-              onClick={showFiles}>
-              Modifier
-            </Button>
-          </div>
-        </DocFileWrap>
-      </ShadowBox>
-    }
+      .slice(-1)[0]
+      .match(/^(jpg)|(jpeg)|(gif)|(bmp)|(svg)$/igm)
+    let classes = 'file-input'
+    if (state.file) classes += ' file-input_with-file'
+    if (props.src) classes += ' file-input_with-source'
+    if (props.src && isImg(props.src)) classes += ' file-input_with-image-source'
+    if (props.src && !isImg(props.src)) classes += ' file-input_with-other-source'
 
-    // Wrapper
-    const imgExtRegexp = /^(jpg)|(jpeg)|(gif)|(bmp)|(svg)$/igm
-    const isImg = srcExtension.match(imgExtRegexp)
-    const CurrFileWrap = styled.div`
-      width: 100%;
-      box-sizing: border-box;
-      overflow: hidden;
-      border-radius: ${p => p.theme.units(1)};
-      #image-file { display: ${isImg ? 'block' : 'none'}; }
-      #doc-file { display: ${isImg ? 'none' : 'block'}; }
-    `
-    const CurrentFile = props => <CurrFileWrap {...props}>
-      <ImageFile
-        id='image-file'
-        src={props.src} />
-      <DocFile
-        id='doc-file'
-        src={props.src} />
-    </CurrFileWrap>
+    /* Inner logic */
+    const Label = () => props.label ? <InputLabel>{props.label}</InputLabel> : null
+    const FileName = () => state.file ? state.file.name : props.placeholder || 'Choisir un fichier'
+    const getSourceName = (src = '') => src.split('/').slice(-1)[0]
 
-    /* * * * * * * * * * * * * * * * * * *
-     *
-     *  Return whole component
-     *
-     * * * * * * * * * * * * * * * * * * */
-    const Wrapper = styled.div`
-      width: 100%;
-      box-sizing: border-box;
-      #current-file {
-        display: ${!props.src || state.filename ? 'none' : 'block'};
-      }
-      #fake-input {
-        display: ${!props.src || state.filename ? 'flex' : 'none'};
-      }
-    `
-    return <Wrapper {...props}>
-      { props.label ? <InputLabel>Label</InputLabel> : null }
-      <FakeInput
-        id='fake-input'
-        filename={state.filename}
-        placeholder={props.placeholder} />
-      <CurrentFile
-        id='current-file'
-        src={props.src} />
+    /* Display */
+    return <Wrapper className={classes}>
+      <Label />
+      <div className='file-input__input'>
+        <div className='file-input__fake-input' onClick={showFilesExplorer}>
+          <FileName />
+        </div>
+        <Button minor className='file-input__cancel-file-select'>x</Button>
+        <Button className='file-input__upload-file'>↑</Button>
+        <div className='file-input__upload-loader' />
+        <input type='file' onChange={handleFileChange} ref={n => { this.input = n }} />
+      </div>
+      <div className='file-input__image-file'>
+        <div><Image src={props.src} /></div>
+        <Button>Modifier</Button>
+      </div>
+      <div className='file-input__other-file'>
+        <div>{getSourceName(props.src)}</div>
+        <Button minor>Télécharger</Button>
+        <Button>Modifier</Button>
+      </div>
     </Wrapper>
   }
 }
