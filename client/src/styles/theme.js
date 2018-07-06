@@ -27,15 +27,16 @@ const rawColors = {
 }
 
 const colors = {
-  text:       rawColors.black,
-  lightText:  rawColors.grey,
-  clearText:  rawColors.white,
-  dangerText: rawColors.red,
-  borders:    rawColors.lightGrey,
-  clearBg:    rawColors.white,
-  shadedBg:   rawColors.shadedWhite,
-  dimBg:      rawColors.shadedBlack,
-  action:     rawColors.blue
+  text:           rawColors.black,
+  lightText:      rawColors.grey,
+  lightClearText: rawColors.lightGrey,
+  clearText:      rawColors.white,
+  dangerText:     rawColors.red,
+  borders:        rawColors.lightGrey,
+  clearBg:        rawColors.white,
+  shadedBg:       rawColors.shadedWhite,
+  dimBg:          rawColors.shadedBlack,
+  action:         rawColors.blue
 }
 
 const shadows = {
@@ -49,12 +50,17 @@ const breakpoints = {
   medium: '980px'
 }
 
+const transitions = {
+  quick: '200ms'
+}
+
 const theme = {
   units,
   fonts,
   colors,
   shadows,
-  breakpoints
+  breakpoints,
+  transitions
 }
 
 export default theme

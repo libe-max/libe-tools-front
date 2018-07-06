@@ -121,7 +121,7 @@ export default class ComponentsPage extends Component {
             <FileInput
               label='Label'
               placeholder='Choisir un fichier'
-              src='http://maximefabas.github.io/ressources/maxime_fabas_resume_fr_feb_18.pdf' />
+              src='https://maximefabas.github.io/ressources/maxime_fabas_resume_fr_feb_18.pdf' />
           </CpBx>
         </CpRow>
         <CpRow title='Compound components'>
