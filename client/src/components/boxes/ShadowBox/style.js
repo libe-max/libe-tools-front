@@ -8,6 +8,8 @@ overflow: hidden;
 border:
   ${p => p.theme.units(0.25)}
   ${p => p.theme.colors.borders}
-  solid;`
+  solid;
+/* Compensation of border thickness in padding */
+padding: ${p => p.theme.units(2 - 0.25)};`
 
 export default Wrapper

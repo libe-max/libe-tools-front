@@ -4,22 +4,14 @@ const Wrapper = styled.div`
 width: 100%;
 
 .image {
-  width: 100%;
+  width: calc(100% + ${p => p.theme.units(4)});
   height: ${p => p.theme.units(20)};
-  /* [WARN]
-   * Trick here to compensate the border
-   * width in ShadowBox component, since
-   * its height is not constrained */
-  margin-top: ${p => p.theme.units(-0.25)};
+  margin-left: ${p => p.theme.units(-2)};
+  margin-top: ${p => p.theme.units(-2)};
 }
 
 .libe-tool-thumb__content {
-  /* [WARN]
-   * Trick here to compensate the border
-   * width in ShadowBox component, since
-   * its height is not constrained */
-  padding: ${p => p.theme.units(2 - 0.25)};
-  padding-top: ${p => p.theme.units(2)};
+  margin-top: ${p => p.theme.units(2)};
 }
 
 .libe-tool-thumb__content > .block-title { 

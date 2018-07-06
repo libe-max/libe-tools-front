@@ -6,14 +6,6 @@ const Wrapper = styled.div`
  *  Loaded
  *
  * * * * * * * * * * * * * * * * * * * */
-.shadow-box {
-  /* [WARN]
-   * Trick here to compensate the border
-   * width in ShadowBox component, since
-   * its height is not constrained */
-  padding: ${p => p.theme.units(2 - 0.25)};
-}
-
 .libe-bundle-thumb__top {
   display: flex;
   margin-bottom: ${p => p.theme.units(2)};
@@ -112,7 +104,7 @@ const Wrapper = styled.div`
    * Trick here to compensate the absence of
    * border in the loading version of this
    * component */
-  padding: ${p => p.theme.units(2)};
+  // padding: ${p => p.theme.units(2)};
 }
 
 &.libe-bundle-thumb_loading .libe-bundle-thumb__image {
