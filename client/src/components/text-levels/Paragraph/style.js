@@ -9,7 +9,6 @@ font-size: ${p => p.theme.units(2)};
 color: ${p => p.theme.colors.text};
 
 &.paragraph_small {
-  line-height: ${p => p.theme.units(2)};
   font-size: ${p => p.theme.units(1.75)};
 }
 
