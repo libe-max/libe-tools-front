@@ -12,7 +12,8 @@ import Wrapper from './style'
  *   primary, dangerous, minor, link
  *
  *   PROPS
- *   tabIndex, primary, dangerous, minor, link, children
+ *   onClick, tabIndex, primary, dangerous, minor,
+ *   link, children
  *
  */
 
@@ -24,7 +25,10 @@ export default class Button extends Component {
     if (props.dangerous) classes += ' button_dangerous'
     if (props.minor) classes += ' button_minor'
     if (props.link) classes += ' button_link'
-    return <Wrapper tabIndex={props.tabIndex} className={classes}>
+    return <Wrapper
+      tabIndex={props.tabIndex}
+      onClick={props.onClick}
+      className={classes}>
       {props.children}
     </Wrapper>
   }
