@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Header from '../components/blocks/Header'
-import SearchField from '../components/inputs/SearchField'
-import LibeToolThumb from '../components/blocks/LibeToolThumb'
-import LibeBundleThumb from '../components/blocks/LibeBundleThumb'
+import Header from '../../components/blocks/Header'
+import SearchField from '../../components/inputs/SearchField'
+import LibeToolThumb from '../../components/blocks/LibeToolThumb'
+import LibeBundleThumb from '../../components/blocks/LibeBundleThumb'
 
 export default class HomePage extends Component {
   render () {
