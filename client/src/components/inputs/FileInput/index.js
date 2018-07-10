@@ -10,6 +10,21 @@ import Wrapper from './style'
 /* [WIP] Gérer l'affichage du label par css et répliquer
  * cette logique sur les autres inputs */
 
+/*
+ *   Input file component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   This component is a fake input type=file component, 
+ *   able to display a file if the component has a distant
+ *   source file, and an uploader button in order to update
+ *   the source file
+ *
+ *   PROPS
+ *   src, uploading, onSubmit, label, placeholder
+ *
+ */
+
 export default class FileInput extends Component {
   constructor (props) {
     super(props)
