@@ -30,11 +30,19 @@ export default class Image extends Component {
       height: props.height ? `${props.height}px` : null,
       width: props.width ? `${props.width}px` : null
     }
-    const imgStyle = {
-      height: props.height ? `${props.height}px` : null,
-      width: props.width ? `${props.width}px` : null
-    }
-    return <Wrapper style={wrapperStyle} className='image'>
+    const imgStyle = {}
+    if (props.height) imgStyle.height = `${props.height}px`
+    if (props.width) imgStyle.width = `${props.width}px`
+
+    /* Assign classes to component */
+    let classes = 'image'
+    if (props.contain) classes += ' image_contained'
+    if (props.position) classes += ' image_positioned'
+    if (props.repeat) classes += ' image_repeated'
+    if (props.width) classes += ' image_fixed-width'
+    if (props.height) classes += ' image_fixed-height'
+
+    return <Wrapper style={wrapperStyle} className={classes}>
       <img
         src={props.src}
         style={imgStyle}
