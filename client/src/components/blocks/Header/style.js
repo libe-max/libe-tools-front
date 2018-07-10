@@ -16,9 +16,7 @@ background: ${p => p.theme.colors.clearBg};
   margin-left: ${p => p.theme.units(2)};
 }
 
-@media screen and (max-width: ${
-  p => p.theme.breakpoints.medium
-}) {
+@media screen and (max-width: ${p => p.theme.breakpoints.medium}) {
   .image {
     height: ${p => p.theme.units(4)};
   }

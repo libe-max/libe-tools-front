@@ -20,7 +20,7 @@ export default class Header extends Component {
   render () {
     return <Wrapper className='header'>
       <ShadowBar>
-        <Image src='/images/libe-logo.svg' />
+        <Image contain src='/images/libe-logo.svg' />
         <MainTitle>
           La boîte à outils de Six Plus
         </MainTitle>
