@@ -61,7 +61,7 @@ export default class LibeBundleThumb extends Component {
     }
     if (published) meta.when += `, publié le ${published}`
     else if (updated) meta.when += `, mis à jour le ${updated}`
-      
+
     /* Display */
     let classes = 'libe-bundle-thumb'
     if (props.loading) classes += ' libe-bundle-thumb_loading'

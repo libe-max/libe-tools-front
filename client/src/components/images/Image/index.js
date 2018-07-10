@@ -8,7 +8,7 @@ import Wrapper from './style'
  *   DESCRIPTION
  *   Image component, displaying a box with the image as
  *   a background, and sized according to the raw
- *   dimensions of the image, or as a cover image on a 
+ *   dimensions of the image, or as a cover image on a
  *   box sized according to the provided width and height
  *   props
  *

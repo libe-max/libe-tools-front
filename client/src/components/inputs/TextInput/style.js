@@ -27,7 +27,7 @@ input::placeholder {
   display: none;
 }
 
-&.text-input_with-label .input-label {
+&.text-input_with-label .input-label {
   display: block;
 }`
 

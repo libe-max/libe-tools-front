@@ -20,14 +20,16 @@ export default class FileInput extends Component {
         type: null
       }
     }
-    if (props.src) fetch(props.src, { method: 'GET', mode: 'cors' })
-      .then(r => r.ok ? r.blob() : null)
-      .then(res => {
-        this.setState({ source: {
-          size: res.size,
-          type: res.type
-        }})
-      })
+    if (props.src) {
+      fetch(props.src, { method: 'GET', mode: 'cors' })
+        .then(r => r.ok ? r.blob() : null)
+        .then(res => {
+          this.setState({ source: {
+            size: res.size,
+            type: res.type
+          }})
+        })
+    }
   }
 
   render () {
@@ -50,7 +52,9 @@ export default class FileInput extends Component {
     const showFilesExplorer = e => { this.input.click() }
     const handleFileChange = e => { this.setState({ file: this.input.files[0] || null }) }
     const downloadSource = e => { window.open(props.src, '_blank') }
-    const uploadFile = e => { props.onSubmit ? props.onSubmit(e, state.file) : null }
+    const uploadFile = e => {
+      if (props.onSubmit) props.onSubmit(e, state.file)
+    }
     const emptyFile = e => {
       this.input.value = null
       this.setState({ file: null })
@@ -59,7 +63,6 @@ export default class FileInput extends Component {
     /* Inner logic */
     const Label = () => props.label ? <InputLabel>{props.label}</InputLabel> : null
     const getSourceName = (src = '') => src.split('/').slice(-1)[0]
-    const getSourceExt = (src = '') => src.split('.').slice(-1)[0]
     const readableFileSize = size => {
       if (!size && size !== 0) return 'no-size'
       let res = size
