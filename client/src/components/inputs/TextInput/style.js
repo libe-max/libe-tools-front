@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
+
+/* ---------- STYLES ---------- */
+
 width: 100%;
 box-sizing: border-box;
 
@@ -27,8 +30,12 @@ input::placeholder {
   display: none;
 }
 
-&.text-input_with-label .input-label {
-  display: block;
+/* ---------- COMPONENT STATES ---------- */
+
+&.text-input_with-label {
+  .input-label {
+    display: block;
+  }
 }`
 
 export default Wrapper

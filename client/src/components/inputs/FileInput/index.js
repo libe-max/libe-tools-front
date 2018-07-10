@@ -7,15 +7,12 @@ import ShadowBox from '../../boxes/ShadowBox'
 import loader from './assets/loader.gif'
 import Wrapper from './style'
 
-/* [WIP] Gérer l'affichage du label par css et répliquer
- * cette logique sur les autres inputs */
-
 /*
  *   Input file component
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
- *   This component is a fake input type=file component, 
+ *   This component is a fake input type=file component,
  *   able to display a file if the component has a distant
  *   source file, and an uploader button in order to update
  *   the source file
@@ -36,13 +33,17 @@ export default class FileInput extends Component {
       }
     }
     if (props.src) {
-      fetch(props.src, { method: 'GET', mode: 'cors' })
-        .then(r => r.ok ? r.blob() : null)
+      fetch(props.src, {
+        method: 'GET',
+        mode: 'cors'
+      }).then(r => r.ok ? r.blob() : null)
         .then(res => {
-          this.setState({ source: {
-            size: res.size,
-            type: res.type
-          }})
+          this.setState({
+            source: {
+              size: res.size,
+              type: res.type
+            }
+          })
         })
     }
   }
@@ -53,6 +54,7 @@ export default class FileInput extends Component {
 
     /* Assign classes to component */
     let classes = 'file-input'
+    if (props.label) classes += ' file-input_with-label'
     if (props.uploading) classes += ' file-input_uploading'
     if (state.file) classes += ' file-input_with-file'
     if (props.src) classes += ' file-input_with-source'
@@ -64,11 +66,23 @@ export default class FileInput extends Component {
     if (props.src && !isImg(props.src)) classes += ' file-input_with-other-source'
 
     /* Interactions */
-    const showFilesExplorer = e => { this.input.click() }
-    const handleFileChange = e => { this.setState({ file: this.input.files[0] || null }) }
-    const downloadSource = e => { window.open(props.src, '_blank') }
+    const showFilesExplorer = e => {
+      e.stopPropagation()
+      this.input.click()
+    }
+    const handleFileChange = e => {
+      this.setState({
+        file: this.input.files[0] || null
+      })
+    }
+    const downloadSource = e => {
+      e.stopPropagation()
+      window.open(props.src, '_blank')
+    }
     const uploadFile = e => {
-      if (props.onSubmit) props.onSubmit(e, state.file)
+      if (props.onSubmit) {
+        props.onSubmit(e, state.file)
+      }
     }
     const emptyFile = e => {
       this.input.value = null
@@ -76,7 +90,6 @@ export default class FileInput extends Component {
     }
 
     /* Inner logic */
-    const Label = () => props.label ? <InputLabel>{props.label}</InputLabel> : null
     const getSourceName = (src = '') => src.split('/').slice(-1)[0]
     const readableFileSize = size => {
       if (!size && size !== 0) return 'no-size'
@@ -93,7 +106,7 @@ export default class FileInput extends Component {
 
     /* Display */
     return <Wrapper className={classes}>
-      <Label />
+      <div className='file-input__label'><InputLabel>{props.label}</InputLabel></div>
       <div className='file-input__input'>
         <div className='file-input__fake-input' onClick={showFilesExplorer}>
           <div className='file-input__filename-placeholder'><P light>{props.placeholder || 'Choisir un fichier'}</P></div>
@@ -105,7 +118,7 @@ export default class FileInput extends Component {
         <div className='file-input__upload-loader'><img src={loader} /></div>
         <div className='file-input__real-input'><input type='file' onChange={handleFileChange} ref={n => { this.input = n }} /></div>
       </div>
-      <div className='file-input__image-source'>
+      <div className='file-input__image-source' onClick={showFilesExplorer}>
         <div className='file-input__image'><Image contain src={props.src} /></div>
         <div className='file-input__image-source-infos-and-actions'>
           <div className='file-input__image-source-infos'>
@@ -117,7 +130,7 @@ export default class FileInput extends Component {
           <div className='file-input__edit-image-source'><Button onClick={showFilesExplorer}>Modifier</Button></div>
         </div>
       </div>
-      <div className='file-input__other-source'>
+      <div className='file-input__other-source' onClick={showFilesExplorer}>
         <ShadowBox>
           <div className='file-input__other-source-infos'>
             <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>

@@ -4,6 +4,7 @@ const Wrapper = styled.div`
 
 /* ---------- STYLES ---------- */
 
+/* Fake input */
 .file-input__input {
   display: flex;
   align-items: center;
@@ -59,6 +60,7 @@ const Wrapper = styled.div`
   }
 }
 
+/* Image source displayer */
 .file-input__image-source {
   position: relative;
   display: flex;
@@ -103,7 +105,10 @@ const Wrapper = styled.div`
   }
 }
 
+/* Non image source displayer */
 .file-input__other-source {
+  cursor: pointer;
+
   .shadow-box {
     display: flex;
     justify-content: space-between;
@@ -128,6 +133,7 @@ const Wrapper = styled.div`
 /* ---------- COMPONENT STATES ---------- */
 
 /* Default */
+.file-input__label,
 .file-input__filename,
 .file-input__filename-upload-prefix,
 .file-input__image-source,
@@ -136,6 +142,11 @@ const Wrapper = styled.div`
 .file-input__upload-file,
 .file-input__upload-loader {
   display: none;
+}
+
+/* With label */
+&.file-input_with-label {
+  .file-input__label { display: block; }
 }
 
 /* With source file of image type */
