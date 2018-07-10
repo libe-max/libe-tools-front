@@ -4,6 +4,7 @@ import P from '../../text-levels/Paragraph'
 import Button from '../../buttons/Button'
 import Image from '../../images/Image'
 import ShadowBox from '../../boxes/ShadowBox'
+import loader from './assets/loader.gif'
 import Wrapper from './style'
 
 /* [WIP] Gérer l'affichage du label par css et répliquer
@@ -22,12 +23,10 @@ export default class FileInput extends Component {
     if (props.src) fetch(props.src, { method: 'GET', mode: 'cors' })
       .then(r => r.ok ? r.blob() : null)
       .then(res => {
-        this.setState({
-          source: {
-            size: res.size,
-            type: res.type
-          }
-        })
+        this.setState({ source: {
+          size: res.size,
+          type: res.type
+        }})
       })
   }
 
@@ -50,11 +49,12 @@ export default class FileInput extends Component {
     /* Interactions */
     const showFilesExplorer = e => { this.input.click() }
     const handleFileChange = e => { this.setState({ file: this.input.files[0] || null }) }
+    const downloadSource = e => { window.open(props.src, '_blank') }
+    const uploadFile = e => { props.onSubmit ? props.onSubmit(e, state.file) : null }
     const emptyFile = e => {
       this.input.value = null
       this.setState({ file: null })
     }
-    const downloadSource = e => { alert('DOWNLOAD SOURCE !') }
 
     /* Inner logic */
     const Label = () => props.label ? <InputLabel>{props.label}</InputLabel> : null
@@ -79,15 +79,16 @@ export default class FileInput extends Component {
       <div className='file-input__input'>
         <div className='file-input__fake-input' onClick={showFilesExplorer}>
           <div className='file-input__filename-placeholder'><P light>{props.placeholder || 'Choisir un fichier'}</P></div>
+          <div className='file-input__filename-upload-prefix'><P light>Uploading...</P></div>
           <div className='file-input__filename'><P>{state.file ? state.file.name : null}</P></div>
         </div>
         <div className='file-input__cancel-file-select'><Button minor onClick={emptyFile}>x</Button></div>
-        <div className='file-input__upload-file'><Button>↑</Button></div>
-        <div className='file-input__upload-loader' />
-        <input type='file' onChange={handleFileChange} ref={n => { this.input = n }} />
+        <div className='file-input__upload-file' onClick={uploadFile}><Button>↑</Button></div>
+        <div className='file-input__upload-loader'><img src={loader} /></div>
+        <div className='file-input__real-input'><input type='file' onChange={handleFileChange} ref={n => { this.input = n }} /></div>
       </div>
       <div className='file-input__image-source'>
-        <Image contain src={props.src} />
+        <div className='file-input__image'><Image contain src={props.src} /></div>
         <div className='file-input__image-source-infos-and-actions'>
           <div className='file-input__image-source-infos'>
             <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>
