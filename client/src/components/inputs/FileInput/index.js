@@ -35,14 +35,14 @@ export default class FileInput extends Component {
     const state = this.state
 
     /* Assign classes to component */
-    const isImg = (src = '') => src
-      .split('.')
-      .slice(-1)[0]
-      .match(/^(jpg)|(jpeg)|(gif)|(bmp)|(svg)$/igm)
     let classes = 'file-input'
     if (props.uploading) classes += ' file-input_uploading'
     if (state.file) classes += ' file-input_with-file'
     if (props.src) classes += ' file-input_with-source'
+    const isImg = (src = '') => src
+      .split('.')
+      .slice(-1)[0]
+      .match(/^(jpg)|(jpeg)|(gif)|(bmp)|(svg)$/igm)
     if (props.src && isImg(props.src)) classes += ' file-input_with-image-source'
     if (props.src && !isImg(props.src)) classes += ' file-input_with-other-source'
 
