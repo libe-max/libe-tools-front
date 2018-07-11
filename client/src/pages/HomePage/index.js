@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import Header from '../../components/blocks/Header'
 import SearchField from '../../components/inputs/SearchField'
 import LibeToolThumb from '../../components/blocks/LibeToolThumb'
@@ -11,18 +10,18 @@ export default class HomePage extends Component {
     return <Wrapper className='home-page'>
       <div className='home-page__header'><Header /></div>
       <div className='home-page__content'>
-          <div className='home-page__tools-panel'>
-            <div className='searchable-list'>
-              <div className='home-page__tools-search'><SearchField placeholder='Rechercher un outil' /></div>
-              <div className='home-page__tools-list'>
-                <div className='home-page__tools-list-slider'>
-                  <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
-                  <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
-                  <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
-                  <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
-                  <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
-                </div>
+        <div className='home-page__tools-panel'>
+          <div className='searchable-list'>
+            <div className='home-page__tools-search'><SearchField placeholder='Rechercher un outil' /></div>
+            <div className='home-page__tools-list'>
+              <div className='home-page__tools-list-slider'>
+                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
+                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
+                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
+                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
+                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
               </div>
+            </div>
           </div>
         </div>
         <div className='home-page__bundles-panel'>

@@ -27,7 +27,7 @@ grid-template-rows: auto 1fr;
   min-height: 100%;
   max-height: 100%;
   overflow: hidden;
-  padding: 0 ${p =>p.theme.units(2)};
+  padding: 0 ${p => p.theme.units(2)};
   border-right-style: solid;
   border-right:
     ${p => p.theme.units(0.25)}
@@ -69,7 +69,7 @@ grid-template-rows: auto 1fr;
 }
 
 .search-field {
-  margin: 0 ${p =>p.theme.units(3)};
+  margin: 0 ${p => p.theme.units(3)};
   max-width: ${p => p.theme.units(40)};
 }
 
