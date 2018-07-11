@@ -20,7 +20,6 @@ background: ${p => p.theme.colors.clearBg};
   .image {
     height: ${p => p.theme.units(4)};
   }
-}
-`
+}`
 
 export default Wrapper

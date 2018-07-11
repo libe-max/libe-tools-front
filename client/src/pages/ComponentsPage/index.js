@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import MainTitle from '../../components/text-levels/MainTitle'
 import BlockTitle from '../../components/text-levels/BlockTitle'
 import ParagraphTitle from '../../components/text-levels/ParagraphTitle'
