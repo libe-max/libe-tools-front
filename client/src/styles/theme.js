@@ -1,10 +1,4 @@
-import { injectGlobal } from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
-
-injectGlobal`
-  html { box-sizing: border-box; }
-  *, *::before, *::after { box-sizing: inherit; }
-`
 
 /* eslint-disable key-spacing */
 
