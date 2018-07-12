@@ -26,7 +26,7 @@ export default class LibeToolThumb extends Component {
       <ShadowBox>
         <Image
           src={props.image}
-          position='top left'
+          position='center'
           alt='Tool thumbnail'
           title='Tool thumbnail' />
         <div className='libe-tool-thumb__content'>

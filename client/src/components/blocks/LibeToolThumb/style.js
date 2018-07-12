@@ -5,7 +5,7 @@ width: 100%;
 
 .image {
   width: calc(100% + ${p => p.theme.units(4)});
-  height: ${p => p.theme.units(20)};
+  height: ${p => p.theme.units(30)};
   margin-left: ${p => p.theme.units(-2)};
   margin-top: ${p => p.theme.units(-2)};
 }
@@ -19,7 +19,10 @@ width: 100%;
 }
 
 .libe-tool-thumb__content > .paragraph {
+  display: block;
   margin-bottom: ${p => p.theme.units(2)};
+  height: ${p => p.theme.units(6)};
+  max-height: ${p => p.theme.units(6)};
 }
 
 .libe-tool-thumb__actions {
