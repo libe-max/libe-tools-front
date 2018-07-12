@@ -4,7 +4,6 @@ import P from '../../text-levels/Paragraph'
 import Button from '../../buttons/Button'
 import Image from '../../images/Image'
 import ShadowBox from '../../boxes/ShadowBox'
-import loader from './assets/loader.gif'
 import Wrapper from './style'
 
 /*
@@ -115,7 +114,7 @@ export default class FileInput extends Component {
         </div>
         <div className='file-input__cancel-file-select'><Button minor onClick={emptyFile}>x</Button></div>
         <div className='file-input__upload-file' onClick={uploadFile}><Button>↑</Button></div>
-        <div className='file-input__upload-loader'><img src={loader} /></div>
+        <div className='file-input__upload-loader'><img src='/images/loader.gif' /></div>
         <div className='file-input__real-input'><input type='file' onChange={handleFileChange} ref={n => { this.input = n }} /></div>
       </div>
       <div className='file-input__image-source' onClick={showFilesExplorer}>

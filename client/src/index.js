@@ -5,12 +5,9 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
 // Components
-import App from './App'
 import reducer from './reducers'
-// Styles
-import 'normalize.css'
-import './styles/fonts.css'
-import theme from './styles/theme'
+import theme from './theme'
+import App from './App'
 // Service worker
 import registerServiceWorker from './registerServiceWorker'
 
