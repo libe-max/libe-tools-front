@@ -1,14 +1,8 @@
 import { combineReducers } from 'redux'
-
-const someReducer = (state = {}, action) => {
-  switch (action.type) {
-    default:
-      return state
-  }
-}
+import bundles from './bundles'
 
 const reducer = combineReducers({
-  someReducer
+  bundles
 })
 
 export default reducer

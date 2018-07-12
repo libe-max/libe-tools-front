@@ -11,9 +11,12 @@ import App from './App'
 // Service worker
 import registerServiceWorker from './registerServiceWorker'
 
+// Create store
+const store = createStore(reducer)
+
 // Render app ---------------------------------------------
 render(
-  <Provider store={createStore(reducer)}>
+  <Provider store={store}>
     <ThemeProvider theme={theme}>
       <Router>
         <App />
