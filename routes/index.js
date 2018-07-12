@@ -3,10 +3,9 @@ const path = require('path')
 const router = express.Router()
 
 /* GET React app. */
-router.get([
-  '/',
-  '/components'
-], (req, res, next) => {
+router.get(
+  ['/', '/components'],
+  (req, res, next) => {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html')
   )
