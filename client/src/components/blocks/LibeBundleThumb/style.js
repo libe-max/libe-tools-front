@@ -34,6 +34,7 @@ const Wrapper = styled.div`
 .libe-bundle-thumb__image .image {
   width: 100%;
   height: 100%;
+  background-color: ${p => p.theme.colors.shadedBg};
 }
 
 .libe-bundle-thumb__image-placeholder {

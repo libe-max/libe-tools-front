@@ -65,7 +65,7 @@ export default class LibeBundleThumb extends Component {
     /* Display */
     let classes = 'libe-bundle-thumb'
     if (props.loading) classes += ' libe-bundle-thumb_loading'
-    return <Wrapper className={classes}>
+    return <Wrapper className={classes} rel={props.bundleId}>
       <ShadowBox>
         <div className='libe-bundle-thumb__top'>
           <div className='libe-bundle-thumb__image-placeholder' />
