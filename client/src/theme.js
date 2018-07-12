@@ -1,6 +1,6 @@
-import hexToRgba from 'hex-to-rgba'
-
 /* eslint-disable key-spacing */
+
+import hexToRgba from 'hex-to-rgba'
 
 const units = val => `${8 * val}px`
 

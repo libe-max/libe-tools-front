@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "hex-to-rgba": "^1.0.1",
-    "normalize.css": "^8.0.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-redux": "^5.0.7",
@@ -22,7 +21,6 @@
     "standard-fix": "standard --fix --verbose | snazzy"
   },
   "proxy": "http://localhost:3001",
-  "homepage": "/build",
   "standard": {
     "globals": [
       "it",
