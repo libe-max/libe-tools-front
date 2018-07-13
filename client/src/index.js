@@ -20,9 +20,6 @@ import ComponentsPage from './pages/ComponentsPage/'
 render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Router>
-        <App />
-      </Router>
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
