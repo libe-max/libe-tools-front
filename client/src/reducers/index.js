@@ -1,8 +1,7 @@
-import { combineReducers } from 'redux'
 import bundles from './bundles'
 
-const reducer = combineReducers({
+const reducers = {
   bundles
-})
+}
 
-export default reducer
+export default reducers

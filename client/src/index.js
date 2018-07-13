@@ -1,25 +1,54 @@
+// React
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
-// Components
-import reducer from './reducers'
-import theme from './theme'
-// Service worker
 import registerServiceWorker from './registerServiceWorker'
 
-// Create store
-const store = createStore(reducer)
+// Redux
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { createLogger } from 'redux-logger'
+import reducers from './reducers'
+
+// Routing
+import { Route, Switch, Redirect } from 'react-router-dom'
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
+
+// Theme
+import { ThemeProvider } from 'styled-components'
+import theme from './theme'
+
+// Components
 import HomePage from './containers/HomePage'
 import ComponentsPage from './pages/ComponentsPage/'
 
-// Render app ---------------------------------------------
+const history = createHistory()
+const middleware = routerMiddleware(history)
+const logger = createLogger({
+  collapsed: true,
+  duration: true,
+  diff: true
+})
+const store = createStore(
+  combineReducers({ 
+    ...reducers,
+    router: routerReducer
+  }),
+  applyMiddleware(
+    middleware,
+    logger
+  )
+)
+
+/* * * * * * * * * * * * * * * * * *
+ *
+ *   Render app
+ *
+ * * * * * * * * * * * * * * * * * */
 render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
+      <ConnectedRouter history={history}>
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
@@ -27,6 +56,7 @@ render(
             <Route path='/' render={() => <Redirect to='/' />} />
           </Switch>
         </div>
+      </ConnectedRouter>
     </ThemeProvider>
   </Provider>,
   document.getElementById('root')
