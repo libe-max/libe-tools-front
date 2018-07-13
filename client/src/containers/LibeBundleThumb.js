@@ -8,6 +8,7 @@ const state2props = state => ({
 
 const dispatch2props = (dispatch, props) => ({
   navigateToBundle: e => {
+    e.stopPropagation()
     dispatch(
       push(`/bundle/${props.bundleId}`)
     )

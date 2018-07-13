@@ -8,6 +8,7 @@ const state2props = state => ({
 
 const dispatch2props = (dispatch, props) => ({
   createNewBundle: e => {
+    e.stopPropagation()
     dispatch(
       push(`/create-bundle/${props.type}`)
     )
