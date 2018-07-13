@@ -54,6 +54,8 @@ render(
           <Switch>
             <Route path='/'component={HomePage} exact />
             <Route path='/test' component={TestPage} exact />
+            <Route path='/bundle/:id' render={props => <div>Edit bundle: {props.match.params.id}</div>} exact />
+            <Route path='/create-bundle/:type' render={() => <div>create bundle</div>} exact />
             <Route path='/components' component={ComponentsPage} exact />
             <Route path='/' render={() => <Redirect to='/' />} />
           </Switch>
