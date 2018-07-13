@@ -84,6 +84,10 @@ const Wrapper = styled.div`
   position: absolute;
 }
 
+&:hover {
+  cursor: pointer;
+}
+
 &:hover .libe-bundle-thumb__meta {
   opacity: .2;
 }

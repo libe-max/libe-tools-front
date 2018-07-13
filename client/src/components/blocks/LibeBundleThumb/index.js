@@ -21,7 +21,7 @@ import Wrapper from './style'
  *
  *   PROPS
  *   title, image, type, author, created, updated,
- *   published, loading
+ *   published, loading, bundleId
  *
  */
 
@@ -62,10 +62,15 @@ export default class LibeBundleThumb extends Component {
     if (published) meta.when += `, publié le ${published}`
     else if (updated) meta.when += `, mis à jour le ${updated}`
 
+    /* Logic */
+    const editBundle = () => {
+      console.log(this.props)
+    }
+
     /* Display */
     let classes = 'libe-bundle-thumb'
     if (props.loading) classes += ' libe-bundle-thumb_loading'
-    return <Wrapper className={classes} rel={props.bundleId}>
+    return <Wrapper className={classes} rel={props.bundleId} onClick={editBundle}>
       <ShadowBox>
         <div className='libe-bundle-thumb__top'>
           <div className='libe-bundle-thumb__image-placeholder' />
@@ -90,7 +95,7 @@ export default class LibeBundleThumb extends Component {
           </div>
           <div className='libe-bundle-thumb__actions'>
             <Button minor dangerous>Supprimer</Button>
-            <Button>Voir, modifier & publier</Button>
+            <Button onClick={editBundle}>Voir, modifier & publier</Button>
           </div>
         </div>
       </ShadowBox>
