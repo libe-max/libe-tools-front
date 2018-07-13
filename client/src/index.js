@@ -20,6 +20,7 @@ import theme from './theme'
 
 // Components
 import HomePage from './containers/HomePage'
+import TestPage from './containers/TestPage'
 import ComponentsPage from './pages/ComponentsPage/'
 
 const history = createHistory()
@@ -52,6 +53,7 @@ render(
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
+            <Route path='/test' component={TestPage} exact />
             <Route path='/components' component={ComponentsPage} exact />
             <Route path='/' render={() => <Redirect to='/' />} />
           </Switch>
