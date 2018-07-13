@@ -30,7 +30,7 @@ export default class HomePage extends Component {
         author={bundle.author}
         created={bundle.created_on}
         updated={settings.timestamp || null}
-        image={`/images/${bundle.type}-small`}
+        image={`/images/${bundle.type}-small.png`}
         title={settings.name || '(sans titre)'} />
     })
 
@@ -42,8 +42,8 @@ export default class HomePage extends Component {
             <div className='home-page__tools-search'><SearchField placeholder='Rechercher un outil' /></div>
             <div className='home-page__tools-list'>
               <div className='home-page__tools-list-slider'>
-                <LibeToolThumb title='Yellow word' image='/images/yellow-word-thumb-image.png' description='Ce module vous permet d&#39;éditer de jolis mots jaunes.' />
-                <LibeToolThumb title='Libé box' image='/images/libe-tool-thumb-image.jpg' description='Lorem ipsum dolor sit amet consectutor' />
+                <LibeToolThumb title='Yellow word' type='yellow-word' image='/images/yellow-word-thumb.png' description='Ce module vous permet d&#39;éditer de jolis mots jaunes.' />
+                <LibeToolThumb title='Libé box' type='libe-box' image='/images/libe-tool-thumb.png' description='Lorem ipsum dolor sit amet consectutor' />
               </div>
             </div>
           </div>
