@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
 width: 100%;
+cursor: pointer;
 
 .image {
   width: calc(100% + ${p => p.theme.units(4)});

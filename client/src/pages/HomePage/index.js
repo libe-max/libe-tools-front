@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Header from '../../components/blocks/Header'
 import SearchField from '../../components/inputs/SearchField'
-import LibeToolThumb from '../../components/blocks/LibeToolThumb'
-import LibeBundleThumb from '../../components/blocks/LibeBundleThumb'
+import LibeToolThumb from '../../containers/LibeToolThumb'
+import LibeBundleThumb from '../../containers/LibeBundleThumb'
 import Wrapper from './style'
 
 export default class HomePage extends Component {

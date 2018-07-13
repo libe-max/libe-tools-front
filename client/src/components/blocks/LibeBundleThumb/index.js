@@ -32,7 +32,7 @@ export default class LibeBundleThumb extends Component {
      * for style purpose */
     super()
     this.state = {
-      loaderWidths: [
+      widths: [
         Math.random() * 9 + 88 + '%',
         Math.random() * 45 + 25 + '%',
         Math.random() * 20 + 30 + '%',
@@ -43,6 +43,7 @@ export default class LibeBundleThumb extends Component {
 
   render () {
     const props = this.props
+    const state = this.state
 
     /* Readable dates */
     const makeReadable = timestamp => timestamp
@@ -62,40 +63,29 @@ export default class LibeBundleThumb extends Component {
     if (published) meta.when += `, publié le ${published}`
     else if (updated) meta.when += `, mis à jour le ${updated}`
 
-    /* Logic */
-    const editBundle = () => {
-      console.log(this.props)
-    }
-
     /* Display */
     let classes = 'libe-bundle-thumb'
     if (props.loading) classes += ' libe-bundle-thumb_loading'
-    return <Wrapper className={classes} rel={props.bundleId} onClick={editBundle}>
+    return <Wrapper className={classes} rel={props.bundleId} onClick={props.navigateToBundle}>
       <ShadowBox>
         <div className='libe-bundle-thumb__top'>
           <div className='libe-bundle-thumb__image-placeholder' />
           <div className='libe-bundle-thumb__title-placeholder'>
-            <div style={{ width: this.state.loaderWidths[0] }} />
-            <div style={{ width: this.state.loaderWidths[1] }} />
+            <div style={{ width: state.widths[0] }} />
+            <div style={{ width: state.widths[1] }} />
           </div>
-          <div className='libe-bundle-thumb__image'>
-            <Image position='center' src={props.image} />
-          </div>
-          <div className='libe-bundle-thumb__title'>
-            <ParagraphTitle>{props.title}</ParagraphTitle>
-          </div>
+          <div className='libe-bundle-thumb__image'><Image position='center' src={props.image} /></div>
+          <div className='libe-bundle-thumb__title'><ParagraphTitle>{props.title}</ParagraphTitle></div>
         </div>
         <div className='libe-bundle-thumb__bottom'>
           <div className='libe-bundle-thumb__meta-placeholder'>
-            <div style={{ width: this.state.loaderWidths[2] }} />
-            <div style={{ width: this.state.loaderWidths[3] }} />
+            <div style={{ width: state.widths[2] }} />
+            <div style={{ width: state.widths[3] }} />
           </div>
-          <div className='libe-bundle-thumb__meta'>
-            <Paragraph light small>{meta.who}<br />{meta.when}</Paragraph>
-          </div>
+          <div className='libe-bundle-thumb__meta'><Paragraph light small>{meta.who}<br />{meta.when}</Paragraph></div>
           <div className='libe-bundle-thumb__actions'>
-            <Button minor dangerous>Supprimer</Button>
-            <Button onClick={editBundle}>Voir, modifier & publier</Button>
+            <Button onClick={props.deleteBundle} minor dangerous>Supprimer</Button>
+            <Button onClick={props.navigateToBundle}>Voir, modifier & publier</Button>
           </div>
         </div>
       </ShadowBox>

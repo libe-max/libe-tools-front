@@ -22,7 +22,8 @@ import Wrapper from './style'
 export default class LibeToolThumb extends Component {
   render () {
     const props = this.props
-    return <Wrapper className='libe-tool-thumb'>
+
+    return <Wrapper className='libe-tool-thumb' onClick={props.createNewBundle}>
       <ShadowBox>
         <Image
           src={props.image}
@@ -33,8 +34,8 @@ export default class LibeToolThumb extends Component {
           <BlockTitle>{props.title}</BlockTitle>
           <Paragraph>{props.description}</Paragraph>
           <div className='libe-tool-thumb__actions'>
-            <Button tabIndex='-1' minor>Voir tous</Button>
-            <Button tabIndex='-1'>Créer</Button>
+            <Button onClick={props.filterBundles} tabIndex='-1' minor>Voir tous</Button>
+            <Button onClick={props.createNewBundle} tabIndex='-1'>Créer</Button>
           </div>
         </div>
       </ShadowBox>
