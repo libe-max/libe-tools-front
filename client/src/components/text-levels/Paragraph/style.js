@@ -14,6 +14,14 @@ color: ${p => p.theme.colors.text};
 
 &.paragraph_light {
   color: ${p => p.theme.colors.lightText};
+}
+
+&.paragraph_italic {
+  font-style: italic;
+}
+
+&.paragraph_error {
+ color: ${p => p.theme.colors.dangerText}; 
 }`
 
 export default Wrapper

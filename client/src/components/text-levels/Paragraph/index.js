@@ -9,10 +9,10 @@ import Wrapper from './style'
  *   Component for usual text
  *
  *   VARIANTS
- *   small, light
+ *   small, light, italic, error
  *
  *   PROPS
- *   small, light, children
+ *   small, light, italic, error, children
  *
  */
 
@@ -22,6 +22,8 @@ export default class Paragraph extends Component {
     let classes = 'paragraph'
     if (props.small) classes += ' paragraph_small'
     if (props.light) classes += ' paragraph_light'
+    if (props.italic) classes += ' paragraph_italic'
+    if (props.error) classes += ' paragraph_error'
     return <Wrapper className={classes}>
       {props.children}
     </Wrapper>
