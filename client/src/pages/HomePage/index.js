@@ -70,7 +70,7 @@ export default class HomePage extends Component {
         <div className='home-page__bundles-panel'>
           <div className='searchable-list'>
             <div className='home-page__bundles-search'><SearchField placeholder='Rechercher un module' /></div>
-            <div className='home-page__bundles-loader'><img src='/images/loader.gif' /></div>
+            <div className='home-page__bundles-loader'><img alt='Loader' src='/images/loader.gif' /></div>
             <div className='home-page__bundles-empty'><Paragraph light italic>Aucun module n'a encore été créé !</Paragraph></div>
             <div className='home-page__bundles-error'>
               <Paragraph error>Une erreur est survenue lors du chargement des modules:</Paragraph>
