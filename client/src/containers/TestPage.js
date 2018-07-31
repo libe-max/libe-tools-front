@@ -7,7 +7,7 @@ const Component = (props) => (
 )
 
 const state2props = state => ({
-  
+
 })
 
 const dispatch2props = dispatch => ({

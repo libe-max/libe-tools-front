@@ -31,7 +31,7 @@ const logger = createLogger({
   diff: true
 })
 const store = createStore(
-  combineReducers({ 
+  combineReducers({
     ...reducers,
     router: routerReducer
   }),
