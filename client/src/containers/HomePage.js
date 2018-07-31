@@ -14,13 +14,16 @@ const dispatch2props = dispatch => ({
   getBundles: () => {
     dispatch(fetchBundlesRequest())
     fetch('/api/get-all-bundles')
-      .then(r => r.json())
+      .then(r => {
+        if (r.ok) return r.json()
+        throw new Error(`Error ${r.status}: ${r.statusText}`)
+      })
       .then(res => {
         if (!res.err) dispatch(fetchBundlesSuccess(res.data))
         else dispatch(fetchBundlesError(res.err))
       })
       .catch(err => {
-        dispatch(fetchBundlesError(err.toString()))
+        dispatch(fetchBundlesError(err.message))
       })
   }
 })
