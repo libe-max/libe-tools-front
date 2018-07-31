@@ -2,12 +2,15 @@ import { connect } from 'react-redux'
 import {
   fetchBundlesRequest,
   fetchBundlesSuccess,
-  fetchBundlesError
+  fetchBundlesError,
+  setToolsFilter,
+  setBundlesFilter
 } from '../actions/actionCreators'
 import Component from '../pages/HomePage'
 
 const state2props = state => ({
-  bundles: state.bundles
+  bundles: state.bundles,
+  filters: state.filters
 })
 
 const dispatch2props = dispatch => ({
@@ -25,6 +28,16 @@ const dispatch2props = dispatch => ({
       .catch(err => {
         dispatch(fetchBundlesError(err.message))
       })
+  },
+  setToolsFilter: e => {
+    if (e && e.target) {
+      dispatch(setToolsFilter(e.target.value))
+    }
+  },
+  setBundlesFilter: e => {
+    if (e && e.target) {
+      dispatch(setBundlesFilter(e.target.value))
+    }
   }
 })
 

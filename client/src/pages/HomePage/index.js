@@ -15,18 +15,42 @@ export default class HomePage extends Component {
 
   render () {
     const props = this.props
-    const bundles = props.bundles || {
-      list: [],
-      error: null,
-      isFetching: false,
-      updatedAt: null
-    }
+    const bundles = props.bundles
+    const filters = props.filters
 
     /* Bundles list */
-    const bundlesDom = bundles.list.map((bundle, i) => {
+    const getBundleCurrentSettings = bundle => {
       const settingsHistory = bundle.settings_history || []
-      const settings = settingsHistory
-        .sort((a, b) => (b.timestamp - a.timestamp))[0]
+      return settingsHistory.sort((a, b) => (b.timestamp - a.timestamp))[0]
+    }
+    const bundlesWithSlug = bundles.list.map((bundle, i) => {
+      const settings = getBundleCurrentSettings(bundle)
+      const slug = [
+        bundle._id,
+        bundle.author,
+        bundle.type,
+        settings.name,
+        settings.text,
+        settings.title
+      ].join('-')
+        .toLowerCase()
+        .replace(/[^a-z0-9-]/igm,'-')
+        .replace(/-{2,}/igm, '-')
+        .replace(/-$/, '')
+      return {
+        ...bundle,
+        slug
+      }
+    })
+    const filteredBundles = bundlesWithSlug.filter(bundle => {
+      const filter = filters.bundles
+      const slug = bundle.slug
+      const splFilters = filter.split(' ')
+      const doesBundleMatch = splFilters.every(word => slug.match(word))
+      return doesBundleMatch ? bundle : null
+    })
+    const bundlesDom = filteredBundles.map((bundle, i) => {
+      const settings = getBundleCurrentSettings(bundle)
       return <LibeBundleThumb
         key={i}
         type={bundle.type}
@@ -50,7 +74,11 @@ export default class HomePage extends Component {
       <div className='home-page__content'>
         <div className='home-page__tools-panel'>
           <div className='searchable-list'>
-            <div className='home-page__tools-search'><SearchField placeholder='Rechercher un outil' /></div>
+            <div className='home-page__tools-search'>
+              <SearchField
+                placeholder='Rechercher un outil'
+                onChange={props.setToolsFilter} />
+            </div>
             <div className='home-page__tools-list'>
               <div className='home-page__tools-list-slider'>
                 <LibeToolThumb
@@ -69,13 +97,17 @@ export default class HomePage extends Component {
         </div>
         <div className='home-page__bundles-panel'>
           <div className='searchable-list'>
-            <div className='home-page__bundles-search'><SearchField placeholder='Rechercher un module' /></div>
+            <div className='home-page__bundles-search'>
+              <SearchField
+                placeholder='Rechercher un module'
+                onChange={props.setBundlesFilter} />
+            </div>
             <div className='home-page__bundles-loader'><img alt='Loader' src='/images/loader.gif' /></div>
             <div className='home-page__bundles-empty'><Paragraph light italic>Aucun module n'a encore été créé !</Paragraph></div>
             <div className='home-page__bundles-error'>
               <Paragraph error>Une erreur est survenue lors du chargement des modules:</Paragraph>
               <Paragraph italic light>{bundles.error || 'Erreur inconnue. Prenez une tisane.'}</Paragraph>
-              <Button link onClick={props.getBundles}>Essayer à nouveau ?</Button>
+              <Button minor link onClick={props.getBundles}>Essayer à nouveau ?</Button>
             </div>
             <div className='home-page__bundles-list'>
               <div className='home-page__bundles-list-slider'>

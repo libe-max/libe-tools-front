@@ -1,7 +1,9 @@
 import bundles from './bundles'
+import filters from './filters'
 
 const reducers = {
-  bundles
+  bundles,
+  filters
 }
 
 export default reducers
