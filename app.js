@@ -23,7 +23,9 @@ app.use(express.static(path.join(__dirname, 'client/build')))
 // Simulate latency
 app.use((req, res, next) => {
   const delay = Math.floor(Math.random() * 800) + 200
-  setTimeout(next, delay)
+  const envIsDev = req.app.get('env') === 'development'
+  if (envIsDev) setTimeout(next, delay)
+  else next()
 })
 
 // Database
