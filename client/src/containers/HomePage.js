@@ -10,7 +10,8 @@ import Component from '../pages/HomePage'
 
 const state2props = state => ({
   bundles: state.bundles,
-  filters: state.filters
+  filters: state.filters,
+  bundleCreation: state.bundleCreation
 })
 
 const dispatch2props = dispatch => ({
@@ -29,15 +30,11 @@ const dispatch2props = dispatch => ({
         dispatch(fetchBundlesError(err.message))
       })
   },
-  setToolsFilter: e => {
-    if (e && e.target) {
-      dispatch(setToolsFilter(e.target.value))
-    }
+  setToolsFilter: val => {
+    dispatch(setToolsFilter(val))
   },
-  setBundlesFilter: e => {
-    if (e && e.target) {
-      dispatch(setBundlesFilter(e.target.value))
-    }
+  setBundlesFilter: val => {
+    dispatch(setBundlesFilter(val))
   }
 })
 

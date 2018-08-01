@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import {
+  createBundleRequest,
+  createBundleError,
   setBundlesFilter,
+  pushNotification
 } from '../actions/actionCreators'
 import Component from '../components/blocks/LibeToolThumb'
 
@@ -12,9 +14,12 @@ const state2props = state => ({
 const dispatch2props = (dispatch, props) => ({
   createNewBundle: e => {
     e.stopPropagation()
-    dispatch(
-      push(`/create-bundle/${props.type}`)
-    )
+    dispatch(createBundleRequest())
+    setTimeout(() => {
+      const err = 'fake error'
+      dispatch(createBundleError(err))
+      dispatch(pushNotification(err))
+    }, 1000)
   },
   filterBundles: e => {
     e.stopPropagation()

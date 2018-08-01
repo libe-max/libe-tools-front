@@ -17,6 +17,7 @@ export default class HomePage extends Component {
     const props = this.props
     const bundles = props.bundles
     const filters = props.filters
+    const bundleCreation = props.bundleCreation
 
     /* Bundles list */
     const getBundleCurrentSettings = bundle => {
@@ -34,7 +35,7 @@ export default class HomePage extends Component {
         settings.title
       ].join('-')
         .toLowerCase()
-        .replace(/[^a-z0-9-]/igm,'-')
+        .replace(/[^a-z0-9-]/igm, '-')
         .replace(/-{2,}/igm, '-')
         .replace(/-$/, '')
       return {
@@ -64,9 +65,12 @@ export default class HomePage extends Component {
 
     /* Assign classes to component */
     const classes = ['home-page']
+    if (bundleCreation.isFetching) classes.push('home-page_create-bundle-fetching')
+    if (bundleCreation.error) classes.push('home-page_create-bundle-error')
     if (bundles.error) classes.push('home-page_bundles-error')
     if (bundles.isFetching) classes.push('home-page_bundles-fetching')
     if (!bundles.list.length) classes.push('home-page_bundles-empty')
+    else if (!bundlesDom.length) classes.push('home-page_bundles-empty-search')
 
     /* Display */
     return <Wrapper className={classes.join(' ')}>
@@ -77,7 +81,8 @@ export default class HomePage extends Component {
             <div className='home-page__tools-search'>
               <SearchField
                 placeholder='Rechercher un outil'
-                onChange={props.setToolsFilter} />
+                onChange={e => { props.setToolsFilter(e.target.value) }}
+                onBlur={e => { props.setToolsFilter(e.target.value) }} />
             </div>
             <div className='home-page__tools-list'>
               <div className='home-page__tools-list-slider'>
@@ -100,10 +105,15 @@ export default class HomePage extends Component {
             <div className='home-page__bundles-search'>
               <SearchField
                 placeholder='Rechercher un module'
-                onChange={props.setBundlesFilter} />
+                onChange={e => { props.setBundlesFilter(e.target.value) }}
+                onBlur={e => { props.setBundlesFilter(e.target.value) }} />
             </div>
             <div className='home-page__bundles-loader'><img alt='Loader' src='/images/loader.gif' /></div>
             <div className='home-page__bundles-empty'><Paragraph light italic>Aucun module n'a encore été créé !</Paragraph></div>
+            <div className='home-page__bundles-empty-search'>
+              <Paragraph light italic>La recherche n'a retourné aucun résultat.</Paragraph>
+              <Button minor link onClick={e => { props.setBundlesFilter('') }}>Remettre à zero ?</Button>
+            </div>
             <div className='home-page__bundles-error'>
               <Paragraph error>Une erreur est survenue lors du chargement des modules:</Paragraph>
               <Paragraph italic light>{bundles.error || 'Erreur inconnue. Prenez une tisane.'}</Paragraph>
@@ -115,6 +125,9 @@ export default class HomePage extends Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className='home-page__create-bundle-loader'>
+          <img src='/images/loader.gif' alt='Loader' />
         </div>
       </div>
     </Wrapper>
