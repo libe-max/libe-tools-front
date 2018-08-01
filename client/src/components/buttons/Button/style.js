@@ -16,6 +16,11 @@ box-shadow: ${p => p.theme.shadows.neat};
 cursor: pointer;
 border: none;
 box-sizing: border-box;
+
+.button__icon {
+  display: none;
+}
+
 :hover {
   box-shadow: 
     ${p => p.theme.shadows.neat},
@@ -67,6 +72,23 @@ box-sizing: border-box;
 
 &.button_link.button_dangerous {
   color: ${p => p.theme.colors.dangerText};
+}
+
+&.button_icon {
+  padding: unset;
+  background: unset;
+  box-shadow: unset;
+  border-radius: unset;
+  height: ${p => p.theme.units(3)};
+}
+
+&.button_icon.button_primary {
+  height: ${p => p.theme.units(5)}; 
+}
+
+&.button_icon .button__icon {
+  display: block;
+  height: 100%;
 }`
 
 export default Wrapper
