@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TextInput from '../TextInput'
+import Button from '../../buttons/Button'
 import Wrapper from './style'
 
 /*
@@ -18,7 +19,28 @@ import Wrapper from './style'
 export default class SearchField extends Component {
   render () {
     const props = this.props
-    return <Wrapper className='search-field'>
+    const inputDom = this.node ? this.node.querySelector('input') : null
+    const inputValue = inputDom ? inputDom.value : null
+
+    /* Inner logic */
+    const focusInput = e => inputDom.focus()
+    const blurInput = e => inputDom.blur()
+    const clearInput = e => {
+      inputDom.value = ''
+      focusInput()
+      blurInput()
+    }
+
+    /* Assign classes to component */
+    let classes = ['search-field']
+    if (!inputValue && !props.value) {
+      classes.push('search-field_empty')
+    }
+
+    /* Display */
+    return <Wrapper
+      className={classes.join(' ')}
+      innerRef={node => { this.node = node }}>
       <TextInput
         value={props.value}
         onChange={props.onChange}
@@ -27,6 +49,18 @@ export default class SearchField extends Component {
         onClick={props.onClick}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue} />
+      <div className='search-field__magnifying-icon'>
+        <Button
+          alt='Magnifying icon'
+          onClick={focusInput}
+          icon='/images/magnifying-icon.svg' />
+      </div>
+      <div className='search-field__empty-icon'>
+        <Button
+          alt='Close icon'
+          onClick={clearInput}
+          icon='/images/close-icon.svg' />
+      </div>
     </Wrapper>
   }
 }
