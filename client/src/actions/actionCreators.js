@@ -25,7 +25,15 @@ export const setToolsFilter = filter => ({
   filter
 })
 
-export const setBundlesFilter = filter => ({
-  type: SET_BUNDLES_FILTER,
-  filter
+export const setBundlesFilter = filter => {
+  document
+    .querySelector('.home-page__bundles-panel')
+    .querySelector('.search-field')
+    .querySelector('input')
+    .value = filter
+  return {
+    type: SET_BUNDLES_FILTER,
+    filter
+  }
+}
 })
