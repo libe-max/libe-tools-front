@@ -1,5 +1,8 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import {
+  setBundlesFilter,
+} from '../actions/actionCreators'
 import Component from '../components/blocks/LibeToolThumb'
 
 const state2props = state => ({
@@ -15,7 +18,7 @@ const dispatch2props = (dispatch, props) => ({
   },
   filterBundles: e => {
     e.stopPropagation()
-    alert('filter!')
+    dispatch(setBundlesFilter(props.type))
   }
 })
 
