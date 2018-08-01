@@ -10,7 +10,8 @@ import Wrapper from './style'
  *   Search field component
  *
  *   PROPS
- *   placeholder, onChange
+ *   placeholder, value, defaultValue, onChange, onFocus,
+ *   onBlur, onClick
  *
  */
 
@@ -19,8 +20,13 @@ export default class SearchField extends Component {
     const props = this.props
     return <Wrapper className='search-field'>
       <TextInput
+        value={props.value}
+        onChange={props.onChange}
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        onClick={props.onClick}
         placeholder={props.placeholder}
-        onChange={props.onChange} />
+        defaultValue={props.defaultValue} />
     </Wrapper>
   }
 }
