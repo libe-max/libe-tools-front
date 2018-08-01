@@ -13,7 +13,8 @@ import Wrapper from './style'
  *   label
  *
  *   PROPS
- *   label, placeholder, onChange
+ *   label, placeholder, value, defaultValue, onChange,
+ *   onFocus, onBlur, onClick
  *
  */
 
@@ -26,8 +27,13 @@ export default class TextInput extends Component {
       <InputLabel>{props.Label}</InputLabel>
       <input
         type='text'
+        value={props.value}
         onChange={props.onChange}
-        placeholder={props.placeholder} />
+        onFocus={props.onFocus}
+        onBlur={props.onBlur}
+        onClick={props.onClick}
+        placeholder={props.placeholder}
+        defaultValue={props.defaultValue} />
     </Wrapper>
   }
 }
