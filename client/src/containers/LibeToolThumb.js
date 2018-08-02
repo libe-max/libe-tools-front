@@ -4,6 +4,7 @@ import {
   createBundleRequest,
   createBundleSuccess,
   createBundleError,
+  pushInBundles,
   setBundlesFilter,
   pushNotification
 } from '../actions/actionCreators'
@@ -25,6 +26,7 @@ const dispatch2props = (dispatch, props) => ({
       .then(res => {
         if (!res.err) {
           dispatch(createBundleSuccess(res.data))
+          dispatch(pushInBundles(res.data))
           dispatch(pushNotification('Bundle created!'))
         } else {
           dispatch(createBundleError(res.err))
