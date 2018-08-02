@@ -5,6 +5,7 @@ import {
   CREATE_BUNDLE_REQUEST,
   CREATE_BUNDLE_SUCCESS,
   CREATE_BUNDLE_FAILURE,
+  PUSH_IN_BUNDLES,
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
   PUSH_NOTIFICATION
@@ -44,6 +45,12 @@ export const createBundleSuccess = bundle => ({
 export const createBundleError = error => ({
   type: CREATE_BUNDLE_FAILURE,
   error
+})
+
+/* Push */
+export const pushInBundles = bundle => ({
+  type: PUSH_IN_BUNDLES,
+  bundle
 })
 
 /* * * * * * * * * * * * * * * * * * * * 
