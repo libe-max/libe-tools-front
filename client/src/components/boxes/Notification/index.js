@@ -2,6 +2,19 @@ import React, { Component } from 'react'
 import Paragraph from '../../text-levels/Paragraph'
 import Wrapper from './style'
 
+/*
+ *   Notification component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   Small component displaying text inside a blue or red
+ *   box, depending on the props
+ *
+ *   PROPS
+ *   children, danger
+ *
+ */
+
 export default class Notification extends Component {
   render () {
     const props = this.props

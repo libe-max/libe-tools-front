@@ -3,6 +3,20 @@ import Notification from '../../boxes/Notification'
 import theme from '../../../theme.js'
 import Wrapper from './style'
 
+/*
+ *   Notification panel component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   Panel fading in notifications as it recieves it via
+ *   it's props, then waiting for 7 seconds, and finally
+ *   fading them out
+ *
+ *   PROPS
+ *   notifications
+ *
+ */
+
 class NotificationSlot extends Component {
   constructor () {
     super()
