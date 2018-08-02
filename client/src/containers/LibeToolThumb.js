@@ -1,6 +1,8 @@
+import React from 'react'
 import { connect } from 'react-redux'
 import {
   createBundleRequest,
+  createBundleSuccess,
   createBundleError,
   setBundlesFilter,
   pushNotification
@@ -15,11 +17,32 @@ const dispatch2props = (dispatch, props) => ({
   createNewBundle: e => {
     e.stopPropagation()
     dispatch(createBundleRequest())
-    setTimeout(() => {
-      const err = 'fake error'
-      dispatch(createBundleError(err))
-      dispatch(pushNotification(err))
-    }, 1000)
+    fetch(`/api/create-bundle/${props.type}`)
+      .then(r => {
+        if (r.ok) return r.json()
+        throw new Error(`Error ${r.status}: ${r.statusText}`)
+      })
+      .then(res => {
+        if (!res.err) {
+          dispatch(createBundleSuccess(res.data))
+          dispatch(pushNotification('Bundle created!'))
+        } else {
+          dispatch(createBundleError(res.err))
+          const notif = <span>
+            <span style={{display: 'block'}}>Impossible de créer ce module de type {props.title}, le serveur a répondu:</span>
+            <span style={{display: 'block'}}>{res.err}</span>
+          </span>
+          dispatch(pushNotification(notif, 'error'))
+        }
+      })
+      .catch(err => {
+        dispatch(createBundleError(err.message))
+        const notif = <span>
+          <span style={{display: 'block'}}>Impossible de créer ce module de type {props.title}, le serveur a répondu:</span>
+          <span style={{display: 'block'}}>{err.message}</span>
+        </span>
+        dispatch(pushNotification(notif, 'error'))
+      })
   },
   filterBundles: e => {
     e.stopPropagation()

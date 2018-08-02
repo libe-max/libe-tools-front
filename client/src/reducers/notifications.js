@@ -6,6 +6,7 @@ const notifications = (state = [], action) => {
       return [
         {
           text: action.notification,
+          level: action.level,
           timestamp: Date.now()
         },
         ...state

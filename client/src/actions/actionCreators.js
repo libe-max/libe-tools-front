@@ -10,6 +10,13 @@ import {
   PUSH_NOTIFICATION
 } from './actionTypes'
 
+/* * * * * * * * * * * * * * * * * * * * 
+ *
+ *  BUNDLES
+ *
+ * * * * * * * * * * * * * * * * * * * */
+
+/* Fetching */
 export const fetchBundlesRequest = () => ({
   type: FETCH_BUNDLES_REQUEST
 })
@@ -24,6 +31,7 @@ export const fetchBundlesError = error => ({
   error
 })
 
+/* Creating */
 export const createBundleRequest = () => ({
   type: CREATE_BUNDLE_REQUEST
 })
@@ -38,11 +46,19 @@ export const createBundleError = error => ({
   error
 })
 
+/* * * * * * * * * * * * * * * * * * * * 
+ *
+ *  FILTERS
+ *
+ * * * * * * * * * * * * * * * * * * * */
+
+/* Tools */
 export const setToolsFilter = filter => ({
   type: SET_TOOLS_FILTER,
   filter
 })
 
+/* Bundles */
 export const setBundlesFilter = filter => {
   document
     .querySelector('.home-page__bundles-panel')
@@ -55,7 +71,15 @@ export const setBundlesFilter = filter => {
   }
 }
 
-export const pushNotification = notification => ({
+/* * * * * * * * * * * * * * * * * * * * 
+ *
+ *  NOTIFICATIONS
+ *
+ * * * * * * * * * * * * * * * * * * * */
+
+/* Push */
+export const pushNotification = (notification, level) => ({
   type: PUSH_NOTIFICATION,
-  notification
+  notification,
+  level
 })
