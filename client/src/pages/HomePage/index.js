@@ -3,6 +3,7 @@ import Paragraph from '../../components/text-levels/Paragraph'
 import Button from '../../components/buttons/Button'
 import Header from '../../components/blocks/Header'
 import SearchField from '../../components/inputs/SearchField'
+import NotificationsPanel from '../../containers/NotificationsPanel'
 import LibeToolThumb from '../../containers/LibeToolThumb'
 import LibeBundleThumb from '../../containers/LibeBundleThumb'
 import Wrapper from './style'
@@ -76,6 +77,7 @@ export default class HomePage extends Component {
     return <Wrapper className={classes.join(' ')}>
       <div className='home-page__header'><Header /></div>
       <div className='home-page__content'>
+        <div className='home-page__notifications'><NotificationsPanel /></div>
         <div className='home-page__tools-panel'>
           <div className='searchable-list'>
             <div className='home-page__tools-search'>

@@ -20,12 +20,20 @@ grid-template-rows: auto 1fr;
   position: relative;
   grid-row: 2;
   z-index: 1;
-  max-width: ${p => p.theme.units(200)};
   min-height: 100%;
   max-height: 100%;
   overflow: hidden;
   padding-top: ${p => p.theme.units(2)};
   padding-right: ${p => p.theme.units(2)};
+}
+
+.home-page__notifications {
+  position: absolute;
+  z-index: 2;
+  bottom: ${p => p.theme.units(2)};
+  right: ${p => p.theme.units(2)};
+  width: calc(100% - ${p => p.theme.units(4)});
+  max-width: ${p => p.theme.units(40)};
 }
 
 .home-page__create-bundle-loader {
@@ -59,10 +67,12 @@ grid-template-rows: auto 1fr;
 
 .home-page__tools-panel {
   width: 65%;
+  max-width: ${p => p.theme.units(130)};
 }
 
 .home-page__bundles-panel {
   width: 35%;
+  max-width: ${p => p.theme.units(70)};
 }
 
 .searchable-list {
