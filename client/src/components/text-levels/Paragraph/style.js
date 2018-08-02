@@ -22,6 +22,10 @@ color: ${p => p.theme.colors.text};
 
 &.paragraph_error {
  color: ${p => p.theme.colors.dangerText}; 
+}
+
+&.paragraph_action {
+  color: ${p => p.theme.colors.actionText};
 }`
 
 export default Wrapper
