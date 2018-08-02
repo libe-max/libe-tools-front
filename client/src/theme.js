@@ -17,7 +17,11 @@ const rawColors = {
   white:        '#FFFFFF',
   shadedBlack:  '#333333',
   red:          '#FF0043',
-  blue:         '#00B9E7'
+  lightRed:     '#FC7599',
+  veryLightRed: '#FFDCE5',
+  blue:         '#00B9E7',
+  lightBlue:    '#6FE2FF',
+  veryLightBlue: '#E6F9FD'
 }
 
 const colors = {
@@ -26,11 +30,16 @@ const colors = {
   lightClearText: rawColors.lightGrey,
   clearText:      rawColors.white,
   dangerText:     rawColors.red,
+  dangerBorders:  rawColors.lightRed,
+  dangerBg:       rawColors.veryLightRed,
+  actionText:     rawColors.blue,
   borders:        rawColors.lightGrey,
   clearBg:        rawColors.white,
   shadedBg:       rawColors.shadedWhite,
   dimBg:          rawColors.shadedBlack,
-  action:         rawColors.blue
+  action:         rawColors.blue,
+  actionBorders:  rawColors.lightBlue,
+  actionBg:       rawColors.veryLightBlue
 }
 
 const shadows = {
@@ -44,8 +53,14 @@ const breakpoints = {
   medium: '980px'
 }
 
+const numericTransitions = {
+  quick: 200,
+  medium: 400
+}
+
 const transitions = {
-  quick: '200ms'
+  quick: `${numericTransitions.quick}ms`,
+  medium: `${numericTransitions.medium}ms`
 }
 
 const theme = {
@@ -54,6 +69,7 @@ const theme = {
   colors,
   shadows,
   breakpoints,
+  numericTransitions,
   transitions
 }
 
