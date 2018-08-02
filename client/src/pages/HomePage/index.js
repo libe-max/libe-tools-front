@@ -23,7 +23,11 @@ export default class HomePage extends Component {
     /* Bundles list */
     const getBundleCurrentSettings = bundle => {
       const settingsHistory = bundle.settings_history || []
-      return settingsHistory.sort((a, b) => (b.timestamp - a.timestamp))[0]
+      const currentSettings = settingsHistory
+        .sort((a, b) => {
+          return (b.timestamp - a.timestamp)
+        })[0]
+      return currentSettings || {}
     }
     const bundlesWithSlug = bundles.list.map((bundle, i) => {
       const settings = getBundleCurrentSettings(bundle)
@@ -51,7 +55,12 @@ export default class HomePage extends Component {
       const doesBundleMatch = splFilters.every(word => slug.match(word))
       return doesBundleMatch ? bundle : null
     })
-    const bundlesDom = filteredBundles.map((bundle, i) => {
+    const sortedBundles = filteredBundles.sort((a, b) => {
+      const latestEditA = getBundleCurrentSettings(a).timestamp || a.created_on
+      const latestEditB = getBundleCurrentSettings(b).timestamp || b.created_on
+      return latestEditB - latestEditA
+    })
+    const bundlesDom = sortedBundles.map((bundle, i) => {
       const settings = getBundleCurrentSettings(bundle)
       return <LibeBundleThumb
         key={i}
@@ -96,7 +105,7 @@ export default class HomePage extends Component {
                 <LibeToolThumb
                   title='Libé box'
                   type='libe-box'
-                  image='/images/libe-tool-thumb.png'
+                  image='/images/libe-box-thumb.png'
                   description='Lorem ipsum dolor sit amet consectutor' />
               </div>
             </div>
