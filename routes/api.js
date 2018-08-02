@@ -12,7 +12,7 @@ router.all('/get-all-bundles', (req, res, next) => {
 })
 
 /* Create a new bundle in database */
-router.all('/:type/create', (req, res, next) => {
+router.all('/create-bundle/:type', (req, res, next) => {
   const type = req.params.type
   const now = moment().valueOf()
   const newBundle = {
