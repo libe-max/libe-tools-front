@@ -79,11 +79,11 @@ box-sizing: border-box;
   background: unset;
   box-shadow: unset;
   border-radius: unset;
-  height: ${p => p.theme.units(3)};
+  height: unset;
 }
 
 &.button_icon.button_primary {
-  height: ${p => p.theme.units(5)}; 
+  height: unset;
 }
 
 &.button_icon .button__icon {
