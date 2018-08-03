@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import {
   createBundleRequest,
   createBundleSuccess,
@@ -28,6 +29,7 @@ const dispatch2props = (dispatch, props) => ({
           dispatch(createBundleSuccess(res.data))
           dispatch(pushInBundles(res.data))
           dispatch(pushNotification('Le module a bien été créé !'))
+          dispatch(push(`/bundle/${res.data._id}`))
         } else {
           dispatch(createBundleError(res.err))
           const notif = <span>
