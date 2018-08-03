@@ -22,13 +22,13 @@ const bundleCreation = (state = {
       return Object.assign({}, state, {
         isFetching: false,
         bundle: action.bundle,
-        receivedAt: Date.now()
+        receivedAt: action.receivedAt
       })
     case CREATE_BUNDLE_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         error: action.error,
-        receivedAt: Date.now()
+        receivedAt: action.receivedAt
       })
     default:
       return state

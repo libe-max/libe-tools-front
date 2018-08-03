@@ -24,11 +24,13 @@ export const fetchBundlesRequest = () => ({
 
 export const fetchBundlesSuccess = list => ({
   type: FETCH_BUNDLES_SUCCESS,
+  updatedAt: Date.now(),
   list
 })
 
 export const fetchBundlesError = error => ({
   type: FETCH_BUNDLES_FAILURE,
+  updatedAt: Date.now(),
   error
 })
 
@@ -39,11 +41,13 @@ export const createBundleRequest = () => ({
 
 export const createBundleSuccess = bundle => ({
   type: CREATE_BUNDLE_SUCCESS,
+  receivedAt: Date.now(),
   bundle
 })
 
 export const createBundleError = error => ({
   type: CREATE_BUNDLE_FAILURE,
+  receivedAt: Date.now(),
   error
 })
 
@@ -88,7 +92,9 @@ export const setBundlesFilter = filter => {
 export const pushNotification = (text, level) => ({
   type: PUSH_NOTIFICATION,
   timestamp: Date.now(),
-  id: Math.floor(Math.random() * 10e9).toString(36),
+  id: Math
+    .floor(Math.random() * 10e9)
+    .toString(36),
   text,
   level,
 })

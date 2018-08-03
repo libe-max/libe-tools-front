@@ -21,13 +21,13 @@ const bundles = (state = {
         list: action.list,
         error: null,
         isFetching: false,
-        updatedAt: Date.now()
+        updatedAt: action.updatedAt
       })
     case FETCH_BUNDLES_FAILURE:
       return Object.assign({}, state, {
         error: action.error,
         isFetching: false,
-        updatedAt: Date.now()
+        updatedAt: action.updatedAt
       })
     case PUSH_IN_BUNDLES:
       return Object.assign({}, state, {
