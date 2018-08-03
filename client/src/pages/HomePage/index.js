@@ -46,6 +46,9 @@ export default class HomePage extends Component {
       tools: state.shouldApplyFilters.tools,
       bundles: state.shouldApplyFilters.bundles
     }
+    if (props.bundles.list.length !== state.bundles.list.length) {
+      nShouldApplyFilters.bundles = true 
+    }
     if (props.filters.tools !== state.filters.tools) {
       nFilters.tools = props.filters.tools
       nLastFilterUpdate.tools = Date.now()
