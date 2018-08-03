@@ -29,26 +29,7 @@ export default class HomePage extends Component {
         })[0]
       return currentSettings || {}
     }
-    const bundlesWithSlug = bundles.list.map((bundle, i) => {
-      const settings = getBundleCurrentSettings(bundle)
-      const slug = [
-        bundle._id,
-        bundle.author,
-        bundle.type,
-        settings.name,
-        settings.text,
-        settings.title
-      ].join('-')
-        .toLowerCase()
-        .replace(/[^a-z0-9-]/igm, '-')
-        .replace(/-{2,}/igm, '-')
-        .replace(/-$/, '')
-      return {
-        ...bundle,
-        slug
-      }
-    })
-    const filteredBundles = bundlesWithSlug.filter(bundle => {
+    const filteredBundles = bundles.list.filter(bundle => {
       const filter = filters.bundles
       const slug = bundle.slug
       const splFilters = filter.split(' ')

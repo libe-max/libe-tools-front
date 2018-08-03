@@ -22,11 +22,40 @@ export const fetchBundlesRequest = () => ({
   type: FETCH_BUNDLES_REQUEST
 })
 
-export const fetchBundlesSuccess = list => ({
-  type: FETCH_BUNDLES_SUCCESS,
-  updatedAt: Date.now(),
-  list
-})
+export const fetchBundlesSuccess = list => {
+  const getBundleCurrentSettings = bundle => {
+    const settingsHistory = bundle.settings_history || []
+    const currentSettings = settingsHistory
+      .sort((a, b) => {
+        return (b.timestamp - a.timestamp)
+      })[0]
+    return currentSettings || {}
+  }
+  const bundlesWithSlug = list.map((bundle, i) => {
+    const settings = getBundleCurrentSettings(bundle)
+    const slug = [
+      bundle._id,
+      bundle.author,
+      bundle.type,
+      settings.name,
+      settings.text,
+      settings.title
+    ].join('-')
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/igm, '-')
+      .replace(/-{2,}/igm, '-')
+      .replace(/-$/, '')
+    return {
+      ...bundle,
+      slug
+    }
+  })
+  return {
+    type: FETCH_BUNDLES_SUCCESS,
+    updatedAt: Date.now(),
+    list: bundlesWithSlug
+  }
+}
 
 export const fetchBundlesError = error => ({
   type: FETCH_BUNDLES_FAILURE,
