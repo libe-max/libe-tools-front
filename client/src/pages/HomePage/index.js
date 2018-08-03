@@ -29,8 +29,7 @@ export default class HomePage extends Component {
     }
     this.getBundleCurrentSettings = this.getBundleCurrentSettings.bind(this)
     this.tryFilterBundles = this.tryFilterBundles.bind(this)
-    props.getBundles()
-      .then(res => this.filterBundles())
+    props.getBundles().then(res => this.filterBundles())
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -142,7 +141,8 @@ export default class HomePage extends Component {
     if (bundleCreation.isFetching) classes.push('home-page_create-bundle-fetching')
     if (bundleCreation.error) classes.push('home-page_create-bundle-error')
     if (bundles.error) classes.push('home-page_bundles-error')
-    if (bundles.isFetching || shouldApplyBundlesFilter) classes.push('home-page_bundles-fetching')
+    if (bundles.isFetching) classes.push('home-page_bundles-fetching')
+    if (shouldApplyBundlesFilter) classes.push('home-page_bundles-filtering')
     if (!bundles.list.length) classes.push('home-page_bundles-empty')
     else if (!bundlesDom.length) classes.push('home-page_bundles-empty-search')
 

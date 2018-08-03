@@ -241,6 +241,19 @@ grid-template-rows: auto 1fr;
   }
 }
 
+&.home-page_bundles-filtering {
+  .home-page__bundles-error,
+  .home-page__bundles-list,
+  .home-page__bundles-empty,
+  .home-page__bundles-empty-search {
+    display: none;
+  }
+
+  .home-page__bundles-loader {
+    display: block;
+  }
+}
+
 &.home-page_create-bundle-fetching {
   .home-page__create-bundle-loader {
     display: flex;
