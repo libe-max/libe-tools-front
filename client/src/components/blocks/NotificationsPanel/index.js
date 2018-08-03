@@ -47,7 +47,7 @@ class NotificationSlot extends Component {
     const notif = props.notif
     if (notif.level === 'error') {
       return <div
-        ref={node => {this.node = node}}
+        ref={node => { this.node = node }}
         className='notifications-panel__notification-slot'>
         <Notification danger>{notif.text}</Notification>
         <div className='notifications-panel__hide-notification-slot'>
@@ -56,7 +56,7 @@ class NotificationSlot extends Component {
       </div>
     } else {
       return <div
-        ref={node => {this.node = node}}
+        ref={node => { this.node = node }}
         className='notifications-panel__notification-slot'>
         <Notification>{notif.text}</Notification>
         <div className='notifications-panel__hide-notification-slot'>
@@ -82,7 +82,7 @@ export default class NotificationsPanel extends Component {
           notif={notif}
           timeout={timeout}
           transitionTime={transitionTime} />
-        }
+      }
       )
       .filter(notif => notif)
       .reverse()

@@ -26,9 +26,9 @@ export default class Notification extends Component {
     /* Display */
     return <Wrapper className={classes.join(' ')}>
       {
-        props.danger ?
-        <Paragraph small error>{props.children}</Paragraph> :
-        <Paragraph small action>{props.children}</Paragraph>
+        props.danger
+          ? <Paragraph small error>{props.children}</Paragraph>
+          : <Paragraph small action>{props.children}</Paragraph>
       }
     </Wrapper>
   }

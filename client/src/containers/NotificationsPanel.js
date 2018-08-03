@@ -6,7 +6,7 @@ const state2props = state => ({
 })
 
 const dispatch2props = dispatch => ({
-  
+
 })
 
 export default connect(

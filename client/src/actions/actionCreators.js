@@ -11,7 +11,7 @@ import {
   PUSH_NOTIFICATION
 } from './actionTypes'
 
-/* * * * * * * * * * * * * * * * * * * * 
+/* * * * * * * * * * * * * * * * * * * *
  *
  *  BUNDLES
  *
@@ -24,7 +24,7 @@ const getBundleCurrentSettings = bundle => {
     .sort((a, b) => {
       return (b.timestamp - a.timestamp)
     })[0]
-  return currentSettings || {}
+  return currentSettings || {}
 }
 const bundleWithSlug = bundle => {
   const settings = getBundleCurrentSettings(bundle)
@@ -89,7 +89,7 @@ export const pushInBundles = bundle => ({
   bundle: bundleWithSlug(bundle)
 })
 
-/* * * * * * * * * * * * * * * * * * * * 
+/* * * * * * * * * * * * * * * * * * * *
  *
  *  FILTERS
  *
@@ -114,7 +114,7 @@ export const setBundlesFilter = filter => {
   }
 }
 
-/* * * * * * * * * * * * * * * * * * * * 
+/* * * * * * * * * * * * * * * * * * * *
  *
  *  NOTIFICATIONS
  *
@@ -128,5 +128,5 @@ export const pushNotification = (text, level) => ({
     .floor(Math.random() * 10e9)
     .toString(36),
   text,
-  level,
+  level
 })

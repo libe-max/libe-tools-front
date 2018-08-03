@@ -27,6 +27,7 @@ export default class HomePage extends Component {
         bundles: true
       },
     }
+    this.filterDelay = 100
     this.getBundleCurrentSettings = this.getBundleCurrentSettings.bind(this)
     this.tryFilterBundles = this.tryFilterBundles.bind(this)
     this.filterBundles = this.filterBundles.bind(this)
@@ -89,8 +90,6 @@ export default class HomePage extends Component {
       this.filterBundles
     )
   }
-
-  filterDelay = 100
 
   tryFilterBundles () {
     const state = this.state
