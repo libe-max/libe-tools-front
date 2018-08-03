@@ -15,7 +15,7 @@ const state2props = state => ({
 })
 
 const dispatch2props = dispatch => ({
-  getBundles: () => {
+  getBundles: () => new Promise((resolve, reject) => {
     dispatch(fetchBundlesRequest())
     fetch('/api/get-all-bundles')
       .then(r => {
@@ -23,13 +23,19 @@ const dispatch2props = dispatch => ({
         throw new Error(`Error ${r.status}: ${r.statusText}`)
       })
       .then(res => {
-        if (!res.err) dispatch(fetchBundlesSuccess(res.data))
-        else dispatch(fetchBundlesError(res.err))
+        if (!res.err) {
+          dispatch(fetchBundlesSuccess(res.data))
+          resolve(res.data)
+        } else {
+          dispatch(fetchBundlesError(res.err))
+          reject(res.err)
+        }
       })
       .catch(err => {
         dispatch(fetchBundlesError(err.message))
+        reject(err.message)
       })
-  },
+  }),
   setToolsFilter: val => {
     dispatch(setToolsFilter(val))
   },

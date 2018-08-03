@@ -11,38 +11,121 @@ import Wrapper from './style'
 export default class HomePage extends Component {
   constructor (props) {
     super(props)
-    if (props.getBundles) props.getBundles()
+    this.state = {
+      bundles: props.bundles,
+      filteredBundles: props.bundles.list,
+      filters: {
+        tools: null,
+        bundles: null
+      },
+      lastFilterUpdate: {
+        tools: 0,
+        bundles: 0
+      },
+      shouldApplyFilters: {
+        tools: true,
+        bundles: true
+      },
+    }
+    this.getBundleCurrentSettings = this.getBundleCurrentSettings.bind(this)
+    this.tryFilterBundles = this.tryFilterBundles.bind(this)
+    props.getBundles()
+      .then(res => this.filterBundles())
   }
 
-  render () {
-    const props = this.props
-    const bundles = props.bundles
-    const filters = props.filters
-    const bundleCreation = props.bundleCreation
-
-    /* Bundles list */
-    const getBundleCurrentSettings = bundle => {
-      const settingsHistory = bundle.settings_history || []
-      const currentSettings = settingsHistory
-        .sort((a, b) => {
-          return (b.timestamp - a.timestamp)
-        })[0]
-      return currentSettings || {}
+  static getDerivedStateFromProps (props, state) {
+    const nBundles = props.bundles
+    const nFilters = {
+      tools: state.filters.tools,
+      bundles: state.filters.bundles,  
     }
+    const nLastFilterUpdate = {
+      tools: state.lastFilterUpdate.tools,
+      bundles: state.lastFilterUpdate.bundles,  
+    }
+    const nShouldApplyFilters = {
+      tools: state.shouldApplyFilters.tools,
+      bundles: state.shouldApplyFilters.bundles
+    }
+    if (props.filters.tools !== state.filters.tools) {
+      nFilters.tools = props.filters.tools
+      nLastFilterUpdate.tools = Date.now()
+      nShouldApplyFilters.tools = true
+    }
+    if (props.filters.bundles !== state.filters.bundles) {
+      nFilters.bundles = props.filters.bundles
+      nLastFilterUpdate.bundles = Date.now()
+      nShouldApplyFilters.bundles = true
+    }
+    return {
+      ...state,
+      bundles: nBundles,
+      filters: nFilters,
+      lastFilterUpdate: nLastFilterUpdate,
+      shouldApplyFilters: nShouldApplyFilters
+    }
+  }
+
+  filterDelay = 100
+
+  componentDidUpdate () {
+    setTimeout(this.tryFilterBundles, this.filterDelay)
+  }
+
+  tryFilterBundles () {
+    const state = this.state
+    const timeSinceLastUpdate = Date.now() - state.lastFilterUpdate.bundles
+    const shouldApply = state.shouldApplyFilters.bundles
+    if (timeSinceLastUpdate > this.filterDelay && shouldApply) {
+      this.filterBundles()
+    }
+  }
+
+  filterBundles () {
+    const state = this.state
+    const bundles = state.bundles
+    const filter = state.filters.bundles
     const filteredBundles = bundles.list.filter(bundle => {
-      const filter = filters.bundles
       const slug = bundle.slug
       const splFilters = filter.split(' ')
       const doesBundleMatch = splFilters.every(word => slug.match(word))
       return doesBundleMatch ? bundle : null
     })
     const sortedBundles = filteredBundles.sort((a, b) => {
-      const latestEditA = getBundleCurrentSettings(a).timestamp || a.created_on
-      const latestEditB = getBundleCurrentSettings(b).timestamp || b.created_on
+      const latestEditA = this.getBundleCurrentSettings(a).timestamp || a.created_on
+      const latestEditB = this.getBundleCurrentSettings(b).timestamp || b.created_on
       return latestEditB - latestEditA
     })
-    const bundlesDom = sortedBundles.map((bundle, i) => {
-      const settings = getBundleCurrentSettings(bundle)
+    this.setState({
+      filteredBundles: sortedBundles,
+      shouldApplyFilters: {
+        ...state.shouldApplyFilters,
+        bundles: false
+      }
+    })
+  }
+
+  getBundleCurrentSettings (bundle) {
+    const settingsHistory = bundle.settings_history || []
+    const currentSettings = settingsHistory
+      .sort((a, b) => {
+        return (b.timestamp - a.timestamp)
+      })[0]
+    return currentSettings || {}
+  }
+
+  render () {
+    const props = this.props
+    const state = this.state
+    const bundles = state.bundles
+    const filteredBundles = state.filteredBundles
+    const shouldApplyBundlesFilter = state.shouldApplyFilters.bundles
+    const bundleCreation = props.bundleCreation
+
+    /* Bundles list */
+    // [WIP] Some pagination here ?
+    const bundlesDom = filteredBundles.map((bundle, i) => {
+      const settings = this.getBundleCurrentSettings(bundle)
       return <LibeBundleThumb
         key={i}
         type={bundle.type}
@@ -59,7 +142,7 @@ export default class HomePage extends Component {
     if (bundleCreation.isFetching) classes.push('home-page_create-bundle-fetching')
     if (bundleCreation.error) classes.push('home-page_create-bundle-error')
     if (bundles.error) classes.push('home-page_bundles-error')
-    if (bundles.isFetching) classes.push('home-page_bundles-fetching')
+    if (bundles.isFetching || shouldApplyBundlesFilter) classes.push('home-page_bundles-fetching')
     if (!bundles.list.length) classes.push('home-page_bundles-empty')
     else if (!bundlesDom.length) classes.push('home-page_bundles-empty-search')
 

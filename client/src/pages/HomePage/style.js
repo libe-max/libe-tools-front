@@ -215,19 +215,6 @@ grid-template-rows: auto 1fr;
   }
 }
 
-&.home-page_bundles-fetching {
-  .home-page__bundles-error,
-  .home-page__bundles-list,
-  .home-page__bundles-empty,
-  .home-page__bundles-empty-search {
-    display: none;
-  }
-
-  .home-page__bundles-loader {
-    display: block;
-  }
-}
-
 &.home-page_bundles-empty-search {
   .home-page__bundles-error,
   .home-page__bundles-list,
@@ -237,6 +224,19 @@ grid-template-rows: auto 1fr;
   }
 
   .home-page__bundles-empty-search {
+    display: block;
+  }
+}
+
+&.home-page_bundles-fetching {
+  .home-page__bundles-error,
+  .home-page__bundles-list,
+  .home-page__bundles-empty,
+  .home-page__bundles-empty-search {
+    display: none;
+  }
+
+  .home-page__bundles-loader {
     display: block;
   }
 }
