@@ -44,7 +44,6 @@ class NotificationSlot extends Component {
 
   render () {
     const props = this.props
-    const state = this.state
     const notif = props.notif
     if (notif.level === 'error') {
       return <div
