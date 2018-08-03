@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-.notifications__notification-slot {
+.notifications-panel__notification-slot {
+  position: relative;
   margin-bottom: ${p => p.theme.units(1)};
   box-shadow: ${p => p.theme.shadows.small};
   overflow: hidden;
@@ -9,15 +10,24 @@ const Wrapper = styled.div`
   animation-duration: ${p => p.theme.transitions.medium};
 }
 
-.notifications__notification-slot:last-child {
+.notifications-panel__notification-slot:last-child {
   margin-bottom: unset;
 }
 
-.notifications__notification-slot_fadeout {
+.notifications-panel__hide-notification-slot {
+  position: absolute;
+  right: ${p => p.theme.units(1)};
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
+.notifications-panel__notification-slot_fadeout {
   animation-name: fadeOut;
 }
 
-.notifications__notification-slot_hide {
+.notifications-panel__notification-slot_hide {
   display: none;
 }
 

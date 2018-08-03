@@ -5,9 +5,10 @@ const notifications = (state = [], action) => {
     case PUSH_NOTIFICATION:
       return [
         {
-          text: action.notification,
+          id: action.id,
+          text: action.text,
           level: action.level,
-          timestamp: Date.now()
+          timestamp: action.timestamp
         },
         ...state
       ]

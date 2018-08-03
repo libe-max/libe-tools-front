@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Notification from '../../boxes/Notification'
+import Button from '../../buttons/Button'
 import theme from '../../../theme.js'
 import Wrapper from './style'
 
@@ -18,49 +19,75 @@ import Wrapper from './style'
  */
 
 class NotificationSlot extends Component {
-  constructor () {
-    super()
-    this.state = { fadeout: false }
-    const timeout = 7000
-    const transitionTime = theme.numericTransitions.medium
-    setTimeout(() => {
-      this.setState({ fadeout: true })
-      setTimeout(() => {
-        this.setState({ hide: true })
-      }, transitionTime)
-    }, timeout)
+  constructor (props) {
+    super(props)
+    this.fadeOut = this.fadeOut.bind(this)
+    this.hide = this.hide.bind(this)
+    setTimeout(this.fadeOut, props.timeout)
+  }
+
+  fadeOut () {
+    const transitionTime = this.props.transitionTime
+    if (this.node) {
+      this.node.classList
+        .add('notifications-panel__notification-slot_fadeout')
+      setTimeout(this.hide, transitionTime)
+    }
+  }
+
+  hide () {
+    if (this.node) {
+      this.node.classList
+        .add('notifications-panel__notification-slot_hide')
+    }
   }
 
   render () {
     const props = this.props
     const state = this.state
     const notif = props.notif
-
-    /* Assign classes to component */
-    const classes = ['notifications__notification-slot']
-    if (state.fadeout) classes.push('notifications__notification-slot_fadeout')
-    if (state.hide) classes.push('notifications__notification-slot_hide')
-
-    /* Display */
-    return <div className={classes.join(' ')}>
-      {
-        notif.level === 'error' ?
-        <Notification danger>{notif.text}</Notification> :
+    if (notif.level === 'error') {
+      return <div
+        ref={node => {this.node = node}}
+        className='notifications-panel__notification-slot'>
+        <Notification danger>{notif.text}</Notification>
+        <div className='notifications-panel__hide-notification-slot'>
+          <Button minor onClick={this.fadeOut} icon='/images/danger-small-close-icon.svg' />
+        </div>
+      </div>
+    } else {
+      return <div
+        ref={node => {this.node = node}}
+        className='notifications-panel__notification-slot'>
         <Notification>{notif.text}</Notification>
-      }
-    </div>
+        <div className='notifications-panel__hide-notification-slot'>
+          <Button minor onClick={this.fadeOut} icon='/images/action-small-close-icon.svg' />
+        </div>
+      </div>
+    }
   }
 }
 
-export default class Notifications extends Component {
+export default class NotificationsPanel extends Component {
   render () {
     const props = this.props
+    const timeout = 7000
+    const transitionTime = theme.numericTransitions.medium
     const notificationsDom = props.notifications
-      .map((notif, i) => <NotificationSlot
-        key={i}
-        notif={notif} />)
+      .map(notif => {
+        const notifAge = Date.now() - notif.timestamp
+        const hasTimedout = timeout + transitionTime - notifAge < 0
+        if (hasTimedout) return null
+        return <NotificationSlot
+          key={notif.id}
+          notif={notif}
+          timeout={timeout}
+          transitionTime={transitionTime} />
+        }
+      )
+      .filter(notif => notif)
       .reverse()
-    return <Wrapper className='notifications'>
+    return <Wrapper className='notifications-panel'>
       {notificationsDom}
     </Wrapper>
   }

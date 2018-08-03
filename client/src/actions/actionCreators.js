@@ -85,8 +85,10 @@ export const setBundlesFilter = filter => {
  * * * * * * * * * * * * * * * * * * * */
 
 /* Push */
-export const pushNotification = (notification, level) => ({
+export const pushNotification = (text, level) => ({
   type: PUSH_NOTIFICATION,
-  notification,
-  level
+  timestamp: Date.now(),
+  id: Math.floor(Math.random() * 10e9).toString(36),
+  text,
+  level,
 })
