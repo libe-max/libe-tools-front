@@ -29,7 +29,15 @@ export default class HomePage extends Component {
     }
     this.getBundleCurrentSettings = this.getBundleCurrentSettings.bind(this)
     this.tryFilterBundles = this.tryFilterBundles.bind(this)
+    this.filterBundles = this.filterBundles.bind(this)
     props.getBundles().then(res => this.filterBundles())
+  }
+
+  componentDidMount () {
+    this.node.addEventListener(
+      'filterBundles',
+      this.filterBundles
+    )
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -68,18 +76,39 @@ export default class HomePage extends Component {
     }
   }
 
-  filterDelay = 100
-
   componentDidUpdate () {
-    setTimeout(this.tryFilterBundles, this.filterDelay)
+    setTimeout(
+      this.tryFilterBundles,
+      this.filterDelay
+    )
   }
+
+  componentWillUnount () {
+    this.node.removeEventListener(
+      'filterBundles',
+      this.filterBundles
+    )
+  }
+
+  filterDelay = 100
 
   tryFilterBundles () {
     const state = this.state
     const timeSinceLastUpdate = Date.now() - state.lastFilterUpdate.bundles
     const shouldApply = state.shouldApplyFilters.bundles
     if (timeSinceLastUpdate > this.filterDelay && shouldApply) {
-      this.filterBundles()
+      if (this.node) this.node.dispatchEvent(
+        new CustomEvent(
+          'filterBundles', {
+            detail: {
+              message: 'Time to filter bundles!',
+              time: new Date()
+            },
+            bubbles: true,
+            cancelable: true
+          }
+        )
+      )
     }
   }
 
@@ -150,7 +179,9 @@ export default class HomePage extends Component {
     else if (!bundlesDom.length) classes.push('home-page_bundles-empty-search')
 
     /* Display */
-    return <Wrapper className={classes.join(' ')}>
+    return <Wrapper
+      className={classes.join(' ')}
+      innerRef={node => {this.node = node}}>
       <div className='home-page__header'><Header /></div>
       <div className='home-page__content'>
         <div className='home-page__notifications'><NotificationsPanel /></div>
