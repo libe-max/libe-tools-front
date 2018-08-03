@@ -66,11 +66,11 @@ export default class HomePage extends Component {
         key={i}
         type={bundle.type}
         bundleId={bundle._id}
-        author={bundle.author}
         created={bundle.created_on}
         updated={settings.timestamp || null}
+        author={bundle.author || '<sans-nom>'}
         image={`/images/${bundle.type}-small.png`}
-        title={settings.name || '(sans titre)'} />
+        title={settings.name || '<sans-titre>'} />
     })
 
     /* Assign classes to component */
