@@ -27,7 +27,7 @@ const dispatch2props = (dispatch, props) => ({
         if (!res.err) {
           dispatch(createBundleSuccess(res.data))
           dispatch(pushInBundles(res.data))
-          dispatch(pushNotification('Bundle created!'))
+          dispatch(pushNotification('Le module a bien été créé !'))
         } else {
           dispatch(createBundleError(res.err))
           const notif = <span>
