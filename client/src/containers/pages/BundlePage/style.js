@@ -76,6 +76,20 @@ grid-template-rows: auto 1fr auto;
 .bundle-page__bundle-preview-box::-webkit-scrollbar,
 .bundle-page__bundle-settings-box::-webkit-scrollbar {
   display: none;
+}
+
+.bundle-page__bundle-general-settings {
+  margin-bottom: ${p => p.theme.units(5)};
+}
+
+.bundle-page__bundle-general-settings > *,
+.bundle-page__bundle-custom-settings > * {
+  margin-bottom: ${p => p.theme.units(3)};
+}
+
+.bundle-page__bundle-general-settings > *:last-child,
+.bundle-page__bundle-custom-settings > *:last-child {
+  margin-bottom: unset;
 }`
 
 export default Wrapper
