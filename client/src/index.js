@@ -20,6 +20,7 @@ import theme from './theme'
 
 // Components
 import HomePage from './containers/pages/HomePage'
+import BundlePage from './containers/pages/BundlePage'
 import ComponentsPage from './containers/pages/ComponentsPage'
 
 /* * * * * * * * * * * * * * * * * *
@@ -57,7 +58,7 @@ render(
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
-            <Route path='/bundle/:id' render={props => <div>Edit bundle: {props.match.params.id}</div>} exact />
+            <Route path='/bundle/:id' component={BundlePage} exact />
             <Route path='/components' component={ComponentsPage} exact />
             <Redirect from='/' to='/' />
           </Switch>
