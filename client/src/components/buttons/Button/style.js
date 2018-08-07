@@ -31,6 +31,11 @@ box-sizing: border-box;
   color: ${p => p.theme.colors.lightText};
   background: ${p => p.theme.colors.shadedBg};
   box-shadow: unset;
+  &:hover {
+    box-shadow: 
+      ${p => p.theme.shadows.neat},
+      ${p => p.theme.shadows.small};
+  }
 }
 
 &.button_dangerous {
