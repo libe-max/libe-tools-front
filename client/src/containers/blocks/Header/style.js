@@ -9,10 +9,12 @@ background: ${p => p.theme.colors.clearBg};
 }
 
 .image {
+  cursor: pointer;
   height: ${p => p.theme.units(7)};
 }
 
 .main-title {
+  cursor: pointer;
   margin-left: ${p => p.theme.units(2)};
 }
 

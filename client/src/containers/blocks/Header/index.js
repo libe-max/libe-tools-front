@@ -1,3 +1,6 @@
+import { connect } from 'react-redux'
+import { state2props, dispatch2props } from './connected'
+
 import React, { Component } from 'react'
 import ShadowBar from '../../../components/boxes/ShadowBar'
 import Image from '../../../components/images/Image'
@@ -16,15 +19,19 @@ import Wrapper from './style'
  *
  */
 
-export default class Header extends Component {
+class Header extends Component {
   render () {
+    const props = this.props
     return <Wrapper className='header'>
       <ShadowBar>
-        <Image contain src='/images/libe-logo.svg' />
-        <MainTitle>
-          La boîte à outils de Six Plus
-        </MainTitle>
+        <div onClick={props.goHome}><Image contain src='/images/libe-logo.svg' /></div>
+        <div onClick={props.goHome}><MainTitle>La boîte à outils de Six Plus</MainTitle></div>
       </ShadowBar>
     </Wrapper>
   }
 }
+
+export default connect(
+  state2props,
+  dispatch2props
+)(Header)
