@@ -24,7 +24,7 @@ export default class TextInput extends Component {
     let classes = 'text-input'
     if (props.label) classes += ' text-input_with-label'
     return <Wrapper className={classes}>
-      <InputLabel>{props.Label}</InputLabel>
+      <InputLabel>{props.label}</InputLabel>
       <input
         type='text'
         value={props.value}
