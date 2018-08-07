@@ -47,7 +47,14 @@ const bundles = (state = {
       })
     case PUSH_IN_BUNDLES:
       return Object.assign({}, state, {
-        list: [...state.list, action.bundle]
+        list: [
+          state.list.map(bundle => {
+            const id1 = bundle._id
+            const id2 = action.bundle._id
+            if (id1 !== id2) return bundle
+          }).filter(elt => elt),
+          action.bundle
+        ]
       })
     default:
       return state
