@@ -192,6 +192,7 @@ class HomePage extends Component {
             <div className='home-page__tools-search'>
               <SearchField
                 placeholder='Rechercher un outil'
+                defaultValue={props.filters.tools}
                 onChange={e => { props.setToolsFilter(e.target.value) }}
                 onBlur={e => { props.setToolsFilter(e.target.value) }} />
             </div>
@@ -216,6 +217,7 @@ class HomePage extends Component {
             <div className='home-page__bundles-search'>
               <SearchField
                 placeholder='Rechercher un module'
+                defaultValue={props.filters.bundles}
                 onChange={e => { props.setBundlesFilter(e.target.value) }}
                 onBlur={e => { props.setBundlesFilter(e.target.value) }} />
             </div>
