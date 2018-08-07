@@ -20,6 +20,7 @@ input {
   border-bottom-style: solid;
   border-bottom-width: ${p => p.theme.units(0.25)};
   border-bottom-color: ${p => p.theme.colors.borders};
+  background: transparent;
 }
 
 input::placeholder {
