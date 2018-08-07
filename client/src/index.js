@@ -20,9 +20,13 @@ import theme from './theme'
 
 // Components
 import HomePage from './containers/HomePage'
-import TestPage from './containers/TestPage'
 import ComponentsPage from './pages/ComponentsPage/'
 
+/* * * * * * * * * * * * * * * * * *
+ *
+ *   Init router and store
+ *
+ * * * * * * * * * * * * * * * * * */
 const history = createHistory()
 const middleware = routerMiddleware(history)
 const logger = createLogger({
@@ -53,11 +57,9 @@ render(
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
-            <Route path='/test' component={TestPage} exact />
             <Route path='/bundle/:id' render={props => <div>Edit bundle: {props.match.params.id}</div>} exact />
-            <Route path='/create-bundle/:type' render={() => <div>create bundle</div>} exact />
             <Route path='/components' component={ComponentsPage} exact />
-            <Route path='/' render={() => <Redirect to='/' />} />
+            <Redirect from='/' to='/' />
           </Switch>
         </div>
       </ConnectedRouter>
