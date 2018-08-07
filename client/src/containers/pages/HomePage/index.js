@@ -153,7 +153,6 @@ class HomePage extends Component {
     const bundles = state.bundles
     const filteredBundles = state.filteredBundles
     const shouldApplyBundlesFilter = state.shouldApplyFilters.bundles
-    const bundleCreation = props.bundleCreation
 
     /* Bundles list */
     // [WIP] Some pagination here ?
