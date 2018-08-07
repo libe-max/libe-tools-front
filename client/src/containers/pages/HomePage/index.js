@@ -172,9 +172,8 @@ class HomePage extends Component {
 
     /* Assign classes to component */
     const classes = ['home-page']
-    if (bundleCreation.isFetching) classes.push('home-page_create-bundle-fetching')
-    if (bundleCreation.error) classes.push('home-page_create-bundle-error')
     if (bundles.error) classes.push('home-page_bundles-error')
+    if (bundles.isCreating) classes.push('home-page_create-bundle-fetching')
     if (bundles.isFetching) classes.push('home-page_bundles-fetching')
     if (shouldApplyBundlesFilter) classes.push('home-page_bundles-filtering')
     if (!bundles.list.length) classes.push('home-page_bundles-empty')

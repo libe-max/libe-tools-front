@@ -2,6 +2,9 @@ import {
   FETCH_BUNDLES_REQUEST,
   FETCH_BUNDLES_SUCCESS,
   FETCH_BUNDLES_FAILURE,
+  CREATE_BUNDLE_REQUEST,
+  CREATE_BUNDLE_SUCCESS,
+  CREATE_BUNDLE_FAILURE,
   PUSH_IN_BUNDLES
 } from '../actions/actionTypes'
 
@@ -9,6 +12,7 @@ const bundles = (state = {
   list: [],
   error: null,
   isFetching: false,
+  isCreating: false,
   updatedAt: null
 }, action) => {
   switch (action.type) {
@@ -28,6 +32,18 @@ const bundles = (state = {
         error: action.error,
         isFetching: false,
         updatedAt: action.updatedAt
+      })
+    case CREATE_BUNDLE_REQUEST:
+      return Object.assign({}, state, {
+        isCreating: true
+      })
+    case CREATE_BUNDLE_SUCCESS:
+      return Object.assign({}, state, {
+        isCreating: false
+      })
+    case CREATE_BUNDLE_FAILURE:
+      return Object.assign({}, state, {
+        isCreating: false
       })
     case PUSH_IN_BUNDLES:
       return Object.assign({}, state, {
