@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ShadowBar from '../../boxes/ShadowBar'
-import Image from '../../images/Image'
-import MainTitle from '../../text-levels/MainTitle'
+import ShadowBar from '../../../components/boxes/ShadowBar'
+import Image from '../../../components/images/Image'
+import MainTitle from '../../../components/text-levels/MainTitle'
 import Wrapper from './style'
 
 /*

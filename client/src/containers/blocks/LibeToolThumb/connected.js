@@ -1,5 +1,3 @@
-import React from 'react'
-import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import {
   createBundleRequest,
@@ -8,14 +6,11 @@ import {
   pushInBundles,
   setBundlesFilter,
   pushNotification
-} from '../actions/actionCreators'
-import Component from '../components/blocks/LibeToolThumb'
+} from '../../../actions/actionCreators'
 
-const state2props = state => ({
+export const state2props = state => ({})
 
-})
-
-const dispatch2props = (dispatch, props) => ({
+export const dispatch2props = (dispatch, props) => ({
   createNewBundle: e => {
     e.stopPropagation()
     dispatch(createBundleRequest())
@@ -32,19 +27,13 @@ const dispatch2props = (dispatch, props) => ({
           dispatch(push(`/bundle/${res.data._id}`))
         } else {
           dispatch(createBundleError(res.err))
-          const notif = <span>
-            <span style={{display: 'block'}}>Impossible de créer ce module de type {props.title}, le serveur a répondu:</span>
-            <span style={{display: 'block'}}>{res.err}</span>
-          </span>
+          const notif = `Impossible de créer ce module de type ${props.title}, le serveur a répondu : ${res.err}`
           dispatch(pushNotification(notif, 'error'))
         }
       })
       .catch(err => {
         dispatch(createBundleError(err.message))
-        const notif = <span>
-          <span style={{display: 'block'}}>Impossible de créer ce module de type {props.title}, le serveur a répondu:</span>
-          <span style={{display: 'block'}}>{err.message}</span>
-        </span>
+        const notif = `Impossible de créer ce module de type ${props.title}, le serveur a répondu : ${err.message}`
         dispatch(pushNotification(notif, 'error'))
       })
   },
@@ -53,8 +42,3 @@ const dispatch2props = (dispatch, props) => ({
     dispatch(setBundlesFilter(props.type))
   }
 })
-
-export default connect(
-  state2props,
-  dispatch2props
-)(Component)

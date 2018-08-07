@@ -1,20 +1,18 @@
-import { connect } from 'react-redux'
 import {
   fetchBundlesRequest,
   fetchBundlesSuccess,
   fetchBundlesError,
   setToolsFilter,
   setBundlesFilter
-} from '../actions/actionCreators'
-import Component from '../pages/HomePage'
+} from '../../../actions/actionCreators'
 
-const state2props = state => ({
+export const state2props = state => ({
   bundles: state.bundles,
   filters: state.filters,
   bundleCreation: state.bundleCreation
 })
 
-const dispatch2props = dispatch => ({
+export const dispatch2props = dispatch => ({
   getBundles: () => new Promise((resolve, reject) => {
     dispatch(fetchBundlesRequest())
     fetch('/api/get-all-bundles')
@@ -43,8 +41,3 @@ const dispatch2props = dispatch => ({
     dispatch(setBundlesFilter(val))
   }
 })
-
-export default connect(
-  state2props,
-  dispatch2props
-)(Component)

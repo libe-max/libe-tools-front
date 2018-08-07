@@ -1,15 +1,18 @@
+import { connect } from 'react-redux'
+import { state2props, dispatch2props } from './connected'
+
 import React, { Component } from 'react'
 import moment from 'moment'
 import 'moment/locale/fr'
-import ShadowBox from '../../boxes/ShadowBox'
-import Image from '../../images/Image'
-import Button from '../../buttons/Button'
-import ParagraphTitle from '../../text-levels/ParagraphTitle'
-import Paragraph from '../../text-levels/Paragraph'
+import ShadowBox from '../../../components/boxes/ShadowBox'
+import Image from '../../../components/images/Image'
+import Button from '../../../components/buttons/Button'
+import ParagraphTitle from '../../../components/text-levels/ParagraphTitle'
+import Paragraph from '../../../components/text-levels/Paragraph'
 import Wrapper from './style'
 
 /*
- *   Libé bundle thumb component
+ *   Libé bundle thumb container
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
@@ -25,7 +28,7 @@ import Wrapper from './style'
  *
  */
 
-export default class LibeBundleThumb extends Component {
+class LibeBundleThumb extends Component {
   constructor () {
     /* [WARN]
      * The logic below is only
@@ -92,3 +95,8 @@ export default class LibeBundleThumb extends Component {
     </Wrapper>
   }
 }
+
+export default connect(
+  state2props,
+  dispatch2props
+)(LibeBundleThumb)

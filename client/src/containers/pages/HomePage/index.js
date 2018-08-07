@@ -1,14 +1,17 @@
+import { connect } from 'react-redux'
+import { state2props, dispatch2props } from './connected'
+
 import React, { Component } from 'react'
-import Paragraph from '../../components/text-levels/Paragraph'
-import Button from '../../components/buttons/Button'
-import Header from '../../components/blocks/Header'
-import SearchField from '../../components/inputs/SearchField'
-import NotificationsPanel from '../../containers/NotificationsPanel'
-import LibeToolThumb from '../../containers/LibeToolThumb'
-import LibeBundleThumb from '../../containers/LibeBundleThumb'
+import Header from '../../blocks/Header'
+import NotificationsPanel from '../../blocks/NotificationsPanel'
+import LibeToolThumb from '../../blocks/LibeToolThumb'
+import LibeBundleThumb from '../../blocks/LibeBundleThumb'
+import Paragraph from '../../../components/text-levels/Paragraph'
+import Button from '../../../components/buttons/Button'
+import SearchField from '../../../components/inputs/SearchField'
 import Wrapper from './style'
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -241,3 +244,8 @@ export default class HomePage extends Component {
     </Wrapper>
   }
 }
+
+export default connect(
+  state2props,
+  dispatch2props
+)(HomePage)

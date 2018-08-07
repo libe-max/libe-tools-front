@@ -1,11 +1,14 @@
+import { connect } from 'react-redux'
+import { state2props, dispatch2props } from './connected'
+
 import React, { Component } from 'react'
-import Notification from '../../boxes/Notification'
-import Button from '../../buttons/Button'
+import Notification from '../../../components/boxes/Notification'
+import Button from '../../../components/buttons/Button'
 import theme from '../../../theme.js'
 import Wrapper from './style'
 
 /*
- *   Notification panel component
+ *   Notification panel container
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
@@ -67,7 +70,7 @@ class NotificationSlot extends Component {
   }
 }
 
-export default class NotificationsPanel extends Component {
+class NotificationsPanel extends Component {
   render () {
     const props = this.props
     const timeout = 7000
@@ -91,3 +94,8 @@ export default class NotificationsPanel extends Component {
     </Wrapper>
   }
 }
+
+export default connect(
+  state2props,
+  dispatch2props
+)(NotificationsPanel)

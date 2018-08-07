@@ -1,13 +1,16 @@
+import { connect } from 'react-redux'
+import { state2props, dispatch2props } from './connected'
+
 import React, { Component } from 'react'
-import ShadowBox from '../../boxes/ShadowBox'
-import Image from '../../images/Image'
-import BlockTitle from '../../text-levels/BlockTitle'
-import Paragraph from '../../text-levels/Paragraph'
-import Button from '../../buttons/Button'
+import ShadowBox from '../../../components/boxes/ShadowBox'
+import Image from '../../../components/images/Image'
+import BlockTitle from '../../../components/text-levels/BlockTitle'
+import Paragraph from '../../../components/text-levels/Paragraph'
+import Button from '../../../components/buttons/Button'
 import Wrapper from './style'
 
 /*
- *   Libé tool thumb component
+ *   Libé tool thumb container
  *   ------------------------------------------------------
  *
  *   DESCRIPTION
@@ -19,7 +22,7 @@ import Wrapper from './style'
  *
  */
 
-export default class LibeToolThumb extends Component {
+class LibeToolThumb extends Component {
   render () {
     const props = this.props
 
@@ -42,3 +45,8 @@ export default class LibeToolThumb extends Component {
     </Wrapper>
   }
 }
+
+export default connect(
+  state2props,
+  dispatch2props
+)(LibeToolThumb)

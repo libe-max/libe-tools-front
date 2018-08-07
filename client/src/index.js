@@ -19,8 +19,8 @@ import { ThemeProvider } from 'styled-components'
 import theme from './theme'
 
 // Components
-import HomePage from './containers/HomePage'
-import ComponentsPage from './pages/ComponentsPage/'
+import HomePage from './containers/pages/HomePage'
+import ComponentsPage from './containers/pages/ComponentsPage'
 
 /* * * * * * * * * * * * * * * * * *
  *
