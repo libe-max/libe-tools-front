@@ -51,7 +51,7 @@ const bundles = (state = {
           state.list.map(bundle => {
             const id1 = bundle._id
             const id2 = action.bundle._id
-            if (id1 !== id2) return bundle
+            return (id1 !== id2) ? bundle : undefined
           }).filter(elt => elt),
           action.bundle
         ]
