@@ -29,18 +29,15 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
 
-  .file-input__fake-input::after {
-    content: '';
-    position: absolute;
-    width: ${p => p.theme.units(2)};
-    height: ${p => p.theme.units(5)};
-    background: ${p => p.theme.colors.clearBg};
-    top: 0;
-    right: 0;
+  .file-input__filename {
+    max-width: calc(100% - ${p => p.theme.units(1)});
   }
 
-  .file-input__filename {
-    width: ${p => p.theme.units(1000)};
+  .file-input__filename p.paragraph {
+    width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; 
   }
 
   .file-input__cancel-file-select,
