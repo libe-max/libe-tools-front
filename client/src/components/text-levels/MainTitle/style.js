@@ -5,7 +5,7 @@ h1, h2, h3, h4, h5, h6, span {
   font-size: ${p => p.theme.units(3)};
   line-height: ${p => p.theme.units(4)};
   font-family: ${p => p.theme.fonts.brand};
-  color: ${p => p.theme.colors.text};
+  color: ${p => p.theme.colors.baseText};
   font-weight: 600;
   margin: 0;
   padding: 0

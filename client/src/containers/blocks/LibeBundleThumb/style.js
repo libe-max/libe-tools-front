@@ -34,11 +34,11 @@ const Wrapper = styled.div`
 .libe-bundle-thumb__image .image {
   width: 100%;
   height: 100%;
-  background-color: ${p => p.theme.colors.shadedBg};
+  background-color: ${p => p.theme.colors.baseAltBg};
 }
 
 .libe-bundle-thumb__image-placeholder {
-  background: ${p => p.theme.colors.borders};
+  background: ${p => p.theme.colors.baseBorder};
   display: none;
 }
 
@@ -52,7 +52,7 @@ const Wrapper = styled.div`
 .libe-bundle-thumb__title-placeholder div {
   height: ${p => p.theme.units(2)};
   margin-bottom: ${p => p.theme.units(1)};
-  background: ${p => p.theme.colors.borders};
+  background: ${p => p.theme.colors.baseBorder};
 }
 
 .libe-bundle-thumb__title-placeholder div:last-child {
@@ -70,7 +70,7 @@ const Wrapper = styled.div`
 .libe-bundle-thumb__meta-placeholder div {
   height: ${p => p.theme.units(1.25)};
   margin-bottom: ${p => p.theme.units(0.75)};
-  background: ${p => p.theme.colors.borders};
+  background: ${p => p.theme.colors.baseBorder};
 }
 
 .libe-bundle-thumb__meta-placeholder div:last-child {
@@ -104,7 +104,7 @@ const Wrapper = styled.div`
 &.libe-bundle-thumb_loading .shadow-box {
   box-shadow: unset;
   border: unset;
-  background: ${p => p.theme.colors.shadedBg};
+  background: ${p => p.theme.colors.baseAltBg};
   /* [WARN]
    * Trick here to compensate the absence of
    * border in the loading version of this

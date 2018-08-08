@@ -4,13 +4,14 @@ const Wrapper = styled.div`
 .component-row {
   width: 100%;
   padding: ${props => props.theme.units(2)} 0;
+  background: ${p => p.theme.colors.baseBg};
 
   .component-row__title {
     font-weight: 600;
     padding: ${props => props.theme.units(1)};
-    background: ${props => props.theme.colors.shadedBg};
+    background: ${props => props.theme.colors.baseAltBg};
     font-family: ${props => props.theme.fonts.easy};
-    color: ${props => props.theme.colors.lightText};
+    color: ${props => props.theme.colors.baseLightText};
     margin-bottom: ${props => props.theme.units(1)};
   }
 
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
   
   .component-box__title {
     font-family: ${props => props.theme.fonts.easy};
-    color: ${props => props.theme.colors.lightText};
+    color: ${props => props.theme.colors.baseLightText};
     margin-bottom: ${props => props.theme.units(2)};
     width: 100%;
   }

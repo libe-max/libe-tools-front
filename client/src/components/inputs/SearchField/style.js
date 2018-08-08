@@ -21,9 +21,9 @@ align-items: center;
 .text-input input {
   border-style: solid;
   border-width: ${p => p.theme.units(0.25)};
-  border-color: ${p => p.theme.colors.borders};
+  border-color: ${p => p.theme.colors.baseBorder};
   border-radius: ${p => p.theme.units(2.5)};
-  background: ${p => p.theme.colors.shadedBg};
+  background: ${p => p.theme.colors.baseAltBg};
   padding: 0 ${p => p.theme.units(2)};
   height: ${p => p.theme.units(5)};
 }

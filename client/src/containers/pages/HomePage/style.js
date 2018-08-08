@@ -9,6 +9,7 @@ display: grid;
 min-height: 100vh;
 max-height: 100vh;
 grid-template-rows: auto 1fr;
+background: ${p => p.theme.colors.baseBg};
 
 .home-page__header {
   grid-row: 1;
@@ -41,7 +42,7 @@ grid-template-rows: auto 1fr;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${p => hexToRgba(p.theme.colors.clearBg, 0.8)};
+  background: ${p => hexToRgba(p.theme.colors.baseBg, 0.8)};
   top: 0;
   bottom: 0;
   left: 0;
@@ -61,7 +62,7 @@ grid-template-rows: auto 1fr;
   border-right-style: solid;
   border-right:
     ${p => p.theme.units(0.25)}
-    ${p => p.theme.colors.borders}
+    ${p => p.theme.colors.baseBorder}
     solid;
 }
 

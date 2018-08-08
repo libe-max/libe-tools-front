@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-background: ${p => p.theme.colors.clearBg};
+background: ${p => p.theme.colors.baseBg};
 
 .shadow-bar {
   display: flex;

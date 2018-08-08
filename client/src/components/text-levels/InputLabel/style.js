@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const Wrapper = styled.label`
 display: block;
 box-sizing: border-box;
-color: ${p => p.theme.colors.lightText};
+color: ${p => p.theme.colors.baseLightText};
 font-family: ${p => p.theme.fonts.easy};
 font-size: ${p => p.theme.units(1.5)};
 line-height: ${p => p.theme.units(2)};

@@ -13,18 +13,18 @@ input {
   border: none;
   height: ${p => p.theme.units(5)};
   padding: 0 ${p => p.theme.units(1)};
-  color: ${p => p.theme.colors.text};
+  color: ${p => p.theme.colors.baseText};
   font-family: ${p => p.theme.fonts.easy};
   font-size: ${p => p.theme.units(2)};
   line-height: ${p => p.theme.units(5)};
   border-bottom-style: solid;
   border-bottom-width: ${p => p.theme.units(0.25)};
-  border-bottom-color: ${p => p.theme.colors.borders};
+  border-bottom-color: ${p => p.theme.colors.baseBorder};
   background: transparent;
 }
 
 input::placeholder {
-  color: ${p => p.theme.colors.lightText};
+  color: ${p => p.theme.colors.baseLightText};
 }
 
 .input-label {

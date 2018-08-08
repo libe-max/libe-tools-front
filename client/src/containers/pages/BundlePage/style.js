@@ -43,7 +43,8 @@ grid-template-rows: auto 1fr auto;
   width: calc(100% - 400px);
   overflow-y: scroll;
   overflow-scrolling: touch;
-  background: url('/images/tiled-transparency-background.png');
+  background-color: ${p => p.theme.colors.baseBg};
+  background-image: url('/images/tiled-transparency-background.png');
 }
 
 .bundle-page__bundle-settings-box {
@@ -66,9 +67,9 @@ grid-template-rows: auto 1fr auto;
   width: 100%;
   min-height: 100%;
   padding: ${p => p.theme.units(2)};
-  background: ${p => p.theme.colors.shadedBg};
+  background: ${p => p.theme._shade().colors.baseBg};
   border-left:
-    ${p => p.theme.colors.borders}
+    ${p => p.theme._shade().colors.baseBorder}
     ${p => p.theme.units(0.25)}
     solid;
 }

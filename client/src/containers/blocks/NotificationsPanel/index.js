@@ -4,7 +4,7 @@ import { state2props, dispatch2props } from './connected'
 import React, { Component } from 'react'
 import Notification from '../../../components/boxes/Notification'
 import Button from '../../../components/buttons/Button'
-import theme from '../../../theme.js'
+import theme from '../../../theme'
 import Wrapper from './style'
 
 /*

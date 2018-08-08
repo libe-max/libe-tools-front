@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     height: ${p => p.theme.units(5)};
     border-style: solid;
     border-width: ${p => p.theme.units(0.25)};
-    border-color: ${p => p.theme.colors.borders};
+    border-color: ${p => p.theme.colors.baseBorder};
     border-radius: ${p => p.theme.units(2.5)};
     padding:
       ${p => p.theme.units(1)}
@@ -62,7 +62,7 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   border-radius: ${p => p.theme.units(1)};
-  background: ${p => p.theme.colors.dimBg};
+  background: ${p => p.theme._invert().colors.baseBg};
   cursor: pointer;
 
   .image {
@@ -94,11 +94,11 @@ const Wrapper = styled.div`
 
   .file-input__sourcesize .paragraph,
   .file-input__sourcetype .paragraph {
-    color: ${p => p.theme.colors.lightClearText};
+    color: ${p => p.theme._invert().colors.baseLightText};
   }
 
   .file-input__sourcename .paragraph {
-    color: ${p => p.theme.colors.clearText};
+    color: ${p => p.theme._invert().colors.baseText};
   }
 }
 

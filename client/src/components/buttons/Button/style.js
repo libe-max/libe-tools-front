@@ -6,8 +6,8 @@ font-size: ${p => p.theme.units(2)};
 line-height: ${p => p.theme.units(3)};
 font-weight: 400;
 height: ${p => p.theme.units(4)};
-background: ${p => p.theme.colors.action};
-color: ${p => p.theme.colors.clearText};
+background: ${p => p.theme.colors.actionInvertedBg};
+color: ${p => p.theme.colors.actionInvertedText};
 padding:
   ${p => p.theme.units(0.5)}
   ${p => p.theme.units(2)};
@@ -28,8 +28,8 @@ box-sizing: border-box;
 }
 
 &.button_minor {
-  color: ${p => p.theme.colors.lightText};
-  background: ${p => p.theme.colors.shadedBg};
+  color: ${p => p.theme.colors.baseLightText};
+  background: ${p => p.theme.colors.baseAltBg};
   box-shadow: unset;
   &:hover {
     box-shadow: 
@@ -39,8 +39,8 @@ box-sizing: border-box;
 }
 
 &.button_dangerous {
-  color: ${p => p.theme.colors.clearText};
-  background: ${p => p.theme.colors.dangerText};
+  color: ${p => p.theme.colors.dangerInvertedText};
+  background: ${p => p.theme.colors.dangerInvertedBg};
   font-style: italic;
 }
 
@@ -56,7 +56,7 @@ box-sizing: border-box;
 }
 
 &.button_link {
-  color: ${p => p.theme.colors.action};
+  color: ${p => p.theme.colors.actionText};
   padding: 0;
   box-shadow: none;
   text-decoration: underline;
@@ -67,11 +67,11 @@ box-sizing: border-box;
 
 &.button_dangerous.button_minor {
   color: ${p => p.theme.colors.dangerText};
-  background: ${p => p.theme.colors.shadedBg};
+  background: ${p => p.theme.colors.dangerAltBg};
 }
 
 &.button_link.button_minor {
-  color: ${p => p.theme.colors.lightText};
+  color: ${p => p.theme.colors.baseLightText};
   background: transparent;
 }
 
