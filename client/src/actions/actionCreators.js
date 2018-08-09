@@ -2,12 +2,20 @@ import {
   FETCH_BUNDLES_REQUEST,
   FETCH_BUNDLES_SUCCESS,
   FETCH_BUNDLES_FAILURE,
+
+  FETCH_BUNDLE_REQUEST,
+  FETCH_BUNDLE_SUCCESS,
+  FETCH_BUNDLE_FAILURE,
+
   CREATE_BUNDLE_REQUEST,
   CREATE_BUNDLE_SUCCESS,
   CREATE_BUNDLE_FAILURE,
+
   PUSH_IN_BUNDLES,
+
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
+
   PUSH_NOTIFICATION
 } from './actionTypes'
 
@@ -46,7 +54,7 @@ const bundleWithSlug = bundle => {
   }
 }
 
-/* Fetching */
+/* Fetching many */
 export const fetchBundlesRequest = () => ({
   type: FETCH_BUNDLES_REQUEST
 })
@@ -62,6 +70,24 @@ export const fetchBundlesSuccess = list => {
 
 export const fetchBundlesError = error => ({
   type: FETCH_BUNDLES_FAILURE,
+  updatedAt: Date.now(),
+  error
+})
+
+/* Fetching one */
+export const fetchBundleRequest = id => ({
+  type: FETCH_BUNDLE_REQUEST,
+  id
+})
+
+export const fetchBundleSuccess = bundle => ({
+  type: FETCH_BUNDLE_SUCCESS,
+  updatedAt: Date.now(),
+  bundle: bundleWithSlug(bundle)
+})
+
+export const fetchBundleError = error => ({
+  type: FETCH_BUNDLE_FAILURE,
   updatedAt: Date.now(),
   error
 })
