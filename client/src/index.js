@@ -58,7 +58,7 @@ render(
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />
-            <Route path='/bundle/:id' component={BundlePage} exact />
+            <Route path='/bundle/:type/:id' component={BundlePage} exact />
             <Route path='/components' component={ComponentsPage} exact />
             <Redirect from='/' to='/' />
           </Switch>
