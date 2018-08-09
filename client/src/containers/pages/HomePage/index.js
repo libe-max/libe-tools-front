@@ -11,6 +11,8 @@ import Button from '../../../components/buttons/Button'
 import SearchField from '../../../components/inputs/SearchField'
 import Wrapper from './style'
 
+import toolsList from '../../../_config/toolsList'
+
 class HomePage extends Component {
   constructor (props) {
     super(props)
@@ -34,7 +36,10 @@ class HomePage extends Component {
     this.getBundleCurrentSettings = this.getBundleCurrentSettings.bind(this)
     this.tryFilterBundles = this.tryFilterBundles.bind(this)
     this.filterBundles = this.filterBundles.bind(this)
-    props.getBundles().then(res => this.filterBundles())
+
+    props.getBundles().then(res => {
+      this.filterBundles()
+    })
   }
 
   componentDidMount () {
@@ -154,6 +159,16 @@ class HomePage extends Component {
     const filteredBundles = state.filteredBundles
     const shouldApplyBundlesFilter = state.shouldApplyFilters.bundles
 
+    /* Tools list */
+    const toolsDom = toolsList.map((tool, i) => {
+      return <LibeToolThumb
+        key={i}
+        name={tool.name}
+        type={tool.type}
+        image={tool.image}
+        description={tool.description} />
+    })
+
     /* Bundles list */
     // [WIP] Some pagination here ?
     const bundlesDom = filteredBundles.map((bundle, i) => {
@@ -196,16 +211,7 @@ class HomePage extends Component {
             </div>
             <div className='home-page__tools-list'>
               <div className='home-page__tools-list-slider'>
-                <LibeToolThumb
-                  title='Yellow word'
-                  type='yellow-word'
-                  image='/images/yellow-word-thumb.png'
-                  description='Ce module vous permet d&#39;éditer de jolis mots jaunes.' />
-                <LibeToolThumb
-                  title='Libé box'
-                  type='libe-box'
-                  image='/images/libe-box-thumb.png'
-                  description='Lorem ipsum dolor sit amet consectutor' />
+                {toolsDom}
               </div>
             </div>
           </div>

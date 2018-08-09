@@ -18,7 +18,7 @@ import Wrapper from './style'
  *   to build bundles
  *
  *   PROPS
- *   title, description, image
+ *   name, type, description, image
  *
  */
 
@@ -34,7 +34,7 @@ class LibeToolThumb extends Component {
           alt='Tool thumbnail'
           title='Tool thumbnail' />
         <div className='libe-tool-thumb__content'>
-          <BlockTitle>{props.title}</BlockTitle>
+          <BlockTitle>{props.name}</BlockTitle>
           <Paragraph>{props.description}</Paragraph>
           <div className='libe-tool-thumb__actions'>
             <Button onClick={props.filterBundles} tabIndex='-1' minor>Voir tous</Button>
