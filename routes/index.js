@@ -5,7 +5,7 @@ const router = express.Router()
 /* GET React app. */
 const clientRoutes = [
   '/',
-  'bundle/:id',
+  'bundle/:type/:id',
   '/components'
 ]
 
