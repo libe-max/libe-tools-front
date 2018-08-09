@@ -48,7 +48,7 @@ const bundles = (state = {
     case PUSH_IN_BUNDLES:
       return Object.assign({}, state, {
         list: [
-          state.list.map(bundle => {
+          ...state.list.map(bundle => {
             const id1 = bundle._id
             const id2 = action.bundle._id
             return (id1 !== id2) ? bundle : undefined
