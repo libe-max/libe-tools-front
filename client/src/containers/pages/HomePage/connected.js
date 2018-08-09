@@ -3,7 +3,8 @@ import {
   fetchBundlesSuccess,
   fetchBundlesError,
   setToolsFilter,
-  setBundlesFilter
+  setBundlesFilter,
+  pushNotification
 } from '../../../actions/actionCreators'
 
 export const state2props = state => ({
@@ -26,11 +27,15 @@ export const dispatch2props = dispatch => ({
           resolve(res.data)
         } else {
           dispatch(fetchBundlesError(res.err))
+          const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${res.err}`
+          dispatch(pushNotification(notif, 'error'))
           reject(res.err)
         }
       })
       .catch(err => {
         dispatch(fetchBundlesError(err.message))
+        const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${err.message}`
+        dispatch(pushNotification(notif, 'error'))
         reject(err.message)
       })
   }),
