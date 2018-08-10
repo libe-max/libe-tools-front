@@ -24,16 +24,16 @@ export const dispatch2props = (dispatch, props) => ({
           dispatch(createBundleSuccess())
           dispatch(pushInBundles(res.data))
           dispatch(pushNotification('Le module a bien été créé !'))
-          dispatch(push(`/bundle/${res.data._id}`))
+          dispatch(push(`/bundle/${res.data.type}/${res.data._id}`))
         } else {
           dispatch(createBundleError())
-          const notif = `Impossible de créer ce module de type ${props.title}, le serveur a répondu : ${res.err}`
+          const notif = `Impossible de créer ce module de type ${props.type}, le serveur a répondu : ${res.err}`
           dispatch(pushNotification(notif, 'error'))
         }
       })
       .catch(err => {
         dispatch(createBundleError())
-        const notif = `Impossible de créer ce module de type ${props.title}, le serveur a répondu : ${err.message}`
+        const notif = `Impossible de créer ce module de type ${props.type}, le serveur a répondu : ${err.message}`
         dispatch(pushNotification(notif, 'error'))
       })
   },
