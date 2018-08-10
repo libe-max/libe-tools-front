@@ -13,6 +13,13 @@ import {
 
   PUSH_IN_BUNDLES,
 
+  EDIT_BUNDLE_GENERAL_SETTING,
+  EDIT_BUNDLE_CUSTOM_SETTING,
+
+  SAVE_BUNDLE_REQUEST,
+  SAVE_BUNDLE_SUCCESS,
+  SAVE_BUNDLE_FAILURE,
+
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
 
@@ -85,6 +92,37 @@ export const createBundleError = error => ({
 export const pushInBundles = bundle => ({
   type: PUSH_IN_BUNDLES,
   bundle: new Bundle(bundle)
+})
+
+/* Bundle settings */
+export const editBundleGeneralSetting = (id, key, value) => ({
+  type: EDIT_BUNDLE_GENERAL_SETTING,
+  id,
+  key,
+  value
+})
+
+export const editBundleCustomSetting = (id, key, value) => ({
+  type: EDIT_BUNDLE_CUSTOM_SETTING,
+  id,
+  key,
+  value
+})
+
+/* Save bundle */
+export const saveBundleRequest = id => ({
+  type: SAVE_BUNDLE_REQUEST,
+  id
+})
+
+export const saveBundleSuccess = bundle => ({
+  type: SAVE_BUNDLE_SUCCESS,
+  bundle
+})
+
+export const saveBundleError = error => ({
+  type: SAVE_BUNDLE_FAILURE,
+  error
 })
 
 /* * * * * * * * * * * * * * * * * * * *
