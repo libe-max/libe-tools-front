@@ -33,7 +33,8 @@ export default class TextInput extends Component {
         onBlur={props.onBlur}
         onClick={props.onClick}
         placeholder={props.placeholder}
-        defaultValue={props.defaultValue} />
+        defaultValue={props.defaultValue}
+        ref={node => this.input = node} />
     </Wrapper>
   }
 }
