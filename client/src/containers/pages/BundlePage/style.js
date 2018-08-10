@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import hexToRgba from 'hex-to-rgba' 
 
 const Wrapper = styled.div`
 
@@ -54,6 +55,23 @@ grid-template-rows: auto 1fr auto;
   overflow-scrolling: touch;
 }
 
+.bundle-page__fetching-bundle-loader {
+  z-index: 10;
+  position: absolute;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: ${p => hexToRgba(p.theme.colors.baseBg, 0.8)};
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.bundle-page__fetching-bundle-loader img {
+  height: ${p => p.theme.units(1)};
+}
+
 .bundle-page__bundle-preview-box-slider {
   display: flex;
   justify-content: center;
@@ -61,6 +79,14 @@ grid-template-rows: auto 1fr auto;
   width: 100%;
   min-height: 100%;
   padding: ${p => p.theme.units(2)};
+}
+
+.bundle-page__bundle-display {
+  display: none;
+}
+
+.bundle-page__no-bundle-display {
+  display: block;
 }
 
 .bundle-page__bundle-settings-box-slider {
@@ -83,6 +109,10 @@ grid-template-rows: auto 1fr auto;
   margin-bottom: ${p => p.theme.units(5)};
 }
 
+.bundle-page__bundle-custom-settings {
+  display: none;
+}
+
 .bundle-page__bundle-general-settings > *,
 .bundle-page__bundle-custom-settings > * {
   margin-bottom: ${p => p.theme.units(3)};
@@ -91,6 +121,47 @@ grid-template-rows: auto 1fr auto;
 .bundle-page__bundle-general-settings > *:last-child,
 .bundle-page__bundle-custom-settings > *:last-child {
   margin-bottom: unset;
+}
+
+.bundle-page__actions {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  height: ${p => p.theme.units(6)};
+}
+
+.bundle-page__actions > * {
+  margin-left: ${p => p.theme.units(4)};
+}
+
+.bundle-page__actions > *:first-child {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* ---------- STATES ---------- */
+
+&.bundle-page_fetching-bundle {
+  .bundle-page__fetching-bundle-loader {
+    display: flex;
+  }
+}
+
+&.bundle-page_with-custom-settings {
+  .bundle-page__bundle-custom-settings {
+    display: block;
+  }
+}
+
+&.bundle-page_with-display {
+  .bundle-page__bundle-display {
+    display: block;
+  }
+
+  .bundle-page__no-bundle-display {
+    display: none;
+  }
 }`
 
 export default Wrapper
