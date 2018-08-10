@@ -1,4 +1,6 @@
-function Bundle (bundle = {}) {
+function Bundle (bundle = {
+  settings_history: []
+}) {
   this._id = bundle._id
   this.type = bundle.type
   this.name = bundle.name
@@ -25,6 +27,26 @@ function Bundle (bundle = {}) {
       .replace(/-{2,}/igm, '-')
       .replace(/-$/, '')
     return slug
+  }
+  this._getLastSaveDate = function () {
+    const settings = this._getCurrentSettings()
+    const updatedOn = settings.timestamp || 0
+    const createdOn = this.created_on || 0
+    const lastSave = [createdOn, updatedOn].reduce((max, curr) => {
+      return Math.max(max, curr)
+    })
+    return lastSave
+  }
+  this._stringify = function () {
+    const dataOnly = {
+      _id: this._id,
+      type: this.type,
+      name: this.name,
+      author: this.author,
+      created_on: this.created_on,
+      settings_history: this.settings_history
+    }
+    return JSON.stringify(dataOnly)
   }
 }
 
