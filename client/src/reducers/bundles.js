@@ -5,11 +5,13 @@ import {
   CREATE_BUNDLE_REQUEST,
   CREATE_BUNDLE_SUCCESS,
   CREATE_BUNDLE_FAILURE,
-  PUSH_IN_BUNDLES
+  PUSH_IN_BUNDLES,
+  EDIT_BUNDLE_GENERAL_SETTING
 } from '../actions/actionTypes'
 
 const bundles = (state = {
   list: [],
+  unsavedList: [],
   error: null,
   isFetching: false,
   isCreating: false,
@@ -54,6 +56,27 @@ const bundles = (state = {
             return (id1 !== id2) ? bundle : undefined
           }).filter(elt => elt),
           action.bundle
+        ]
+      })
+    case EDIT_BUNDLE_GENERAL_SETTING:
+      const savedBundle = state.list.map(bundle => {
+        return bundle._id === action.id ? bundle : undefined
+      }).filter(elt => elt)[0]
+      const unsavedBundle = state.unsavedList.map(bundle => {
+        return bundle._id === action.id ? bundle : undefined
+      }).filter(elt => elt)[0] || savedBundle
+      if (!unsavedBundle) return state
+      const editedBundle = Object.assign({}, unsavedBundle, {
+        [action.key]: action.value
+      })
+      return Object.assign({}, state, {
+        unsavedList: [
+          ...state.unsavedList.map(bundle => {
+            const id1 = bundle._id
+            const id2 = action.id
+            return (id1 !== id2) ? bundle : undefined
+          }).filter(elt => elt),
+          editedBundle
         ]
       })
     default:
