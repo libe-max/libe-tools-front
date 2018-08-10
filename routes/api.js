@@ -37,7 +37,7 @@ router.all('/create-bundle/:type', (req, res, next) => {
     const now = moment().valueOf()
     const newBundle = {
       type,
-      name: null,
+      author: null,
       settings_history: [],
       created_on: now
     }
