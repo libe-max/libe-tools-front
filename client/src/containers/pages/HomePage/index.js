@@ -11,6 +11,7 @@ import Button from '../../../components/buttons/Button'
 import SearchField from '../../../components/inputs/SearchField'
 import Wrapper from './style'
 
+import { list as toolsList } from '../../../_config/tools'
 
 class HomePage extends Component {
   constructor (props) {

@@ -1,14 +1,14 @@
 import React from 'react'
 
-const tools = [
+const list = [
   {
     name: 'Yellow word',
     type: 'yellow-word',
     description: 'Ce module vous permet d\'éditer de jolis mots jaunes.',
     image: '/images/yellow-word-thumb.png',
-    display: <div>Display component</div>,
-    settings: <div>Settings component</div>,
-    actions: <div>Actions component</div>
+    display: props => <div>Display component</div>,
+    settings: props => <div>Settings component</div>,
+    actions: props => <div>Actions component</div>
   }, {
     name: 'Libé box',
     type: 'libe-box',
@@ -17,4 +17,4 @@ const tools = [
   }
 ]
 
-export default tools
+export { list }

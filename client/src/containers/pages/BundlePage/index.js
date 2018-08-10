@@ -14,6 +14,8 @@ import { ThemeProvider } from 'styled-components'
 import theme from '../../../theme'
 import Wrapper from './style'
 
+import { list as toolsList } from '../../../_config/tools'
+
 class BundlePage extends Component {
   render () {
     return <Wrapper className='bundle-page'>
