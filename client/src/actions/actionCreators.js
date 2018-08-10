@@ -19,40 +19,13 @@ import {
   PUSH_NOTIFICATION
 } from './actionTypes'
 
+import { Bundle } from '../_config/bundles'
+
 /* * * * * * * * * * * * * * * * * * * *
  *
  *  BUNDLES
  *
  * * * * * * * * * * * * * * * * * * * */
-
-/* Utilities */
-const getBundleCurrentSettings = bundle => {
-  const settingsHistory = bundle.settings_history || []
-  const currentSettings = settingsHistory
-    .sort((a, b) => {
-      return (b.timestamp - a.timestamp)
-    })[0]
-  return currentSettings || {}
-}
-const bundleWithSlug = bundle => {
-  const settings = getBundleCurrentSettings(bundle)
-  const slug = [
-    bundle._id,
-    bundle.author,
-    bundle.type,
-    settings.name,
-    settings.text,
-    settings.title
-  ].join('-')
-    .toLowerCase()
-    .replace(/[^a-z0-9-]/igm, '-')
-    .replace(/-{2,}/igm, '-')
-    .replace(/-$/, '')
-  return {
-    ...bundle,
-    slug
-  }
-}
 
 /* Fetching many */
 export const fetchBundlesRequest = () => ({
@@ -60,11 +33,11 @@ export const fetchBundlesRequest = () => ({
 })
 
 export const fetchBundlesSuccess = list => {
-  const listWithSlug = list.map(bundle => bundleWithSlug(bundle))
+  const bundles = list.map(bundle => new Bundle(bundle))
   return {
     type: FETCH_BUNDLES_SUCCESS,
     updatedAt: Date.now(),
-    list: listWithSlug
+    list: bundles
   }
 }
 
@@ -83,7 +56,7 @@ export const fetchBundleRequest = id => ({
 export const fetchBundleSuccess = bundle => ({
   type: FETCH_BUNDLE_SUCCESS,
   updatedAt: Date.now(),
-  bundle: bundleWithSlug(bundle)
+  bundle: new Bundle(bundle)
 })
 
 export const fetchBundleError = error => ({
@@ -99,8 +72,7 @@ export const createBundleRequest = () => ({
 
 export const createBundleSuccess = bundle => ({
   type: CREATE_BUNDLE_SUCCESS,
-  receivedAt: Date.now(),
-  bundle
+  receivedAt: Date.now()
 })
 
 export const createBundleError = error => ({
@@ -112,7 +84,7 @@ export const createBundleError = error => ({
 /* Push */
 export const pushInBundles = bundle => ({
   type: PUSH_IN_BUNDLES,
-  bundle: bundleWithSlug(bundle)
+  bundle: new Bundle(bundle)
 })
 
 /* * * * * * * * * * * * * * * * * * * *
