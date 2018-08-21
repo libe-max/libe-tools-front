@@ -7,7 +7,6 @@ import {
   saveBundleSuccess,
   saveBundleError,
   editBundleGeneralSetting,
-  pushInBundles,
   pushNotification
 } from '../../../actions/actionCreators'
 
@@ -34,7 +33,6 @@ export const dispatch2props = (dispatch, props) => ({
       .then(res => {
         if (!res.err) {
           dispatch(fetchBundleSuccess(res.data))
-          dispatch(pushInBundles(res.data))
           resolve(res.data)
         } else {
           dispatch(fetchBundleError(res.err))
@@ -71,8 +69,7 @@ export const dispatch2props = (dispatch, props) => ({
       throw new Error(`Error ${r.status}: ${r.statusText}`)
     }).then(res => {
       if (!res.err) {
-        dispatch(saveBundleSuccess())
-        dispatch(pushInBundles(res.data))
+        dispatch(saveBundleSuccess(res.data))
         dispatch(pushNotification('Sauvegardé !'))
         resolve(res.data)
       } else {

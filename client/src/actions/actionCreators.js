@@ -11,8 +11,6 @@ import {
   CREATE_BUNDLE_SUCCESS,
   CREATE_BUNDLE_FAILURE,
 
-  PUSH_IN_BUNDLES,
-
   EDIT_BUNDLE_GENERAL_SETTING,
   EDIT_BUNDLE_CUSTOM_SETTING,
 
@@ -79,7 +77,8 @@ export const createBundleRequest = () => ({
 
 export const createBundleSuccess = bundle => ({
   type: CREATE_BUNDLE_SUCCESS,
-  receivedAt: Date.now()
+  receivedAt: Date.now(),
+  bundle: new Bundle(bundle)
 })
 
 export const createBundleError = error => ({
@@ -88,10 +87,20 @@ export const createBundleError = error => ({
   error
 })
 
-/* Push */
-export const pushInBundles = bundle => ({
-  type: PUSH_IN_BUNDLES,
+/* Save bundle */
+export const saveBundleRequest = id => ({
+  type: SAVE_BUNDLE_REQUEST,
+  id
+})
+
+export const saveBundleSuccess = bundle => ({
+  type: SAVE_BUNDLE_SUCCESS,
   bundle: new Bundle(bundle)
+})
+
+export const saveBundleError = error => ({
+  type: SAVE_BUNDLE_FAILURE,
+  error
 })
 
 /* Bundle settings */
@@ -107,22 +116,6 @@ export const editBundleCustomSetting = (id, key, value) => ({
   id,
   key,
   value
-})
-
-/* Save bundle */
-export const saveBundleRequest = id => ({
-  type: SAVE_BUNDLE_REQUEST,
-  id
-})
-
-export const saveBundleSuccess = bundle => ({
-  type: SAVE_BUNDLE_SUCCESS,
-  bundle
-})
-
-export const saveBundleError = error => ({
-  type: SAVE_BUNDLE_FAILURE,
-  error
 })
 
 /* * * * * * * * * * * * * * * * * * * *

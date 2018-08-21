@@ -3,7 +3,6 @@ import {
   createBundleRequest,
   createBundleSuccess,
   createBundleError,
-  pushInBundles,
   setBundlesFilter,
   pushNotification
 } from '../../../actions/actionCreators'
@@ -22,7 +21,6 @@ export const dispatch2props = (dispatch, props) => ({
       .then(res => {
         if (!res.err) {
           dispatch(createBundleSuccess())
-          dispatch(pushInBundles(res.data))
           dispatch(pushNotification('Le module a bien été créé !'))
           dispatch(push(`/bundle/${res.data.type}/${res.data._id}`))
         } else {
