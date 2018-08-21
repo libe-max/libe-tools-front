@@ -63,7 +63,7 @@ export const dispatch2props = (dispatch, props) => ({
     dispatch(saveBundleRequest(id))
     fetch(`/api/save-bundle/${id}`, {
       method: 'POST',
-      body: bundle._stringify()
+      body: bundle
     }).then(r => {
       if (r.ok) return r.json()
       throw new Error(`Error ${r.status}: ${r.statusText}`)

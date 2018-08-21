@@ -1,6 +1,6 @@
 import React from 'react'
 
-const list = [
+export const list = [
   {
     name: 'Yellow word',
     type: 'yellow-word',
@@ -16,5 +16,3 @@ const list = [
     image: '/images/libe-box-thumb.png'
   }
 ]
-
-export { list }

@@ -15,7 +15,7 @@ import theme from '../../../theme'
 import Wrapper from './style'
 
 import { list as toolsList } from '../../../_config/tools'
-import { Bundle } from '../../../_config/bundles'
+import { bundleTemplate, getBundleLastSaveDate } from '../../../_config/bundles'
 
 class BundlePage extends Component {
   constructor (props) {
@@ -33,7 +33,7 @@ class BundlePage extends Component {
           if (this.node) {
             this.setState({
               loading: false,
-              bundle: new Bundle(res)
+              bundle: res
             })
           }
         })
@@ -61,7 +61,7 @@ class BundlePage extends Component {
       type,
       loading: !unsavedBundle,
       tool: rightTool,
-      bundle: unsavedBundle || new Bundle(),
+      bundle: unsavedBundle || bundleTemplate,
     }
   }
 
@@ -107,7 +107,7 @@ class BundlePage extends Component {
     const BundleActions = state.tool.actions || (props => <div></div>)
 
     /* Inner logic */
-    const lastSaveMillis = state.bundle._getLastSaveDate()
+    const lastSaveMillis = getBundleLastSaveDate(state.bundle)
     const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
     const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
 

@@ -12,6 +12,7 @@ import SearchField from '../../../components/inputs/SearchField'
 import Wrapper from './style'
 
 import { list as toolsList } from '../../../_config/tools'
+import { getBundleSlug, getBundleCurrentSettings } from '../../../_config/bundles'
 
 class HomePage extends Component {
   constructor (props) {
@@ -123,14 +124,14 @@ class HomePage extends Component {
     const bundles = state.bundles
     const filter = state.filters.bundles
     const filteredBundles = bundles.list.filter(bundle => {
-      const slug = bundle._getSlug()
+      const slug = getBundleSlug(bundle)
       const splFilters = filter.split(' ')
       const doesBundleMatch = splFilters.every(word => slug.match(word))
       return doesBundleMatch ? bundle : null
     })
     const sortedBundles = filteredBundles.sort((a, b) => {
-      const latestEditA = a._getCurrentSettings().timestamp || a.created_on
-      const latestEditB = b._getCurrentSettings().timestamp || b.created_on
+      const latestEditA = getBundleCurrentSettings(a).timestamp || a.created_on
+      const latestEditB = getBundleCurrentSettings(b).timestamp || b.created_on
       return latestEditB - latestEditA
     })
     this.setState({
@@ -162,7 +163,7 @@ class HomePage extends Component {
     /* Bundles list */
     // [WIP] Some pagination here ?
     const bundlesDom = filteredBundles.map((bundle, i) => {
-      const settings = bundle._getCurrentSettings()
+      const settings = getBundleCurrentSettings(bundle)
       return <LibeBundleThumb
         key={i}
         type={bundle.type}

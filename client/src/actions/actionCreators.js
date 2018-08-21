@@ -24,8 +24,6 @@ import {
   PUSH_NOTIFICATION
 } from './actionTypes'
 
-import { Bundle } from '../_config/bundles'
-
 /* * * * * * * * * * * * * * * * * * * *
  *
  *  BUNDLES
@@ -38,11 +36,10 @@ export const fetchBundlesRequest = () => ({
 })
 
 export const fetchBundlesSuccess = list => {
-  const bundles = list.map(bundle => new Bundle(bundle))
   return {
     type: FETCH_BUNDLES_SUCCESS,
     updatedAt: Date.now(),
-    list: bundles
+    list
   }
 }
 
@@ -61,7 +58,7 @@ export const fetchBundleRequest = id => ({
 export const fetchBundleSuccess = bundle => ({
   type: FETCH_BUNDLE_SUCCESS,
   updatedAt: Date.now(),
-  bundle: new Bundle(bundle)
+  bundle
 })
 
 export const fetchBundleError = error => ({
@@ -78,7 +75,7 @@ export const createBundleRequest = () => ({
 export const createBundleSuccess = bundle => ({
   type: CREATE_BUNDLE_SUCCESS,
   receivedAt: Date.now(),
-  bundle: new Bundle(bundle)
+  bundle
 })
 
 export const createBundleError = error => ({
@@ -95,7 +92,7 @@ export const saveBundleRequest = id => ({
 
 export const saveBundleSuccess = bundle => ({
   type: SAVE_BUNDLE_SUCCESS,
-  bundle: new Bundle(bundle)
+  bundle
 })
 
 export const saveBundleError = error => ({
