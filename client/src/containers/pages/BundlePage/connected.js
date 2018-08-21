@@ -9,7 +9,8 @@ import {
 } from '../../../actions/actionCreators'
 
 export const state2props = (state, props) => ({
-  getUnsavedBundle: id => {
+  getUnsavedBundle: () => {
+    const id = props.match.params.id
     const unsavedBundle = state.bundles.unsavedList.map(bundle => {
       return (bundle._id === id) ? bundle : undefined
     }).filter(elt => elt)[0]
@@ -18,6 +19,8 @@ export const state2props = (state, props) => ({
 })
 
 export const dispatch2props = (dispatch, props) => ({
+  notify: (text, level) => { dispatch(pushNotification(text, level)) },
+  goHome: e => { dispatch(push('/')) },
   fetchBundle: id => new Promise((resolve, reject) => {
     dispatch(fetchBundleRequest(id))
     fetch(`/api/get-bundle/${id}`)
@@ -46,12 +49,6 @@ export const dispatch2props = (dispatch, props) => ({
         reject(err.message)
       })
   }),
-  notify: (text, level) => {
-    dispatch(pushNotification(text, level))
-  },
-  goHome: e => {
-    dispatch(push('/'))
-  },
   dispatchGeneralSetting: (e, key) => {
     const id = props.match.params.id
     const value = e.target.value

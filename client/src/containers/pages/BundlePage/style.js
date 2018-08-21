@@ -140,11 +140,24 @@ grid-template-rows: auto 1fr auto;
   margin-right: auto;
 }
 
+.bundle-page__save-button {
+  display: none;
+}
+
 /* ---------- STATES ---------- */
 
 &.bundle-page_fetching-bundle {
   .bundle-page__fetching-bundle-loader {
     display: flex;
+  }
+}
+
+&.bundle-page_unsaved-bundle {
+  .bundle-page__saved-paragraph {
+    display: none;
+  }
+  .bundle-page__save-button {
+    display: block;
   }
 }
 

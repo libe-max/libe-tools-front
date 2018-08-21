@@ -2,9 +2,9 @@ import { connect } from 'react-redux'
 import { state2props, dispatch2props } from './connected'
 
 import React, { Component } from 'react'
+import moment from 'moment'
 import Header from '../../blocks/Header'
 import NotificationsPanel from '../../blocks/NotificationsPanel'
-import BundleSaver from '../../blocks/BundleSaver'
 import ShadowBar from '../../../components/boxes/ShadowBar'
 import BlockTitle from '../../../components/text-levels/BlockTitle'
 import Paragraph from '../../../components/text-levels/Paragraph'
@@ -22,10 +22,10 @@ class BundlePage extends Component {
     super(props)
     this.populateFields = this.populateFields.bind(this)
 
-    /* Get the unsaved bundle from store
-     * if none is found, fetch it from the database */
+    /* Get the unsaved bundle from store, then save it to state.
+     * If none is found, fetch it from the database */
     const id = props.match.params.id
-    const unsavedBundle = props.getUnsavedBundle(id)
+    const unsavedBundle = props.getUnsavedBundle()
     if (!unsavedBundle) {
       props.fetchBundle(id)
         .then(res => {
@@ -38,7 +38,7 @@ class BundlePage extends Component {
         })
     }
 
-    /* Get the appropriate tool for the bundle to edit */
+    /* Get the appropriate tool for the bundle edition */
     const type = props.match.params.type
     let rightTool = {}
     const toolExists = toolsList.some(tool => {
@@ -58,15 +58,15 @@ class BundlePage extends Component {
     /* Init page state */
     this.state = {
       type,
-      loading: unsavedBundle ? false : true,
+      loading: !unsavedBundle,
       tool: rightTool,
-      bundle: unsavedBundle || {},
+      bundle: unsavedBundle || new Bundle(),
     }
   }
 
   static getDerivedStateFromProps (props, state) {
     const id = props.match.params.id
-    const unsavedBundle = props.getUnsavedBundle(id)
+    const unsavedBundle = props.getUnsavedBundle()
     if (unsavedBundle) {
       return Object.assign({}, state, {
         bundle: unsavedBundle
@@ -96,9 +96,16 @@ class BundlePage extends Component {
     const BundleCustomSettings = state.tool.settings || (props => <div></div>)
     const BundleActions = state.tool.actions || (props => <div></div>)
 
+    /* Inner logic */
+    const lastSaveMillis = state.bundle._getLastSaveDate()
+    const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
+    const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
+
     /* Assign classes to component */
     const classes = ['bundle-page']
     if (state.loading) classes.push('bundle-page_fetching-bundle')
+    if (props.getUnsavedBundle()) classes.push('bundle-page_unsaved-bundle')
+    console.log(props.getUnsavedBundle())
     if (state.tool.display) classes.push('bundle-page_with-display')
     if (state.tool.settings) classes.push('bundle-page_with-custom-settings')
 
@@ -153,7 +160,14 @@ class BundlePage extends Component {
           <div className='bundle-page__actions'>
             <Button link minor onClick={props.goHome}>‹ Retour</Button>
             <BundleActions id={state.bundle._id} />
-            <BundleSaver id={state.bundle._id} />
+            <div className='bundle-page__saved-paragraph'>
+              <Paragraph light small>
+                Module sauvegardé (dernière modif. : <span title={lastSavedOn}>{lastSavedAgo}</span>)
+              </Paragraph>
+            </div>
+            <div className='bundle-page__save-button'>
+              <Button onClick={props.saveBundle} primary>Enregistrer</Button>
+            </div>
           </div>
         </ShadowBar>
       </div>
