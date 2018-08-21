@@ -3,6 +3,9 @@ import {
   fetchBundleRequest,
   fetchBundleSuccess,
   fetchBundleError,
+  saveBundleRequest,
+  saveBundleSuccess,
+  saveBundleError,
   editBundleGeneralSetting,
   pushInBundles,
   pushNotification
@@ -56,5 +59,33 @@ export const dispatch2props = (dispatch, props) => ({
   },
   dispatchCustomSetting: (e, key) => {
     console.log('wip')
-  }
+  },
+  saveBundle: (bundle) => new Promise((resolve, reject) => {
+    const id = bundle._id
+    dispatch(saveBundleRequest(id))
+    fetch(`/api/save-bundle/${id}`, {
+      method: 'POST',
+      body: bundle._stringify()
+    }).then(r => {
+      if (r.ok) return r.json()
+      throw new Error(`Error ${r.status}: ${r.statusText}`)
+    }).then(res => {
+      if (!res.err) {
+        dispatch(saveBundleSuccess())
+        dispatch(pushInBundles(res.data))
+        dispatch(pushNotification('Sauvegardé !'))
+        resolve(res.data)
+      } else {
+        dispatch(saveBundleError())
+        const notif = `Impossible d'enregistrer ce module, le serveur a répondu : ${res.err}`
+        dispatch(pushNotification(notif, 'error'))
+        reject(res.err)
+      }
+    }).catch(err => {
+      dispatch(saveBundleError())
+      const notif = `Impossible d'enregistrer ce module, le serveur a répondu : ${err.message}`
+      dispatch(pushNotification(notif, 'error'))
+      reject(err.message)
+    })
+  })
 })

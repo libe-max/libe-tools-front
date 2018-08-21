@@ -21,6 +21,7 @@ class BundlePage extends Component {
   constructor (props) {
     super(props)
     this.populateFields = this.populateFields.bind(this)
+    this.saveBundle = this.saveBundle.bind(this)
 
     /* Get the unsaved bundle from store, then save it to state.
      * If none is found, fetch it from the database */
@@ -65,7 +66,6 @@ class BundlePage extends Component {
   }
 
   static getDerivedStateFromProps (props, state) {
-    const id = props.match.params.id
     const unsavedBundle = props.getUnsavedBundle()
     if (unsavedBundle) {
       return Object.assign({}, state, {
@@ -88,6 +88,16 @@ class BundlePage extends Component {
     this.bundleAuthorInput.input.value = state.bundle.author || ''
   }
 
+  saveBundle () {
+    const props = this.props
+    const state = this.state
+    this.setState({ loading: true })
+    props.saveBundle(state.bundle).finally(all => {
+      this.setState({ loading: false })
+      this.populateFields()
+    })
+  }
+
   render () {
     const props = this.props
     const state = this.state
@@ -105,7 +115,6 @@ class BundlePage extends Component {
     const classes = ['bundle-page']
     if (state.loading) classes.push('bundle-page_fetching-bundle')
     if (props.getUnsavedBundle()) classes.push('bundle-page_unsaved-bundle')
-    console.log(props.getUnsavedBundle())
     if (state.tool.display) classes.push('bundle-page_with-display')
     if (state.tool.settings) classes.push('bundle-page_with-custom-settings')
 
@@ -166,7 +175,7 @@ class BundlePage extends Component {
               </Paragraph>
             </div>
             <div className='bundle-page__save-button'>
-              <Button onClick={props.saveBundle} primary>Enregistrer</Button>
+              <Button onClick={this.saveBundle} primary>Enregistrer</Button>
             </div>
           </div>
         </ShadowBar>
