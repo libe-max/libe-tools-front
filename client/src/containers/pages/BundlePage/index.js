@@ -69,12 +69,12 @@ class BundlePage extends Component {
                 <TextInput
                   label='Titre'
                   placeholder='Donnez un titre à ce module'
-                  onChange={e => props.dispatchChange(e, 'name')}
+                  onChange={e => props.dispatchEdition(e, 'name')}
                   ref={node => { this.bundleTitleInput = node }} />
                 <TextInput
                   label='Auteur'
                   placeholder='Votre nom'
-                  onChange={e => props.dispatchChange(e, 'author')}
+                  onChange={e => props.dispatchEdition(e, 'author')}
                   ref={node => { this.bundleAuthorInput = node }} />
               </div>
               <div className='bundle-page__bundle-custom-settings'>

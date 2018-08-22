@@ -3,7 +3,7 @@ import {
   fetchBundleRequest,
   fetchBundleSuccess,
   fetchBundleError,
-  changeBundle,
+  editBundle,
   pushNotification
 } from '../../../actions/actionCreators'
 
@@ -26,8 +26,8 @@ export const dispatch2props = (dispatch, props) => {
     goHome: e => {
       dispatch(push('/'))
     },
-    dispatchChange: (e, key) => {
-      dispatch(changeBundle(id, key, e.target.value))
+    dispatchEdition: (e, key) => {
+      dispatch(editBundle(id, key, e.target.value))
     },
     getSavedBundle: () => new Promise((resolve, reject) => {
       const id = props.match.params.id

@@ -15,7 +15,7 @@ import {
   SAVE_BUNDLE_SUCCESS,
   SAVE_BUNDLE_FAILURE,
 
-  CHANGE_BUNDLE
+  EDIT_BUNDLE
 } from '../actions/actionTypes'
 
 const bundles = (state = {
@@ -94,8 +94,8 @@ const bundles = (state = {
     case SAVE_BUNDLE_FAILURE:
       return state
 
-    /* Bundle settings */
-    case CHANGE_BUNDLE:
+    /* Edit bundle */
+    case EDIT_BUNDLE:
       console.log('CHANGE THIS BUNDLE')
       return state
 

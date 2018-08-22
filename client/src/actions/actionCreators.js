@@ -15,7 +15,7 @@ import {
   SAVE_BUNDLE_SUCCESS,
   SAVE_BUNDLE_FAILURE,
 
-  CHANGE_BUNDLE,
+  EDIT_BUNDLE,
 
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
@@ -100,8 +100,8 @@ export const saveBundleError = error => ({
 })
 
 /* Bundle settings */
-export const changeBundle = (id, key, value) => ({
-  type: CHANGE_BUNDLE,
+export const editBundle = (id, key, value) => ({
+  type: EDIT_BUNDLE,
   id,
   key,
   value
