@@ -2,7 +2,6 @@ export const bundleTemplate = {
   _id: null,
   type: null,
   name: null,
-  author: null,
   created_on: 0,
   settings_history: []
 }
@@ -19,8 +18,8 @@ export const getBundleSlug = bundle => {
   const settings = getBundleCurrentSettings(bundle)
   const slug = [
     this._id,
-    this.author,
     this.type,
+    settings.author,
     settings.name,
     settings.text,
     settings.title

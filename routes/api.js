@@ -2,6 +2,8 @@ const express = require('express')
 const moment = require('moment')
 const router = express.Router()
 
+const allowedTypes = ['yellow-word', 'libe-box']
+
 /* Get all bundles from database */
 router.all('/get-all-bundles', (req, res, next) => {
   const collection = req.db.collection('bundles')
@@ -32,12 +34,10 @@ router.all('/get-bundle/:id', (req, res, next) => {
 /* Create a new bundle in database */
 router.all('/create-bundle/:type', (req, res, next) => {
   const type = req.params.type
-  const allowedTypes = ['yellow-word', 'libe-box']
   if (allowedTypes.indexOf(type) + 1) {
     const now = moment().valueOf()
     const newBundle = {
       type,
-      author: null,
       settings_history: [],
       created_on: now
     }

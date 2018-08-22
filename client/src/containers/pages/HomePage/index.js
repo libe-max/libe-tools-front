@@ -170,7 +170,7 @@ class HomePage extends Component {
         bundleId={bundle._id}
         created={bundle.created_on}
         updated={settings.timestamp || null}
-        author={bundle.author || '<sans-nom>'}
+        author={settings.author || '<sans-nom>'}
         image={`/images/${bundle.type}-small.png`}
         title={settings.name || '<sans-titre>'} />
     })
