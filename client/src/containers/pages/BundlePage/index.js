@@ -43,6 +43,7 @@ class BundlePage extends Component {
     /* Assign classes to component */
     const classes = ['bundle-page']
     if (state.loading) classes.push('bundle-page_fetching-bundle')
+    if (props.hasChanges) classes.push('bundle-page_unsaved-bundle')
     if (props.tool.display) classes.push('bundle-page_with-display')
     if (props.tool.settings) classes.push('bundle-page_with-custom-settings')
 
