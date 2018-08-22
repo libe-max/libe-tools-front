@@ -106,7 +106,8 @@ const bundles = (state = {
       const changes = state.changes.filter(bundleChanges => bundleChanges._id === id)[0] || { _id: id }
       const newChanges = Object.assign({}, changes, { [key]: value })
 
-      if (storedSettings[key] === newChanges[key]) delete newChanges[key]
+      if (newChanges[key] === storedSettings[key]) delete newChanges[key]
+      if (newChanges[key] === '' && !storedSettings[key]) delete newChanges[key]
       if (
         Object.keys(newChanges).length <= 1 ||
         !newChanges.hasOwnProperty('_id')
