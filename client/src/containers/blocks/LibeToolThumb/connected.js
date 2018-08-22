@@ -31,7 +31,6 @@ export const dispatch2props = (dispatch, props) => ({
       })
       .catch(err => {
         dispatch(createBundleError())
-        console.log(err)
         const notif = `Impossible de créer ce module de type ${props.type}, le serveur a répondu : ${err.message}`
         dispatch(pushNotification(notif, 'error'))
       })

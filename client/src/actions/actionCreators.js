@@ -11,12 +11,11 @@ import {
   CREATE_BUNDLE_SUCCESS,
   CREATE_BUNDLE_FAILURE,
 
-  EDIT_BUNDLE_GENERAL_SETTING,
-  EDIT_BUNDLE_CUSTOM_SETTING,
-
   SAVE_BUNDLE_REQUEST,
   SAVE_BUNDLE_SUCCESS,
   SAVE_BUNDLE_FAILURE,
+
+  CHANGE_BUNDLE,
 
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
@@ -101,15 +100,8 @@ export const saveBundleError = error => ({
 })
 
 /* Bundle settings */
-export const editBundleGeneralSetting = (id, key, value) => ({
-  type: EDIT_BUNDLE_GENERAL_SETTING,
-  id,
-  key,
-  value
-})
-
-export const editBundleCustomSetting = (id, key, value) => ({
-  type: EDIT_BUNDLE_CUSTOM_SETTING,
+export const changeBundle = (id, key, value) => ({
+  type: CHANGE_BUNDLE,
   id,
   key,
   value
