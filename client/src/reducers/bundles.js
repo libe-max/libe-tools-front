@@ -84,17 +84,39 @@ const bundles = (state = {
 
     /* Save bundle */
     case SAVE_BUNDLE_REQUEST:
-      return state
+      return Object.assign({}, state, {
+        changes: [...state.changes.map(bundleChanges => {
+          const id1 = bundleChanges._id
+          const id2 = action.id
+          return (id1 !== id2) ? bundleChanges : {
+            ...bundleChanges,
+            _saving: true
+          }
+        })]
+      })
     case SAVE_BUNDLE_SUCCESS:
       return Object.assign({}, state, {
         list: [...state.list.map(bundle => {
           const id1 = bundle._id
           const id2 = action.bundle._id
           return (id1 !== id2) ? bundle : undefined
-        }), action.bundle].filter(elt => elt)
+        }), action.bundle].filter(elt => elt),
+        changes: [...state.changes.filter(bundleChanges => {
+          const id1 = bundleChanges._id
+          const id2 = action.bundle._id
+          return (id1 !== id2)
+        })]
       })
     case SAVE_BUNDLE_FAILURE:
-      return state
+      return Object.assign({}, state, {
+        changes: [...state.changes.map(bundleChanges => {
+          const id1 = bundleChanges._id
+          const id2 = action.id
+          const cleanedBundleChanges = {...bundleChanges}
+          delete cleanedBundleChanges._saving
+          return (id1 !== id2) ? bundleChanges : cleanedBundleChanges
+        })]
+      })
 
     /* Edit bundle */
     case EDIT_BUNDLE:
