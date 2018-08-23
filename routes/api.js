@@ -54,6 +54,32 @@ router.all('/create-bundle/:type', (req, res, next) => {
   }
 })
 
+/* Save a bundle edition */
+router.put('/save-bundle/:id', (req, res, next) => {
+  const id = req.params.id
+  const idIsValid = id.match(/^[0-9a-fA-F]{24}$/)
+  if (!idIsValid) {
+    return res.json({
+      err: `Requested bundle ID is not valid (${id})`,
+      data: null
+    })
+  }
+  const now = moment().valueOf()
+  const request = {
+    $push: {
+      settings_history: {
+        ...req.body,
+        timestamp: now
+      }
+    }
+  }
+  const collection = req.db.collection('bundles')
+  collection.findOneAndUpdate({_id: id}, request, (e, doc) => {
+    if (!e) res.json({err: null, data: doc})
+    else res.json({err: e, data: null})
+  })
+})
+
 /* All other requests */
 router.all('/*', (req, res, next) => {
   res.json({
