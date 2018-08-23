@@ -47,18 +47,41 @@ export default class ComponentsPage extends Component {
         <CpBx title='Button minor' width={1 / 4}><Button minor>Click me!</Button></CpBx>
         <CpBx title='Button dangerous' width={1 / 4}><Button dangerous>Click me!</Button></CpBx>
         <CpBx title='Button minor dangerous' width={1 / 4}><Button minor dangerous>Click me!</Button></CpBx>
+
+        <CpBx title='Button disabled' width={1 / 4}><Button disabled>Click me!</Button></CpBx>
+        <CpBx title='Button minor disabled' width={1 / 4}><Button minor disabled>Click me!</Button></CpBx>
+        <CpBx title='Button dangerous disabled' width={1 / 4}><Button dangerous disabled>Click me!</Button></CpBx>
+        <CpBx title='Button minor dangerous disabled' width={1 / 4}><Button minor dangerous disabled>Click me!</Button></CpBx>
+
         <CpBx title='Button primary' width={1 / 4}><Button primary>Click me!</Button></CpBx>
         <CpBx title='Button primary minor' width={1 / 4}><Button primary minor>Click me!</Button></CpBx>
         <CpBx title='Button primary dangerous' width={1 / 4}><Button primary dangerous>Click me!</Button></CpBx>
         <CpBx title='Button primary minor dangerous' width={1 / 4}><Button primary minor dangerous>Click me!</Button></CpBx>
+
+        <CpBx title='Button primary disabled' width={1 / 4}><Button primary disabled>Click me!</Button></CpBx>
+        <CpBx title='Button primary minor disabled' width={1 / 4}><Button primary minor disabled>Click me!</Button></CpBx>
+        <CpBx title='Button primary dangerous disabled' width={1 / 4}><Button primary dangerous disabled>Click me!</Button></CpBx>
+        <CpBx title='Button primary minor dangerous disabled' width={1 / 4}><Button primary minor dangerous disabled>Click me!</Button></CpBx>
+
         <CpBx title='Button link' width={1 / 4}><Button link>Click me!</Button></CpBx>
         <CpBx title='Button link minor' width={1 / 4}><Button link minor>Click me!</Button></CpBx>
         <CpBx title='Button link dangerous' width={1 / 4}><Button link dangerous>Click me!</Button></CpBx>
         <CpBx title='Button link minor dangerous' width={1 / 4}><Button link minor dangerous>Click me!</Button></CpBx>
+
+        <CpBx title='Button link disabled' width={1 / 4}><Button link disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link minor disabled' width={1 / 4}><Button link minor disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link dangerous disabled' width={1 / 4}><Button link dangerous disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link minor dangerous disabled' width={1 / 4}><Button link minor dangerous disabled>Click me!</Button></CpBx>
+
         <CpBx title='Button link primary' width={1 / 4}><Button link primary>Click me!</Button></CpBx>
         <CpBx title='Button link primary minor' width={1 / 4}><Button link primary minor>Click me!</Button></CpBx>
         <CpBx title='Button link primary dangerous' width={1 / 4}><Button link primary dangerous>Click me!</Button></CpBx>
         <CpBx title='Button link primary minor dangerous' width={1 / 4}><Button link primary minor dangerous>Click me!</Button></CpBx>
+
+        <CpBx title='Button link primary disabled' width={1 / 4}><Button link primary disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link primary minor disabled' width={1 / 4}><Button link primary minor disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link primary dangerous disabled' width={1 / 4}><Button link primary dangerous disabled>Click me!</Button></CpBx>
+        <CpBx title='Button link primary minor dangerous disabled' width={1 / 4}><Button link primary minor dangerous disabled>Click me!</Button></CpBx>
       </CpRow>
       <CpRow title='Inputs'>
         <CpBx title='Text input' width={1 / 4}>
