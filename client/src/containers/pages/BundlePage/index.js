@@ -41,28 +41,38 @@ class BundlePage extends Component {
       : undefined
     if (unsavedSettings) {
       delete unsavedSettings._id
-      delete unsavedSettings.timestamp
+      unsavedSettings.timestamp = moment().valueOf()
     }
-    const displaySettings = unsavedSettings || storedSettings
+    const unsavedBundle = props.changes
+      ? {
+        ...storedBundle,
+        settings_history: [...storedSettings, unsavedSettings]
+      }
+      : undefined
+    const latestSettings = unsavedSettings || storedSettings
+    const latestBundle = unsavedBundle || storedBundle
     const isSaving = unsavedSettings && unsavedSettings._saving
     return {
       storedBundle,
       storedSettings,
+      unsavedBundle,
       unsavedSettings,
-      displaySettings,
+      latestBundle,
+      latestSettings,
       isSaving
     }
   }
 
   populateFields () {
-    const { displaySettings } = this.getSettingsVersions()
+    const props = this.props
+    const { latestSettings } = this.getSettingsVersions()
     const { name, author } = this.settingsComponents
     const makeString = val => {
       if (val === undefined) return ''
       return val
     }
-    name.input.value = makeString(displaySettings.name)
-    author.input.value = makeString(displaySettings.author)
+    name.input.value = makeString(latestSettings.name)
+    author.input.value = makeString(latestSettings.author)
   }
 
   render () {
@@ -70,7 +80,7 @@ class BundlePage extends Component {
     const state = this.state
 
     /* Inner logic */
-    const { storedBundle, unsavedSettings, displaySettings, isSaving } = this.getSettingsVersions()
+    const { storedBundle, storedSettings, unsavedSettings, latestSettings, isSaving } = this.getSettingsVersions()
     const lastSaveMillis = getBundleLastSaveDate(storedBundle)
     const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
     const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
@@ -94,7 +104,13 @@ class BundlePage extends Component {
         <div className='bundle-page__bundle-preview-box'>
           <div className='bundle-page__bundle-preview-box-slider'>
             <div className='bundle-page__bundle-display'>
-              <BundleDisplayer bundle={storedBundle} />
+              <BundleDisplayer
+                id={storedBundle._id}
+                isSaving={isSaving}
+                storedSettings={storedSettings}
+                unsavedSettings={unsavedSettings}
+                latestSettings={latestSettings}
+                dispatchEdition={props.dispatchEdition} />
             </div>
             <div className='bundle-page__no-bundle-display'>
               <Paragraph italic light>Aucune prévisualisation du module disponible.</Paragraph>
@@ -106,22 +122,34 @@ class BundlePage extends Component {
             <div className='bundle-page__bundle-settings-box-slider'>
               <div className='bundle-page__bundle-general-settings'>
                 <BlockTitle level={2}>Paramètres généraux</BlockTitle>
-                <TextInput
-                  label='Titre'
-                  placeholder='Donnez un titre à ce module'
-                  defaultValue={displaySettings.name}
-                  onChange={e => props.dispatchEdition(e, 'name')}
-                  ref={node => { this.settingsComponents.name = node }} />
-                <TextInput
-                  label='Auteur'
-                  placeholder='Votre nom'
-                  defaultValue={displaySettings.author}
-                  onChange={e => props.dispatchEdition(e, 'author')}
-                  ref={node => { this.settingsComponents.author = node }} />
+                <ul>
+                  <li>
+                    <TextInput
+                      label='Titre'
+                      placeholder='Donnez un titre à ce module'
+                      defaultValue={latestSettings.name}
+                      onChange={e => props.dispatchEdition(e, 'name')}
+                      ref={node => { this.settingsComponents.name = node }} />
+                  </li>
+                  <li>
+                    <TextInput
+                      label='Auteur'
+                      placeholder='Votre nom'
+                      defaultValue={latestSettings.author}
+                      onChange={e => props.dispatchEdition(e, 'author')}
+                      ref={node => { this.settingsComponents.author = node }} />
+                  </li>
+                </ul>
               </div>
               <div className='bundle-page__bundle-custom-settings'>
                 <BlockTitle level={2}>Paramètres du module</BlockTitle>
-                <BundleCustomSettings id={storedBundle._id} />
+                <BundleCustomSettings
+                  id={storedBundle._id}
+                  isSaving={isSaving}
+                  storedSettings={storedSettings}
+                  unsavedSettings={unsavedSettings}
+                  latestSettings={latestSettings}
+                  dispatchEdition={props.dispatchEdition} />
               </div>
             </div>
           </div>
@@ -135,7 +163,13 @@ class BundlePage extends Component {
           <div className='bundle-page__actions'>
             <Button link minor onClick={props.goHome}>‹ Retour</Button>
             <div className='bundle-page__custom-actions'>
-              <BundleActions id={storedBundle._id} />
+              <BundleActions
+                id={storedBundle._id}
+                isSaving={isSaving}
+                storedSettings={storedSettings}
+                unsavedSettings={unsavedSettings}
+                latestSettings={latestSettings}
+                dispatchEdition={props.dispatchEdition} />
             </div>
             <div className='bundle-page__saved-paragraph'>
               <Paragraph light small>

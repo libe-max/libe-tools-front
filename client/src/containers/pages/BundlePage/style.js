@@ -83,6 +83,7 @@ grid-template-rows: auto 1fr auto;
 
 .bundle-page__bundle-display {
   display: none;
+  box-shadow: ${p => p.theme.shadows.small};
 }
 
 .bundle-page__no-bundle-display {
@@ -113,8 +114,14 @@ grid-template-rows: auto 1fr auto;
   display: none;
 }
 
-.bundle-page__bundle-general-settings > *,
-.bundle-page__bundle-custom-settings > * {
+.bundle-page__bundle-general-settings > ul,
+.bundle-page__bundle-custom-settings > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.bundle-page__bundle-general-settings > ul > li,
+.bundle-page__bundle-custom-settings > ul > li {
   margin-bottom: ${p => p.theme.units(3)};
 }
 
