@@ -31,7 +31,7 @@ class HomePage extends Component {
       shouldApplyFilters: {
         tools: true,
         bundles: true
-      },
+      }
     }
     this.filterDelay = 100
     this.tryFilterBundles = this.tryFilterBundles.bind(this)
@@ -53,25 +53,25 @@ class HomePage extends Component {
     const nBundles = props.bundles
     const nFilters = {
       tools: state.filters.tools,
-      bundles: state.filters.bundles,  
+      bundles: state.filters.bundles
     }
     const nLastFilterUpdate = {
       tools: state.lastFilterUpdate.tools,
-      bundles: state.lastFilterUpdate.bundles,  
+      bundles: state.lastFilterUpdate.bundles
     }
     const nShouldApplyFilters = {
       tools: state.shouldApplyFilters.tools,
       bundles: state.shouldApplyFilters.bundles
     }
     if (props.bundles.list.length !== state.bundles.list.length) {
-      nShouldApplyFilters.bundles = true 
+      nShouldApplyFilters.bundles = true
     }
-    if (props.filters.tools !== state.filters.tools) {
+    if (props.filters.tools !== state.filters.tools) {
       nFilters.tools = props.filters.tools
       nLastFilterUpdate.tools = Date.now()
       nShouldApplyFilters.tools = true
     }
-    if (props.filters.bundles !== state.filters.bundles) {
+    if (props.filters.bundles !== state.filters.bundles) {
       nFilters.bundles = props.filters.bundles
       nLastFilterUpdate.bundles = Date.now()
       nShouldApplyFilters.bundles = true
@@ -104,18 +104,20 @@ class HomePage extends Component {
     const timeSinceLastUpdate = Date.now() - state.lastFilterUpdate.bundles
     const shouldApply = state.shouldApplyFilters.bundles
     if (timeSinceLastUpdate > this.filterDelay && shouldApply) {
-      if (this.node) this.node.dispatchEvent(
-        new CustomEvent(
-          'filterBundles', {
-            detail: {
-              message: 'Time to filter bundles!',
-              time: new Date()
-            },
-            bubbles: true,
-            cancelable: true
-          }
+      if (this.node) {
+        this.node.dispatchEvent(
+          new CustomEvent(
+            'filterBundles', {
+              detail: {
+                message: 'Time to filter bundles!',
+                time: new Date()
+              },
+              bubbles: true,
+              cancelable: true
+            }
+          )
         )
-      )
+      }
     }
   }
 
@@ -187,7 +189,7 @@ class HomePage extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
-      innerRef={node => {this.node = node}}>
+      innerRef={node => { this.node = node }}>
       <div className='home-page__header'><Header /></div>
       <div className='home-page__content'>
         <div className='home-page__notifications'><NotificationsPanel /></div>

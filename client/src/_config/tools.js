@@ -1,5 +1,3 @@
-import React from 'react'
-
 import yellowWord from '../containers/tools-editors/yellow-word'
 
 export const list = [

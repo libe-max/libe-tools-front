@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import hexToRgba from 'hex-to-rgba' 
+import hexToRgba from 'hex-to-rgba'
 
 const Wrapper = styled.div`
 

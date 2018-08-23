@@ -18,9 +18,9 @@ export const state2props = (state, props) => {
   const type = props.match.params.type
   return {
     tool: toolsList.filter(tool => tool.type === type)[0],
-    bundle: state.bundles.list.filter(bundle => bundle._id === id)[0] || {...bundleTemplate},
+    bundle: state.bundles.list.filter(bundle => bundle._id === id)[0] || {...bundleTemplate},
     changes: state.bundles.changes.filter(bundleEdit => bundleEdit._id === id)[0]
-  } 
+  }
 }
 
 export const dispatch2props = (dispatch, props) => {
@@ -53,7 +53,7 @@ export const dispatch2props = (dispatch, props) => {
       })
     }),
     saveChanges: newSettings => new Promise((resolve, reject) => {
-      if (!newSettings) return reject()
+      if (!newSettings) return reject(new Error('No changes to save'))
       dispatch(saveBundleRequest(id))
       fetch(`/api/save-bundle/${id}`, {
         method: 'PUT',
@@ -67,7 +67,7 @@ export const dispatch2props = (dispatch, props) => {
           dispatch(saveBundleSuccess(res.data))
           dispatch(pushNotification('Module sauvegardé !'))
           resolve(res.data)
-        } else {
+        } else {
           dispatch(saveBundleError(id))
           const notif = `Une erreur est survenue lors de la sauvegarde de ce module. Le serveur a répondu : ${res.err}`
           dispatch(pushNotification(notif, 'error'))

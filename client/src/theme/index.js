@@ -40,22 +40,22 @@ const shadows = {
 }
 
 const colorScales = {
-  default: {
+  default: {
     base: chroma.scale([rawColors.white, rawColors.black]).mode('lab'),
     action: chroma.scale([rawColors.white, rawColors.blue]).mode('lab'),
     danger: chroma.scale([rawColors.white, rawColors.red]).mode('lab')
   },
-  shaded: {
+  shaded: {
     base: chroma.scale([rawColors.slightGrey, rawColors.black]).mode('lab'),
     action: chroma.scale([rawColors.slightGrey, rawColors.blue]).mode('lab'),
     danger: chroma.scale([rawColors.slightGrey, rawColors.red]).mode('lab')
   },
-  inverted: {
+  inverted: {
     base: chroma.scale([rawColors.lightBlack, rawColors.slightGrey]).mode('lab'),
     action: chroma.scale([rawColors.lightBlack, rawColors.blue]).mode('lab'),
     danger: chroma.scale([rawColors.lightBlack, rawColors.red]).mode('lab')
   },
-  shadedInverted: {
+  shadedInverted: {
     base: chroma.scale([rawColors.obscureGrey, rawColors.slightGrey]).mode('lab'),
     action: chroma.scale([rawColors.obscureGrey, rawColors.blue]).mode('lab'),
     danger: chroma.scale([rawColors.obscureGrey, rawColors.red]).mode('lab')

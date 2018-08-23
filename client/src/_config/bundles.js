@@ -11,7 +11,7 @@ export const getBundleCurrentSettings = bundle => {
   if (!settingsHistory) return {}
   if (!Array.isArray(settingsHistory)) return {}
   return settingsHistory
-    .sort((a, b) => b.timestamp - a.timestamp)[0] || {}
+    .sort((a, b) => b.timestamp - a.timestamp)[0] || {}
 }
 
 export const getBundleSlug = bundle => {

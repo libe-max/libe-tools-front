@@ -36,9 +36,9 @@ class BundlePage extends Component {
     const props = this.props
     const storedBundle = props.bundle
     const storedSettings = getBundleCurrentSettings(storedBundle)
-    const unsavedSettings = props.changes ?
-      Object.assign({}, storedSettings, {...props.changes}) :
-      undefined
+    const unsavedSettings = props.changes
+      ? Object.assign({}, storedSettings, {...props.changes})
+      : undefined
     if (unsavedSettings) {
       delete unsavedSettings._id
       delete unsavedSettings.timestamp
@@ -74,9 +74,9 @@ class BundlePage extends Component {
     const lastSaveMillis = getBundleLastSaveDate(storedBundle)
     const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
     const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
-    const BundleDisplayer = props.tool.display || (props => <div></div>)
-    const BundleCustomSettings = props.tool.settings || (props => <div></div>)
-    const BundleActions = props.tool.actions || (props => <div></div>)
+    const BundleDisplayer = props.tool.display || (props => <div />)
+    const BundleCustomSettings = props.tool.settings || (props => <div />)
+    const BundleActions = props.tool.actions || (props => <div />)
 
     /* Assign classes to component */
     const classes = ['bundle-page']

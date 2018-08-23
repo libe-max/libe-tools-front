@@ -29,7 +29,6 @@ const bundles = (state = {
   updatedAt: null
 }, action) => {
   switch (action.type) {
-
     /* Fetching many */
     case FETCH_BUNDLES_REQUEST:
       return Object.assign({}, state, {
@@ -133,13 +132,15 @@ const bundles = (state = {
       if (
         Object.keys(newChanges).length <= 1 ||
         !newChanges.hasOwnProperty('_id')
-      ) return Object.assign({}, state, {
-        changes: [...state.changes.map(bundleChanges => {
-          const id1 = bundleChanges._id
-          const id2 = id
-          return (id1 !== id2) ? bundleChanges : undefined
-        })].filter(elt => elt)
-      })
+      ) {
+        return Object.assign({}, state, {
+          changes: [...state.changes.map(bundleChanges => {
+            const id1 = bundleChanges._id
+            const id2 = id
+            return (id1 !== id2) ? bundleChanges : undefined
+          })].filter(elt => elt)
+        })
+      }
 
       return Object.assign({}, state, {
         changes: [...state.changes.map(bundleChanges => {

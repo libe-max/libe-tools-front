@@ -29,7 +29,8 @@
     "globals": [
       "it",
       "fetch",
-      "alert"
+      "alert",
+      "CustomEvent"
     ]
   }
 }

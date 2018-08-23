@@ -34,7 +34,7 @@ export default class TextInput extends Component {
         onClick={props.onClick}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
-        ref={node => this.input = node} />
+        ref={node => { this.input = node }} />
     </Wrapper>
   }
 }
