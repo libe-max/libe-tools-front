@@ -35,8 +35,8 @@ export const getBundleLastSaveDate = bundle => {
   const settings = getBundleCurrentSettings(bundle)
   const updatedOn = settings.timestamp || 0
   const createdOn = bundle.created_on || 0
-  const lastSave = [createdOn, updatedOn].reduce((max, curr) => {
+  const lastSavedOn = [createdOn, updatedOn].reduce((max, curr) => {
     return Math.max(max, curr)
   })
-  return lastSave
+  return lastSavedOn
 }
