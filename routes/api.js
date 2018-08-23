@@ -5,9 +5,9 @@ const router = express.Router()
 /* Get all bundles from database */
 router.all('/get-all-bundles', (req, res, next) => {
   const collection = req.db.collection('bundles')
-  collection.find({}, (e, docs) => !e ?
-    res.json({err: null, data: docs}) :
-    res.json({err: e, data: null})
+  collection.find({}, (e, docs) => !e
+    ? res.json({err: null, data: docs})
+    : res.json({err: e, data: null})
   )
 })
 
@@ -16,13 +16,15 @@ router.all('/get-bundle/:id', (req, res, next) => {
   const id = req.params.id
   const collection = req.db.collection('bundles')
   const idIsValid = id.match(/^[0-9a-fA-F]{24}$/)
-  if (!idIsValid) return res.json({
-    err: `Requested bundle ID is not valid (${id})`,
-    data: null
-  })
-  collection.findOne({_id: id}, (e, doc) => !e ?
-    res.json({err: null, data: doc}) :
-    res.json({err: e, data: null})
+  if (!idIsValid) {
+    return res.json({
+      err: `Requested bundle ID is not valid (${id})`,
+      data: null
+    })
+  }
+  collection.findOne({_id: id}, (e, doc) => !e
+    ? res.json({err: null, data: doc})
+    : res.json({err: e, data: null})
   )
 })
 
@@ -36,9 +38,9 @@ router.all('/create-bundle/:type', (req, res, next) => {
     settings_history: [],
     created_on: now
   }
-  collection.insert(newBundle, (e, docs) => !e ?
-    res.json({err: null, data: docs}) :
-    res.json({err: e, data: null})
+  collection.insert(newBundle, (e, docs) => !e
+    ? res.json({err: null, data: docs})
+    : res.json({err: e, data: null})
   )
 })
 
@@ -48,21 +50,21 @@ router.put('/save-bundle/:id', (req, res, next) => {
   const now = moment().valueOf()
   const collection = req.db.collection('bundles')
   const idIsValid = id.match(/^[0-9a-fA-F]{24}$/)
-  const request = {
-    $push: {
-      settings_history: {
-        ...req.body,
-        timestamp: now
-      }
+  const request = { $push: {
+    settings_history: {
+      ...req.body,
+      timestamp: now
     }
+  }}
+  if (!idIsValid) {
+    return res.json({
+      err: `Requested bundle ID is not valid (${id})`,
+      data: null
+    })
   }
-  if (!idIsValid) return res.json({
-    err: `Requested bundle ID is not valid (${id})`,
-    data: null
-  })
-  collection.findOneAndUpdate({_id: id}, request, (e, doc) => !e ?
-    res.json({err: null, data: doc}) :
-    res.json({err: e, data: null})
+  collection.findOneAndUpdate({_id: id}, request, (e, doc) => !e
+    ? res.json({err: null, data: doc})
+    : res.json({err: e, data: null})
   )
 })
 
