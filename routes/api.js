@@ -2,8 +2,6 @@ const express = require('express')
 const moment = require('moment')
 const router = express.Router()
 
-const allowedTypes = ['yellow-word', 'libe-box']
-
 /* Get all bundles from database */
 router.all('/get-all-bundles', (req, res, next) => {
   const collection = req.db.collection('bundles')
@@ -33,16 +31,11 @@ router.all('/create-bundle/:type', (req, res, next) => {
   const type = req.params.type
   const now = moment().valueOf()
   const collection = req.db.collection('bundles')
-  const typeIsValid = allowedTypes.indexOf(type) + 1
   const newBundle = {
     type,
     settings_history: [],
     created_on: now
   }
-  if (!typeIsValid) return res.json({
-    data: null,
-    err: `Not allowed to create a bundle of type ${type}`
-  })
   collection.insert(newBundle, (e, docs) => !e ?
     res.json({err: null, data: docs}) :
     res.json({err: e, data: null})
