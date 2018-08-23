@@ -140,6 +140,10 @@ grid-template-rows: auto 1fr auto;
   margin-right: auto;
 }
 
+.bundle-page__saving-paragraph {
+  display: none;
+}
+
 .bundle-page__save-button {
   display: none;
 }
@@ -174,6 +178,18 @@ grid-template-rows: auto 1fr auto;
 
   .bundle-page__no-bundle-display {
     display: none;
+  }
+}
+
+&.bundle-page_saving {
+  .bundle-page__custom-actions {
+    display: none;
+  }
+  .bundle-page__saved-paragraph {
+    display: none;
+  }
+  .bundle-page__saving-paragraph {
+    display: block;
   }
 }`
 

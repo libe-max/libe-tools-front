@@ -65,6 +65,7 @@ export const dispatch2props = (dispatch, props) => {
       }).then(res => {
         if (!res.err) {
           dispatch(saveBundleSuccess(res.data))
+          dispatch(pushNotification('Module sauvegardé !'))
           resolve(res.data)
         } else {
           dispatch(saveBundleError(id))

@@ -44,7 +44,14 @@ class BundlePage extends Component {
       delete unsavedSettings.timestamp
     }
     const displaySettings = unsavedSettings || storedSettings
-    return { storedBundle, storedSettings, unsavedSettings, displaySettings }
+    const isSaving = unsavedSettings && unsavedSettings._saving
+    return {
+      storedBundle,
+      storedSettings,
+      unsavedSettings,
+      displaySettings,
+      isSaving
+    }
   }
 
   populateFields () {
@@ -63,7 +70,7 @@ class BundlePage extends Component {
     const state = this.state
 
     /* Inner logic */
-    const { storedBundle, unsavedSettings, displaySettings } = this.getSettingsVersions()
+    const { storedBundle, unsavedSettings, displaySettings, isSaving } = this.getSettingsVersions()
     const lastSaveMillis = getBundleLastSaveDate(storedBundle)
     const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
     const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
@@ -77,6 +84,7 @@ class BundlePage extends Component {
     if (props.changes) classes.push('bundle-page_unsaved-bundle')
     if (props.tool.display) classes.push('bundle-page_with-display')
     if (props.tool.settings) classes.push('bundle-page_with-custom-settings')
+    if (isSaving) classes.push('bundle-page_saving')
 
     /* Display */
     return <Wrapper innerRef={node => { this.node = node }} className={classes.join(' ')}>
@@ -126,14 +134,26 @@ class BundlePage extends Component {
         <ShadowBar>
           <div className='bundle-page__actions'>
             <Button link minor onClick={props.goHome}>‹ Retour</Button>
-            <BundleActions id={storedBundle._id} />
+            <div className='bundle-page__custom-actions'>
+              <BundleActions id={storedBundle._id} />
+            </div>
             <div className='bundle-page__saved-paragraph'>
               <Paragraph light small>
                 Module sauvegardé (dernière modif. : <span title={lastSavedOn}>{lastSavedAgo}</span>)
               </Paragraph>
             </div>
+            <div className='bundle-page__saving-paragraph'>
+              <Paragraph light italic small>
+                Enregistrement...
+              </Paragraph>
+            </div>
             <div className='bundle-page__save-button'>
-              <Button onClick={e => props.saveChanges(unsavedSettings)} primary>Enregistrer</Button>
+              <Button
+                onClick={e => props.saveChanges(unsavedSettings)}
+                disabled={isSaving}
+                primary>
+                Enregistrer
+              </Button>
             </div>
           </div>
         </ShadowBar>
