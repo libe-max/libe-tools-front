@@ -94,6 +94,13 @@ box-sizing: border-box;
 &.button_icon .button__icon {
   display: block;
   height: 100%;
+}
+
+&.button_disabled {
+  cursor: not-allowed;
+  font-style: italic;
+  outline: none;
+  opacity: 0.5;
 }`
 
 export default Wrapper

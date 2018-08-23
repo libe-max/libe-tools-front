@@ -9,11 +9,11 @@ import Wrapper from './style'
  *   Component for action buttons
  *
  *   VARIANTS
- *   primary, dangerous, minor, link, icon
+ *   primary, dangerous, minor, link, icon, disabled
  *
  *   PROPS
  *   onClick, tabIndex, primary, dangerous, minor,
- *   link, children, icon, alt
+ *   disabled, link, children, icon, alt
  *
  */
 
@@ -26,9 +26,12 @@ export default class Button extends Component {
     if (props.minor) classes += ' button_minor'
     if (props.link) classes += ' button_link'
     if (props.icon) classes += ' button_icon'
+    if (props.disabled) classes += ' button_disabled'
     return <Wrapper
-      tabIndex={props.tabIndex}
-      onClick={props.onClick}
+      onFocus={props.disabled ? () => this.node.blur() : null}
+      onClick={!props.disabled ? props.onClick : null}
+      tabIndex={!props.disabled ? props.tabIndex : -1}
+      innerRef={node => { this.node = node }}
       className={classes}>
       {props.children}
       <img
