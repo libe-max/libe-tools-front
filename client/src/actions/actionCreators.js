@@ -94,9 +94,9 @@ export const saveBundleSuccess = bundle => ({
   bundle
 })
 
-export const saveBundleError = error => ({
+export const saveBundleError = id => ({
   type: SAVE_BUNDLE_FAILURE,
-  error
+  id
 })
 
 /* Bundle settings */
