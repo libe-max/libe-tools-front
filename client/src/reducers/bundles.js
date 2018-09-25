@@ -15,7 +15,11 @@ import {
   SAVE_BUNDLE_SUCCESS,
   SAVE_BUNDLE_FAILURE,
 
-  EDIT_BUNDLE
+  EDIT_BUNDLE,
+
+  DELETE_BUNDLE_REQUEST,
+  DELETE_BUNDLE_SUCCESS,
+  DELETE_BUNDLE_FAILURE
 } from '../actions/actionTypes'
 
 import { getBundleCurrentSettings } from '../_config/bundles'
@@ -23,6 +27,7 @@ import { getBundleCurrentSettings } from '../_config/bundles'
 const bundles = (state = {
   list: [],
   changes: [],
+  deleting: [],
   error: null,
   isFetching: false,
   isCreating: false,
@@ -150,7 +155,31 @@ const bundles = (state = {
         }), newChanges].filter(elt => elt)
       })
 
-    default:
+    /* Delete bundle */
+    case DELETE_BUNDLE_REQUEST:
+      return Object.assign({}, state, {
+        deleting: [
+          ...state.deleting,
+          action.id
+        ]
+      })
+    case DELETE_BUNDLE_SUCCESS:
+      return Object.assign({}, state, {
+        list: state.list
+          .filter(bundle => bundle._id !== action.id),
+        changes: state.changes
+          .filter(bundle => bundle._id !== action.id),
+        deleting: state.deleting
+          .filter(id => id !== action.id)
+      })
+    case DELETE_BUNDLE_FAILURE:
+      return Object.assign({}, state, {
+        deleting: state.deleting
+          .filter(id => id !== action.id)
+      })
+
+    /* Default */
+    default: 
       return state
   }
 }
