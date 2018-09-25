@@ -112,8 +112,9 @@ export const editBundle = (id, key, value) => ({
 })
 
 /* Deleting */
-export const deleteBundleRequest = () => ({
-  type: DELETE_BUNDLE_REQUEST
+export const deleteBundleRequest = id => ({
+  type: DELETE_BUNDLE_REQUEST,
+  id
 })
 
 export const deleteBundleSuccess = id => ({
@@ -121,9 +122,10 @@ export const deleteBundleSuccess = id => ({
   id
 })
 
-export const deleteBundleError = error => ({
+export const deleteBundleError = (id, error) => ({
   type: DELETE_BUNDLE_FAILURE,
-  error
+  error,
+  id
 })
 
 /* * * * * * * * * * * * * * * * * * * *
