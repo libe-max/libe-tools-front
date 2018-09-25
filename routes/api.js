@@ -86,7 +86,7 @@ router.delete('/delete-bundle/:id', (req, res, next) => {
     const trashed = Object.assign({}, doc, {_original_id: doc._id})
     delete trashed._id
     trash.insert(trashed, (e, doc) => !e
-      ? res.json({err: null, data: `Doc (id: ${id}) successfully moved to trash`})
+      ? res.json({err: null, data: id})
       : res.json({err: e, data: null})
     )
   })
