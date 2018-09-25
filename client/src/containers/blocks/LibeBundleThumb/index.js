@@ -77,15 +77,21 @@ class LibeBundleThumb extends Component {
             <div style={{ width: state.widths[0] }} />
             <div style={{ width: state.widths[1] }} />
           </div>
-          <div className='libe-bundle-thumb__image'><Image position='center' src={props.image} /></div>
-          <div className='libe-bundle-thumb__title'><ParagraphTitle>{props.title}</ParagraphTitle></div>
+          <div className='libe-bundle-thumb__image'>
+            <Image position='center' src={props.image} />
+          </div>
+          <div className='libe-bundle-thumb__title'>
+            <ParagraphTitle>{props.title}</ParagraphTitle>
+          </div>
         </div>
         <div className='libe-bundle-thumb__bottom'>
           <div className='libe-bundle-thumb__meta-placeholder'>
             <div style={{ width: state.widths[2] }} />
             <div style={{ width: state.widths[3] }} />
           </div>
-          <div className='libe-bundle-thumb__meta'><Paragraph light small>{meta.who}<br />{meta.when}</Paragraph></div>
+          <div className='libe-bundle-thumb__meta'>
+            <Paragraph light small>{meta.who}<br />{meta.when}</Paragraph>
+          </div>
           <div className='libe-bundle-thumb__actions'>
             <Button onClick={props.deleteBundle} minor dangerous>Supprimer</Button>
             <Button onClick={props.navigateToBundle}>Voir, modifier & publier</Button>
