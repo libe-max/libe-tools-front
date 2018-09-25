@@ -68,6 +68,30 @@ router.put('/save-bundle/:id', (req, res, next) => {
   )
 })
 
+/* Delete a bundle */
+router.delete('/delete-bundle/:id', (req, res, next) => {
+  const id = req.params.id
+  const collection = req.db.collection('bundles')
+  const trash = req.db.collection('trash')
+  const idIsValid = id.match(/^[0-9a-fA-F]{24}$/)
+  if (!idIsValid) {
+    return res.json({
+      err: `Requested bundle ID is not valid (${id})`,
+      data: null
+    })
+  }
+  collection.findOneAndDelete({_id: id}, (e, doc) => {
+    if (!doc) return res.json({err: `Found no doc with id: ${id}`, data: null})
+    if (e) return res.json({err: e, data: null})
+    const trashed = Object.assign({}, doc, {_original_id: doc._id})
+    delete trashed._id
+    trash.insert(trashed, (e, doc) => !e
+      ? res.json({err: null, data: `Doc (id: ${id}) successfully moved to trash`})
+      : res.json({err: e, data: null})
+    )
+  })
+})
+
 /* All other requests */
 router.all('/*', (req, res, next) => res.json({
   data: null,
