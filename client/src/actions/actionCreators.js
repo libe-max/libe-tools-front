@@ -17,6 +17,10 @@ import {
 
   EDIT_BUNDLE,
 
+  DELETE_BUNDLE_REQUEST,
+  DELETE_BUNDLE_SUCCESS,
+  DELETE_BUNDLE_FAILURE,
+
   SET_TOOLS_FILTER,
   SET_BUNDLES_FILTER,
 
@@ -83,7 +87,7 @@ export const createBundleError = error => ({
   error
 })
 
-/* Save bundle */
+/* Saving */
 export const saveBundleRequest = id => ({
   type: SAVE_BUNDLE_REQUEST,
   id
@@ -99,12 +103,27 @@ export const saveBundleError = id => ({
   id
 })
 
-/* Bundle settings */
+/* Editing */
 export const editBundle = (id, key, value) => ({
   type: EDIT_BUNDLE,
   id,
   key,
   value
+})
+
+/* Deleting */
+export const deleteBundleRequest = () => ({
+  type: DELETE_BUNDLE_REQUEST
+})
+
+export const deleteBundleSuccess = id => ({
+  type: DELETE_BUNDLE_SUCCESS,
+  id
+})
+
+export const deleteBundleError = error => ({
+  type: DELETE_BUNDLE_FAILURE,
+  error
 })
 
 /* * * * * * * * * * * * * * * * * * * *
