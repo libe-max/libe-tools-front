@@ -17,8 +17,8 @@ export const getBundleCurrentSettings = bundle => {
 export const getBundleSlug = bundle => {
   const settings = getBundleCurrentSettings(bundle)
   const slug = [
-    this._id,
-    this.type,
+    bundle._id,
+    bundle.type,
     settings.author,
     settings.name,
     settings.text,
