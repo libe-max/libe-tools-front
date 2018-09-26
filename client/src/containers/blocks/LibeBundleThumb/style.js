@@ -23,8 +23,14 @@ const Wrapper = styled.div`
   flex-grow: 0;
   flex-shrink: 0;
   width: ${p => p.theme.units(7)};
-  height: ${p => p.theme.units(6)};
+  height: ${p => p.theme.units(7)};
   margin-right: ${p => p.theme.units(2)};
+  overflow: hidden;
+  border-radius: ${p => p.theme.units(1)};
+  border:
+    solid
+    ${p => p.theme.units(0.25)}
+    ${p => p.theme.colors.baseBorder};
 }
 
 .libe-bundle-thumb__image {
@@ -34,7 +40,6 @@ const Wrapper = styled.div`
 .libe-bundle-thumb__image .image {
   width: 100%;
   height: 100%;
-  background-color: ${p => p.theme.colors.baseAltBg};
 }
 
 .libe-bundle-thumb__image-placeholder {
