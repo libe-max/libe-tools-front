@@ -17,7 +17,7 @@ export const state2props = (state, props) => {
   const id = props.match.params.id
   const type = props.match.params.type
   return {
-    tool: toolsList.filter(tool => tool.type === type)[0],
+    tool: toolsList.filter(tool => tool.type === type)[0] || {},
     bundle: state.bundles.list.filter(bundle => bundle._id === id)[0] || {...bundleTemplate},
     changes: state.bundles.changes.filter(bundleEdit => bundleEdit._id === id)[0]
   }

@@ -29,7 +29,25 @@ class BundlePage extends Component {
   }
 
   componentDidUpdate () {
+    const state = this.state
+    const props = this.props
+    const expectedType = props.match.params.type
+    const actualType = props.bundle.type
+    const typesDiffer = actualType !== expectedType
+    if (!state.loading && typesDiffer) return props.goHome()
     this.populateFields()
+  }
+
+  populateFields () {
+    const props = this.props
+    const { latestSettings } = this.getSettingsVersions()
+    const { name, author } = this.settingsComponents
+    const makeString = val => {
+      if (val === undefined) return ''
+      return val
+    }
+    name.input.value = makeString(latestSettings.name)
+    author.input.value = makeString(latestSettings.author)
   }
 
   getSettingsVersions () {
@@ -61,18 +79,6 @@ class BundlePage extends Component {
       latestSettings,
       isSaving
     }
-  }
-
-  populateFields () {
-    const props = this.props
-    const { latestSettings } = this.getSettingsVersions()
-    const { name, author } = this.settingsComponents
-    const makeString = val => {
-      if (val === undefined) return ''
-      return val
-    }
-    name.input.value = makeString(latestSettings.name)
-    author.input.value = makeString(latestSettings.author)
   }
 
   render () {
