@@ -12,6 +12,12 @@ export default class SettingsPanel extends Component {
   render () {
     const props = this.props
     const classes = ['libe-yellow-word-settings-panel']
+    const hashPrefix = e => {
+      if (e.target.value[0] === '#') return e
+      if (!e.target.value.length) return e
+      e.target.value = '#' + e.target.value
+      return e
+    }
     return <ul className={classes.join(' ')}>
       <li><TextInput
         label='Texte'
@@ -21,9 +27,9 @@ export default class SettingsPanel extends Component {
         placeholder='Tapez votre texte ici' />
       </li>
       <li><TextInput
-        label='Couleur'
+        label={`Vous n'aimez pas le jaune ?`}
         ref={node => { this.colorInput = node }}
-        onChange={e => props.dispatchEdition(e, 'color')}
+        onChange={e => props.dispatchEdition(hashPrefix(e), 'color')}
         defaultValue={props.latestSettings.color || ''}
         placeholder='Tapez un code hexadecimal (ex : #FF0000)' />
       </li>
