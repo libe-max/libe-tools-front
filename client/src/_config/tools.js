@@ -1,7 +1,16 @@
+import libeInstagramStory from '../containers/tools-editors/libe-instagram-story'
 import yellowWord from '../containers/tools-editors/yellow-word'
 
 export const list = [
   {
+    name: 'Stories Instagram',
+    type: 'libe-instagram-story',
+    description: 'Éditez simplement des images à la charte et au format Instagram.',
+    image: '/images/libe-instagram-story-thumb.png',
+    display: libeInstagramStory.DisplayPanel,
+    settings: libeInstagramStory.SettingsPanel,
+    actions: libeInstagramStory.ActionsPanel
+  }, {
     name: 'Yellow word',
     type: 'yellow-word',
     description: 'Ce module vous permet d\'éditer de jolis mots jaunes.',
