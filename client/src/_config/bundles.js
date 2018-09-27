@@ -1,7 +1,6 @@
 export const bundleTemplate = {
   _id: null,
   type: null,
-  name: null,
   created_on: 0,
   settings_history: []
 }
