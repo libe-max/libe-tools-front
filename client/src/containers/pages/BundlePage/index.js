@@ -39,7 +39,6 @@ class BundlePage extends Component {
   }
 
   populateFields () {
-    const props = this.props
     const { latestSettings } = this.getSettingsVersions()
     const { name, author } = this.settingsComponents
     const makeString = val => {
@@ -108,19 +107,17 @@ class BundlePage extends Component {
       <div className='bundle-page__content'>
         <div className='bundle-page__notifications'><NotificationsPanel /></div>
         <div className='bundle-page__bundle-preview-box'>
-          <div className='bundle-page__bundle-preview-box-slider'>
-            <div className='bundle-page__bundle-display'>
-              <BundleDisplayer
-                id={storedBundle._id}
-                isSaving={isSaving}
-                storedSettings={storedSettings}
-                unsavedSettings={unsavedSettings}
-                latestSettings={latestSettings}
-                dispatchEdition={props.dispatchEdition} />
-            </div>
-            <div className='bundle-page__no-bundle-display'>
-              <Paragraph italic light>Aucune prévisualisation du module disponible.</Paragraph>
-            </div>
+          <div className='bundle-page__bundle-display'>
+            <BundleDisplayer
+              id={storedBundle._id}
+              isSaving={isSaving}
+              storedSettings={storedSettings}
+              unsavedSettings={unsavedSettings}
+              latestSettings={latestSettings}
+              dispatchEdition={props.dispatchEdition} />
+          </div>
+          <div className='bundle-page__no-bundle-display'>
+            <Paragraph italic light>Aucune prévisualisation du module disponible.</Paragraph>
           </div>
         </div>
         <ThemeProvider theme={theme._shade}>

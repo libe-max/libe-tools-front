@@ -42,8 +42,8 @@ grid-template-rows: auto 1fr auto;
 .bundle-page__bundle-preview-box {
   z-index: 1;
   width: calc(100% - 400px);
-  overflow-y: scroll;
-  overflow-scrolling: touch;
+  height: 100%;
+  overflow: hidden;
   background-color: ${p => p.theme.colors.baseBg};
   background-image: url('/images/tiled-transparency-background.png');
 }
@@ -72,17 +72,9 @@ grid-template-rows: auto 1fr auto;
   height: ${p => p.theme.units(1)};
 }
 
-.bundle-page__bundle-preview-box-slider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 100%;
-  padding: ${p => p.theme.units(2)};
-}
-
 .bundle-page__bundle-display {
   display: none;
+  height: 100%;
   box-shadow: ${p => p.theme.shadows.small};
 }
 
