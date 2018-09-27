@@ -16,28 +16,25 @@ export const state2props = state => ({
 export const dispatch2props = dispatch => ({
   getBundles: () => new Promise((resolve, reject) => {
     dispatch(fetchBundlesRequest())
-    fetch('/api/get-all-bundles')
-      .then(r => {
-        if (r.ok) return r.json()
-        throw new Error(`Error ${r.status}: ${r.statusText}`)
-      })
-      .then(res => {
-        if (!res.err) {
-          dispatch(fetchBundlesSuccess(res.data))
-          resolve(res.data)
-        } else {
-          dispatch(fetchBundlesError(res.err))
-          const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${res.err}`
-          dispatch(pushNotification(notif, 'error'))
-          reject(res.err)
-        }
-      })
-      .catch(err => {
-        dispatch(fetchBundlesError(err.message))
-        const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${err.message}`
+    fetch('/api/get-all-bundles').then(r => {
+      if (r.ok) return r.json()
+      throw new Error(`Error ${r.status}: ${r.statusText}`)
+    }).then(res => {
+      if (!res.err) {
+        dispatch(fetchBundlesSuccess(res.data))
+        resolve(res.data)
+      } else {
+        dispatch(fetchBundlesError(res.err))
+        const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${res.err}`
         dispatch(pushNotification(notif, 'error'))
-        reject(err.message)
-      })
+        reject(res.err)
+      }
+    }).catch(err => {
+      dispatch(fetchBundlesError(err.message))
+      const notif = `Une erreur est survenue lors du chargement des modules. Le serveur a répondu : ${err.message}`
+      dispatch(pushNotification(notif, 'error'))
+      reject(err.message)
+    })
   }),
   setToolsFilter: val => {
     dispatch(setToolsFilter(val))

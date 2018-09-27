@@ -23,14 +23,14 @@ export default class SettingsPanel extends Component {
         label='Texte'
         ref={node => { this.textInput = node }}
         onChange={e => props.dispatchEdition(e, 'text')}
-        defaultValue={props.latestSettings.text || ''}
+        defaultValue={props.latestSettings.text || ''}
         placeholder='Tapez votre texte ici' />
       </li>
       <li><TextInput
         label={`Vous n'aimez pas le jaune ?`}
         ref={node => { this.colorInput = node }}
         onChange={e => props.dispatchEdition(hashPrefix(e), 'color')}
-        defaultValue={props.latestSettings.color || ''}
+        defaultValue={props.latestSettings.color || ''}
         placeholder='Tapez un code hexadecimal (ex : #FF0000)' />
       </li>
     </ul>

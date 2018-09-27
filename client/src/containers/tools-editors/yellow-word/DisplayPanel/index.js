@@ -8,8 +8,8 @@ export default class DisplayPanel extends Component {
     const latestSettings = props.latestSettings
     const makeHex = color => color
       .match(/^#([0-9a-f]{3}){1,2}$/i)
-        ? color
-        : null
+      ? color
+      : null
     const text = latestSettings.text
     const color = latestSettings.color ? makeHex(latestSettings.color) : null
     const style = (text && color) ? { style: { color } } : ``
