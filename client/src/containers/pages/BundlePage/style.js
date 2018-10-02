@@ -20,8 +20,6 @@ grid-template-rows: auto 1fr auto;
   position: relative;
   grid-row: 2;
   z-index: 1;
-  min-height: 100%;
-  max-height: 100%;
   overflow: hidden;
 }
 
