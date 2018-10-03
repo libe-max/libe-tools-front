@@ -19,18 +19,21 @@ import { getBundleCurrentSettings, getBundleLastSaveDate } from '../../../_confi
 class BundlePage extends Component {
   constructor (props) {
     super(props)
-    this.state = { loading: true }
+    this.state = {
+      loading: true,
+      bundle: undefined
+    }
     this.settingsComponents = {}
     this.populateFields = this.populateFields.bind(this)
     this.getSettingsVersions = this.getSettingsVersions.bind(this)
-    props.getSavedBundle().finally(bundle => {
+    props.getSavedBundle().finally(() => {
       if (this.node) this.setState({ loading: false })
     })
   }
 
   componentDidUpdate () {
-    const state = this.state
     const props = this.props
+    const state = this.state
     const expectedType = props.match.params.type
     const actualType = props.bundle.type
     const typesDiffer = actualType !== expectedType
@@ -83,12 +86,18 @@ class BundlePage extends Component {
   render () {
     const props = this.props
     const state = this.state
-
     /* Inner logic */
-    const { storedBundle, storedSettings, unsavedSettings, latestSettings, isSaving } = this.getSettingsVersions()
+    const {
+      storedBundle,
+      storedSettings,
+      unsavedSettings,
+      latestSettings,
+      isSaving
+    } = this.getSettingsVersions()
     const lastSaveMillis = getBundleLastSaveDate(storedBundle)
     const lastSavedOn = moment(lastSaveMillis, 'x').format('DD MMM YYYY à HH:mm:ss')
     const lastSavedAgo = moment(lastSaveMillis, 'x').fromNow()
+    const loading = state.loading
     const BundleDisplayer = props.tool.display || (props => <div />)
     const BundleCustomSettings = props.tool.settings || (props => <div />)
     const BundleActions = props.tool.actions || (props => <div />)
@@ -111,6 +120,7 @@ class BundlePage extends Component {
             <BundleDisplayer
               id={storedBundle._id}
               isSaving={isSaving}
+              loading={loading}
               storedSettings={storedSettings}
               unsavedSettings={unsavedSettings}
               latestSettings={latestSettings}
@@ -131,7 +141,7 @@ class BundlePage extends Component {
                       label='Titre'
                       placeholder='Donnez un titre à ce module'
                       defaultValue={latestSettings.name}
-                      onChange={e => props.dispatchEdition(e, 'name')}
+                      onChange={e => props.dispatchEdition('name', e.target.value)}
                       ref={node => { this.settingsComponents.name = node }} />
                   </li>
                   <li>
@@ -139,7 +149,7 @@ class BundlePage extends Component {
                       label='Auteur'
                       placeholder='Votre nom'
                       defaultValue={latestSettings.author}
-                      onChange={e => props.dispatchEdition(e, 'author')}
+                      onChange={e => props.dispatchEdition('author', e.target.value)}
                       ref={node => { this.settingsComponents.author = node }} />
                   </li>
                 </ul>
@@ -149,6 +159,7 @@ class BundlePage extends Component {
                 <BundleCustomSettings
                   id={storedBundle._id}
                   isSaving={isSaving}
+                  loading={loading}
                   storedSettings={storedSettings}
                   unsavedSettings={unsavedSettings}
                   latestSettings={latestSettings}
@@ -169,6 +180,7 @@ class BundlePage extends Component {
               <BundleActions
                 id={storedBundle._id}
                 isSaving={isSaving}
+                loading={loading}
                 storedSettings={storedSettings}
                 unsavedSettings={unsavedSettings}
                 latestSettings={latestSettings}

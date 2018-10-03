@@ -9,11 +9,13 @@ const breakpoints = {
 }
 
 const numericTransitions = {
+  flash: 50,
   quick: 200,
   medium: 400
 }
 
 const transitions = {
+  flash: `${numericTransitions.flash}ms`,
   quick: `${numericTransitions.quick}ms`,
   medium: `${numericTransitions.medium}ms`
 }

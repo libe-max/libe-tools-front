@@ -27,7 +27,7 @@ export const dispatch2props = (dispatch, props) => {
   const id = props.match.params.id
   return {
     goHome: e => dispatch(push('/')),
-    dispatchEdition: (e, key) => dispatch(editBundle(id, key, e.target.value)),
+    dispatchEdition: (key, val) => dispatch(editBundle(id, key, val)),
     getSavedBundle: () => new Promise((resolve, reject) => {
       dispatch(fetchBundleRequest(id))
       fetch(`/api/get-bundle/${id}`).then(r => {

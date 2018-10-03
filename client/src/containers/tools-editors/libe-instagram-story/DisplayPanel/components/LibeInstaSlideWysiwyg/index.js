@@ -5,6 +5,9 @@ import Wrapper from './style'
 export default class LibeInstaSlideWysiwyg extends Component {
   constructor () {
     super()
+    this.state = {
+      id: Math.floor(Math.random() * 10e10).toString(36)
+    }
     // this.constrainProportions = this.constrainProportions.bind(this)
     // window.addEventListener(
     //   'resize',
@@ -32,7 +35,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     return <Wrapper
       innerRef={node => this.$wrapper = node}
       className={classes.join(' ')}>
-      <div className='coucou'>page {this.props.nb}</div>
+      <div className='coucou'>page {this.props.display}</div>
     </Wrapper>
   }
 }
