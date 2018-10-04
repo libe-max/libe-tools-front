@@ -20,7 +20,12 @@ input {
   border-bottom-style: solid;
   border-bottom-width: ${p => p.theme.units(0.25)};
   border-bottom-color: ${p => p.theme.colors.baseBorder};
-  background: transparent;
+  background: ${p => p.theme.colors.baseBg};
+  transition: background ${p => p.theme.transitions.quick};
+}
+
+input:hover {
+  background: ${p => p.theme.colors.baseAltBg};
 }
 
 input::placeholder {
