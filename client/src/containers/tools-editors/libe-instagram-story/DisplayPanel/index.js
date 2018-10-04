@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 
+import { displays, displayPickerOptions } from './_config/'
+
 import Button from '../../../../components/buttons/Button'
 import BlockTitle from '../../../../components/text-levels/BlockTitle'
 import Paragraph from '../../../../components/text-levels/Paragraph'
+import SelectList from '../../../../components/inputs/SelectList'
 import LibeInstaSlideWysiwyg from './components/LibeInstaSlideWysiwyg/'
 
 import Wrapper from './style'
@@ -11,7 +14,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      activeSlide: -1,
+      activeSlidePos: -1,
       pLatestSettings: [],
       loading: props.loading
     }
@@ -23,6 +26,8 @@ export default class LibeInstaStoryWysiwyg extends Component {
     this.getOffsetForCentering = this.getOffsetForCentering.bind(this)
     this.centerSlide = this.centerSlide.bind(this)
     this.deleteSlide = this.deleteSlide.bind(this)
+    this.changeDisplayOnActiveSlide = this.changeDisplayOnActiveSlide.bind(this)
+    this.dispatchEditionInSlide = this.dispatchEditionInSlide.bind(this)
     window.addEventListener('resize', () => this.constrainProportions())
     window.addEventListener('resize', () => this.centerSlide())
   }
@@ -31,6 +36,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     window.removeEventListener('resize', () => this.constrainProportions())
     window.removeEventListener('resize', () => this.centerSlide())
   }
+
   componentDidMount () {
     const { latestSettings } = this.props
     const slides = latestSettings.slides || []
@@ -38,6 +44,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (slides.length) this.centerSlide()
     else this.centerSlide(-1)
   }
+
   componentDidUpdate () {
     const { latestSettings } = this.props
     const slides = latestSettings.slides || []
@@ -45,6 +52,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (slides.length) this.centerSlide()
     else this.centerSlide(-1)
   }
+
   static getDerivedStateFromProps (props, state) {
     const { latestSettings } = props
     const { pLatestSettings } = state
@@ -55,10 +63,10 @@ export default class LibeInstaStoryWysiwyg extends Component {
       loading: props.loading
     }
     if (state.loading && !props.loading) {
-      if (slides.length) newState.activeSlide = slides.length - 1
-      else newState.activeSlide = undefined
+      if (slides.length) newState.activeSlidePos = slides.length - 1
+      else newState.activeSlidePos = undefined
     } else if (!state.loading && !props.loading) {
-      if (slides.length > pSlides.length) newState.activeSlide = slides.length - 1
+      if (slides.length > pSlides.length) newState.activeSlidePos = slides.length - 1
     }
     newState.pLatestSettings = props.latestSettings
     return newState
@@ -69,20 +77,32 @@ export default class LibeInstaStoryWysiwyg extends Component {
     const state = this.state
 
     /* Inner logic */
-    const activeSlide = state.activeSlide
+    const activeSlidePos = state.activeSlidePos
     const latestSettings = props.latestSettings
     const slides = latestSettings.slides || []
+    
+    /* Params for the slide display selector */
+    const activeSlide = slides[activeSlidePos] || {}
+    const activeSlideDisplay = activeSlide.display
+    const displayExists = displays.indexOf(activeSlideDisplay) + 1
+    if (this.$displayPicker) {
+      this.$displayPicker.input.value = displayExists
+        ? activeSlideDisplay
+        : 'placeholder'
+    }
+
+    /* Dom for each slide of the story */
     const slidesDom = slides.map((slide, i) => {
-      const onClick = (i !== activeSlide)
-        ? e => this.activateSlide(i)
-        : null
+      const onClick = (i !== activeSlidePos) ? e => this.activateSlide(i) : null
       const classes = ['libe-insta-story-wysiwyg__slide']
-      if (i === activeSlide) classes.push('libe-insta-story-wysiwyg__slide_active')
+      if (i === activeSlidePos) classes.push('libe-insta-story-wysiwyg__slide_active')
       return <div
         key={i}
         onClick={onClick}
         className={classes.join(' ')}>
-        <LibeInstaSlideWysiwyg {...slide} />
+        <LibeInstaSlideWysiwyg
+          {...slide}
+          dispatchEdition={this.dispatchEditionInSlide(i)} />
         <div className="libe-insta-story-wysiwyg__delete-slide">
           <Button
             onClick={e => {
@@ -110,14 +130,14 @@ export default class LibeInstaStoryWysiwyg extends Component {
             ].join(' ')}>
             <Button
               icon='/images/back-arrow-icon.svg'
-              disabled={activeSlide === 0}
+              disabled={activeSlidePos === 0}
               onClick={this.activatePrevSlide} />
           </div>
           <div className="libe-insta-story-wysiwyg__active-page">
             <BlockTitle>{
-              activeSlide !== undefined
-              && activeSlide !== -1
-                ? `Page ${activeSlide + 1}`
+              activeSlidePos !== undefined
+              && activeSlidePos !== -1
+                ? `Page ${activeSlidePos + 1}`
                 : `Nouvelle Story`
             }</BlockTitle>
           </div>
@@ -127,12 +147,15 @@ export default class LibeInstaStoryWysiwyg extends Component {
             ].join(' ')}>
             <Button
               icon='/images/forward-arrow-icon.svg'
-              disabled={activeSlide === slides.length - 1}
+              disabled={activeSlidePos === slides.length - 1}
               onClick={this.activateNextSlide} />
           </div>
         </div>
         <div className='libe-insta-story-wysiwyg__slide-display'>
-          <Button link minor>Quel display ?</Button>
+          <SelectList
+            options={displayPickerOptions}
+            ref={node => this.$displayPicker = node}
+            onChange={this.changeDisplayOnActiveSlide} />
         </div>
       </div>
       <div className='libe-insta-story-wysiwyg__slides'>
@@ -168,13 +191,13 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   activatePrevSlide () {
-    const activeSlide = this.state.activeSlide
-    this.activateSlide(activeSlide - 1)
+    const activeSlidePos = this.state.activeSlidePos
+    this.activateSlide(activeSlidePos - 1)
   }
 
   activateNextSlide () {
-    const activeSlide = this.state.activeSlide
-    this.activateSlide(activeSlide + 1)
+    const activeSlidePos = this.state.activeSlidePos
+    this.activateSlide(activeSlidePos + 1)
   }
 
   activateSlide (n = null) {
@@ -184,7 +207,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (n === null) return
     if (n >= slides.length) return
     if (n < -1) return
-    this.setState({ activeSlide: n })
+    this.setState({ activeSlidePos: n })
     this.centerSlide(n)
   }
 
@@ -211,7 +234,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *  Calculate spacer margin in order to center slides n
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  getOffsetForCentering (n = this.state.activeSlide) {
+  getOffsetForCentering (n = this.state.activeSlidePos) {
     if (!n && n !== 0) return null
     if (!this.$wrapper) return null
     if (!this.$spacer) return null
@@ -235,7 +258,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *  Center slide n
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  centerSlide(n = this.state.activeSlide) {
+  centerSlide (n = this.state.activeSlidePos) {
     const target = this.getOffsetForCentering(n)
     if (target === null) return
     this.$spacer.style.marginLeft = `${target}px`
@@ -246,14 +269,14 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *  Delete slide n
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  deleteSlide(n = undefined) {
+  deleteSlide (n = undefined) {
     if (n === undefined) return
     if (!window.confirm('Supprimer cette page ?')) return
     const props = this.props
     const state = this.state
     const { latestSettings } = props
     const { slides } = latestSettings
-    const { activeSlide } = state
+    const { activeSlidePos } = state
     const newSlides = [
       ...slides.slice(0, n),
       ...slides.slice(n + 1)
@@ -262,10 +285,48 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (!newSlides.length) return this.activateSlide(-1)
     if (n === 0) return this.activateSlide(0)
     if (n === newSlides.length) return this.activateSlide(newSlides.length - 1)
-    if (activeSlide < n) return this.activateSlide(activeSlide)
-    if (activeSlide === n) return this.activateSlide(activeSlide + 1)
-    if (activeSlide > n) this.activateSlide(activeSlide - 1)
+    if (activeSlidePos < n) return this.activateSlide(activeSlidePos)
+    if (activeSlidePos === n) return this.activateSlide(activeSlidePos + 1)
+    if (activeSlidePos > n) this.activateSlide(activeSlidePos - 1)
   }
 
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Handle changes on the display select list
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  changeDisplayOnActiveSlide (e) {
+    const { activeSlidePos } = this.state
+    const { dispatchEdition, latestSettings } = this.props
+    const { slides } = latestSettings
+    const { value } = e.target
+    const newSlide = slides[activeSlidePos]
+    newSlide.display = value
+    const newSlides = [
+      ...slides.slice(0, activeSlidePos),
+      newSlide,
+      ...slides.slice(activeSlidePos + 1)
+    ]
+    return dispatchEdition('slides', newSlides)
+  }
 
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Dispatch edition inside a given slide
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  dispatchEditionInSlide (n) {
+    const { latestSettings, dispatchEdition } = this.props
+    const { slides } = latestSettings
+    return (key, val) => {
+      const newSlide = slides[n]
+      newSlide[key] = val
+      const newSlides = [
+        ...slides.slice(0, n),
+        newSlide,
+        ...slides.slice(n + 1)
+      ]
+      return dispatchEdition('slides', newSlides)
+    }
+  }
 }

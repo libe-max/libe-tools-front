@@ -7,8 +7,7 @@ overflow: hidden;
 
 .libe-insta-story-wysiwyg__slide-controls {
   margin-top: ${p => p.theme.units(3)};
-  height: ${p => p.theme.units(8)};
-  grid-row: 2;
+  height: ${p => p.theme.units(10)};
   display: flex;
   flex-direction: column;
 }
@@ -16,8 +15,7 @@ overflow: hidden;
 .libe-insta-story-wysiwyg__slides {
   margin-top: ${p => p.theme.units(3)};
   margin-bottom: ${p => p.theme.units(3)};
-  height: calc(100% - ${p => p.theme.units(17)});
-  grid-row: 4;
+  height: calc(100% - ${p => p.theme.units(19)});
   display: flex;
 }
 
@@ -97,6 +95,8 @@ overflow: hidden;
 .libe-insta-story-wysiwyg__slide-display {
   display: flex;
   justify-content: center;
+  margin: ${p => p.theme.units(1)} auto;
+  width: unset;
 }
 
 /* * * * * * * States * * * * * * */
