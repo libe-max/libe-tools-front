@@ -4,6 +4,7 @@ import BlockTitle from '../../../components/text-levels/BlockTitle'
 import ParagraphTitle from '../../../components/text-levels/ParagraphTitle'
 import Button from '../../../components/buttons/Button'
 import TextInput from '../../../components/inputs/TextInput'
+import SelectList from '../../../components/inputs/SelectList'
 import FileInput from '../../../components/inputs/FileInput'
 import SearchField from '../../../components/inputs/SearchField'
 import Header from '../../blocks/Header'
@@ -89,7 +90,18 @@ export default class ComponentsPage extends Component {
             label='Label'
             placeholder='Placeholder' />
         </CpBx>
-        <CpBx width={3 / 4} />
+        <CpBx title='Select list' width={1 / 4}>
+          <SelectList
+            label='Label'
+            options={[
+              {label: 'Sélectionnez une option', value: 'placeholder', disabled: true, selected: true},
+              {label: 'Value 2', value: 'Value 2'},
+              {label: '–', value: '-', disabled: true},
+              {label: 'Value 3', value: 'Value 3'},
+              {label: 'Value 4', value: 'Value 4'},
+            ]} />
+        </CpBx>
+        <CpBx width={2 / 4} />
         <CpBx title='Search field' width={1 / 4}>
           <SearchField placeholder='Chercher un truc' />
         </CpBx>
