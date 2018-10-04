@@ -38,7 +38,14 @@ export default class SelectList extends Component {
     const classes = ['select-list']
     if (props.label) classes.push('select-list_with-label')
     if (props.disabled) classes.push('select-list_disabled')
-    if (state.placeholder) classes.push('select-list_placeholder-selected')
+    if (state.placeholder) {
+      if (
+        this.input
+        && this.input.value
+        && this.input.value === state.placeholder.value) {
+        return classes.push('select-list_placeholder-selected')
+      } else if (!this.input) classes.push('select-list_placeholder-selected')
+    }
     /* Display */
     return <Wrapper className={classes.join(' ')}>
       <InputLabel>{props.label}</InputLabel>
