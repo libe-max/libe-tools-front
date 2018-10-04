@@ -43,7 +43,7 @@ export default class SelectList extends Component {
         this.input
         && this.input.value
         && this.input.value === state.placeholder.value) {
-        return classes.push('select-list_placeholder-selected')
+         classes.push('select-list_placeholder-selected')
       } else if (!this.input) classes.push('select-list_placeholder-selected')
     }
     /* Display */
