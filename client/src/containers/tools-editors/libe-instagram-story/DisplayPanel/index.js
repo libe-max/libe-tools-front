@@ -6,7 +6,7 @@ import Button from '../../../../components/buttons/Button'
 import BlockTitle from '../../../../components/text-levels/BlockTitle'
 import Paragraph from '../../../../components/text-levels/Paragraph'
 import SelectList from '../../../../components/inputs/SelectList'
-import LibeInstaSlideWysiwyg from './components/LibeInstaSlideWysiwyg/'
+import InstaSlide from './components/SlideWysiwyg/'
 
 import Wrapper from './style'
 
@@ -100,7 +100,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
         key={i}
         onClick={onClick}
         className={classes.join(' ')}>
-        <LibeInstaSlideWysiwyg
+        <InstaSlide
           {...slide}
           dispatchEdition={this.dispatchEditionInSlide(i)} />
         <div className="libe-insta-story-wysiwyg__delete-slide">
@@ -111,6 +111,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
             }}
             icon='/images/trash-icon.svg' />
         </div>
+        <div className="libe-insta-story-wysiwyg__blocker" />
       </div>
     })
 
@@ -220,13 +221,14 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (!this.$wrapper) return null
     const $slidesWrapper = this.$wrapper.querySelector('.libe-insta-story-wysiwyg__slides')
     const height = $slidesWrapper.clientHeight
-    const constrainedWidth = Math.floor(9 * height / 16)
+    const width = Math.floor(9 * height / 16)
     this.$wrapper
       .querySelectorAll('.libe-insta-story-wysiwyg__slide')
-      .forEach(slide => slide.style.width = `${constrainedWidth}px`)
+      .forEach(slide => slide.style.width = `${width}px`)
     this.$wrapper
       .querySelector('.libe-insta-story-wysiwyg__new-slide')
-      .style.width = `${constrainedWidth}px`
+      .style.width = `${width}px`
+    return { width, height }
   }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *

@@ -36,7 +36,7 @@ overflow: hidden;
 }
 
 .libe-insta-story-wysiwyg__slide {
-  opacity: 0.5;
+  opacity: 0.3;
   cursor: pointer;
   position: relative;
   box-shadow:
@@ -45,6 +45,12 @@ overflow: hidden;
   &:hover,
   &.libe-insta-story-wysiwyg__slide_active {
     opacity: 1;
+  }
+  &.libe-insta-story-wysiwyg__slide_active {
+    cursor: unset;
+    .libe-insta-story-wysiwyg__blocker {
+      display: none;
+    }
   }
   &:hover:not(.libe-insta-story-wysiwyg__slide_active) {
     box-shadow:
@@ -58,6 +64,14 @@ overflow: hidden;
   position: absolute;
   left: calc(100% + ${p => p.theme.units(1)});
   top: ${p => p.theme.units(1)};
+}
+
+.libe-insta-story-wysiwyg__blocker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .libe-insta-story-wysiwyg__new-slide {

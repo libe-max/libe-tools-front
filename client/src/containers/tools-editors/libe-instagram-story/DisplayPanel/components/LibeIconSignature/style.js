@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
-height: 100%;
-background: ${p => p.theme.colors.baseBg};
+img {
+  width: 100%;
+  height: auto;
+}
 `
 
 export default Wrapper
