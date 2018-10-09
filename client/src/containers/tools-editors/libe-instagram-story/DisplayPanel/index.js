@@ -91,19 +91,24 @@ export default class LibeInstaStoryWysiwyg extends Component {
         : 'placeholder'
     }
 
+    /* Assign classes to component */
+    const rootClass = `libe-insta-story-wysiwyg`
+    const classes = [rootClass]
+    if (!slides.length) classes.push(`${rootClass}_no-slides`)
+
     /* Dom for each slide of the story */
     const slidesDom = slides.map((slide, i) => {
       const onClick = (i !== activeSlidePos) ? e => this.activateSlide(i) : null
-      const classes = ['libe-insta-story-wysiwyg__slide']
-      if (i === activeSlidePos) classes.push('libe-insta-story-wysiwyg__slide_active')
+      const classes = [`${rootClass}__slide`]
+      if (i === activeSlidePos) classes.push(`${rootClass}__slide_active`)
       return <div
         key={i}
         onClick={onClick}
         className={classes.join(' ')}>
         <InstaSlide
-          {...slide}
+          slide={slide}
           dispatchEdition={this.dispatchEditionInSlide(i)} />
-        <div className="libe-insta-story-wysiwyg__delete-slide">
+        <div className={`${rootClass}__delete-slide`}>
           <Button
             onClick={e => {
               e.stopPropagation()
@@ -111,30 +116,25 @@ export default class LibeInstaStoryWysiwyg extends Component {
             }}
             icon='/images/trash-icon.svg' />
         </div>
-        <div className="libe-insta-story-wysiwyg__blocker" />
+        <div className={`${rootClass}__blocker`} />
       </div>
     })
-
-    /* Assign classes to component */
-    const classes = [`libe-insta-story-wysiwyg`]
-    if (!slides.length) classes.push(`libe-insta-story-wysiwyg_no-slides`)
 
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
       innerRef={node => this.$wrapper = node}>
-      <div className='libe-insta-story-wysiwyg__slide-controls'>
-        <div className='libe-insta-story-wysiwyg__slides-navigation'>
+      <div className={`${rootClass}__slide-controls`}>
+        <div className={`${rootClass}__slides-navigation`}>
           <div className={[
-            "libe-insta-story-wysiwyg__turn-page",
-            "libe-insta-story-wysiwyg__turn-page_prev"
-            ].join(' ')}>
+            `${rootClass}__turn-page`,
+            `${rootClass}__turn-page_prev`].join(' ')}>
             <Button
               icon='/images/back-arrow-icon.svg'
               disabled={activeSlidePos === 0}
               onClick={this.activatePrevSlide} />
           </div>
-          <div className="libe-insta-story-wysiwyg__active-page">
+          <div className={`${rootClass}__active-page`}>
             <BlockTitle>{
               activeSlidePos !== undefined
               && activeSlidePos !== -1
@@ -143,31 +143,30 @@ export default class LibeInstaStoryWysiwyg extends Component {
             }</BlockTitle>
           </div>
           <div className={[
-            "libe-insta-story-wysiwyg__turn-page",
-            "libe-insta-story-wysiwyg__turn-page_next"
-            ].join(' ')}>
+            `${rootClass}__turn-page`,
+            `${rootClass}__turn-page_next`].join(' ')}>
             <Button
               icon='/images/forward-arrow-icon.svg'
               disabled={activeSlidePos === slides.length - 1}
               onClick={this.activateNextSlide} />
           </div>
         </div>
-        <div className='libe-insta-story-wysiwyg__slide-display'>
+        <div className={`${rootClass}__slide-display`}>
           <SelectList
             options={displayPickerOptions}
             ref={node => this.$displayPicker = node}
             onChange={this.changeDisplayOnActiveSlide} />
         </div>
       </div>
-      <div className='libe-insta-story-wysiwyg__slides'>
+      <div className={`${rootClass}__slides`}>
         <div
           ref={node => this.$spacer = node}
-          className='libe-insta-story-wysiwyg__slides-spacer'>
+          className={`${rootClass}__slides-spacer`}>
         </div>
         {slidesDom}
         <div
           onClick={this.addNewSlide}
-          className='libe-insta-story-wysiwyg__new-slide'>
+          className={`${rootClass}__new-slide`}>
           <Button link>+ Nouvelle page</Button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 export const displays = [
   'cover',
   'image-and-text',
-  'full-image',
+  'bg-image',
   'quote-on-bg-image',
   'text-on-bg-image'
 ]
