@@ -14,7 +14,7 @@ import Wrapper from './style'
  *
  *   PROPS
  *   label, placeholder, value, defaultValue, onChange,
- *   onFocus, onBlur, onClick
+ *   onFocus, onBlur, onClick, onKeyPress, blurOnEnter
  *
  */
 
@@ -23,6 +23,13 @@ export default class TextInput extends Component {
     const props = this.props
     let classes = 'text-input'
     if (props.label) classes += ' text-input_with-label'
+
+    const handleKeyPress = e => {
+      if (props.onKeyPress) props.onKeyPress(e)
+      if (props.blurOnEnter && e.key === 'Enter') this.input.blur()
+      return
+    }
+
     return <Wrapper className={classes}>
       <InputLabel>{props.label}</InputLabel>
       <input
@@ -32,6 +39,7 @@ export default class TextInput extends Component {
         onFocus={props.onFocus}
         onBlur={props.onBlur}
         onClick={props.onClick}
+        onKeyPress={handleKeyPress}
         placeholder={props.placeholder}
         defaultValue={props.defaultValue}
         ref={node => { this.input = node }} />
