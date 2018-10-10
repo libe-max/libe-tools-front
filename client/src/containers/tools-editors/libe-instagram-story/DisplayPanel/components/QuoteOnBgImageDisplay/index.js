@@ -1,15 +1,27 @@
 import React, { Component } from 'react'
 
 import LibeIconSignature from '../LibeIconSignature'
+import quoteSignIcon from '../../assets/libe-quote-sign.svg'
 
 import Wrapper from './style'
 
 export default class QuoteOnBgImageDisplay extends Component {
   render () {
     const { props } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, width } = props
+    const backgroundImages = slide.backgroundImages || []
+    const text = slide.text || {}
+    const title = slide.title || {}
     const styles = {
-      
+      quote: {
+        fontSize: `${122 / 1080 * width}px`,
+        lineHeight: `${142 / 1080 * width}px`,
+        marginBottom: `${100 / 1080 * width}px`
+      },
+      quoteAuthor: {
+        fontSize: `${50 / 1080 * width}px`,
+        lineHeight: `${60 / 1080 * width}px`
+      }
     }
     const rootClass = `libe-insta-quote-on-bg-image-display-slide`
     const classes = [rootClass]
@@ -18,7 +30,7 @@ export default class QuoteOnBgImageDisplay extends Component {
       innerRef={node => this.$wrapper = node}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__background-images`}>{
-        slide.backgroundImages.map((img, i) => {
+        backgroundImages.map((img, i) => {
           const style = {
             backgroundImage: `url(${img.src})`,
             backgroundPosition: `${img.position}% ${img.position}%`
@@ -30,6 +42,21 @@ export default class QuoteOnBgImageDisplay extends Component {
           </div>
         })
       }</div>
+      <div className={`${rootClass}__quote-block`}>
+        <div className={`${rootClass}__quote-sign`}>
+          <img src={quoteSignIcon} />
+        </div>
+        <div className={`${rootClass}__quote-and-author`}>
+          <div
+            style={styles.quote}
+            className={`${rootClass}__quote`}>
+            {text.value}
+          </div>
+          <div className={`${rootClass}__quote-author`}>
+            {title.value}
+          </div>
+        </div>
+      </div>
       <div className={`${rootClass}__icon-signature`}>
         <LibeIconSignature />
       </div>

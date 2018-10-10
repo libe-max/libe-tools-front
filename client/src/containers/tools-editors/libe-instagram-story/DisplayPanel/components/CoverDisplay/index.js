@@ -7,7 +7,11 @@ import Wrapper from './style'
 export default class LibeInstaSlideCoverDisplay extends Component {
   render () {
     const { props } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, width } = props
+    const backgroundImages = slide.backgroundImages || []
+    const text = slide.text || {}
+    const title = slide.title || {}
+
     const styles = {
       titleAndText: {
         width: `${780 / 1080 * width}px`,
@@ -31,7 +35,7 @@ export default class LibeInstaSlideCoverDisplay extends Component {
       innerRef={node => this.$wrapper = node}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__background-images`}>{
-          slide.backgroundImages.map((img, i) => {
+          backgroundImages.map((img, i) => {
           const style = {
             backgroundImage: `url(${img.src})`,
             backgroundPosition: `${img.position}% ${img.position}%`
@@ -49,7 +53,7 @@ export default class LibeInstaSlideCoverDisplay extends Component {
         <div
           style={styles.text}
           className={`${rootClass}__text`}>
-          {slide.text.value}
+          {text.value}
         </div>
         <div
           style={styles.title}
@@ -58,7 +62,7 @@ export default class LibeInstaSlideCoverDisplay extends Component {
           <div
             style={styles.title}
             className={`${rootClass}__title-value`}>
-            {slide.title.value}
+            {title.value}
           </div>
         </div>
       </div>

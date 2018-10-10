@@ -7,7 +7,10 @@ import Wrapper from './style'
 export default class ImgAndTextDisplay extends Component {
   render () {
     const { props } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, width } = props
+    const image = slide.image || {}
+    const title = slide.title || {}
+    const text = slide.text || {}
     const styles = {
       image: {
         marginBottom: `${104 / 1080 * width}px`
@@ -34,17 +37,17 @@ export default class ImgAndTextDisplay extends Component {
         <div
           style={styles.image}
           className={`${rootClass}__image`}>
-          <img src={slide.image.src} />
+          <img src={image.src} />
         </div>
         <div
           style={styles.title}
           className={`${rootClass}__title`}>
-          Title
+          {title.value}
         </div>
         <div
           style={styles.text}
           className={`${rootClass}__text`}>
-          Text
+          {text.value}
         </div>
       </div>
       <div className={`${rootClass}__icon-signature`}>

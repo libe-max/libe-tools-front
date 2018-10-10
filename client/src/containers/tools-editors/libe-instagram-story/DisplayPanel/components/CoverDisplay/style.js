@@ -8,6 +8,7 @@ height: 100%;
 
 ${rootClass}__safe-zone {
   position: absolute;
+  display: none;
   width: calc(780 / 1080 * 100%);
   height: calc(1620 / 1920 * 100%);
   left: calc((1 - (780 / 1080)) / 2 * 100%);
@@ -50,8 +51,8 @@ ${rootClass}__title {
     position: absolute;
     top: 20%;
     bottom: 20%;
-    left: 15%;
-    right: 15%;
+    left: 11%;
+    right: 11%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,7 +67,7 @@ ${rootClass}__title {
 }
 
 ${rootClass}__text {
-  background: white;
+  background: #FFFFFF;
   font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-style: normal;

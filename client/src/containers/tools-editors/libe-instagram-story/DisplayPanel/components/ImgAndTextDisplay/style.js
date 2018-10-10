@@ -22,7 +22,6 @@ ${rootClass}__image-title-and-text {
   position: absolute;
   max-width: calc(780 / 1080 * 100%);
   max-height: calc(1620 / 1920 * 90%);
-  overflow: hidden;
   width: calc(780 / 1080 * 100%);
   transform: translate(-50%, -50%);
   top: 45%;

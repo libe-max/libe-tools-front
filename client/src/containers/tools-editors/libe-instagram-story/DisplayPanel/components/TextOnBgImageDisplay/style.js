@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const rootClass = `.libe-insta-quote-on-bg-image-display-slide`
+const rootClass = `.libe-insta-text-on-bg-image-display-slide`
 
 export default styled.div`
 position: relative;
@@ -20,7 +20,6 @@ ${rootClass}__safe-zone {
 
 ${rootClass}__background-images {
   position: absolute;
-  opacity: 0.3;
   display: flex;
   flex-direction: column;
   top: 0;
@@ -36,49 +35,21 @@ ${rootClass}__background-image {
   background-position: center center;
 }
 
-${rootClass}__quote-block {
+${rootClass}__text {
   position: absolute;
   transform: translate(-50%, -50%);
   top: 45%;
   left: 50%;
-  width: calc(780 / 1080 * 100%);
   max-width: calc(780 / 1080 * 100%);
   max-height: calc(1620 / 1920 * 90%);
-}
-
-${rootClass}__quote-sign {
-  position: relative;
-  width: 100%;
-  img {
-    position: absolute;
-    transform: translate(-10%, -10%);
-    opacity: 0.9;
-    mix-blend-mode: screen;
-    width: calc(360 / 780 * 100%);
-  }
-}
-
-${rootClass}__quote-and-author {
-  position: relative;
-}
-
-${rootClass}__quote {
+  background: rgba(255, 255, 255, 0.7);
   font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   letter-spacing: 0.03em;
-  text-transform: normal;
-  color: #212121;
-}
-
-${rootClass}__quote-author {
-  font-family: 'Synthese', Helvetica, Arial, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: 0em;
   text-transform: uppercase;
   color: #212121;
-  text-align: right;
+  text-align: center;
 }
 
 ${rootClass}__icon-signature {

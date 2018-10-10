@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 
 import { displays, displayPickerOptions } from '../../_config/'
-import CoverDisplay from '../CoverDisplay/'
+import CoverDisplayWysiwyg from '../CoverDisplayWysiwyg/'
 import ImgAndTextDisplay from '../ImgAndTextDisplay/'
 import FullImageDisplay from '../FullImageDisplay/'
 import QuoteOnBgImageDisplay from '../QuoteOnBgImageDisplay/'
+import TextOnBgImageDisplay from '../TextOnBgImageDisplay/'
 import NoDisplay from '../NoDisplay/'
 
 import Wrapper from './style'
@@ -42,13 +43,15 @@ export default class LibeInstaSlideWysiwyg extends Component {
     const content = (() => {
       switch (display) {
         case 'cover':
-          return <CoverDisplay {...props} {...state} />
+          return <CoverDisplayWysiwyg {...props} {...state} />
         case 'image-and-text':
           return <ImgAndTextDisplay {...props} {...state} />
         case 'bg-image':
           return <FullImageDisplay {...props} {...state} />
         case 'quote-on-bg-image':
           return <QuoteOnBgImageDisplay {...props} {...state} />
+        case 'text-on-bg-image':
+          return <TextOnBgImageDisplay {...props} {...state} />
         default:
           return <NoDisplay {...props} {...state} />
       }
