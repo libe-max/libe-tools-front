@@ -5,15 +5,15 @@ import RangeInput from '../../../../../../components/inputs/RangeInput'
 import Button from '../../../../../../components/buttons/Button'
 import ParagraphTitle from '../../../../../../components/text-levels/ParagraphTitle'
 import ParamBox from '../ParamBox'
-import CoverDisplay from '../CoverDisplay/'
+import FullImageDisplay from '../FullImageDisplay'
 
 import Wrapper from './style'
 
-export default class CoverDisplayWysiwyg extends Component {
+export default class FullImageDisplayWysiwyg extends Component {
   constructor () {
     super()
     this.state = { selected: null }
-    this.rootClass = `libe-insta-cover-display-slide-wysiwyg`
+    this.rootClass = `libe-insta-full-image-display-slide-wysiwyg`
     this.selectElement = this.selectElement.bind(this)
     this.populateSettingsFields = this.populateSettingsFields.bind(this)
   }
@@ -21,12 +21,8 @@ export default class CoverDisplayWysiwyg extends Component {
   componentDidMount () {
     const { $wrapper } = this
     const select = query => $wrapper.querySelector(query)
-    this.$bgImages = select(`.libe-insta-cover-display-slide__background-images`)
-    this.$title = select(`.libe-insta-cover-display-slide__title`)
-    this.$text = select(`.libe-insta-cover-display-slide__text`)
+    this.$bgImages = select(`.libe-insta-full-image-display-slide__background-images`)
     this.$bgImages.addEventListener('click', e => {this.selectElement('bg')})
-    this.$title.addEventListener('click', e => {this.selectElement('title')})
-    this.$text.addEventListener('click', e => {this.selectElement('text')})
     this.populateSettingsFields()
   }
 
@@ -36,26 +32,18 @@ export default class CoverDisplayWysiwyg extends Component {
 
   componentWillUnmount () {
     this.$bgImages.removeEventListener('click', e => {this.selectElement('bg')})
-    this.$title.removeEventListener('click', e => {this.selectElement('title')})
-    this.$text.removeEventListener('click', e => {this.selectElement('text')})
   }
 
   selectElement (name) {
     this.setState({ selected: name })
     if (name === 'bg' && this.$bgSrcSetter0) this.$bgSrcSetter0.input.focus()
-    if (name === 'title' && this.$titleValueSetter) this.$titleValueSetter.input.focus()
-    if (name === 'text' && this.$textValueSetter) this.$textValueSetter.input.focus()
   }
 
   populateSettingsFields () {
     const { props, $wrapper } = this
     const { slide } = props
-    const title = slide.title || { value: '' }
-    const text = slide.text || { value: '' }
     const background = slide.backgroundImages || [{ src: '', position: 50 }]
     const select = query => $wrapper.querySelector(query)
-    if (this.$titleValueSetter) this.$titleValueSetter.input.value = title.value
-    if (this.$textValueSetter) this.$textValueSetter.input.value = text.value
     if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
     if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
     if (this.$bgSrcSetter1) this.$bgSrcSetter1.input.value = background[1]
@@ -72,15 +60,9 @@ export default class CoverDisplayWysiwyg extends Component {
     const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
     const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
     const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
-    const hasNoTitle = !slide.title || !slide.title.value
-    const hasNoText = !slide.text || !slide.text.value
     const bgIsSelected = state.selected === 'bg'
-    const titleIsSelected = state.selected === 'title'
-    const textIsSelected = state.selected === 'text'
     const renderedSlide = { ...slide }
     if (hasNoBg) renderedSlide.backgroundImages = [{}]
-    if (hasNoTitle) renderedSlide.title = { value: `Ajoutez un titre` }
-    if (hasNoText) renderedSlide.text = { value: `Ajoutez un texte` }
     const addImage = e => dispatchEdition(
       'backgroundImages', [
         ...renderedSlide.backgroundImages, {
@@ -110,17 +92,13 @@ export default class CoverDisplayWysiwyg extends Component {
     /* Assign classes */
     const classes = [this.rootClass]
     if (hasNoBg) classes.push(`${this.rootClass}_no-bg`)
-    if (hasNoTitle) classes.push(`${this.rootClass}_no-title`)
-    if (hasNoText) classes.push(`${this.rootClass}_no-text`)
     if (bgIsSelected) classes.push(`${this.rootClass}_bg-selected`)
-    if (titleIsSelected) classes.push(`${this.rootClass}_title-selected`)
-    if (textIsSelected) classes.push(`${this.rootClass}_text-selected`)
 
     /* Display */
     return <Wrapper
       className={classes.join(` `)}
       innerRef={node => this.$wrapper = node}>
-      <CoverDisplay slide={renderedSlide} width={width} />
+      <FullImageDisplay slide={renderedSlide} width={width} />
       <div className={`${this.rootClass}__background-setter`}>
         <ParamBox
           title='Images de fond'
@@ -160,32 +138,6 @@ export default class CoverDisplayWysiwyg extends Component {
           {!hasTwoImages
             ? <Button link onClick={addImage}>+ Ajouter une image</Button>
             : null}
-        </ParamBox>
-      </div>
-      <div className={`${this.rootClass}__title-setter`}>
-        <ParamBox
-          title='Titre'
-          handleClose={e => this.selectElement(null)}>
-          <TextInput
-            blurOnEnter
-            label={`Titre de la page`}
-            placeholder={`Tapez le titre de la page`}
-            ref={node => this.$titleValueSetter = node}
-            onBlur={e => this.selectElement(null)}
-            onChange={e => dispatchEdition('title', { value: e.target.value })} />
-        </ParamBox>
-      </div>
-      <div className={`${this.rootClass}__text-setter`}>
-        <ParamBox
-          title='Texte'
-          handleClose={e => this.selectElement(null)}>
-          <TextInput
-            blurOnEnter
-            label={`Texte`}
-            placeholder={`Tapez le texte de la page`}
-            ref={node => this.$textValueSetter = node}
-            onBlur={e => this.selectElement(null)}
-            onChange={e => dispatchEdition('text', { value: e.target.value })} />
         </ParamBox>
       </div>
     </Wrapper>

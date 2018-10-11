@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import LibeIconSignature from '../LibeIconSignature'
+import bgImagePlaceholder from '../../assets/bg-image-placeholder.svg'
 
 import Wrapper from './style'
 
@@ -34,8 +35,8 @@ export default class FullImageDisplay extends Component {
       <div className={`${rootClass}__background-images`}>{
         backgroundImages.map((img, i) => {
           const style = {
-            backgroundImage: `url(${img.src})`,
-            backgroundPosition: `${img.position}% ${img.position}%`
+            backgroundImage: `url(${img.src || bgImagePlaceholder})`,
+            backgroundPosition: `${img.position || 50}% ${img.position || 50}%`
           }
           return <div
             key={i}

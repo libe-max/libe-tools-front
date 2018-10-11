@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import { displays, displayPickerOptions } from '../../_config/'
 import CoverDisplayWysiwyg from '../CoverDisplayWysiwyg/'
 import ImgAndTextDisplay from '../ImgAndTextDisplay/'
-import FullImageDisplay from '../FullImageDisplay/'
-import QuoteOnBgImageDisplay from '../QuoteOnBgImageDisplay/'
-import TextOnBgImageDisplay from '../TextOnBgImageDisplay/'
+import FullImageDisplayWysiwyg from '../FullImageDisplayWysiwyg/'
+import QuoteOnBgImageDisplayWysiwyg from '../QuoteOnBgImageDisplayWysiwyg/'
+import TextOnBgImageDisplayWysiwyg from '../TextOnBgImageDisplayWysiwyg/'
 import NoDisplay from '../NoDisplay/'
 
 import Wrapper from './style'
@@ -47,11 +47,11 @@ export default class LibeInstaSlideWysiwyg extends Component {
         case 'image-and-text':
           return <ImgAndTextDisplay {...props} {...state} />
         case 'bg-image':
-          return <FullImageDisplay {...props} {...state} />
+          return <FullImageDisplayWysiwyg {...props} {...state} />
         case 'quote-on-bg-image':
-          return <QuoteOnBgImageDisplay {...props} {...state} />
+          return <QuoteOnBgImageDisplayWysiwyg {...props} {...state} />
         case 'text-on-bg-image':
-          return <TextOnBgImageDisplay {...props} {...state} />
+          return <TextOnBgImageDisplayWysiwyg {...props} {...state} />
         default:
           return <NoDisplay {...props} {...state} />
       }
