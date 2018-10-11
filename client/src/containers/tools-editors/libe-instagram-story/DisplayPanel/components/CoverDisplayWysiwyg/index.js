@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 import TextInput from '../../../../../../components/inputs/TextInput'
 import RangeInput from '../../../../../../components/inputs/RangeInput'
-import bgImagePlaceholder from '../../assets/bg-image-placeholder.svg'
+import Button from '../../../../../../components/buttons/Button'
+import ParagraphTitle from '../../../../../../components/text-levels/ParagraphTitle'
 import CoverDisplay from '../CoverDisplay/'
 import ParamBox from '../ParamBox'
 
@@ -41,7 +42,7 @@ export default class CoverDisplayWysiwyg extends Component {
 
   selectElement (name) {
     this.setState({ selected: name })
-    if (name === 'bg') return
+    if (name === 'bg') this.$bgSrcSetter0.input.focus()
     if (name === 'title') this.$titleValueSetter.input.focus()
     if (name === 'text') this.$textValueSetter.input.focus()
   }
@@ -51,10 +52,16 @@ export default class CoverDisplayWysiwyg extends Component {
     const { slide } = props
     const title = slide.title || { value: '' }
     const text = slide.text || { value: '' }
-    const background = slide.backgroundImages || [{}]
+    const background = slide.backgroundImages || [{ src: '', position: 50 }]
     const select = query => $wrapper.querySelector(query)
-    this.$titleValueSetter.input.value = title.value
-    this.$textValueSetter.input.value = text.value
+    if (this.$titleValueSetter) this.$titleValueSetter.input.value = title.value
+    if (this.$textValueSetter) this.$textValueSetter.input.value = text.value
+    if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
+    if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
+    if (this.$bgSrcSetter1) this.$bgSrcSetter1.input.value = background[1]
+      ? background[1].src : ''
+    if (this.$bgPosSetter1) this.$bgPosSetter1.input.value = background[1]
+      ? background[1].position : ''
   }
 
   render () {
@@ -63,6 +70,8 @@ export default class CoverDisplayWysiwyg extends Component {
 
     /* Inner logic */
     const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
+    const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
+    const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
     const hasNoTitle = !slide.title || !slide.title.value
     const hasNoText = !slide.text || !slide.text.value
     const bgIsSelected = state.selected === 'bg'
@@ -70,9 +79,35 @@ export default class CoverDisplayWysiwyg extends Component {
     const textIsSelected = state.selected === 'text'
 
     const renderedSlide = { ...slide }
-    if (hasNoBg) renderedSlide.backgroundImages = [{ src: bgImagePlaceholder, position: 50 }]
+    if (hasNoBg) renderedSlide.backgroundImages = [{}]
     if (hasNoTitle) renderedSlide.title = { value: `Ajoutez un titre` }
     if (hasNoText) renderedSlide.text = { value: `Ajoutez un texte` }
+
+    const addSlide = e => dispatchEdition(
+      'backgroundImages', [
+        ...renderedSlide.backgroundImages, {
+          src: '',
+          position: 50
+      }])
+    const removeSlide = n => dispatchEdition(
+      'backgroundImages', [
+        ...renderedSlide.backgroundImages.slice(0, n),
+        ...renderedSlide.backgroundImages.slice(n + 1)
+      ])
+    const changeImageSrc = (n, val) => dispatchEdition(
+      'backgroundImages', [
+        ...renderedSlide.backgroundImages.slice(0, n), {
+          ...renderedSlide.backgroundImages[n],
+          src: val
+        }, ...renderedSlide.backgroundImages.slice(n + 1)
+      ])
+    const changeImagePos = (n, val) => dispatchEdition(
+      'backgroundImages', [
+        ...renderedSlide.backgroundImages.slice(0, n), {
+          ...renderedSlide.backgroundImages[n],
+          position: parseInt(val, 10) || 1
+        }, ...renderedSlide.backgroundImages.slice(n + 1)
+      ])
 
     /* Assign classes */
     const classes = [this.rootClass]
@@ -92,12 +127,41 @@ export default class CoverDisplayWysiwyg extends Component {
         <ParamBox
           title='Images de fond'
           handleClose={e => this.selectElement(null)}>
-          <TextInput
-            label={`URL de l'image`}
-            placeholder={`Entrez l'URL de l'image`} />
-          <RangeInput
-            unit='%'
-            label={`Position de l'image`} />
+          <div className={`libe-insta-param-box__section`}>
+            <ParagraphTitle>Image 1</ParagraphTitle>
+            <TextInput
+              label={`URL de l'image`}
+              placeholder={`Entrez l'URL de l'image`}
+              ref={node => this.$bgSrcSetter0 = node}
+              onChange={e => changeImageSrc(0, e.target.value)} />
+            <RangeInput
+              unit='%'
+              label={`Position de l'image`}
+              ref={node => this.$bgPosSetter0 = node}
+              onChange={e => changeImagePos(0, e.target.value)} />
+            {hasTwoImages
+              ? <Button link onClick={e => removeSlide(0)}>Supprimer cette image</Button>
+              : null}
+          </div>
+          {hasTwoImages
+            ? <div className={`libe-insta-param-box__section`}>
+                <ParagraphTitle>Image 2</ParagraphTitle>
+                <TextInput
+                  label={`URL de l'image`}
+                  placeholder={`Entrez l'URL de l'image`}
+                  ref={node => this.$bgSrcSetter1 = node}
+                  onChange={e => changeImageSrc(1, e.target.value)} />
+                <RangeInput
+                  unit='%'
+                  label={`Position de l'image`}
+                  ref={node => this.$bgPosSetter1 = node}
+                  onChange={e => changeImagePos(1, e.target.value)} />
+                <Button link onClick={e => removeSlide(1)}>Supprimer cette image</Button>
+              </div>
+            : null}
+          {!hasTwoImages
+            ? <Button link onClick={addSlide}>+ Ajouter une image</Button>
+            : null}
         </ParamBox>
       </div>
       <div className={`${this.rootClass}__title-setter`}>

@@ -18,7 +18,9 @@ export default class ParamBox extends Component {
           <BlockTitle>{this.props.title}</BlockTitle>
           <Button icon='/images/close-icon.svg' onClick={props.handleClose} />
         </div>
-        {this.props.children}
+        <div className={`${this.rootClass}__params`}>
+          {this.props.children}
+        </div>
       </Wrapper>
     </ThemeProvider>
   }

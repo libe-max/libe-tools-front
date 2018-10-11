@@ -15,4 +15,20 @@ ${rootClass}__head {
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${p =>p.theme.units(3)};
+}
+
+${rootClass}__params > * {
+  margin-bottom: ${p =>p.theme.units(3)};
+}
+
+${rootClass}__params > *:last-child {
+  margin-bottom: 0;
+}
+
+${rootClass}__params > ${rootClass}__section > * {
+  margin-bottom: ${p =>p.theme.units(2)}; 
+}
+
+${rootClass}__params > ${rootClass}__section > *:last-child {
+  margin-bottom: 0;
 }`
