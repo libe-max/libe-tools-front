@@ -1,8 +1,14 @@
 const express = require('express')
 const moment = require('moment')
 const router = express.Router()
+const build = require('../bundle-builder/index')
 
-/* Get all bundles from database */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  GET ALL BUNDLES FROM DATABASE
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.all('/get-all-bundles', (req, res, next) => {
   const collection = req.db.collection('bundles')
   collection.find({}, (e, docs) => !e
@@ -11,7 +17,12 @@ router.all('/get-all-bundles', (req, res, next) => {
   )
 })
 
-/* Get one bundle by it's ID */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  GET ONE BUNDLE BY IT'S ID
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.all('/get-bundle/:id', (req, res, next) => {
   const id = req.params.id
   const collection = req.db.collection('bundles')
@@ -28,7 +39,12 @@ router.all('/get-bundle/:id', (req, res, next) => {
   )
 })
 
-/* Create a new bundle in database */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  CREATE A NEW BUNDLE IN DATABASE
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.all('/create-bundle/:type', (req, res, next) => {
   const type = req.params.type
   const now = moment().valueOf()
@@ -44,7 +60,12 @@ router.all('/create-bundle/:type', (req, res, next) => {
   )
 })
 
-/* Save a bundle edition */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  SAVE A BUNDLE EDITION
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.put('/save-bundle/:id', (req, res, next) => {
   const id = req.params.id
   const now = moment().valueOf()
@@ -68,7 +89,12 @@ router.put('/save-bundle/:id', (req, res, next) => {
   )
 })
 
-/* Delete a bundle */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  DELETE A BUNDLE
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.delete('/delete-bundle/:id', (req, res, next) => {
   const id = req.params.id
   const collection = req.db.collection('bundles')
@@ -92,7 +118,36 @@ router.delete('/delete-bundle/:id', (req, res, next) => {
   })
 })
 
-/* All other requests */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  BUILD A BUNDLE
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+router.get('/build/:id', (req, res, next) => {
+  const id = req.params.id
+  const collection = req.db.collection('bundles')
+  const idIsValid = id.match(/^[0-9a-fA-F]{24}$/)
+  if (!idIsValid) {
+    return res.json({
+      err: `Requested bundle ID is not valid (${id})`,
+      data: null
+    })
+  }
+  collection.findOne({_id: id}, (e, doc) => !e
+    ? build(doc)
+        .then(built => res.json({err: null, data: built}))
+        .catch(err => res.json({err: err, data: null }))
+    : res.json({err: e, data: null})
+  )
+})
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ *
+ *  ALL OTHER REQUESTS
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 router.all('/*', (req, res, next) => res.json({
   data: null,
   err: `There is nothing to ${req.method} on ${req.url}`
