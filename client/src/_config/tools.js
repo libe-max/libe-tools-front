@@ -9,7 +9,8 @@ export const list = [
     image: '/images/libe-instagram-story-thumb.png',
     display: libeInstagramStory.DisplayPanel,
     settings: libeInstagramStory.SettingsPanel,
-    actions: libeInstagramStory.ActionsPanel
+    actions: libeInstagramStory.ActionsPanel,
+    savedActions: libeInstagramStory.SavedActionsPanel
   }, {
     name: 'Yellow word',
     type: 'yellow-word',
