@@ -48,12 +48,11 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
   }
 
   populateSettingsFields () {
-    const { props, $wrapper } = this
+    const { props } = this
     const { slide } = props
     const quote = slide.title || { value: '' }
     const author = slide.text || { value: '' }
     const background = slide.backgroundImages || [{ src: '', position: 50 }]
-    const select = query => $wrapper.querySelector(query)
     if (this.$quoteValueSetter) this.$quoteValueSetter.input.value = quote.value
     if (this.$authorValueSetter) this.$authorValueSetter.input.value = author.value
     if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
@@ -66,11 +65,10 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
 
   render () {
     const { props, state } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, dispatchEdition, width } = props
 
     /* Inner logic */
     const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
-    const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
     const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
     const hasNoQuote = !slide.title || !slide.title.value
     const hasNoAuthor = !slide.text || !slide.text.value

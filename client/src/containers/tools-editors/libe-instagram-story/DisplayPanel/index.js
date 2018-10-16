@@ -4,7 +4,6 @@ import { displays, displayPickerOptions } from './_config/'
 
 import Button from '../../../../components/buttons/Button'
 import BlockTitle from '../../../../components/text-levels/BlockTitle'
-import Paragraph from '../../../../components/text-levels/Paragraph'
 import SelectList from '../../../../components/inputs/SelectList'
 import InstaSlide from './components/SlideWysiwyg/'
 

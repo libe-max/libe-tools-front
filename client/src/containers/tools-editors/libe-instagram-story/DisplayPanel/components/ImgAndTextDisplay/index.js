@@ -39,7 +39,7 @@ export default class ImgAndTextDisplay extends Component {
         <div
           style={styles.image}
           className={`${rootClass}__image`}>
-          <img src={image.src || bgImagePlaceholder} />
+          <img alt='Slide illustration' src={image.src || bgImagePlaceholder} />
         </div>
         <div className={`${rootClass}__title-and-text`}>
           <div

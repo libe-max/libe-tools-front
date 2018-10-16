@@ -44,11 +44,10 @@ export default class TextOnBgImageDisplayWysiwyg extends Component {
   }
 
   populateSettingsFields () {
-    const { props, $wrapper } = this
+    const { props } = this
     const { slide } = props
     const text = slide.text || { value: '' }
     const background = slide.backgroundImages || [{ src: '', position: 50 }]
-    const select = query => $wrapper.querySelector(query)
     if (this.$textValueSetter) this.$textValueSetter.input.value = text.value
     if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
     if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
@@ -60,11 +59,10 @@ export default class TextOnBgImageDisplayWysiwyg extends Component {
 
   render () {
     const { props, state } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, dispatchEdition, width } = props
 
     /* Inner logic */
     const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
-    const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
     const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
     const hasNoText = !slide.text || !slide.text.value
     const bgIsSelected = state.selected === 'bg'

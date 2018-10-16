@@ -9,7 +9,9 @@ export default class LibeIconSignature extends Component {
   render () {
     const { props } = this
     return <Wrapper className='libe-icon-signature'>
-      <img src={props.noBorders ? iconLogoNoBorders : iconLogo} />
+      <img
+        alt='Petit logo de Libération'
+        src={props.noBorders ? iconLogoNoBorders : iconLogo} />
     </Wrapper>
   }
 }

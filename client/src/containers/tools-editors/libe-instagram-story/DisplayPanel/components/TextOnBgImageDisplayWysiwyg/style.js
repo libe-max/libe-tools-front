@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import greyLibeIcon from '../../assets/libe-icon-no-borders-outline.svg'
 
 const rootClass = `.libe-insta-text-on-bg-image-display-slide-wysiwyg`
 

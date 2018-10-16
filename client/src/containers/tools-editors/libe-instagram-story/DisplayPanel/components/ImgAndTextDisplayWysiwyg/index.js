@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 import TextInput from '../../../../../../components/inputs/TextInput'
-import RangeInput from '../../../../../../components/inputs/RangeInput'
-import Button from '../../../../../../components/buttons/Button'
-import ParagraphTitle from '../../../../../../components/text-levels/ParagraphTitle'
 import ParamBox from '../ParamBox'
 import ImgAndTextDisplay from '../ImgAndTextDisplay/'
 
@@ -48,12 +45,11 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
   }
 
   populateSettingsFields () {
-    const { props, $wrapper } = this
+    const { props } = this
     const { slide } = props
     const title = slide.title || { value: '' }
     const text = slide.text || { value: '' }
     const image = slide.image || { src: '', position: 50 }
-    const select = query => $wrapper.querySelector(query)
     if (this.$titleValueSetter) this.$titleValueSetter.input.value = title.value
     if (this.$textValueSetter) this.$textValueSetter.input.value = text.value
     if (this.$imgSrcSetter) this.$imgSrcSetter.input.value = image.src
@@ -61,7 +57,7 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
 
   render () {
     const { props, state } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, dispatchEdition, width } = props
 
     /* Inner logic */
     const hasNoImg = !slide.image

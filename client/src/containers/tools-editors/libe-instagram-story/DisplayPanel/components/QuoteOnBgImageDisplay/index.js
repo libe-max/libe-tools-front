@@ -45,7 +45,7 @@ export default class QuoteOnBgImageDisplay extends Component {
       }</div>
       <div className={`${rootClass}__quote-block`}>
         <div className={`${rootClass}__quote-sign`}>
-          <img src={quoteSignIcon} />
+          <img alt='Quote sign' src={quoteSignIcon} />
         </div>
         <div className={`${rootClass}__quote-and-author`}>
           <div

@@ -40,10 +40,9 @@ export default class FullImageDisplayWysiwyg extends Component {
   }
 
   populateSettingsFields () {
-    const { props, $wrapper } = this
+    const { props } = this
     const { slide } = props
     const background = slide.backgroundImages || [{ src: '', position: 50 }]
-    const select = query => $wrapper.querySelector(query)
     if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
     if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
     if (this.$bgSrcSetter1) this.$bgSrcSetter1.input.value = background[1]
@@ -54,11 +53,10 @@ export default class FullImageDisplayWysiwyg extends Component {
 
   render () {
     const { props, state } = this
-    const { slide, dispatchEdition, width, height} = props
+    const { slide, dispatchEdition, width } = props
 
     /* Inner logic */
     const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
-    const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
     const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
     const bgIsSelected = state.selected === 'bg'
     const renderedSlide = { ...slide }

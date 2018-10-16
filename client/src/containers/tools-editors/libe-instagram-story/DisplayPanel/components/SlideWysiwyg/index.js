@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { displays, displayPickerOptions } from '../../_config/'
+import { displays } from '../../_config/'
 import CoverDisplayWysiwyg from '../CoverDisplayWysiwyg/'
 import ImgAndTextDisplayWysiwyg from '../ImgAndTextDisplayWysiwyg/'
 import FullImageDisplayWysiwyg from '../FullImageDisplayWysiwyg/'
@@ -34,7 +34,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
   render () {
     const { props } = this
     const { state } = this
-    const { slide, dispatchEdition } = props
+    const { slide } = props
     const displayIsAllowed = displays.indexOf(slide.display) + 1
     const display = slide.display
       ? displayIsAllowed ? slide.display : `unallowed`
