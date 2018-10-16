@@ -49,6 +49,12 @@ ${rootClass}__image {
   }
 }
 
+${rootClass}__title-and-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 ${rootClass}__title {
   background: #E4214B;
   font-family: 'Libe-Sans-Semicondensed', Helvetica, Arial, sans-serif;
