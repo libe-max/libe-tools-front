@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { displays, displayPickerOptions } from '../../_config/'
 import CoverDisplayWysiwyg from '../CoverDisplayWysiwyg/'
-import ImgAndTextDisplay from '../ImgAndTextDisplay/'
+import ImgAndTextDisplayWysiwyg from '../ImgAndTextDisplayWysiwyg/'
 import FullImageDisplayWysiwyg from '../FullImageDisplayWysiwyg/'
 import QuoteOnBgImageDisplayWysiwyg from '../QuoteOnBgImageDisplayWysiwyg/'
 import TextOnBgImageDisplayWysiwyg from '../TextOnBgImageDisplayWysiwyg/'
@@ -45,7 +45,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
         case 'cover':
           return <CoverDisplayWysiwyg {...props} {...state} />
         case 'image-and-text':
-          return <ImgAndTextDisplay {...props} {...state} />
+          return <ImgAndTextDisplayWysiwyg {...props} {...state} />
         case 'bg-image':
           return <FullImageDisplayWysiwyg {...props} {...state} />
         case 'quote-on-bg-image':

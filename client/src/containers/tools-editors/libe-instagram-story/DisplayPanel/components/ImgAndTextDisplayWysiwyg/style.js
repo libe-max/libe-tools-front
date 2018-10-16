@@ -1,16 +1,16 @@
 import styled from 'styled-components'
 import greyLibeIcon from '../../assets/libe-icon-no-borders-outline.svg'
 
-const rootClass = `.libe-insta-quote-on-bg-image-display-slide-wysiwyg`
+const rootClass = `.libe-insta-img-and-text-display-slide-wysiwyg`
 
 export default styled.div`
 position: relative;
 width: 100%;
 height: 100%;
 
-${rootClass}__background-setter,
-${rootClass}__quote-setter,
-${rootClass}__author-setter {
+${rootClass}__image-setter,
+${rootClass}__title-setter,
+${rootClass}__text-setter {
   position: absolute;
   display: none;
   left: ${p => p.theme.units(2)};
@@ -18,9 +18,9 @@ ${rootClass}__author-setter {
   width: calc(100% - ${p => p.theme.units(4)});
 }
 
-.libe-insta-quote-on-bg-image-display-slide__background-images:hover,
-.libe-insta-quote-on-bg-image-display-slide__quote:hover,
-.libe-insta-quote-on-bg-image-display-slide__quote-author:hover {
+.libe-insta-img-and-text-display-slide__image:hover,
+.libe-insta-img-and-text-display-slide__title:hover,
+.libe-insta-img-and-text-display-slide__text:hover {
   cursor: pointer;
   box-shadow:
       0 0 5px ${p => p.theme.units(0.125)}
@@ -28,24 +28,16 @@ ${rootClass}__author-setter {
       ${p => p.theme.shadows.medium};
 }
 
-.libe-insta-quote-on-bg-image-display-slide__quote:hover {
+.libe-insta-img-and-text-display-slide__title:hover {
   color: ${p => p.theme.colors.actionText};
 }
 
-.libe-insta-quote-on-bg-image-display-slide__quote-author:hover {
-  .libe-insta-quote-on-bg-image-display-slide__quote-author {
-    color: ${p => p.theme.colors.actionText};
-  }
+.libe-insta-img-and-text-display-slide__text:hover {
+  color: ${p => p.theme.colors.actionText};
 }
 
-&${rootClass}_no-bg {
-  .libe-insta-quote-on-bg-image-display-slide__background-images {
-    opacity: 1;
-  }
-}
-
-&${rootClass}_no-quote {
-  .libe-insta-quote-on-bg-image-display-slide__quote {
+&${rootClass}_no-title {
+  .libe-insta-img-and-text-display-slide__title {
     color: #999999;
     .libe-icon-signature {
       background-image: url(${greyLibeIcon});
@@ -54,25 +46,25 @@ ${rootClass}__author-setter {
       img { opacity: 0 }
     }
   }
-  .libe-insta-quote-on-bg-image-display-slide__quote:hover {
+  .libe-insta-img-and-text-display-slide__title:hover {
     color: ${p => p.theme.colors.actionText};
   }
 }
 
-&${rootClass}_no-author {
-  .libe-insta-quote-on-bg-image-display-slide__quote-author {
+&${rootClass}_no-text {
+  .libe-insta-img-and-text-display-slide__text {
     color: #999999;
   }
-  .libe-insta-quote-on-bg-image-display-slide__quote-author:hover {
+  .libe-insta-img-and-text-display-slide__text:hover {
     color: ${p => p.theme.colors.actionText};
   }
 }
 
-&${rootClass}_bg-selected {
-  ${rootClass}__background-setter {
+&${rootClass}_img-selected {
+  ${rootClass}__image-setter {
     display: block;
   }
-  .libe-insta-quote-on-bg-image-display-slide__background-images {
+  .libe-insta-img-and-text-display-slide__image {
     cursor: pointer;
     box-shadow:
         0 0 5px ${p => p.theme.units(0.125)}
@@ -81,11 +73,11 @@ ${rootClass}__author-setter {
   }
 }
 
-&${rootClass}_quote-selected {
-  ${rootClass}__quote-setter {
+&${rootClass}_title-selected {
+  ${rootClass}__title-setter {
     display: block;
   }
-  .libe-insta-quote-on-bg-image-display-slide__quote {
+  .libe-insta-img-and-text-display-slide__title {
     cursor: pointer;
     box-shadow:
         0 0 5px ${p => p.theme.units(0.125)}
@@ -95,11 +87,11 @@ ${rootClass}__author-setter {
   }
 }
 
-&${rootClass}_author-selected {
-  ${rootClass}__author-setter {
+&${rootClass}_text-selected {
+  ${rootClass}__text-setter {
     display: block;
   }
-  .libe-insta-quote-on-bg-image-display-slide__quote-author {
+  .libe-insta-img-and-text-display-slide__text {
     cursor: pointer;
     color: ${p => p.theme.colors.actionText};
     box-shadow:

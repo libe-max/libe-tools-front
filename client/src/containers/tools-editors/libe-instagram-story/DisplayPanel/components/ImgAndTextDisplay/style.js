@@ -23,18 +23,29 @@ ${rootClass}__image-title-and-text {
   max-width: calc(780 / 1080 * 100%);
   max-height: calc(1620 / 1920 * 90%);
   width: calc(780 / 1080 * 100%);
+  height: 100%;
   transform: translate(-50%, -50%);
   top: 45%;
   left: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 }
 
 ${rootClass}__image {
+  max-width: 100%;
+  max-height: 70%;
+  overflow: hidden;
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
   img {
-    width: 100%;
+    opacity: 0;
+    width: auto;
     height: auto;
+    max-width: 100%;
+    max-height: 100%;
   }
 }
 

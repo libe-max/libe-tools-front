@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import LibeIconSignature from '../LibeIconSignature'
+import bgImagePlaceholder from '../../assets/bg-image-placeholder.svg'
 
 import Wrapper from './style'
 
@@ -13,7 +14,8 @@ export default class ImgAndTextDisplay extends Component {
     const text = slide.text || {}
     const styles = {
       image: {
-        marginBottom: `${104 / 1080 * width}px`
+        marginBottom: `${54 / 1080 * width}px`,
+        backgroundImage: `url(${image.src || bgImagePlaceholder})`,
       },
       title: {
         marginBottom: `${36 / 1080 * width}px`,
@@ -37,17 +39,19 @@ export default class ImgAndTextDisplay extends Component {
         <div
           style={styles.image}
           className={`${rootClass}__image`}>
-          <img src={image.src} />
+          <img src={image.src || bgImagePlaceholder} />
         </div>
-        <div
-          style={styles.title}
-          className={`${rootClass}__title`}>
-          {title.value}
-        </div>
-        <div
-          style={styles.text}
-          className={`${rootClass}__text`}>
-          {text.value}
+        <div className={`${rootClass}__title-and-text`}>
+          <div
+            style={styles.title}
+            className={`${rootClass}__title`}>
+            {title.value}
+          </div>
+          <div
+            style={styles.text}
+            className={`${rootClass}__text`}>
+            {text.value}
+          </div>
         </div>
       </div>
       <div className={`${rootClass}__icon-signature`}>

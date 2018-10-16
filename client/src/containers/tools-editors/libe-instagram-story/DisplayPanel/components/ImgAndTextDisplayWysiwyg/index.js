@@ -5,15 +5,15 @@ import RangeInput from '../../../../../../components/inputs/RangeInput'
 import Button from '../../../../../../components/buttons/Button'
 import ParagraphTitle from '../../../../../../components/text-levels/ParagraphTitle'
 import ParamBox from '../ParamBox'
-import QuoteOnBgImageDisplay from '../QuoteOnBgImageDisplay/'
+import ImgAndTextDisplay from '../ImgAndTextDisplay/'
 
 import Wrapper from './style'
 
-export default class QuoteOnBgImageDisplayWysiwyg extends Component {
+export default class ImgAndTextDisplayWysiwyg extends Component {
   constructor () {
     super()
     this.state = { selected: null }
-    this.rootClass = `libe-insta-quote-on-bg-image-display-slide-wysiwyg`
+    this.rootClass = `libe-insta-img-and-text-display-slide-wysiwyg`
     this.selectElement = this.selectElement.bind(this)
     this.populateSettingsFields = this.populateSettingsFields.bind(this)
   }
@@ -21,12 +21,12 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
   componentDidMount () {
     const { $wrapper } = this
     const select = query => $wrapper.querySelector(query)
-    this.$bgImages = select(`.libe-insta-quote-on-bg-image-display-slide__background-images`)
-    this.$quote = select(`.libe-insta-quote-on-bg-image-display-slide__quote`)
-    this.$author = select(`.libe-insta-quote-on-bg-image-display-slide__quote-author`)
-    this.$bgImages.addEventListener('click', e => {this.selectElement('bg')})
-    this.$quote.addEventListener('click', e => {this.selectElement('quote')})
-    this.$author.addEventListener('click', e => {this.selectElement('author')})
+    this.$image = select(`.libe-insta-img-and-text-display-slide__image`)
+    this.$title = select(`.libe-insta-img-and-text-display-slide__title`)
+    this.$text = select(`.libe-insta-img-and-text-display-slide__text`)
+    this.$image.addEventListener('click', e => {this.selectElement('img')})
+    this.$title.addEventListener('click', e => {this.selectElement('title')})
+    this.$text.addEventListener('click', e => {this.selectElement('text')})
     this.populateSettingsFields()
   }
 
@@ -35,33 +35,28 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
   }
 
   componentWillUnmount () {
-    this.$bgImages.removeEventListener('click', e => {this.selectElement('bg')})
-    this.$quote.removeEventListener('click', e => {this.selectElement('quote')})
-    this.$author.removeEventListener('click', e => {this.selectElement('author')})
+    this.$image.removeEventListener('click', e => {this.selectElement('img')})
+    this.$title.removeEventListener('click', e => {this.selectElement('title')})
+    this.$text.removeEventListener('click', e => {this.selectElement('text')})
   }
 
   selectElement (name) {
     this.setState({ selected: name })
-    if (name === 'bg' && this.$bgSrcSetter0) this.$bgSrcSetter0.input.focus()
-    if (name === 'quote' && this.$quoteValueSetter) this.$quoteValueSetter.input.focus()
-    if (name === 'author' && this.$authorValueSetter) this.$authorValueSetter.input.focus()
+    if (name === 'img' && this.$imgSrcSetter) this.$imgSrcSetter.input.focus()
+    if (name === 'title' && this.$titleValueSetter) this.$titleValueSetter.input.focus()
+    if (name === 'text' && this.$textValueSetter) this.$textValueSetter.input.focus()
   }
 
   populateSettingsFields () {
     const { props, $wrapper } = this
     const { slide } = props
-    const quote = slide.title || { value: '' }
-    const author = slide.text || { value: '' }
-    const background = slide.backgroundImages || [{ src: '', position: 50 }]
+    const title = slide.title || { value: '' }
+    const text = slide.text || { value: '' }
+    const image = slide.image || { src: '', position: 50 }
     const select = query => $wrapper.querySelector(query)
-    if (this.$quoteValueSetter) this.$quoteValueSetter.input.value = quote.value
-    if (this.$authorValueSetter) this.$authorValueSetter.input.value = author.value
-    if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
-    if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
-    if (this.$bgSrcSetter1) this.$bgSrcSetter1.input.value = background[1]
-      ? background[1].src : ''
-    if (this.$bgPosSetter1) this.$bgPosSetter1.input.value = background[1]
-      ? background[1].position : ''
+    if (this.$titleValueSetter) this.$titleValueSetter.input.value = title.value
+    if (this.$textValueSetter) this.$textValueSetter.input.value = text.value
+    if (this.$imgSrcSetter) this.$imgSrcSetter.input.value = image.src
   }
 
   render () {
@@ -69,121 +64,71 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
     const { slide, dispatchEdition, width, height} = props
 
     /* Inner logic */
-    const hasNoBg = !slide.backgroundImages || !slide.backgroundImages.length
-    const hasOneImage = slide.backgroundImages && slide.backgroundImages.length === 1
-    const hasTwoImages = slide.backgroundImages && slide.backgroundImages.length === 2
-    const hasNoQuote = !slide.title || !slide.title.value
-    const hasNoAuthor = !slide.text || !slide.text.value
-    const bgIsSelected = state.selected === 'bg'
-    const quoteIsSelected = state.selected === 'quote'
-    const authorIsSelected = state.selected === 'author'
+    const hasNoImg = !slide.image
+    const hasNoTitle = !slide.title || !slide.title.value
+    const hasNoText = !slide.text || !slide.text.value
+    const imgIsSelected = state.selected === 'img'
+    const titleIsSelected = state.selected === 'title'
+    const textIsSelected = state.selected === 'text'
     const renderedSlide = { ...slide }
-    if (hasNoBg) renderedSlide.backgroundImages = [{}]
-    if (hasNoQuote) renderedSlide.title = { value: `Ajoutez un titre` }
-    if (hasNoAuthor) renderedSlide.text = { value: `Ajoutez un texte` }
-    const addImage = e => dispatchEdition(
-      'backgroundImages', [
-        ...renderedSlide.backgroundImages, {
-          src: '',
-          position: 50
-      }])
-    const removeImage = n => dispatchEdition(
-      'backgroundImages', [
-        ...renderedSlide.backgroundImages.slice(0, n),
-        ...renderedSlide.backgroundImages.slice(n + 1)
-      ])
-    const changeImageSrc = (n, val) => dispatchEdition(
-      'backgroundImages', [
-        ...renderedSlide.backgroundImages.slice(0, n), {
-          ...renderedSlide.backgroundImages[n],
-          src: val
-        }, ...renderedSlide.backgroundImages.slice(n + 1)
-      ])
-    const changeImagePos = (n, val) => dispatchEdition(
-      'backgroundImages', [
-        ...renderedSlide.backgroundImages.slice(0, n), {
-          ...renderedSlide.backgroundImages[n],
-          position: parseInt(val, 10) || 1
-        }, ...renderedSlide.backgroundImages.slice(n + 1)
-      ])
+    if (hasNoImg) renderedSlide.image = {}
+    if (hasNoTitle) renderedSlide.title = { value: `Ajoutez un titre` }
+    if (hasNoText) renderedSlide.text = { value: `Ajoutez un texte` }
+    const changeImageSrc = (val) => dispatchEdition(
+      'image', {
+        ...renderedSlide.image,
+        src: val
+      })
 
     /* Assign classes */
     const classes = [this.rootClass]
-    if (hasNoBg) classes.push(`${this.rootClass}_no-bg`)
-    if (hasNoQuote) classes.push(`${this.rootClass}_no-quote`)
-    if (hasNoAuthor) classes.push(`${this.rootClass}_no-author`)
-    if (bgIsSelected) classes.push(`${this.rootClass}_bg-selected`)
-    if (quoteIsSelected) classes.push(`${this.rootClass}_quote-selected`)
-    if (authorIsSelected) classes.push(`${this.rootClass}_author-selected`)
+    if (hasNoImg) classes.push(`${this.rootClass}_no-img`)
+    if (hasNoTitle) classes.push(`${this.rootClass}_no-title`)
+    if (hasNoText) classes.push(`${this.rootClass}_no-text`)
+    if (imgIsSelected) classes.push(`${this.rootClass}_img-selected`)
+    if (titleIsSelected) classes.push(`${this.rootClass}_title-selected`)
+    if (textIsSelected) classes.push(`${this.rootClass}_text-selected`)
 
     /* Display */
     return <Wrapper
       className={classes.join(` `)}
       innerRef={node => this.$wrapper = node}>
-      <QuoteOnBgImageDisplay slide={renderedSlide} width={width} />
-      <div className={`${this.rootClass}__background-setter`}>
+      <ImgAndTextDisplay slide={renderedSlide} width={width} />
+      <div className={`${this.rootClass}__image-setter`}>
         <ParamBox
-          title='Images de fond'
+          title='Image'
           handleClose={e => this.selectElement(null)}>
           <div className={`libe-insta-param-box__section`}>
-            <ParagraphTitle>Image 1</ParagraphTitle>
             <TextInput
               label={`URL de l'image`}
               placeholder={`Entrez l'URL de l'image`}
-              ref={node => this.$bgSrcSetter0 = node}
-              onChange={e => changeImageSrc(0, e.target.value)} />
-            <RangeInput
-              unit='%'
-              label={`Position de l'image`}
-              ref={node => this.$bgPosSetter0 = node}
-              onChange={e => changeImagePos(0, e.target.value)} />
-            {hasTwoImages
-              ? <Button link onClick={e => removeImage(0)}>Supprimer cette image</Button>
-              : null}
+              ref={node => this.$imgSrcSetter = node}
+              onChange={e => changeImageSrc(e.target.value)} />
           </div>
-          {hasTwoImages
-            ? <div className={`libe-insta-param-box__section`}>
-                <ParagraphTitle>Image 2</ParagraphTitle>
-                <TextInput
-                  label={`URL de l'image`}
-                  placeholder={`Entrez l'URL de l'image`}
-                  ref={node => this.$bgSrcSetter1 = node}
-                  onChange={e => changeImageSrc(1, e.target.value)} />
-                <RangeInput
-                  unit='%'
-                  label={`Position de l'image`}
-                  ref={node => this.$bgPosSetter1 = node}
-                  onChange={e => changeImagePos(1, e.target.value)} />
-                <Button link onClick={e => removeImage(1)}>Supprimer cette image</Button>
-              </div>
-            : null}
-          {!hasTwoImages
-            ? <Button link onClick={addImage}>+ Ajouter une image</Button>
-            : null}
         </ParamBox>
       </div>
-      <div className={`${this.rootClass}__quote-setter`}>
+      <div className={`${this.rootClass}__title-setter`}>
         <ParamBox
-          title='Texte de la citation'
+          title='Titre'
           handleClose={e => this.selectElement(null)}>
           <TextInput
             blurOnEnter
-            label={`Citation`}
-            placeholder={`Entrez la citation`}
-            ref={node => this.$quoteValueSetter = node}
+            label={`Titre de la page`}
+            placeholder={`Tapez le titre`}
+            ref={node => this.$titleValueSetter = node}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('title', { value: e.target.value })} />
         </ParamBox>
       </div>
-      <div className={`${this.rootClass}__author-setter`}>
+      <div className={`${this.rootClass}__text-setter`}>
         <ParamBox
-          title='Auteur de la citation'
+          title='Texte'
           handleClose={e => this.selectElement(null)}>
           <TextInput
             blurOnEnter
-            label={`Nom`}
-            placeholder={`Tapez le nom associé à la citation`}
-            ref={node => this.$authorValueSetter = node}
+            label={`Texte`}
+            placeholder={`Tapez le texte`}
+            ref={node => this.$textValueSetter = node}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('text', { value: e.target.value })} />
         </ParamBox>
