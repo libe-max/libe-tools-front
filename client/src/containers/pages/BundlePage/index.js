@@ -86,6 +86,7 @@ class BundlePage extends Component {
   render () {
     const props = this.props
     const state = this.state
+
     /* Inner logic */
     const {
       storedBundle,
@@ -101,6 +102,14 @@ class BundlePage extends Component {
     const BundleDisplayer = props.tool.display || (props => <div />)
     const BundleCustomSettings = props.tool.settings || (props => <div />)
     const BundleActions = props.tool.actions || (props => <div />)
+    const BundleSavedActions = props.tool.savedActions || (props => <div />)
+    const isSaved = (props => {
+      if (!storedBundle._id) return false
+      if (loading) return false
+      if (isSaving) return false
+      if (unsavedSettings) return false
+      return true
+    })(props)
 
     /* Assign classes to component */
     const classes = ['bundle-page']
@@ -109,6 +118,7 @@ class BundlePage extends Component {
     if (props.tool.display) classes.push('bundle-page_with-display')
     if (props.tool.settings) classes.push('bundle-page_with-custom-settings')
     if (isSaving) classes.push('bundle-page_saving')
+    if (isSaved) classes.push('bundle-page_saved')
 
     /* Display */
     return <Wrapper innerRef={node => { this.node = node }} className={classes.join(' ')}>
@@ -188,7 +198,8 @@ class BundlePage extends Component {
             </div>
             <div className='bundle-page__saved-paragraph'>
               <Paragraph light small>
-                Module sauvegardé (dernière modif. : <span title={lastSavedOn}>{lastSavedAgo}</span>)
+                Module sauvegardé<br />
+                (<span title={lastSavedOn}>{lastSavedAgo}</span>)
               </Paragraph>
             </div>
             <div className='bundle-page__saving-paragraph'>
@@ -198,11 +209,21 @@ class BundlePage extends Component {
             </div>
             <div className='bundle-page__save-button'>
               <Button
-                onClick={e => props.saveChanges(unsavedSettings)}
+                primary
                 disabled={isSaving}
-                primary>
+                onClick={e => props.saveChanges(unsavedSettings)}>
                 Enregistrer
               </Button>
+            </div>
+            <div className='bundle-page__custom-saved-actions'>
+              <BundleSavedActions
+                id={storedBundle._id}
+                isSaving={isSaving}
+                loading={loading}
+                storedSettings={storedSettings}
+                unsavedSettings={unsavedSettings}
+                latestSettings={latestSettings}
+                dispatchEdition={props.dispatchEdition} />
             </div>
           </div>
         </ShadowBar>
