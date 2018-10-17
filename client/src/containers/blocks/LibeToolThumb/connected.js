@@ -20,7 +20,7 @@ export const dispatch2props = (dispatch, props) => ({
       if (!res.err) {
         dispatch(createBundleSuccess(res.data))
         dispatch(pushNotification('Le module a bien été créé !'))
-        dispatch(push(`/bundle/${res.data.type}/${res.data._id}`))
+        dispatch(push(`/edit/${res.data.type}/${res.data._id}`))
       } else {
         dispatch(createBundleError())
         const notif = `Impossible de créer ce module de type ${props.type}, le serveur a répondu : ${res.err}`

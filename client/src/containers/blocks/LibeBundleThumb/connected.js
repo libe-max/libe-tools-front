@@ -12,7 +12,7 @@ export const dispatch2props = (dispatch, props) => ({
   navigateToBundle: e => {
     e.stopPropagation()
     dispatch(
-      push(`/bundle/${props.type}/${props.bundleId}`)
+      push(`/edit/${props.type}/${props.bundleId}`)
     )
   },
   deleteBundle: e => {
