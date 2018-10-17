@@ -1,0 +1,9 @@
+html, body { padding: 0; margin: 0; }
+html, body, html *, body *, * { box-sizing: border-box; }
+.container {
+  width: 540px;
+  height: 1900px;
+  background: limegreen;
+  font-family: 'Mali', cursive;
+}
+h1 { color: blue; }

@@ -9,6 +9,7 @@
     "standard-fix": "standard --fix --verbose | snazzy"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "~1.4.3",
     "debug": "^4.1.0",
     "express": "^4.16.4",
@@ -16,7 +17,9 @@
     "moment": "^2.22.2",
     "monk": "^6.0.6",
     "morgan": "^1.9.1",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "uuid": "^3.3.2",
+    "webshot": "^0.18.0"
   },
   "standard": {
     "ignore": [
