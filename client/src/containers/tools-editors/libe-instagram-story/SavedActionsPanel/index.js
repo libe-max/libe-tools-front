@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import download from 'downloadjs'
 
 import Button from '../../../../components/buttons/Button'
 
@@ -10,7 +11,7 @@ export default class LibeInstaStorySavedActionsPanel extends Component {
     const { id } = props
     const handleClick = e => fetch(`/api/build/${id}`)
       .then(r => r.blob())
-      .then(res => console.log(res))
+      .then(blob => download(blob, 'story.zip'))
       .catch(e => console.log(e))
     return <Wrapper>
       <Button
