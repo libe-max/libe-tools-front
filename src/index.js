@@ -46,6 +46,8 @@ const store = createStore(
   )
 )
 
+console.log('tututu')
+
 /* * * * * * * * * * * * * * * * * *
  *
  *   Render app
