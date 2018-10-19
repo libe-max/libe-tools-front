@@ -137,8 +137,9 @@ router.get('/build/:id', (req, res, next) => {
     const { type } = doc
     try {
       const built = await build(doc)
-      res.json({err: null, data: built})
+      res.sendFile(built)
     } catch (err) {
+      console.error(err)
       res.json({err: err, data: null})
     }
   })
