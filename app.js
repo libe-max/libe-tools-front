@@ -21,12 +21,12 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'client/build')))
 
 // Simulate latency
-app.use((req, res, next) => {
-  const delay = Math.floor(Math.random() * 800) + 200
-  const envIsDev = req.app.get('env') === 'development'
-  if (envIsDev) setTimeout(next, delay)
-  else next()
-})
+// app.use((req, res, next) => {
+//   const delay = Math.floor(Math.random() * 800) + 200
+//   const envIsDev = req.app.get('env') === 'development'
+//   if (envIsDev) setTimeout(next, delay)
+//   else next()
+// })
 
 // Database
 const db = monk('localhost:27017/libetools')
