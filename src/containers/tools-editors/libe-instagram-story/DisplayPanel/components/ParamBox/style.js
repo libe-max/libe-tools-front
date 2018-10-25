@@ -14,11 +14,11 @@ ${rootClass}__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: ${p =>p.theme.units(3)};
+  margin-bottom: ${p => p.theme.units(3)};
 }
 
 ${rootClass}__params > * {
-  margin-bottom: ${p =>p.theme.units(3)};
+  margin-bottom: ${p => p.theme.units(3)};
 }
 
 ${rootClass}__params > *:last-child {
@@ -26,7 +26,7 @@ ${rootClass}__params > *:last-child {
 }
 
 ${rootClass}__params > ${rootClass}__section > * {
-  margin-bottom: ${p =>p.theme.units(2)}; 
+  margin-bottom: ${p => p.theme.units(2)}; 
 }
 
 ${rootClass}__params > ${rootClass}__section > *:last-child {

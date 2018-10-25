@@ -5,17 +5,17 @@ import bgImagePlaceholder from '../../assets/bg-image-placeholder.svg'
 
 import Wrapper from './style'
 
-export default class ImgAndTextDisplay extends Component {
+export default class ImgAndTextDisplay extends Component {
   render () {
     const { props } = this
     const { slide, width } = props
-    const image = slide.image || {}
-    const title = slide.title || {}
-    const text = slide.text || {}
+    const image = slide.image || {}
+    const title = slide.title || {}
+    const text = slide.text || {}
     const styles = {
       image: {
         marginBottom: `${54 / 1080 * width}px`,
-        backgroundImage: `url(${image.src || bgImagePlaceholder})`,
+        backgroundImage: `url(${image.src || bgImagePlaceholder})`
       },
       title: {
         marginBottom: `${36 / 1080 * width}px`,
@@ -33,7 +33,7 @@ export default class ImgAndTextDisplay extends Component {
     const classes = [rootClass]
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__image-title-and-text`}>
         <div

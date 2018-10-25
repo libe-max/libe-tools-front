@@ -38,7 +38,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
 
   componentDidMount () {
     const { latestSettings } = this.props
-    const slides = latestSettings.slides || []
+    const slides = latestSettings.slides || []
     this.constrainProportions()
     if (slides.length) this.centerSlide()
     else this.centerSlide(-1)
@@ -46,7 +46,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
 
   componentDidUpdate () {
     const { latestSettings } = this.props
-    const slides = latestSettings.slides || []
+    const slides = latestSettings.slides || []
     this.constrainProportions()
     if (slides.length) this.centerSlide()
     else this.centerSlide(-1)
@@ -55,8 +55,8 @@ export default class LibeInstaStoryWysiwyg extends Component {
   static getDerivedStateFromProps (props, state) {
     const { latestSettings } = props
     const { pLatestSettings } = state
-    const slides = latestSettings.slides || []
-    const pSlides = pLatestSettings.slides || []
+    const slides = latestSettings.slides || []
+    const pSlides = pLatestSettings.slides || []
     const newState = {
       ...state,
       loading: props.loading
@@ -78,8 +78,8 @@ export default class LibeInstaStoryWysiwyg extends Component {
     /* Inner logic */
     const activeSlidePos = state.activeSlidePos
     const latestSettings = props.latestSettings
-    const slides = latestSettings.slides || []
-    
+    const slides = latestSettings.slides || []
+
     /* Params for the slide display selector */
     const activeSlide = slides[activeSlidePos] || {}
     const activeSlideDisplay = activeSlide.display
@@ -122,7 +122,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__slide-controls`}>
         <div className={`${rootClass}__slides-navigation`}>
           <div className={[
@@ -135,8 +135,8 @@ export default class LibeInstaStoryWysiwyg extends Component {
           </div>
           <div className={`${rootClass}__active-page`}>
             <BlockTitle>{
-              activeSlidePos !== undefined
-              && activeSlidePos !== -1
+              activeSlidePos !== undefined &&
+              activeSlidePos !== -1
                 ? `Page ${activeSlidePos + 1}`
                 : `Nouvelle Story`
             }</BlockTitle>
@@ -153,15 +153,14 @@ export default class LibeInstaStoryWysiwyg extends Component {
         <div className={`${rootClass}__slide-display`}>
           <SelectList
             options={displayPickerOptions}
-            ref={node => this.$displayPicker = node}
+            ref={node => { this.$displayPicker = node }}
             onChange={this.changeDisplayOnActiveSlide} />
         </div>
       </div>
       <div className={`${rootClass}__slides`}>
         <div
-          ref={node => this.$spacer = node}
-          className={`${rootClass}__slides-spacer`}>
-        </div>
+          ref={node => { this.$spacer = node }}
+          className={`${rootClass}__slides-spacer`} />
         {slidesDom}
         <div
           onClick={this.addNewSlide}
@@ -180,7 +179,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
   addNewSlide () {
     const props = this.props
     const latestSettings = props.latestSettings
-    const slides = latestSettings.slides || []
+    const slides = latestSettings.slides || []
     props.dispatchEdition('slides', [...slides, {}])
   }
 
@@ -222,7 +221,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     const width = Math.floor(9 * height / 16)
     this.$wrapper
       .querySelectorAll('.libe-insta-story-wysiwyg__slide')
-      .forEach(slide => slide.style.width = `${width}px`)
+      .forEach(slide => { slide.style.width = `${width}px` })
     this.$wrapper
       .querySelector('.libe-insta-story-wysiwyg__new-slide')
       .style.width = `${width}px`

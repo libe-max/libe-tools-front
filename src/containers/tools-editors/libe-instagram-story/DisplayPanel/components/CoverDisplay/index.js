@@ -9,13 +9,13 @@ export default class LibeInstaSlideCoverDisplay extends Component {
   render () {
     const { props } = this
     const { slide, width } = props
-    const backgroundImages = slide.backgroundImages || []
+    const backgroundImages = slide.backgroundImages || []
     const text = slide.text || {}
     const title = slide.title || {}
 
     const styles = {
       titleAndText: {
-        width: `${780 / 1080 * width}px`,
+        width: `${780 / 1080 * width}px`
       },
       title: {
         maxWidth: `${450 / 1080 * width}px`,
@@ -33,10 +33,10 @@ export default class LibeInstaSlideCoverDisplay extends Component {
     const classes = [rootClass]
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__background-images`}>{
-          backgroundImages.map((img, i) => {
+        backgroundImages.map((img, i) => {
           const style = {
             backgroundImage: `url(${img.src || bgImagePlaceholder})`,
             backgroundPosition: `${img.position || 50}% ${img.position || 50}%`
@@ -44,8 +44,7 @@ export default class LibeInstaSlideCoverDisplay extends Component {
           return <div
             key={i}
             style={style}
-            className={`${rootClass}__background-image`}>
-          </div>
+            className={`${rootClass}__background-image`} />
         })
       }</div>
       <div

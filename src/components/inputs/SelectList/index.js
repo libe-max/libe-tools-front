@@ -22,7 +22,7 @@ import Wrapper from './style'
 export default class SelectList extends Component {
   constructor (props) {
     super(props)
-    const options = props.options || []
+    const options = props.options || []
     const placeholderOption = options.filter(option => option.selected && option.disabled)[0]
     this.onChangeWrapper = this.onChangeWrapper.bind(this)
     this.state = { placeholder: placeholderOption }
@@ -31,7 +31,7 @@ export default class SelectList extends Component {
   render () {
     const props = this.props
     const state = this.state
-    const options = props.options || []
+    const options = props.options || []
     const defaultOption = options.filter(option => option.selected)[0]
     const defaultValue = defaultOption ? defaultOption.value : undefined
     /* Assign classes to component */
@@ -40,10 +40,10 @@ export default class SelectList extends Component {
     if (props.disabled) classes.push('select-list_disabled')
     if (state.placeholder) {
       if (
-        this.input
-        && this.input.value
-        && this.input.value === state.placeholder.value) {
-         classes.push('select-list_placeholder-selected')
+        this.input &&
+        this.input.value &&
+        this.input.value === state.placeholder.value) {
+        classes.push('select-list_placeholder-selected')
       } else if (!this.input) classes.push('select-list_placeholder-selected')
     }
     /* Display */
@@ -57,17 +57,17 @@ export default class SelectList extends Component {
         onBlur={props.onBlur}
         onClick={props.onClick}
         ref={node => { this.input = node }}>{
-        options.map(option => {
-          if (!option.value) console.error('Options need a value field')
-          return <option
-            key={option.value}
-            disabled={option.disabled}
-            label={option.label}
-            value={option.value}>
-            {option.label}
-          </option>
-        })
-      }</select>
+          options.map(option => {
+            if (!option.value) console.error('Options need a value field')
+            return <option
+              key={option.value}
+              disabled={option.disabled}
+              label={option.label}
+              value={option.value}>
+              {option.label}
+            </option>
+          })
+        }</select>
     </Wrapper>
   }
 

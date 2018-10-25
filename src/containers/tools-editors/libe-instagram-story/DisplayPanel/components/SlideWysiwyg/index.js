@@ -61,7 +61,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     classes.push(`libe-insta-slide-wysiwyg_${display}`)
     /* Display */
     return <Wrapper
-      innerRef={node => this.$wrapper = node}
+      innerRef={node => { this.$wrapper = node }}
       className={classes.join(` `)}>
       {content}
     </Wrapper>
@@ -71,8 +71,8 @@ export default class LibeInstaSlideWysiwyg extends Component {
     const { state, $wrapper } = this
     if (!this.$wrapper) return
     if (
-      $wrapper.offsetWidth === state.width
-      && $wrapper.offsetHeight === state.height
+      $wrapper.offsetWidth === state.width &&
+      $wrapper.offsetHeight === state.height
     ) return
     return this.setState({
       width: this.$wrapper.offsetWidth,

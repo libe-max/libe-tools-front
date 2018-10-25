@@ -5,16 +5,16 @@ import bgImagePlaceholder from '../../assets/bg-image-placeholder.svg'
 
 import Wrapper from './style'
 
-export default class FullImageDisplay extends Component {
+export default class FullImageDisplay extends Component {
   render () {
     const { props } = this
     const { slide } = props
-    const backgroundImages = slide.backgroundImages || []
+    const backgroundImages = slide.backgroundImages || []
     const rootClass = `libe-insta-full-image-display-slide`
     const classes = [rootClass]
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__background-images`}>{
         backgroundImages.map((img, i) => {
@@ -25,8 +25,7 @@ export default class FullImageDisplay extends Component {
           return <div
             key={i}
             style={style}
-            className={`${rootClass}__background-image`}>
-          </div>
+            className={`${rootClass}__background-image`} />
         })
       }</div>
       <div className={`${rootClass}__icon-signature`}>

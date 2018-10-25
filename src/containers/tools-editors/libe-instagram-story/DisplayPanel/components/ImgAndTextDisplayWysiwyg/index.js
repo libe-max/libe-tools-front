@@ -21,9 +21,9 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
     this.$image = select(`.libe-insta-img-and-text-display-slide__image`)
     this.$title = select(`.libe-insta-img-and-text-display-slide__title`)
     this.$text = select(`.libe-insta-img-and-text-display-slide__text`)
-    this.$image.addEventListener('click', e => {this.selectElement('img')})
-    this.$title.addEventListener('click', e => {this.selectElement('title')})
-    this.$text.addEventListener('click', e => {this.selectElement('text')})
+    this.$image.addEventListener('click', e => { this.selectElement('img') })
+    this.$title.addEventListener('click', e => { this.selectElement('title') })
+    this.$text.addEventListener('click', e => { this.selectElement('text') })
     this.populateSettingsFields()
   }
 
@@ -32,9 +32,9 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
   }
 
   componentWillUnmount () {
-    this.$image.removeEventListener('click', e => {this.selectElement('img')})
-    this.$title.removeEventListener('click', e => {this.selectElement('title')})
-    this.$text.removeEventListener('click', e => {this.selectElement('text')})
+    this.$image.removeEventListener('click', e => { this.selectElement('img') })
+    this.$title.removeEventListener('click', e => { this.selectElement('title') })
+    this.$text.removeEventListener('click', e => { this.selectElement('text') })
   }
 
   selectElement (name) {
@@ -88,7 +88,7 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <ImgAndTextDisplay slide={renderedSlide} width={width} />
       <div className={`${this.rootClass}__image-setter`}>
         <ParamBox
@@ -98,7 +98,7 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
             <TextInput
               label={`URL de l'image`}
               placeholder={`Entrez l'URL de l'image`}
-              ref={node => this.$imgSrcSetter = node}
+              ref={node => { this.$imgSrcSetter = node }}
               onChange={e => changeImageSrc(e.target.value)} />
           </div>
         </ParamBox>
@@ -111,7 +111,7 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
             blurOnEnter
             label={`Titre de la page`}
             placeholder={`Tapez le titre`}
-            ref={node => this.$titleValueSetter = node}
+            ref={node => { this.$titleValueSetter = node }}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('title', { value: e.target.value })} />
         </ParamBox>
@@ -124,7 +124,7 @@ export default class ImgAndTextDisplayWysiwyg extends Component {
             blurOnEnter
             label={`Texte`}
             placeholder={`Tapez le texte`}
-            ref={node => this.$textValueSetter = node}
+            ref={node => { this.$textValueSetter = node }}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('text', { value: e.target.value })} />
         </ParamBox>

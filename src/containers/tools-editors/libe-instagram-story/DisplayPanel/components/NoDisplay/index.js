@@ -12,7 +12,7 @@ export default class NoDisplay extends Component {
     const classes = [rootClass]
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__safe-zone`} />
       <div
         style={{fontSize: `${fontSize}px`}}

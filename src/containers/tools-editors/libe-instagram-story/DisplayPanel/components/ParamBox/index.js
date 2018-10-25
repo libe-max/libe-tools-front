@@ -8,7 +8,10 @@ import theme from '../../../../../../theme'
 import Wrapper from './style'
 
 export default class ParamBox extends Component {
-  rootClass = `libe-insta-param-box`
+  constructor () {
+    super()
+    this.rootClass = `libe-insta-param-box`
+  }
 
   render () {
     const { props } = this

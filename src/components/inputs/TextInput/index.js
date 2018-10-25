@@ -27,7 +27,6 @@ export default class TextInput extends Component {
     const handleKeyPress = e => {
       if (props.onKeyPress) props.onKeyPress(e)
       if (props.blurOnEnter && e.key === 'Enter') this.input.blur()
-      return
     }
 
     return <Wrapper className={classes}>

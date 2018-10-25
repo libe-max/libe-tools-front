@@ -6,13 +6,13 @@ import quoteSignIcon from '../../assets/libe-quote-sign.svg'
 
 import Wrapper from './style'
 
-export default class QuoteOnBgImageDisplay extends Component {
+export default class QuoteOnBgImageDisplay extends Component {
   render () {
     const { props } = this
     const { slide, width } = props
-    const backgroundImages = slide.backgroundImages || []
-    const text = slide.text || {}
-    const title = slide.title || {}
+    const backgroundImages = slide.backgroundImages || []
+    const text = slide.text || {}
+    const title = slide.title || {}
     const styles = {
       quote: {
         fontSize: `${122 / 1080 * width}px`,
@@ -28,7 +28,7 @@ export default class QuoteOnBgImageDisplay extends Component {
     const classes = [rootClass]
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__safe-zone`} />
       <div className={`${rootClass}__background-images`}>{
         backgroundImages.map((img, i) => {
@@ -39,8 +39,7 @@ export default class QuoteOnBgImageDisplay extends Component {
           return <div
             key={i}
             style={style}
-            className={`${rootClass}__background-image`}>
-          </div>
+            className={`${rootClass}__background-image`} />
         })
       }</div>
       <div className={`${rootClass}__quote-block`}>

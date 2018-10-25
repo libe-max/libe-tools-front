@@ -1,5 +1,5 @@
 import libeInstagramStory from '../containers/tools-editors/libe-instagram-story'
-import yellowWord from '../containers/tools-editors/yellow-word'
+// import yellowWord from '../containers/tools-editors/yellow-word'
 
 export const list = [
   {
@@ -24,5 +24,5 @@ export const list = [
     type: 'libe-box',
     description: 'Lorem ipsum dolor sit amet consectutor.',
     image: '/images/libe-box-thumb.png'
-  }*/
+  } */
 ]

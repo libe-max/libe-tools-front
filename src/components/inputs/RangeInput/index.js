@@ -46,7 +46,7 @@ export default class TextInput extends Component {
 
   updateTextAndFakeRange () {
     const { props, input, valueDisplayer, fakeGauge } = this
-    if (!input || ! valueDisplayer || !fakeGauge) return
+    if (!input || !valueDisplayer || !fakeGauge) return
     const min = props.min || 0
     const max = props.max || 100
     const ratio = input.value ? ((input.value - min) / max) : 0.5
@@ -69,7 +69,7 @@ export default class TextInput extends Component {
         <div
           className='range-input__value-displayer-wrapper'
           ref={node => { this.valueDisplayer = node }}>
-          <Paragraph></Paragraph>
+          <Paragraph />
         </div>
         <input
           type='range'

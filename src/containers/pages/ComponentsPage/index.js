@@ -98,7 +98,7 @@ export default class ComponentsPage extends Component {
               {label: 'Value 2', value: 'Value 2'},
               {label: '–', value: '-', disabled: true},
               {label: 'Value 3', value: 'Value 3'},
-              {label: 'Value 4', value: 'Value 4'},
+              {label: 'Value 4', value: 'Value 4'}
             ]} />
         </CpBx>
         <CpBx width={2 / 4} />

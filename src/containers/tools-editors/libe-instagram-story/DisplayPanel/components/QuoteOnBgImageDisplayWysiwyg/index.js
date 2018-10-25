@@ -24,9 +24,9 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
     this.$bgImages = select(`.libe-insta-quote-on-bg-image-display-slide__background-images`)
     this.$quote = select(`.libe-insta-quote-on-bg-image-display-slide__quote`)
     this.$author = select(`.libe-insta-quote-on-bg-image-display-slide__quote-author`)
-    this.$bgImages.addEventListener('click', e => {this.selectElement('bg')})
-    this.$quote.addEventListener('click', e => {this.selectElement('quote')})
-    this.$author.addEventListener('click', e => {this.selectElement('author')})
+    this.$bgImages.addEventListener('click', e => { this.selectElement('bg') })
+    this.$quote.addEventListener('click', e => { this.selectElement('quote') })
+    this.$author.addEventListener('click', e => { this.selectElement('author') })
     this.populateSettingsFields()
   }
 
@@ -35,9 +35,9 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
   }
 
   componentWillUnmount () {
-    this.$bgImages.removeEventListener('click', e => {this.selectElement('bg')})
-    this.$quote.removeEventListener('click', e => {this.selectElement('quote')})
-    this.$author.removeEventListener('click', e => {this.selectElement('author')})
+    this.$bgImages.removeEventListener('click', e => { this.selectElement('bg') })
+    this.$quote.removeEventListener('click', e => { this.selectElement('quote') })
+    this.$author.removeEventListener('click', e => { this.selectElement('author') })
   }
 
   selectElement (name) {
@@ -57,10 +57,14 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
     if (this.$authorValueSetter) this.$authorValueSetter.input.value = author.value
     if (this.$bgSrcSetter0) this.$bgSrcSetter0.input.value = background[0].src
     if (this.$bgPosSetter0) this.$bgPosSetter0.input.value = background[0].position
-    if (this.$bgSrcSetter1) this.$bgSrcSetter1.input.value = background[1]
-      ? background[1].src : ''
-    if (this.$bgPosSetter1) this.$bgPosSetter1.input.value = background[1]
-      ? background[1].position : ''
+    if (this.$bgSrcSetter1) {
+      this.$bgSrcSetter1.input.value = background[1]
+        ? background[1].src : ''
+    }
+    if (this.$bgPosSetter1) {
+      this.$bgPosSetter1.input.value = background[1]
+        ? background[1].position : ''
+    }
   }
 
   render () {
@@ -84,7 +88,7 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
         ...renderedSlide.backgroundImages, {
           src: '',
           position: 50
-      }])
+        }])
     const removeImage = n => dispatchEdition(
       'backgroundImages', [
         ...renderedSlide.backgroundImages.slice(0, n),
@@ -101,7 +105,7 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
       'backgroundImages', [
         ...renderedSlide.backgroundImages.slice(0, n), {
           ...renderedSlide.backgroundImages[n],
-          position: parseInt(val, 10) || 1
+          position: parseInt(val, 10) || 1
         }, ...renderedSlide.backgroundImages.slice(n + 1)
       ])
 
@@ -117,7 +121,7 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(` `)}
-      innerRef={node => this.$wrapper = node}>
+      innerRef={node => { this.$wrapper = node }}>
       <QuoteOnBgImageDisplay slide={renderedSlide} width={width} />
       <div className={`${this.rootClass}__background-setter`}>
         <ParamBox
@@ -128,12 +132,12 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
             <TextInput
               label={`URL de l'image`}
               placeholder={`Entrez l'URL de l'image`}
-              ref={node => this.$bgSrcSetter0 = node}
+              ref={node => { this.$bgSrcSetter0 = node }}
               onChange={e => changeImageSrc(0, e.target.value)} />
             <RangeInput
               unit='%'
               label={`Position de l'image`}
-              ref={node => this.$bgPosSetter0 = node}
+              ref={node => { this.$bgPosSetter0 = node }}
               onChange={e => changeImagePos(0, e.target.value)} />
             {hasTwoImages
               ? <Button link onClick={e => removeImage(0)}>Supprimer cette image</Button>
@@ -141,19 +145,19 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
           </div>
           {hasTwoImages
             ? <div className={`libe-insta-param-box__section`}>
-                <ParagraphTitle>Image 2</ParagraphTitle>
-                <TextInput
-                  label={`URL de l'image`}
-                  placeholder={`Entrez l'URL de l'image`}
-                  ref={node => this.$bgSrcSetter1 = node}
-                  onChange={e => changeImageSrc(1, e.target.value)} />
-                <RangeInput
-                  unit='%'
-                  label={`Position de l'image`}
-                  ref={node => this.$bgPosSetter1 = node}
-                  onChange={e => changeImagePos(1, e.target.value)} />
-                <Button link onClick={e => removeImage(1)}>Supprimer cette image</Button>
-              </div>
+              <ParagraphTitle>Image 2</ParagraphTitle>
+              <TextInput
+                label={`URL de l'image`}
+                placeholder={`Entrez l'URL de l'image`}
+                ref={node => { this.$bgSrcSetter1 = node }}
+                onChange={e => changeImageSrc(1, e.target.value)} />
+              <RangeInput
+                unit='%'
+                label={`Position de l'image`}
+                ref={node => { this.$bgPosSetter1 = node }}
+                onChange={e => changeImagePos(1, e.target.value)} />
+              <Button link onClick={e => removeImage(1)}>Supprimer cette image</Button>
+            </div>
             : null}
           {!hasTwoImages
             ? <Button link onClick={addImage}>+ Ajouter une image</Button>
@@ -168,7 +172,7 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
             blurOnEnter
             label={`Citation`}
             placeholder={`Entrez la citation`}
-            ref={node => this.$quoteValueSetter = node}
+            ref={node => { this.$quoteValueSetter = node }}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('title', { value: e.target.value })} />
         </ParamBox>
@@ -181,7 +185,7 @@ export default class QuoteOnBgImageDisplayWysiwyg extends Component {
             blurOnEnter
             label={`Nom`}
             placeholder={`Tapez le nom associé à la citation`}
-            ref={node => this.$authorValueSetter = node}
+            ref={node => { this.$authorValueSetter = node }}
             onBlur={e => this.selectElement(null)}
             onChange={e => dispatchEdition('text', { value: e.target.value })} />
         </ParamBox>
