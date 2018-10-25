@@ -10,8 +10,8 @@ import {
   pushNotification
 } from '../../../actions/actionCreators'
 
-import { list as toolsList } from '../../../_config/tools'
-import { bundleTemplate } from '../../../_config/bundles'
+import { list as toolsList } from '../../../utils/tools'
+import { bundleTemplate } from '../../../utils/bundles'
 
 export const state2props = (state, props) => {
   const id = props.match.params.id

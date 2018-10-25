@@ -14,7 +14,7 @@ import { ThemeProvider } from 'styled-components'
 import theme from '../../../theme'
 import Wrapper from './style'
 
-import { getBundleCurrentSettings, getBundleLastSaveDate } from '../../../_config/bundles'
+import { getBundleCurrentSettings, getBundleLastSaveDate } from '../../../utils/bundles'
 
 class BundlePage extends Component {
   constructor (props) {

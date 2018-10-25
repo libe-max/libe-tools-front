@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { displays, displayPickerOptions } from './_config/'
+import { displays, displayPickerOptions } from './utils/'
 
 import Button from '../../../../components/buttons/Button'
 import BlockTitle from '../../../../components/text-levels/BlockTitle'

@@ -40,6 +40,7 @@ ${rootClass}__text {
   transform: translate(-50%, -50%);
   top: 45%;
   left: 50%;
+  width: fit-content;
   max-width: calc(780 / 1080 * 100%);
   max-height: calc(1620 / 1920 * 90%);
   background: rgba(255, 255, 255, 0.7);

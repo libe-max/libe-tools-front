@@ -11,8 +11,8 @@ import Button from '../../../components/buttons/Button'
 import SearchField from '../../../components/inputs/SearchField'
 import Wrapper from './style'
 
-import { list as toolsList } from '../../../_config/tools'
-import { getBundleSlug, getBundleCurrentSettings } from '../../../_config/bundles'
+import { list as toolsList } from '../../../utils/tools'
+import { getBundleSlug, getBundleCurrentSettings } from '../../../utils/bundles'
 
 class HomePage extends Component {
   constructor (props) {

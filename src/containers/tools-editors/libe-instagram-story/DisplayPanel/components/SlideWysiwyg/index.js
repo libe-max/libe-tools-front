@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { displays } from '../../_config/'
+import { displays } from '../../utils/'
 import CoverDisplayWysiwyg from '../CoverDisplayWysiwyg/'
 import ImgAndTextDisplayWysiwyg from '../ImgAndTextDisplayWysiwyg/'
 import FullImageDisplayWysiwyg from '../FullImageDisplayWysiwyg/'

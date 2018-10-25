@@ -1,5 +1,5 @@
 import { EDIT_BUNDLE } from '../../actions/actionTypes'
-import { getBundleCurrentSettings } from '../../_config/bundles'
+import { getBundleCurrentSettings } from '../../utils/bundles'
 
 const editBundle = (state, action) => {
   switch (action.type) {
