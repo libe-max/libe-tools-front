@@ -183,6 +183,7 @@ const Theme = function ({ inverted, shaded } = {}) {
     breakpoints,
     transitions,
     numericTransitions,
+    hexToRgba: hexToRgba,
     _isInverted: typeof inverted === 'boolean' ? inverted : false,
     _isShaded: typeof shaded === 'boolean' ? shaded : false,
     _invert: function (theme = this) {
