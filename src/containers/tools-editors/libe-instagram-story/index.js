@@ -1,7 +1,7 @@
-import DisplayPanel from './DisplayPanel'
-import SavedActionsPanel from './SavedActionsPanel'
+import LibeInstaStoryWysiwyg from './LibeInstaStoryWysiwyg'
+import LibeInstaStorySavedActionsPanel from './LibeInstaStorySavedActionsPanel'
 
 export default {
-  DisplayPanel,
-  SavedActionsPanel
+  DisplayPanel: LibeInstaStoryWysiwyg,
+  SavedActionsPanel: LibeInstaStorySavedActionsPanel
 }
