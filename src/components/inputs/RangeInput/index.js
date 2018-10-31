@@ -53,7 +53,7 @@ export default class TextInput extends Component {
     fakeGauge.style.right = `${100 - 100 * ratio}%`
     valueDisplayer
       .querySelector('.paragraph')
-      .innerHTML = `${input.value} ${props.unit}`
+      .innerHTML = `${input.value}${props.unit ? props.unit : ''}`
   }
 
   render () {
