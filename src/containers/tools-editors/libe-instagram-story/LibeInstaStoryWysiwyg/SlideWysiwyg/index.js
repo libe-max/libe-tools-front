@@ -12,12 +12,32 @@ export default class LibeInstaSlideWysiwyg extends Component {
   constructor () {
     super()
     this.wysiwygEditors = []
+    this.resize = this.resize.bind(this)
+    this.initEditors = this.initEditors.bind(this)
     this.populateFields = this.populateFields.bind(this)
     this.activateEditor = this.activateEditor.bind(this)
     this.unactivateAllEditors = this.unactivateAllEditors.bind(this)
+    this.interval = window.setInterval(this.resize, 2000)
+    window.addEventListener('resize', this.resize)
   }
 
   componentDidMount () {
+    this.initEditors()
+    this.resize()
+    setTimeout(this.populateFields, 50)
+  }
+
+  componentDidUpdate () {
+    this.resize()
+    setTimeout(this.populateFields, 50)
+  }
+
+  componentWillUnmount () {
+    window.clearInterval(this.interval)
+    window.removeEventListener('resize', this.resize)
+  }
+
+  initEditors () {
     const { props: { slide, dispatchEdition } } = this
     const r = 'libe-insta-slide-wysiwyg'
     const slideClass = 'libe-insta-slide'
@@ -141,14 +161,6 @@ export default class LibeInstaSlideWysiwyg extends Component {
         </WysiwygEditor>
       </div>
     }))
-
-    console.log('----- MOUNT -----')
-    setTimeout(this.populateFields, 50)
-  }
-
-  componentDidUpdate () {
-    console.log('----- UPDATE -----')
-    setTimeout(this.populateFields, 50)
   }
 
   populateFields () {
@@ -167,6 +179,19 @@ export default class LibeInstaSlideWysiwyg extends Component {
     // if (slide.title) this.$titleEditorInput.input.value = slide.title.value
     // if (slide.text) this.$textEditorInput.input.value = slide.text.value
 
+  }
+
+  resize () {
+    const slideWidth = 1080
+    const slideHeight = 1920
+    const wrapperWidth = this.$wrapper.offsetWidth
+    const wrapperHeight = this.$wrapper.offsetHeight
+    const scX = wrapperWidth / slideWidth
+    const scY = wrapperHeight / slideHeight
+    const trX = (wrapperWidth - slideWidth) / 2
+    const trY = (wrapperHeight - slideHeight) / 2
+    const $slide = this.$wrapper.querySelector('.libe-insta-slide')
+    $slide.style.transform = `matrix(${scX}, 0, 0, ${scY}, ${trX}, ${trY})` 
   }
 
   activateEditor (editor) {

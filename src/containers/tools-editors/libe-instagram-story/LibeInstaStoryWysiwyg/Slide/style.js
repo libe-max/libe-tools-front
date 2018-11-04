@@ -11,9 +11,7 @@ width: 1080px;
 height: 1920px;
 background: white;
 
-// [WIP] scale programmatically
 // [WIP] make sure fontsfaces are inherited from here and not from the app
-transform: matrix(0.3425, 0, 0, 0.3425, -355, -631);
 
 /* Background images */
 ${r}__background-images {
