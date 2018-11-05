@@ -1,15 +1,32 @@
 import React, { Component } from 'react'
 
-import { withTheme } from 'styled-components'
+import Button from '../../buttons/Button'
+import ParagraphTitle from '../../text-levels/ParagraphTitle'
 
+import { withTheme, ThemeProvider } from 'styled-components'
 import Wrapper from './style'
+
+/*
+ *   Wysiwyg editor component
+ *   ------------------------------------------------------
+ *
+ *   DESCRIPTION
+ *   This component applies a hover style to a given DOM
+ *   element (props.domRoot), and pops a settings block
+ *   when this DOM element is clicked.
+ *
+ *   PROPS
+ *   title, domRoot, children, onActivate
+ *
+ */
 
 class WysiwygEditor extends Component {
   constructor (props) {
     super(props)
-    this.state = {
-      initDomRootStyles: props.domRoot.style,
-      active: false
+    this.state = { active: false }
+    this.initDomRootStyles = {
+      boxShadow: props.domRoot.style.boxShadow,
+      cursor: props.domRoot.style.cursor
     }
     this.setActiveStyle = this.setActiveStyle.bind(this)
     this.unsetActiveStyle = this.unsetActiveStyle.bind(this)
@@ -19,7 +36,7 @@ class WysiwygEditor extends Component {
     this.handleMouseleaveOnDomRoot = this.handleMouseleaveOnDomRoot.bind(this)
     props.domRoot.addEventListener('mouseenter', this.handleMouseenterOnDomRoot)
     props.domRoot.addEventListener('mouseleave', this.handleMouseleaveOnDomRoot)
-    props.domRoot.addEventListener('click', props.activate)
+    props.domRoot.addEventListener('click', this.activate)
   }
 
   componentDidMount () {
@@ -28,7 +45,10 @@ class WysiwygEditor extends Component {
   }
 
   componentDidUpdate () {
-    if (this.state.active) return this.setActiveStyle()
+    if (this.state.active) {
+      this.$wrapper.querySelector('input').focus()
+      return this.setActiveStyle()
+    }
     return this.unsetActiveStyle()
   }
 
@@ -36,24 +56,30 @@ class WysiwygEditor extends Component {
     const { props } = this
     props.domRoot.removeEventListener('mouseenter', this.setActiveStyle)
     props.domRoot.removeEventListener('mouseleave', this.unsetActiveStyle)
-    props.domRoot.removeEventListener('click', props.activate)
+    props.domRoot.removeEventListener('click', this.activate)
   }
 
   render () {
     const r = 'wysiwyg-editor'
     const classes = [r]
     if (!this.state.active) classes.push(`${r}_inactive`)
-    return <Wrapper className={classes.join(' ')}>
-      <div className={`${r}__title`}>
-        {this.props.title}
-      </div>
-      <div className={`${r}__close`}>
-        <button onClick={this.unactivate}>Close</button>
-      </div>
-      <div className={`${r}__children`}>
-        {this.props.children}
-      </div>
-    </Wrapper>
+    return <ThemeProvider theme={theme => theme._shade()}>
+      <Wrapper
+        innerRef={node => this.$wrapper = node}
+        className={classes.join(' ')}>
+        <div className={`${r}__title`}>
+          <ParagraphTitle>{this.props.title}</ParagraphTitle>
+        </div>
+        <div className={`${r}__close`}>
+          <Button
+            icon='/images/close-icon.svg'
+            onClick={this.unactivate} />
+        </div>
+        <div className={`${r}__children`}>
+          {this.props.children}
+        </div>
+      </Wrapper>
+    </ThemeProvider>
   }
 
   handleMouseenterOnDomRoot () {
@@ -66,22 +92,24 @@ class WysiwygEditor extends Component {
 
   setActiveStyle () {
     const { props: { domRoot, theme } } = this
-    domRoot.style.boxShadow = `
-      0 0 0 ${theme.units(0.75)} ${theme.colors.actionText},
-      0 0 ${theme.units(8)} 0 ${theme.hexToRgba(theme.colors.actionText, 1)},
-      inset 0 0 ${theme.units(80)} ${theme.hexToRgba(theme.colors.actionText, 0.4)}`
+    domRoot.style.boxShadow = theme.shadows.massiveFocus
     domRoot.style.cursor = 'pointer'
   }
   
   unsetActiveStyle () {
     const {
-      props: { domRoot },
-      state: { initDomRootStyles }
+      initDomRootStyles,
+      props: { domRoot }
     } = this
-    domRoot.style = initDomRootStyles
+    domRoot.style.boxShadow = initDomRootStyles.boxShadow
+    domRoot.style.cursor = initDomRootStyles.cursor
   }
 
-  activate () { this.setState({ active: true }) }
+  activate () {
+    const { onActivate } = this.props
+    if (onActivate && typeof onActivate === 'function') onActivate()
+    this.setState({ active: true })
+  }
   unactivate () { this.setState({ active: false }) }
 }
 
