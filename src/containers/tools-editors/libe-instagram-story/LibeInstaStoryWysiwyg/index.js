@@ -315,9 +315,9 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   dispatchEditionInSlide (n) {
-    const { latestSettings, dispatchEdition } = this.props
-    const { slides } = latestSettings
     return (key, val) => {
+      const { latestSettings, dispatchEdition } = this.props
+      const { slides } = latestSettings
       const newSlide = slides[n]
       newSlide[key] = val
       const newSlides = [
