@@ -42,7 +42,6 @@ export default class LibeInstaSlide extends Component {
         </div>
 
         <div className={`${r}__safe-zone`}>
-
           {/* Cover display */}
           <div className={`${r}__cover-display`}>
             <div className={`${r}__icon-title`}>

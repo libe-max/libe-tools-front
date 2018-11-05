@@ -74,7 +74,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
   render () {
     const props = this.props
     const state = this.state
-
+    
     /* Inner logic */
     const activeSlidePos = state.activeSlidePos
     const latestSettings = props.latestSettings
@@ -161,7 +161,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
         <div
           ref={node => { this.$spacer = node }}
           className={`${rootClass}__slides-spacer`} />
-        {slidesDom}
+        {!props.loading ? slidesDom : ''}
         <div
           onClick={this.addNewSlide}
           className={`${rootClass}__new-slide`}>
