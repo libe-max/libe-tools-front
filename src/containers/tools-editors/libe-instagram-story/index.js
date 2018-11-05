@@ -1,7 +1,7 @@
 import LibeInstaStoryWysiwyg from './LibeInstaStoryWysiwyg'
-import LibeInstaStorySavedActionsPanel from './LibeInstaStorySavedActionsPanel'
+import LibeInstaStoryActionsPanel from './LibeInstaStoryActionsPanel'
 
 export default {
   DisplayPanel: LibeInstaStoryWysiwyg,
-  SavedActionsPanel: LibeInstaStorySavedActionsPanel
+  ActionsPanel: LibeInstaStoryActionsPanel
 }
