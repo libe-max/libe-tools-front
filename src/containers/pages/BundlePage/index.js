@@ -133,7 +133,8 @@ class BundlePage extends Component {
               storedSettings={storedSettings}
               unsavedSettings={unsavedSettings}
               latestSettings={latestSettings}
-              dispatchEdition={props.dispatchEdition} />
+              dispatchEdition={props.dispatchEdition}
+              pushNotification={props.pushNotification} />
           </div>
           <div className='bundle-page__no-bundle-display'>
             <Paragraph italic light>Aucune prévisualisation du module disponible.</Paragraph>
@@ -172,7 +173,8 @@ class BundlePage extends Component {
                   storedSettings={storedSettings}
                   unsavedSettings={unsavedSettings}
                   latestSettings={latestSettings}
-                  dispatchEdition={props.dispatchEdition} />
+                  dispatchEdition={props.dispatchEdition}
+                  pushNotification={props.pushNotification} />
               </div>
             </div>
           </div>
@@ -193,7 +195,8 @@ class BundlePage extends Component {
                 storedSettings={storedSettings}
                 unsavedSettings={unsavedSettings}
                 latestSettings={latestSettings}
-                dispatchEdition={props.dispatchEdition} />
+                dispatchEdition={props.dispatchEdition}
+                pushNotification={props.pushNotification} />
             </div>
             <div className='bundle-page__saved-paragraph'>
               <Paragraph light small>

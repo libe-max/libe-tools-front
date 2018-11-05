@@ -79,6 +79,10 @@ export const dispatch2props = (dispatch, props) => {
         dispatch(pushNotification(notif, 'error'))
         reject(err.message)
       })
-    })
+    }),
+    pushNotification: (text, level) => {
+      if (!text) throw new Error('Cannot push a notification without text (@ BundlePage/connected.js)')
+      dispatch(pushNotification(text, level))
+    }
   }
 }
