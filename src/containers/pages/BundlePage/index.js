@@ -215,16 +215,6 @@ class BundlePage extends Component {
                 Enregistrer
               </Button>
             </div>
-            <div className='bundle-page__custom-saved-actions'>
-              <BundleSavedActions
-                id={storedBundle._id}
-                isSaving={isSaving}
-                loading={loading}
-                storedSettings={storedSettings}
-                unsavedSettings={unsavedSettings}
-                latestSettings={latestSettings}
-                dispatchEdition={props.dispatchEdition} />
-            </div>
           </div>
         </ShadowBar>
       </div>

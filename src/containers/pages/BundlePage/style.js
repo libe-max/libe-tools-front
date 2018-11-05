@@ -157,10 +157,6 @@ grid-template-rows: auto 1fr auto;
   display: none;
 }
 
-.bundle-page__custom-saved-actions {
-  display: none;
-}
-
 &.bundle-page_fetching-bundle {
   .bundle-page__fetching-bundle-loader {
     display: flex;
@@ -200,12 +196,6 @@ grid-template-rows: auto 1fr auto;
     display: none;
   }
   .bundle-page__saving-paragraph {
-    display: block;
-  }
-}
-
-&.bundle-page_saved {
-  .bundle-page__custom-saved-actions {
     display: block;
   }
 }`
