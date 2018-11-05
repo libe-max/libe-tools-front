@@ -17,10 +17,12 @@ export default class LibeInstaStoryWysiwyg extends Component {
       pLatestSettings: [],
       loading: props.loading
     }
+    this.slides = []
     this.addNewSlide = this.addNewSlide.bind(this)
     this.activatePrevSlide = this.activatePrevSlide.bind(this)
     this.activateNextSlide = this.activateNextSlide.bind(this)
     this.activateSlide = this.activateSlide.bind(this)
+    this.unactivateAllEditors = this.unactivateAllEditors.bind(this)
     this.constrainProportions = this.constrainProportions.bind(this)
     this.getOffsetForCentering = this.getOffsetForCentering.bind(this)
     this.centerSlide = this.centerSlide.bind(this)
@@ -96,6 +98,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (!slides.length) classes.push(`${rootClass}_no-slides`)
 
     /* Dom for each slide of the story */
+    this.slides = []
     const slidesDom = slides.map((slide, i) => {
       const onClick = (i !== activeSlidePos) ? e => this.activateSlide(i) : null
       const classes = [`${rootClass}__slide`]
@@ -106,6 +109,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
         className={classes.join(' ')}>
         <SlideWysiwyg
           slide={slide}
+          ref={node => this.slides[i] = (node)}
           dispatchEdition={this.dispatchEditionInSlide(i)} />
         <div className={`${rootClass}__delete-slide`}>
           <Button
@@ -181,6 +185,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     const latestSettings = props.latestSettings
     const slides = latestSettings.slides || []
     props.dispatchEdition('slides', [...slides, {}])
+    this.unactivateAllEditors()
   }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -206,6 +211,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (n >= slides.length) return
     if (n < -1) return
     this.setState({ activeSlidePos: n })
+    this.unactivateAllEditors()
     this.centerSlide(n)
   }
 
@@ -270,6 +276,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
   deleteSlide (n = undefined) {
     if (n === undefined) return
+    this.unactivateAllEditors()
     if (!window.confirm('Supprimer cette page ?')) return
     const props = this.props
     const state = this.state
@@ -306,6 +313,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
       newSlide,
       ...slides.slice(activeSlidePos + 1)
     ]
+    this.unactivateAllEditors()
     return dispatchEdition('slides', newSlides)
   }
 
@@ -327,5 +335,16 @@ export default class LibeInstaStoryWysiwyg extends Component {
       ]
       return dispatchEdition('slides', newSlides)
     }
+  }
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Unactivate all editors
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  unactivateAllEditors () {
+    this.slides.forEach(
+      s => s.unactivateAllEditors()
+    )
   }
 }
