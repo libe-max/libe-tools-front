@@ -33,15 +33,6 @@ ${r}__background-image {
   background-repeat: no-repeat;
 }
 
-/* Safe zone */
-${r}__safe-zone {
-  position: absolute;
-  top: 150px;
-  left: calc(50% - 390px);
-  width: 780px;
-  height: 1452px;
-}
-
 /* Icon signature */
 ${r}__icon-signature {
   position: absolute;
@@ -191,6 +182,7 @@ ${r}__cover-display {
   left: 50%;
   top: 45%;
   width: 100%;
+  max-width: 780px;
 }
 
 ${r}__cover-display
@@ -216,9 +208,10 @@ ${r}__image-and-text-display {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 45%;
   left: 50%;
   width: 100%;
+  max-width: 780px;
 }
 
 ${r}__image-and-text-display
@@ -244,9 +237,10 @@ ${r}__quote-on-bg-image-display {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 45%;
   left: 50%;
   width: 100%;
+  max-width: 780px;
 }
 
 ${r}__quote-on-bg-image-display
@@ -277,9 +271,10 @@ ${r}__text-on-bg-image-display {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 50%;
+  top: 45%;
   left: 50%;
   width: 100%;
+  max-width: 780px;
 }
 
 ${r}__text-on-bg-image-display
