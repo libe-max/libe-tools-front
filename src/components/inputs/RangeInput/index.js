@@ -20,9 +20,10 @@ import Wrapper from './style'
  *
  */
 
-export default class TextInput extends Component {
+export default class RangeInput extends Component {
   constructor (props) {
     super(props)
+    this.setValue = this.setValue.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.updateTextAndFakeRange = this.updateTextAndFakeRange.bind(this)
     this.defaultValue = (() => {
@@ -32,6 +33,12 @@ export default class TextInput extends Component {
       if (props.max) return (props.max) / 2
       return 50
     })()
+  }
+
+  setValue (val) {
+    if (!parseInt(val, 10)) return
+    this.input.value = parseInt(val, 10)
+    this.forceUpdate()
   }
 
   componentDidMount () {
