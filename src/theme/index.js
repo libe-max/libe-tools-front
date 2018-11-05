@@ -39,7 +39,11 @@ const shadows = {
   medium: `0 0 ${units(1)} ${units(0.25)} ${hexToRgba(rawColors.black, 0.2)}`,
   small: `0 ${units(0.25)} ${units(0.5)} 0 ${hexToRgba(rawColors.black, 0.1)}`,
   neat: `0 ${units(3 / 8)} 0 0 ${hexToRgba(rawColors.black, 0.1)}`,
-  focus: `0 0 ${units(4)} ${units(0.5)} ${hexToRgba(rawColors.blue)}`
+  focus: `0 0 ${units(4)} ${units(0.5)} ${hexToRgba(rawColors.blue)}`,
+  massiveFocus: `
+    0 0 0 ${units(0.75)} ${rawColors.blue},
+    0 0 ${units(8)} 0 ${hexToRgba(rawColors.blue, 1)},
+    inset 0 0 ${units(80)} ${hexToRgba(rawColors.blue, 0.4)}`
 }
 
 const colorScales = {
