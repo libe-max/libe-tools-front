@@ -19,6 +19,16 @@ import Wrapper from './style'
  */
 
 export default class TextInput extends Component {
+  constructor () {
+    super()
+    this.setValue = this.setValue.bind(this)
+  }
+
+  setValue (val) {
+    this.input.value = val
+    this.forceUpdate()
+  }
+
   render () {
     const props = this.props
     let classes = 'text-input'
