@@ -20,6 +20,13 @@ import Wrapper from './style'
 export default class Button extends Component {
   render () {
     const props = this.props
+    
+    /* Inner logic */
+    const disabledMessage = typeof props.disabled === 'string'
+      ? props.disabled
+      : ''
+
+    /* Assign classes to component */
     let classes = 'button'
     if (props.primary) classes += ' button_primary'
     if (props.dangerous) classes += ' button_dangerous'
@@ -27,11 +34,14 @@ export default class Button extends Component {
     if (props.link) classes += ' button_link'
     if (props.icon) classes += ' button_icon'
     if (props.disabled) classes += ' button_disabled'
+
+    /* Display */
     return <Wrapper
       onFocus={props.disabled ? () => this.node.blur() : null}
       onClick={!props.disabled ? props.onClick : null}
       tabIndex={!props.disabled ? props.tabIndex : -1}
       innerRef={node => { this.node = node }}
+      title={disabledMessage}
       className={classes}>
       {props.children}
       <img
