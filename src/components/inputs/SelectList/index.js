@@ -24,8 +24,13 @@ export default class SelectList extends Component {
     super(props)
     const options = props.options || []
     const placeholderOption = options.filter(option => option.selected && option.disabled)[0]
+    this.setValue = this.setValue.bind(this)
     this.onChangeWrapper = this.onChangeWrapper.bind(this)
     this.state = { placeholder: placeholderOption }
+  }
+
+  setValue (val) {
+    this.input.value = val
   }
 
   render () {
