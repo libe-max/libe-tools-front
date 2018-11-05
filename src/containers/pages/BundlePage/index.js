@@ -102,7 +102,6 @@ class BundlePage extends Component {
     const BundleDisplayer = props.tool.display || (props => <div />)
     const BundleCustomSettings = props.tool.settings || (props => <div />)
     const BundleActions = props.tool.actions || (props => <div />)
-    const BundleSavedActions = props.tool.savedActions || (props => <div />)
     const isSaved = (props => {
       if (!storedBundle._id) return false
       if (loading) return false
