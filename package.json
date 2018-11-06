@@ -1,8 +1,21 @@
 {
   "name": "libe-tools-front",
   "version": "0.1.0",
+  "description": "",
   "private": true,
   "author": "Maxime Fabas <maxime.fabas@pm.me> (https://maximefabas.github.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/libe-max/libe-tools-front.git"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "standard": "standard --verbose | snazzy",
+    "standard-fix": "standard --fix --verbose | snazzy"
+  },
   "dependencies": {
     "chroma-js": "^1.4.0",
     "downloadjs": "^1.4.7",
@@ -19,15 +32,6 @@
     "redux-logger": "^3.0.6",
     "styled-components": "^3.4.10"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "standard": "standard --verbose | snazzy",
-    "standard-fix": "standard --fix --verbose | snazzy"
-  },
-  "proxy": "http://localhost:3001",
   "standard": {
     "globals": [
       "it",
@@ -35,5 +39,6 @@
       "alert",
       "CustomEvent"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
