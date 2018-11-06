@@ -14,6 +14,12 @@ padding-bottom: ${p => p.theme.units(3)};
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
+opacity: 0.6;
+transition: opacity ${p => p.theme.transitions.quick};
+
+&:hover {
+  opacity: 0.95;
+}
 
 ${r}__title {
   flex-grow: 1;
