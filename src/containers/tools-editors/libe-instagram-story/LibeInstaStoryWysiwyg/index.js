@@ -88,7 +88,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
   render () {
     const props = this.props
     const state = this.state
-    
+
     /* Inner logic */
     const activeSlidePos = state.activeSlidePos
     const latestSettings = props.latestSettings

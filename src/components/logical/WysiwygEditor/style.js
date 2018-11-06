@@ -21,15 +21,15 @@ transition: opacity ${p => p.theme.transitions.quick};
   opacity: 0.95;
 }
 
-${r}__title {
+${r}__title {
   flex-grow: 1;
 }
 
-${r}__close {
+${r}__close {
   flex-shrink: 1;
 }
 
-${r}__children {
+${r}__children {
   flex-grow: 0;
   flex-shrink: 0;
   width: 100%;

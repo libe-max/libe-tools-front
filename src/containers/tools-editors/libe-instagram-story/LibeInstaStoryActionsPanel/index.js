@@ -4,7 +4,6 @@ import download from 'downloadjs'
 import Button from '../../../../components/buttons/Button'
 import Paragraph from '../../../../components/text-levels/Paragraph'
 
-
 import Wrapper from './style'
 
 export default class LibeInstaStoryActionsPanel extends Component {
@@ -54,10 +53,12 @@ export default class LibeInstaStoryActionsPanel extends Component {
       .then(r => r.json())
       .then(json => {
         if (json.err) throw new Error(json.err)
-        else fetch(json.data)
-          .then(r => r.blob())
-          .then(blob => download(blob, 'story.zip'))
-          .catch(e => console.log(e))
+        else {
+          fetch(json.data)
+            .then(r => r.blob())
+            .then(blob => download(blob, 'story.zip'))
+            .catch(e => console.log(e))
+        }
       })
       .catch(e => pushNotification(
         `Une erreur est survenue lors de l'export. Le serveur a répondu : ${e.message}`,

@@ -53,19 +53,19 @@ export default class LibeInstaSlideWysiwyg extends Component {
   }
 
   ornamentSlideTemplate () {
-    const { $wrapper, props : { slide } } = this
+    const { $wrapper, props: { slide } } = this
     if (!slide.display) return
     const bgStyle = $wrapper.querySelector('.libe-insta-slide__background-images').style
     // Display a background image placeholder
-    if (!slide.backgroundImages
-      || (slide.backgroundImages && !slide.backgroundImages[0])
-      || (slide.backgroundImages && slide.backgroundImages[0] && !slide.backgroundImages[0].src)
+    if (!slide.backgroundImages ||
+      (slide.backgroundImages && !slide.backgroundImages[0]) ||
+      (slide.backgroundImages && slide.backgroundImages[0] && !slide.backgroundImages[0].src)
     ) bgStyle.backgroundImage = `url(${bgImgPlaceholder})`
     else bgStyle.backgroundImage = ''
     // Display an image placeholder
     const imgStyle = $wrapper.querySelector(`.libe-insta-slide__image-and-text-display .libe-insta-slide__image`).style
-    if (!slide.image
-      || (slide.image && !slide.image.src)
+    if (!slide.image ||
+      (slide.image && !slide.image.src)
     ) {
       imgStyle.width = '780px'
       imgStyle.height = '1000px'
@@ -107,15 +107,15 @@ export default class LibeInstaSlideWysiwyg extends Component {
       : document.createElement('DIV').querySelector(q)
 
     const bgSrcDispatcher = e => {
-      const newVal = slide.backgroundImages
-      && slide.backgroundImages[0]
+      const newVal = slide.backgroundImages &&
+      slide.backgroundImages[0]
         ? { ...slide.backgroundImages[0], src: e.target.value }
         : { position: 50, src: e.target.value }
       return dispatchEdition('backgroundImages', [newVal])
     }
     const bgPosDispatcher = e => {
-      const newVal = slide.backgroundImages
-      && slide.backgroundImages[0]
+      const newVal = slide.backgroundImages &&
+      slide.backgroundImages[0]
         ? { ...slide.backgroundImages[0], position: e.target.value }
         : { src: '', position: e.target.value }
       return dispatchEdition('backgroundImages', [newVal])
@@ -151,6 +151,12 @@ export default class LibeInstaSlideWysiwyg extends Component {
     const classes = [r]
     classes.push(`${r}_${display}`)
 
+    const IfDomReady = props => props.domIsReady
+      ? <div className={`${r}__editors`}>
+        {props.children}
+      </div>
+      : ''
+
     /* Display */
     this.editors = []
     return <Wrapper
@@ -159,166 +165,147 @@ export default class LibeInstaSlideWysiwyg extends Component {
       <div className={`${r}__slide`}>
         <Slide {...slide} />
       </div>
-      <div className={`${r}__editors`}>{!state.domIsReady
-      ? ''
-      : [<div
-          key="Background image editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Image de fond"
+      <IfDomReady domIsReady={state.domIsReady}>
+
+        {/* Background image */}
+        <div key='Background image editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Image de fond'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__background-images`)}>
-            <TextInput
-              blurOnEnter
+            <TextInput blurOnEnter
               label="Adresse de l'image"
-              ref={node => this.inputs.bgImgSrc = node}
+              ref={node => { this.inputs.bgImgSrc = node }}
               placeholder="Tapez ici l'url de l'image"
               onChange={bgSrcDispatcher} />
-            <RangeInput
-              label='Position'
-              ref={node => this.inputs.bgImgPos = node}
+            <RangeInput label='Position'
+              ref={node => { this.inputs.bgImgPos = node }}
               onChange={bgPosDispatcher} />
           </WysiwygEditor>
-        </div>,
+        </div>
 
-        <div
-          key="Cover display / text and title editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Image de fond"
+        {/* Cover display – Title and text */}
+        <div key='Cover display / title and text editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Image de fond'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__cover-display`)}>
-            <SelectList
-              label="Position du bloc"
+            <SelectList label='Position du bloc'
               onChange={contentPositionDispatcher}
-              ref={node => this.inputs.coverDisplayContentPos = node}
+              ref={node => { this.inputs.coverDisplayContentPos = node }}
               options={[
-              { label: 'En haut', value: 'top' },
-              { label: 'Centré',  value: 'center', selected: true },
-              { label: 'En bas',  value: 'bottom' } ]} />
-            <SelectList
-              label="Masquer le titre"
+                { label: 'En haut', value: 'top' },
+                { label: 'Centré', value: 'center', selected: true },
+                { label: 'En bas', value: 'bottom' } ]} />
+            <SelectList label='Masquer le titre'
               onChange={hideTitleDispatcher}
-              ref={node => this.inputs.coverDisplayTitleHide = node}
+              ref={node => { this.inputs.coverDisplayTitleHide = node }}
               options={[
-              { label: 'Afficher', value: '0', selected: true },
-              { label: 'Masquer', value: '1' } ]} />
+                { label: 'Afficher', value: '0', selected: true },
+                { label: 'Masquer', value: '1' } ]} />
             {(!slide.title || (slide.title && !slide.title.hidden))
-            ? <TextInput
-              blurOnEnter
-              label='Titre'
-              placeholder='Tapez ici le titre de la slide'
-              ref={node => this.inputs.coverDisplayTitle = node}
-              onChange={titleDispatcher} />
-            : ''}
-            <TextInput
-              blurOnEnter
+              ? <TextInput blurOnEnter
+                label='Titre'
+                placeholder='Tapez ici le titre de la slide'
+                ref={node => { this.inputs.coverDisplayTitle = node }}
+                onChange={titleDispatcher} />
+              : ''}
+            <TextInput blurOnEnter
               label='Texte'
               placeholder='Tapez ici le texte de la slide'
-              ref={node => this.inputs.coverDisplayText = node}
+              ref={node => { this.inputs.coverDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>,
+        </div>
 
-        <div
-          key="Image and text display / image editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Image de la slide"
+        {/* Image and text display – Image */}
+        <div key='Image and text display / image editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Image de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__image-and-text-display .libe-insta-slide__image`)}>
-            <TextInput
-              blurOnEnter
+            <TextInput blurOnEnter
               label="Adresse de l'image"
-              ref={node => this.inputs.imgAndTxtDisplayImgSrc = node}
+              ref={node => { this.inputs.imgAndTxtDisplayImgSrc = node }}
               placeholder="Tapez ici l'url de l'image"
               onChange={imgSrcDispatcher} />
           </WysiwygEditor>
-        </div>,
+        </div>
 
-        <div
-          key="Image and text display / text and title editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Texte et titre de la slide"
+        {/* Image and text display – Title and text */}
+        <div key='Image and text display / title and text editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Texte et titre de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__image-and-text-display .libe-insta-slide__title-and-text`)}>
-            <SelectList
-              label="Masquer le titre"
+            <SelectList label='Masquer le titre'
               onChange={hideTitleDispatcher}
-              ref={node => this.inputs.imgAndTxtDisplayTitleHide = node}
+              ref={node => { this.inputs.imgAndTxtDisplayTitleHide = node }}
               options={[
-              { label: 'Afficher', value: '0', selected: true },
-              { label: 'Masquer', value: '1' } ]} />
+                { label: 'Afficher', value: '0', selected: true },
+                { label: 'Masquer', value: '1' } ]} />
             {(!slide.title || (slide.title && !slide.title.hidden))
-            ? <TextInput
-              blurOnEnter
-              label="Titre"
-              placeholder='Tapez ici le titre de la slide'
-              ref={node => this.inputs.imgAndTxtDisplayTitle = node}
-              onChange={titleDispatcher} />
-            : ''}
-            <TextInput
-              blurOnEnter
-              label="Texte"
+              ? <TextInput blurOnEnter
+                label='Titre'
+                placeholder='Tapez ici le titre de la slide'
+                ref={node => { this.inputs.imgAndTxtDisplayTitle = node }}
+                onChange={titleDispatcher} />
+              : ''}
+            <TextInput blurOnEnter
+              label='Texte'
               placeholder='Tapez ici le texte de la slide'
-              ref={node => this.inputs.imgAndTxtDisplayText = node}
+              ref={node => { this.inputs.imgAndTxtDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>,
-        
-        <div
-          key="Quote on bg / quote editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Texte de la citation"
+        </div>
+
+        {/* Quote on bg display – Quote */}
+        <div key='Quote on bg / quote editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Texte de la citation'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote`)}>
-            <TextInput
-              blurOnEnter
+            <TextInput blurOnEnter
               placeholder='Tapez ici la citation'
-              ref={node => this.inputs.quoteOnBgDisplayTitle = node}
+              ref={node => { this.inputs.quoteOnBgDisplayTitle = node }}
               onChange={titleDispatcher} />
           </WysiwygEditor>
-        </div>,
+        </div>
 
-        <div
-          key="Quote on bg / author editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Auteur de la citation"
+        {/* Quote on bg display – Author */}
+        <div key='Quote on bg / author editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Auteur de la citation'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote-author`)}>
-            <TextInput
-              blurOnEnter
+            <TextInput blurOnEnter
               placeholder="Tapez ici l'auteur de la citation"
-              ref={node => this.inputs.quoteOnBgDisplayText = node}
+              ref={node => { this.inputs.quoteOnBgDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>,
+        </div>
 
-        <div
-          key="Text on bg / text editor"
-          className="libe-insta-slide-wysiwyg__editor">
-          <WysiwygEditor
-            title="Texte de la slide"
+        {/* Text on bg display – Text */}
+        <div key='Text on bg / text editor'
+          className='libe-insta-slide-wysiwyg__editor'>
+          <WysiwygEditor title='Texte de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => this.editors.push(node)}
+            innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__text-on-bg-image-display .libe-insta-slide__text-panel`)}>
-            <TextInput
-              blurOnEnter
-              placeholder="Tapez ici le texte de la slide"
-              ref={node => this.inputs.textOnBgDisplayText = node}
+            <TextInput blurOnEnter
+              placeholder='Tapez ici le texte de la slide'
+              ref={node => { this.inputs.textOnBgDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>]
-      }</div>
+        </div>
+      </IfDomReady>
+
       <div className={`${r}__placeholder`} />
     </Wrapper>
   }
@@ -332,7 +319,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
         image,
         contentPosition
       } },
-      inputs: {
+      inputs: {
         bgImgSrc,
         bgImgPos,
         coverDisplayTitle,
@@ -351,7 +338,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     // Bg image fields
     if (backgroundImages && backgroundImages[0]) {
       if (bgImgSrc) bgImgSrc.setValue(backgroundImages[0].src)
-      if (bgImgPos) bgImgPos.setValue(backgroundImages[0].position)  
+      if (bgImgPos) bgImgPos.setValue(backgroundImages[0].position)
     }
     // Title fields
     if (title) {

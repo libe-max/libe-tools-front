@@ -62,7 +62,7 @@ class WysiwygEditor extends Component {
     if (!this.state.active) classes.push(`${r}_inactive`)
     return <ThemeProvider theme={theme => theme._shade()}>
       <Wrapper
-        innerRef={node => this.$wrapper = node}
+        innerRef={node => { this.$wrapper = node }}
         className={classes.join(' ')}>
         <div className={`${r}__title`}>
           <ParagraphTitle>{this.props.title}</ParagraphTitle>
@@ -92,7 +92,7 @@ class WysiwygEditor extends Component {
     domRoot.style.boxShadow = theme.shadows.massiveFocus
     domRoot.style.cursor = 'pointer'
   }
-  
+
   unsetActiveStyle () {
     const {
       initDomRootStyles,

@@ -20,7 +20,7 @@ import Wrapper from './style'
 export default class Button extends Component {
   render () {
     const props = this.props
-    
+
     /* Inner logic */
     const disabledMessage = typeof props.disabled === 'string'
       ? props.disabled

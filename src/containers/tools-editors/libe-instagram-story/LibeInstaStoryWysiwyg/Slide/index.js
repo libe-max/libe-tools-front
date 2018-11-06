@@ -31,7 +31,7 @@ export default class LibeInstaSlide extends Component {
 
         {/* Background images */}
         <div
-          data-property="background-images"
+          data-property='background-images'
           className={`${r}__background-images`}>
           {backgroundImages.map((bgImg, i) => <div
             key={i}
@@ -40,22 +40,21 @@ export default class LibeInstaSlide extends Component {
               height: `${100 / (backgroundImages.length || 1)}%`,
               backgroundImage: `url('${bgImg.src}')`,
               backgroundPosition: `${bgImg.position || 50}% ${bgImg.position || 50}%`
-            }}>
-          </div>)}
+            }} />)}
         </div>
 
         {/* Cover display */}
         <div className={`${r}__cover-display`}>
           <div className={`${r}__icon-title`}>
-            <span data-property="title">
-              {title.value || ''}
+            <span data-property='title'>
+              {title.value || ''}
             </span>
           </div>
           <div className={`${r}__text-panel-wrapper`}>
             <div
-              data-property="text"
+              data-property='text'
               className={`${r}__text-panel ${r}__text-panel_big`}>
-              {text.value || ''}
+              {text.value || ''}
             </div>
           </div>
         </div>
@@ -63,27 +62,26 @@ export default class LibeInstaSlide extends Component {
         {/* Image and text display */}
         <div className={`${r}__image-and-text-display`}>
           <div
-            data-property="image"
+            data-property='image'
             className={`${r}__image`}>
             <img src={image.src} />
           </div>
           <div className={`${r}__title-and-text`}>
             <div
-              data-property="title"
+              data-property='title'
               className={`${r}__label-title`}>
-              {title.value || ''}
+              {title.value || ''}
             </div>
             <div
-              data-property="text"
+              data-property='text'
               className={`${r}__paragraph`}>
-              {text.value || ''}
+              {text.value || ''}
             </div>
           </div>
         </div>
 
         {/* Background image display */}
-        <div className={`${r}__bg-image-display`}>
-        </div>
+        <div className={`${r}__bg-image-display`} />
 
         {/* Quote on background image display */}
         <div className={`${r}__quote-on-bg-image-display`}>
@@ -92,14 +90,14 @@ export default class LibeInstaSlide extends Component {
           </div>
           <div className={`${r}__quote-and-author`}>
             <div
-              data-property="title"
+              data-property='title'
               className={`${r}__quote`}>
-              {title.value || ''}
+              {title.value || ''}
             </div>
             <div
-              data-property="text"
+              data-property='text'
               className={`${r}__quote-author`}>
-              {text.value || ''}
+              {text.value || ''}
             </div>
           </div>
         </div>
@@ -107,9 +105,9 @@ export default class LibeInstaSlide extends Component {
         {/* Text on background image display */}
         <div className={`${r}__text-on-bg-image-display`}>
           <div
-            data-property="text"
+            data-property='text'
             className={`${r}__text-panel`}>
-            {text.value || ''}
+            {text.value || ''}
           </div>
         </div>
 
