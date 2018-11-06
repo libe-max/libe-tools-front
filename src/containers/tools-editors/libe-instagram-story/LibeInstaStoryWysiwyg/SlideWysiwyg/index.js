@@ -11,6 +11,12 @@ import imgPlaceholder from '../assets/image-placeholder.svg'
 
 import Wrapper from './style'
 
+const IfDomReady = props => props.domIsReady
+  ? <div className={`libe-insta-slide-wysiwyg__editors`}>
+    {props.children}
+  </div>
+  : ''
+
 export default class LibeInstaSlideWysiwyg extends Component {
   constructor () {
     super()
@@ -151,12 +157,6 @@ export default class LibeInstaSlideWysiwyg extends Component {
     const classes = [r]
     classes.push(`${r}_${display}`)
 
-    const IfDomReady = props => props.domIsReady
-      ? <div className={`${r}__editors`}>
-        {props.children}
-      </div>
-      : ''
-
     /* Display */
     this.editors = []
     return <Wrapper
@@ -165,9 +165,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
       <div className={`${r}__slide`}>
         <Slide {...slide} />
       </div>
-      <IfDomReady domIsReady={state.domIsReady}>
+      <IfDomReady domIsReady={state.domIsReady}>{[
 
-        {/* Background image */}
+        /* Background image */
         <div key='Background image editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de fond'
@@ -183,9 +183,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.bgImgPos = node }}
               onChange={bgPosDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Cover display – Title and text */}
+        /* Cover display – Title and text */
         <div key='Cover display / title and text editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de fond'
@@ -218,9 +218,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.coverDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Image and text display – Image */}
+        /* Image and text display – Image */
         <div key='Image and text display / image editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de la slide'
@@ -233,9 +233,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               placeholder="Tapez ici l'url de l'image"
               onChange={imgSrcDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Image and text display – Title and text */}
+        /* Image and text display – Title and text */
         <div key='Image and text display / title and text editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte et titre de la slide'
@@ -261,9 +261,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.imgAndTxtDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Quote on bg display – Quote */}
+        /* Quote on bg display – Quote */
         <div key='Quote on bg / quote editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte de la citation'
@@ -275,9 +275,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.quoteOnBgDisplayTitle = node }}
               onChange={titleDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Quote on bg display – Author */}
+        /* Quote on bg display – Author */
         <div key='Quote on bg / author editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Auteur de la citation'
@@ -289,9 +289,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.quoteOnBgDisplayText = node }}
               onChange={textDispatcher} />
           </WysiwygEditor>
-        </div>
+        </div>,
 
-        {/* Text on bg display – Text */}
+        /* Text on bg display – Text */
         <div key='Text on bg / text editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte de la slide'
@@ -304,7 +304,8 @@ export default class LibeInstaSlideWysiwyg extends Component {
               onChange={textDispatcher} />
           </WysiwygEditor>
         </div>
-      </IfDomReady>
+
+      ]}</IfDomReady>
 
       <div className={`${r}__placeholder`} />
     </Wrapper>

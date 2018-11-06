@@ -63,7 +63,6 @@ export default class LibeInstaStoryWysiwyg extends Component {
       if (typeof slide.unactivateAllEditors !== 'function') return false
       return true
     })
-    console.log(this.slides)
   }
 
   static getDerivedStateFromProps (props, state) {
