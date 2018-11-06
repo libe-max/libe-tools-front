@@ -45,10 +45,7 @@ class WysiwygEditor extends Component {
   }
 
   componentDidUpdate () {
-    if (this.state.active) {
-      this.$wrapper.querySelector('input').focus()
-      return this.setActiveStyle()
-    }
+    if (this.state.active) return this.setActiveStyle()
     return this.unsetActiveStyle()
   }
 
@@ -106,11 +103,20 @@ class WysiwygEditor extends Component {
   }
 
   activate () {
-    const { onActivate } = this.props
+    const { $wrapper, props: { onActivate } } = this
     if (onActivate && typeof onActivate === 'function') onActivate()
     this.setState({ active: true })
+    setTimeout(() => {
+      if (!$wrapper) return
+      if (!$wrapper.querySelector('input')) return
+      if (!$wrapper.querySelector('input').focus) return
+      $wrapper.querySelector('input').focus()
+    }, 10)
   }
-  unactivate () { this.setState({ active: false }) }
+
+  unactivate () {
+    this.setState({ active: false })
+  }
 }
 
 export default withTheme(WysiwygEditor)
