@@ -85,7 +85,7 @@ ${r}__text-panel {
   line-height: 72px;
   font-style: normal;
   letter-spacing: 0.03em;
-  text-transform: uppercase;
+  text-transform: none;
   color: #212121;
   text-align: center;
 }
@@ -93,6 +93,7 @@ ${r}__text-panel {
 ${r}__text-panel_big {
   font-size: 108px;
   line-height: 108px;
+  text-transform: uppercase;
 }
 
 /* Image */
@@ -303,11 +304,6 @@ ${r}__text-on-bg-image-display {
 
 /* Cover display */
 &${r}_cover-display
-  ${r}__safe-zone {
-    height: 1620px;
-}
-
-&${r}_cover-display
   ${r}__cover-display {
     display: block;
 }
@@ -315,6 +311,42 @@ ${r}__text-on-bg-image-display {
 &${r}_cover-display
   ${r}__icon-signature {
     display: none;
+}
+
+&${r}_cover-display${r}_hidden-title
+  ${r}__icon-signature {
+    display: block;
+}
+
+&${r}_cover-display${r}_hidden-title
+  ${r}__icon-title {
+    display: none;
+}
+
+&${r}_cover-display${r}_hidden-title
+  ${r}__text-panel {
+    margin-top: 0px;
+}
+
+&${r}_cover-display${r}_content-position_top
+  ${r}__cover-display {
+    -webkit-transform: translate(-50%, 0);
+    transform: translate(-50%, 0);
+    top: 300px;
+}
+
+&${r}_cover-display${r}_content-position_bottom
+  ${r}__cover-display {
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    top: 1570px;
+}
+
+&${r}_cover-display${r}_hidden-title${r}_content-position_bottom
+  ${r}__cover-display {
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);
+    top: 1470px;
 }
 
 /* Image and text display */
@@ -328,6 +360,12 @@ ${r}__text-on-bg-image-display {
     display: block;
 }
 
+&${r}_image-and-text-display${r}_hidden-title
+  ${r}__label-title {
+    display: none;
+  }
+}
+
 /* Background image display */
 &${r}_bg-image-display
   ${r}__bg-image-display {
@@ -335,11 +373,6 @@ ${r}__text-on-bg-image-display {
 }
 
 /* Quote on background image display */
-&${r}_quote-on-bg-image-display
-  ${r}__safe-zone {
-    overflow: initial;
-}
-
 &${r}_quote-on-bg-image-display
   ${r}__background-images {
     opacity: 0.3;
@@ -351,11 +384,6 @@ ${r}__text-on-bg-image-display {
 }
 
 /* Text on background image display */
-&${r}_text-on-bg-image-display
-  ${r}__background-images {
-    opacity: 0.3;
-}
-
 &${r}_text-on-bg-image-display
   ${r}__text-on-bg-image-display {
     display: block;

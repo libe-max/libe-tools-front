@@ -9,6 +9,11 @@ import SlideWysiwyg from './SlideWysiwyg/'
 
 import Wrapper from './style'
 
+// [WIP] Faire une notice
+// [WIP] Charger des fichiers plutôt que des liens vers les images
+// [WIP] Gérer le zoom sur l'image de fond
+// [WIP] Faire un autre display "text on bg img"
+
 export default class LibeInstaStoryWysiwyg extends Component {
   constructor (props) {
     super(props)
@@ -52,6 +57,13 @@ export default class LibeInstaStoryWysiwyg extends Component {
     this.constrainProportions()
     if (slides.length) this.centerSlide()
     else this.centerSlide(-1)
+    this.slides = this.slides.filter(slide => {
+      if (!slide) return false
+      if (!slide.unactivateAllEditors) return false
+      if (typeof slide.unactivateAllEditors !== 'function') return false
+      return true
+    })
+    console.log(this.slides)
   }
 
   static getDerivedStateFromProps (props, state) {
@@ -109,7 +121,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
         className={classes.join(' ')}>
         <SlideWysiwyg
           slide={slide}
-          ref={node => this.slides[i] = (node)}
+          ref={node => this.slides.push(node)}
           dispatchEdition={this.dispatchEditionInSlide(i)} />
         <div className={`${rootClass}__delete-slide`}>
           <Button

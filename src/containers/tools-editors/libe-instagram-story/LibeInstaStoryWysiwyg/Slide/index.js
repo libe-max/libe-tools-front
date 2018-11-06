@@ -16,10 +16,13 @@ export default class LibeInstaSlide extends Component {
     const text = props.text || {}
     const image = props.image || {}
     const backgroundImages = props.backgroundImages || []
+    const contentPosition = props.contentPosition
 
     /* Assign classes */
     const r = `libe-insta-slide`
     const classes = [r, `${r}_${display}-display`]
+    if (title.hidden) classes.push(`${r}_hidden-title`)
+    if (contentPosition) classes.push(`${r}_content-position_${contentPosition}`)
 
     /* Display */
     return <ThemeProvider theme={theme}>
@@ -64,15 +67,17 @@ export default class LibeInstaSlide extends Component {
             className={`${r}__image`}>
             <img src={image.src} />
           </div>
-          <div
-            data-property="title"
-            className={`${r}__label-title`}>
-            {title.value || ''}
-          </div>
-          <div
-            data-property="text"
-            className={`${r}__paragraph`}>
-            {text.value || ''}
+          <div className={`${r}__title-and-text`}>
+            <div
+              data-property="title"
+              className={`${r}__label-title`}>
+              {title.value || ''}
+            </div>
+            <div
+              data-property="text"
+              className={`${r}__paragraph`}>
+              {text.value || ''}
+            </div>
           </div>
         </div>
 
