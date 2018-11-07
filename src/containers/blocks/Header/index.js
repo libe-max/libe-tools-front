@@ -25,7 +25,7 @@ class Header extends Component {
     return <Wrapper className='header'>
       <ShadowBar>
         <div onClick={props.goHome}><Image contain src='/images/libe-logo.svg' /></div>
-        <div onClick={props.goHome}><MainTitle>La boîte à outils de Six Plus</MainTitle></div>
+        <div onClick={props.goHome}><MainTitle>La boîte à outils de Libé Labo</MainTitle></div>
       </ShadowBar>
     </Wrapper>
   }
