@@ -29,7 +29,7 @@ export default class LibeInstaSlide extends Component {
     const bgSplitTextValue = textValue.split(/<br\s?\/?>/i)
     const textValueWithBrs = []
     bgSplitTextValue.forEach((line, i) => {
-      textValueWithBrs.push(<span key={i}>{line}</span>)
+      textValueWithBrs.push(line)
       if (i < bgSplitTextValue.length - 1) textValueWithBrs.push(<br key={`br${i}`} />)
     })
 
