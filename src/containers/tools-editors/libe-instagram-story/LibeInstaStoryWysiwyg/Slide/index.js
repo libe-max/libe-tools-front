@@ -24,6 +24,15 @@ export default class LibeInstaSlide extends Component {
     if (title.hidden) classes.push(`${r}_hidden-title`)
     if (contentPosition) classes.push(`${r}_content-position_${contentPosition}`)
 
+    /* Inner logic */
+    const textValue = text.value || ''
+    const bgSplitTextValue = textValue.split(/<br\s?\/?>/i)
+    const textValueWithBrs = []
+    bgSplitTextValue.forEach((line, i) => {
+      textValueWithBrs.push(<span key={i}>{line}</span>)
+      if (i < bgSplitTextValue.length - 1) textValueWithBrs.push(<br key={`br${i}`} />)
+    })
+
     /* Display */
     return <ThemeProvider theme={theme}>
       <Wrapper
@@ -54,7 +63,7 @@ export default class LibeInstaSlide extends Component {
             <div
               data-property='text'
               className={`${r}__text-panel ${r}__text-panel_big`}>
-              {text.value || ''}
+              {textValueWithBrs}
             </div>
           </div>
         </div>
@@ -75,7 +84,7 @@ export default class LibeInstaSlide extends Component {
             <div
               data-property='text'
               className={`${r}__paragraph`}>
-              {text.value || ''}
+              {textValueWithBrs}
             </div>
           </div>
         </div>
@@ -97,7 +106,7 @@ export default class LibeInstaSlide extends Component {
             <div
               data-property='text'
               className={`${r}__quote-author`}>
-              {text.value || ''}
+              {textValueWithBrs}
             </div>
           </div>
         </div>
@@ -107,7 +116,7 @@ export default class LibeInstaSlide extends Component {
           <div
             data-property='text'
             className={`${r}__text-panel`}>
-            {text.value || ''}
+            {textValueWithBrs}
           </div>
         </div>
 
