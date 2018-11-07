@@ -192,19 +192,6 @@ export default class LibeInstaSlideWysiwyg extends Component {
             onActivate={this.unactivateAllEditors}
             innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__cover-display`)}>
-            <SelectList label='Position du bloc'
-              onChange={contentPositionDispatcher}
-              ref={node => { this.inputs.coverDisplayContentPos = node }}
-              options={[
-                { label: 'En haut', value: 'top' },
-                { label: 'Centré', value: 'center', selected: true },
-                { label: 'En bas', value: 'bottom' } ]} />
-            <SelectList label='Masquer le titre'
-              onChange={hideTitleDispatcher}
-              ref={node => { this.inputs.coverDisplayTitleHide = node }}
-              options={[
-                { label: 'Afficher', value: '0', selected: true },
-                { label: 'Masquer', value: '1' } ]} />
             {(!slide.title || (slide.title && !slide.title.hidden))
               ? <TextInput blurOnEnter
                 label='Titre'
@@ -217,6 +204,15 @@ export default class LibeInstaSlideWysiwyg extends Component {
               placeholder='Tapez ici le texte de la slide'
               ref={node => { this.inputs.coverDisplayText = node }}
               onChange={textDispatcher} />
+            <RangeInput label='Position du bloc'
+              onChange={contentPositionDispatcher}
+              ref={node => { this.inputs.coverDisplayContentPos = node }} />
+            <SelectList label='Masquer le titre'
+              onChange={hideTitleDispatcher}
+              ref={node => { this.inputs.coverDisplayTitleHide = node }}
+              options={[
+                { label: 'Afficher', value: '0', selected: true },
+                { label: 'Masquer', value: '1' } ]} />
           </WysiwygEditor>
         </div>,
 
@@ -302,6 +298,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
               placeholder='Tapez ici le texte de la slide'
               ref={node => { this.inputs.textOnBgDisplayText = node }}
               onChange={textDispatcher} />
+            <RangeInput label='Position du bloc'
+              onChange={contentPositionDispatcher}
+              ref={node => { this.inputs.textOnBgDisplayContentPos = node }} />
           </WysiwygEditor>
         </div>
 
@@ -326,6 +325,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
         coverDisplayTitle,
         coverDisplayTitleHide,
         coverDisplayContentPos,
+        imgAndTxtDisplayImgSrc,
         imgAndTxtDisplayTitle,
         imgAndTxtDisplayTitleHide,
         quoteOnBgDisplayTitle,
@@ -333,7 +333,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
         imgAndTxtDisplayText,
         quoteOnBgDisplayText,
         textOnBgDisplayText,
-        imgAndTxtDisplayImgSrc
+        textOnBgDisplayContentPos
       }
     } = this
     // Bg image fields
@@ -363,6 +363,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     // Content position fields
     if (contentPosition) {
       if (coverDisplayContentPos) coverDisplayContentPos.setValue(contentPosition)
+      if (textOnBgDisplayContentPos) textOnBgDisplayContentPos.setValue(contentPosition)
     }
   }
 

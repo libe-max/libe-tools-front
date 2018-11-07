@@ -146,7 +146,7 @@ ${r}__quote {
 /* Quote sign */
 ${r}__quote-sign {
   width: 360px;
-  opacity: 0.9;
+  opacity: 0.5;
   mix-blend-mode: multiply;
 }
 
@@ -326,27 +326,6 @@ ${r}__text-on-bg-image-display {
 &${r}_cover-display${r}_hidden-title
   ${r}__text-panel {
     margin-top: 0px;
-}
-
-&${r}_cover-display${r}_content-position_top
-  ${r}__cover-display {
-    -webkit-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    top: 300px;
-}
-
-&${r}_cover-display${r}_content-position_bottom
-  ${r}__cover-display {
-    -webkit-transform: translate(-50%, -100%);
-    transform: translate(-50%, -100%);
-    top: 1570px;
-}
-
-&${r}_cover-display${r}_hidden-title${r}_content-position_bottom
-  ${r}__cover-display {
-    -webkit-transform: translate(-50%, -100%);
-    transform: translate(-50%, -100%);
-    top: 1470px;
 }
 
 /* Image and text display */

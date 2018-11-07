@@ -22,9 +22,22 @@ export default class LibeInstaSlide extends Component {
     const r = `libe-insta-slide`
     const classes = [r, `${r}_${display}-display`]
     if (title.hidden) classes.push(`${r}_hidden-title`)
-    if (contentPosition) classes.push(`${r}_content-position_${contentPosition}`)
 
     /* Inner logic */
+    const coverContentPosStyle = (() => {
+      if (typeof parseInt(contentPosition, 10) !== 'number') return {}
+      return {
+        top: `${contentPosition / 100 * (1770 - 150) + 150}px`,
+        transform: `translate(-50%, -${contentPosition}%)`
+      }
+    })()
+    const nonCoverContentPosStyle = (() => {
+      if (typeof parseInt(contentPosition, 10) !== 'number') return {}
+      return {
+        top: `${contentPosition / 100 * (1600 - 150) + 150}px`,
+        transform: `translate(-50%, -${contentPosition}%)`
+      }
+    })()
     const textValue = text.value || ''
     const bgSplitTextValue = textValue.split(/<br\s?\/?>/i)
     const textValueWithBrs = []
@@ -53,7 +66,7 @@ export default class LibeInstaSlide extends Component {
         </div>
 
         {/* Cover display */}
-        <div className={`${r}__cover-display`}>
+        <div style={coverContentPosStyle} className={`${r}__cover-display`}>
           <div className={`${r}__icon-title`}>
             <span data-property='title'>
               {title.value || ''}
@@ -112,7 +125,9 @@ export default class LibeInstaSlide extends Component {
         </div>
 
         {/* Text on background image display */}
-        <div className={`${r}__text-on-bg-image-display`}>
+        <div
+          style={nonCoverContentPosStyle}
+          className={`${r}__text-on-bg-image-display`}>
           <div
             data-property='text'
             className={`${r}__text-panel`}>
