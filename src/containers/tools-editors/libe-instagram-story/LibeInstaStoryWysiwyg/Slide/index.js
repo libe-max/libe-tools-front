@@ -39,11 +39,18 @@ export default class LibeInstaSlide extends Component {
       }
     })()
     const textValue = text.value || ''
-    const bgSplitTextValue = textValue.split(/<br\s?\/?>/i)
+    const brSplitTextValue = textValue.split(/<br\s?\/?>/i)
     const textValueWithBrs = []
-    bgSplitTextValue.forEach((line, i) => {
+    brSplitTextValue.forEach((line, i) => {
       textValueWithBrs.push(line)
-      if (i < bgSplitTextValue.length - 1) textValueWithBrs.push(<br key={`br${i}`} />)
+      if (i < brSplitTextValue.length - 1) textValueWithBrs.push(<br key={`br${i}`} />)
+    })
+    const titleValue = title.value || ''
+    const brSplitTitleValue = titleValue.split(/<br\s?\/?>/i)
+    const titleValueWithBrs = []
+    brSplitTitleValue.forEach((line, i) => {
+      titleValueWithBrs.push(line)
+      if (i < brSplitTitleValue.length - 1) titleValueWithBrs.push(<br key={`br${i}`} />)
     })
 
     /* Display */
@@ -118,7 +125,7 @@ export default class LibeInstaSlide extends Component {
             <div
               data-property='title'
               className={`${r}__quote`}>
-              {title.value || ''}
+              {titleValueWithBrs}
             </div>
             <div
               data-property='text'
