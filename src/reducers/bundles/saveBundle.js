@@ -35,7 +35,7 @@ const saveBundle = (state, action) => {
         changes: [...state.changes.map(bundleChanges => {
           const id1 = bundleChanges._id
           const id2 = action.id
-          const cleanedBundleChanges = {...bundleChanges}
+          const cleanedBundleChanges = { ...bundleChanges }
           delete cleanedBundleChanges._saving
           return (id1 !== id2) ? bundleChanges : cleanedBundleChanges
         })]

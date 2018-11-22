@@ -121,7 +121,7 @@ export default class FileInput extends Component {
         <div className='file-input__image'><Image contain src={props.src} /></div>
         <div className='file-input__image-source-infos-and-actions'>
           <div className='file-input__image-source-infos'>
-            <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>
+            <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>
             <div className='file-input__sourcetype'><P light small>{state.source.type || 'no-type'}</P></div>
             <div className='file-input__sourcename'><P>{getSourceName(props.src)}</P></div>
           </div>
@@ -132,7 +132,7 @@ export default class FileInput extends Component {
       <div className='file-input__other-source' onClick={showFilesExplorer}>
         <ShadowBox>
           <div className='file-input__other-source-infos'>
-            <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>
+            <div className='file-input__sourcesize'><P light small>{readableFileSize(state.source.size)} – </P></div>
             <div className='file-input__sourcetype'><P light small>{state.source.type || 'no-type'}</P></div>
             <div className='file-input__sourcename'><P>{getSourceName(props.src)}</P></div>
           </div>

@@ -57,7 +57,7 @@ class BundlePage extends Component {
     const storedBundle = props.bundle
     const storedSettings = getBundleCurrentSettings(storedBundle)
     const unsavedSettings = props.changes
-      ? Object.assign({}, storedSettings, {...props.changes})
+      ? Object.assign({}, storedSettings, { ...props.changes })
       : undefined
     if (unsavedSettings) {
       delete unsavedSettings._id

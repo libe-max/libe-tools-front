@@ -88,10 +88,10 @@ export default class LibeInstaSlide extends Component {
           <div
             data-property='image'
             className={`${r}__image`}>{
-            image.src
-              ? <img src={image.src} alt='Slide illustration' />
-              : ''
-          }</div>
+              image.src
+                ? <img src={image.src} alt='Slide illustration' />
+                : ''
+            }</div>
           <div className={`${r}__title-and-text`}>
             <div
               data-property='title'

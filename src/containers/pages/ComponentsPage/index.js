@@ -12,8 +12,8 @@ import LibeToolThumb from '../../blocks/LibeToolThumb'
 import LibeBundleThumb from '../../blocks/LibeBundleThumb'
 import Wrapper from './style'
 
-const CpRow = ({title, children}) => {
-  const style = {display: title ? 'block' : 'none'}
+const CpRow = ({ title, children }) => {
+  const style = { display: title ? 'block' : 'none' }
   return <div className='component-row'>
     <div className='component-row__title' style={style}>
       {title}
@@ -24,7 +24,7 @@ const CpRow = ({title, children}) => {
   </div>
 }
 
-const CpBx = ({title, width, children}) => {
+const CpBx = ({ title, width, children }) => {
   const style = {
     display: width ? 'inline-block' : 'block',
     width: width ? `${width * 100}%` : '100%'
@@ -94,11 +94,11 @@ export default class ComponentsPage extends Component {
           <SelectList
             label='Label'
             options={[
-              {label: 'Sélectionnez une option', value: 'placeholder', disabled: true, selected: true},
-              {label: 'Value 2', value: 'Value 2'},
-              {label: '–', value: '-', disabled: true},
-              {label: 'Value 3', value: 'Value 3'},
-              {label: 'Value 4', value: 'Value 4'}
+              { label: 'Sélectionnez une option', value: 'placeholder', disabled: true, selected: true },
+              { label: 'Value 2', value: 'Value 2' },
+              { label: '–', value: '-', disabled: true },
+              { label: 'Value 3', value: 'Value 3' },
+              { label: 'Value 4', value: 'Value 4' }
             ]} />
         </CpBx>
         <CpBx width={2 / 4} />
