@@ -78,7 +78,7 @@ export default class LibeInstaSlide extends Component {
         <div style={coverContentPosStyle} className={`${r}__cover-display`}>
           <div className={`${r}__icon-title`}>
             <span data-property='title'>
-              {title.value || ''}
+              {titleValueWithBrs}
             </span>
           </div>
           <div className={`${r}__text-panel-wrapper`}>
@@ -103,7 +103,7 @@ export default class LibeInstaSlide extends Component {
             <div
               data-property='title'
               className={`${r}__label-title`}>
-              {title.value || ''}
+              {titleValueWithBrs}
             </div>
             <div
               data-property='text'
