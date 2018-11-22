@@ -6,8 +6,6 @@ import WysiwygEditor from '../../../../../components/logical/WysiwygEditor'
 import TextInput from '../../../../../components/inputs/TextInput'
 import RangeInput from '../../../../../components/inputs/RangeInput'
 import SelectList from '../../../../../components/inputs/SelectList'
-import bgImgPlaceholder from '../assets/bg-image-placeholder.svg'
-import imgPlaceholder from '../assets/image-placeholder.svg'
 
 import Wrapper from './style'
 
@@ -29,7 +27,6 @@ export default class LibeInstaSlideWysiwyg extends Component {
     this.resize = this.resize.bind(this)
     this.populateFields = this.populateFields.bind(this)
     this.unactivateAllEditors = this.unactivateAllEditors.bind(this)
-    this.ornamentSlideTemplate = this.ornamentSlideTemplate.bind(this)
     this.interval = window.setInterval(this.resize, 2000)
     window.addEventListener('resize', this.resize)
   }
@@ -50,57 +47,11 @@ export default class LibeInstaSlideWysiwyg extends Component {
       return true
     })
     this.populateFields()
-    this.ornamentSlideTemplate()
   }
 
   componentWillUnmount () {
     window.clearInterval(this.interval)
     window.removeEventListener('resize', this.resize)
-  }
-
-  ornamentSlideTemplate () {
-    const { $wrapper, props: { slide } } = this
-    if (!slide.display) return
-    const bgStyle = $wrapper.querySelector('.libe-insta-slide__background-images').style
-    // Display a background image placeholder
-    if (!slide.backgroundImages ||
-      (slide.backgroundImages && !slide.backgroundImages[0]) ||
-      (slide.backgroundImages && slide.backgroundImages[0] && !slide.backgroundImages[0].src)
-    ) bgStyle.backgroundImage = `url(${bgImgPlaceholder})`
-    else bgStyle.backgroundImage = ''
-    // Display an image placeholder
-    const imgStyle = $wrapper.querySelector(`.libe-insta-slide__image-and-text-display .libe-insta-slide__image`).style
-    if (!slide.image ||
-      (slide.image && !slide.image.src)
-    ) {
-      imgStyle.width = '780px'
-      imgStyle.height = '1000px'
-      imgStyle.backgroundImage = `url(${imgPlaceholder})`
-    } else {
-      imgStyle.width = ''
-      imgStyle.height = ''
-      imgStyle.backgroundColor = ''
-    }
-    // Title placeholder
-    const coverDisplayTitle = $wrapper.querySelector(`.libe-insta-slide__cover-display .libe-insta-slide__icon-title span`)
-    const imgAndTxtDisplayTitle = $wrapper.querySelector(`.libe-insta-slide__image-and-text-display .libe-insta-slide__label-title`)
-    const quoteOnBgDisplayTitle = $wrapper.querySelector(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote`)
-    if (!slide.title || (slide.title && !slide.title.value)) {
-      coverDisplayTitle.innerHTML = `<span style="color: white; opacity: 0.5;">Titre</span>`
-      imgAndTxtDisplayTitle.innerHTML = `<span style="color: white; opacity: 0.5;">Titre</span>`
-      quoteOnBgDisplayTitle.innerHTML = `<span style="color: #999999;">Texte de la citation</span>`
-    }
-    // Text placeholder
-    const coverDisplayText = $wrapper.querySelector(`.libe-insta-slide__cover-display .libe-insta-slide__text-panel`)
-    const imgAndTxtDisplayText = $wrapper.querySelector(`.libe-insta-slide__image-and-text-display .libe-insta-slide__paragraph`)
-    const quoteOnBgDisplayText = $wrapper.querySelector(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote-author`)
-    const textOnBgDisplayText = $wrapper.querySelector(`.libe-insta-slide__text-on-bg-image-display .libe-insta-slide__text-panel`)
-    if (!slide.text || (slide.text && !slide.text.value)) {
-      coverDisplayText.innerHTML = `<span style="color: #999999">Texte de la slide</span>`
-      imgAndTxtDisplayText.innerHTML = `<span style="color: #999999">Texte de la slide</span>`
-      quoteOnBgDisplayText.innerHTML = `<span style="color: #999999">Auteur de la citation</span>`
-      textOnBgDisplayText.innerHTML = `<span style="color: #999999">Texte de la slide</span>`
-    }
   }
 
   render () {
