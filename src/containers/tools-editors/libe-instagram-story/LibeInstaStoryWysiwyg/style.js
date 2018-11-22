@@ -78,10 +78,14 @@ ${rootClass}__slide {
   }
 }
 
-${rootClass}__delete-slide {
+${rootClass}__side-actions {
   position: absolute;
   left: calc(100% + ${p => p.theme.units(1)});
   top: ${p => p.theme.units(1)};
+}
+
+${rootClass}__side-actions > * {
+  margin-bottom: ${p => p.theme.units(1)};
 }
 
 ${rootClass}__blocker {

@@ -32,6 +32,8 @@ export default class LibeInstaStoryWysiwyg extends Component {
     this.getOffsetForCentering = this.getOffsetForCentering.bind(this)
     this.centerSlide = this.centerSlide.bind(this)
     this.deleteSlide = this.deleteSlide.bind(this)
+    this.moveSlideToLeft = this.moveSlideToLeft.bind(this)
+    this.moveSlideToRight = this.moveSlideToRight.bind(this)
     this.changeDisplayOnActiveSlide = this.changeDisplayOnActiveSlide.bind(this)
     this.dispatchEditionInSlide = this.dispatchEditionInSlide.bind(this)
     window.addEventListener('resize', () => this.constrainProportions())
@@ -122,13 +124,33 @@ export default class LibeInstaStoryWysiwyg extends Component {
           slide={slide}
           ref={node => this.slides.push(node)}
           dispatchEdition={this.dispatchEditionInSlide(i)} />
-        <div className={`${rootClass}__delete-slide`}>
-          <Button
-            onClick={e => {
-              e.stopPropagation()
-              this.deleteSlide(i)
-            }}
-            icon='/images/trash-icon.svg' />
+        <div className={`${rootClass}__side-actions`}>
+          <div className={`${rootClass}__delete-slide`}>
+            <Button
+              onClick={e => {
+                e.stopPropagation()
+                this.deleteSlide(i)
+              }}
+              icon='/images/trash-icon.svg' />
+          </div>
+          <div className={`${rootClass}__move-slide-left`}>
+            <Button
+              disabled={i === 0}
+              onClick={e => {
+                e.stopPropagation()
+                this.moveSlideToLeft(i)
+              }}
+              icon='/images/go-left-icon-24.svg' />
+          </div>
+          <div className={`${rootClass}__move-slide-right`}>
+            <Button
+              disabled={i === slides.length - 1}
+              onClick={e => {
+                e.stopPropagation()
+                this.moveSlideToRight(i)
+              }}
+              icon='/images/go-right-icon-24.svg' />
+          </div>
         </div>
         <div className={`${rootClass}__blocker`} />
       </div>
@@ -291,20 +313,58 @@ export default class LibeInstaStoryWysiwyg extends Component {
     if (!window.confirm('Supprimer cette page ?')) return
     const props = this.props
     const state = this.state
-    const { latestSettings } = props
+    const { latestSettings, dispatchEdition } = props
     const { slides } = latestSettings
     const { activeSlidePos } = state
     const newSlides = [
       ...slides.slice(0, n),
       ...slides.slice(n + 1)
     ]
-    props.dispatchEdition('slides', newSlides)
+    dispatchEdition('slides', newSlides)
     if (!newSlides.length) return this.activateSlide(-1)
     if (n === 0) return this.activateSlide(0)
     if (n === newSlides.length) return this.activateSlide(newSlides.length - 1)
     if (activeSlidePos < n) return this.activateSlide(activeSlidePos)
     if (activeSlidePos === n) return this.activateSlide(activeSlidePos + 1)
     if (activeSlidePos > n) this.activateSlide(activeSlidePos - 1)
+  }
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Move slide n to the left
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  moveSlideToLeft (n) {
+    const props = this.props
+    const { latestSettings, dispatchEdition } = props
+    const { slides } = latestSettings
+    const newSlides = [
+      ...slides.slice(0, n - 1),
+      slides[n],
+      slides[n - 1],
+      ...slides.slice(n + 1)
+    ]
+    dispatchEdition('slides', newSlides)
+    this.activateSlide(n - 1)
+  }
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Move slide n to the right
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  moveSlideToRight (n) {
+    const props = this.props
+    const { latestSettings, dispatchEdition } = props
+    const { slides } = latestSettings
+    const newSlides = [
+      ...slides.slice(0, n),
+      slides[n + 1],
+      slides[n],
+      ...slides.slice(n + 2)
+    ]
+    dispatchEdition('slides', newSlides)
+    this.activateSlide(n + 1)
   }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
