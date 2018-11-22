@@ -34,6 +34,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     this.deleteSlide = this.deleteSlide.bind(this)
     this.moveSlideToLeft = this.moveSlideToLeft.bind(this)
     this.moveSlideToRight = this.moveSlideToRight.bind(this)
+    this.duplicateSlide = this.duplicateSlide.bind(this)
     this.changeDisplayOnActiveSlide = this.changeDisplayOnActiveSlide.bind(this)
     this.dispatchEditionInSlide = this.dispatchEditionInSlide.bind(this)
     window.addEventListener('resize', () => this.constrainProportions())
@@ -131,7 +132,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
                 e.stopPropagation()
                 this.deleteSlide(i)
               }}
-              icon='/images/trash-icon.svg' />
+              icon='/images/trash-icon-24.svg' />
           </div>
           <div className={`${rootClass}__move-slide-left`}>
             <Button
@@ -150,6 +151,14 @@ export default class LibeInstaStoryWysiwyg extends Component {
                 this.moveSlideToRight(i)
               }}
               icon='/images/go-right-icon-24.svg' />
+          </div>
+          <div className={`${rootClass}__duplicate-slide`}>
+            <Button
+              onClick={e => {
+                e.stopPropagation()
+                this.duplicateSlide(i)
+              }}
+              icon='/images/duplicate-icon-24.svg' />
           </div>
         </div>
         <div className={`${rootClass}__blocker`} />
@@ -362,6 +371,25 @@ export default class LibeInstaStoryWysiwyg extends Component {
       slides[n + 1],
       slides[n],
       ...slides.slice(n + 2)
+    ]
+    dispatchEdition('slides', newSlides)
+    this.activateSlide(n + 1)
+  }
+
+  /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+   *
+   *  Duplicate slide n
+   *
+   * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+  duplicateSlide (n) {  
+    const props = this.props
+    const { latestSettings, dispatchEdition } = props
+    const { slides } = latestSettings
+    const newSlides = [
+      ...slides.slice(0, n),
+      slides[n],
+      slides[n],
+      ...slides.slice(n + 1)
     ]
     dispatchEdition('slides', newSlides)
     this.activateSlide(n + 1)
