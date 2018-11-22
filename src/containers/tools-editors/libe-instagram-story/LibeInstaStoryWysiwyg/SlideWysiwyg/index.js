@@ -190,7 +190,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
         /* Cover display – Title and text */
         <div key='Cover display / title and text editor'
           className='libe-insta-slide-wysiwyg__editor'>
-          <WysiwygEditor title='Image de fond'
+          <WysiwygEditor title='Titre et texte de la slide'
             onActivate={this.unactivateAllEditors}
             innerRef={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__cover-display`)}>
