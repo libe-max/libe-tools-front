@@ -387,11 +387,10 @@ export default class LibeInstaStoryWysiwyg extends Component {
     const newSlides = [
       ...slides.slice(0, n),
       slides[n],
-      slides[n],
-      ...slides.slice(n + 1)
+      ...slides.slice(n + 1),
+      {...slides[n]}
     ]
     dispatchEdition('slides', newSlides)
-    this.activateSlide(n + 1)
   }
 
   /* * * * * * * * * * * * * * * * * * * * * * * * * * * *
