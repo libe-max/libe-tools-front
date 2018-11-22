@@ -116,14 +116,57 @@ export default class LibeInstaSlideWysiwyg extends Component {
       const newVal = slide.backgroundImages &&
       slide.backgroundImages[0]
         ? { ...slide.backgroundImages[0], src: e.target.value }
-        : { position: 50, src: e.target.value }
+        : {
+          position: 50,
+          src: e.target.value,
+          zoom: 1080
+        }
       return dispatchEdition('backgroundImages', [newVal])
     }
-    const bgPosDispatcher = e => {
+    const bgZoomDispatcher = e => {
       const newVal = slide.backgroundImages &&
       slide.backgroundImages[0]
-        ? { ...slide.backgroundImages[0], position: e.target.value }
-        : { src: '', position: e.target.value }
+        ? { ...slide.backgroundImages[0], zoom: e.target.value }
+        : {
+          position: 50,
+          src: '',
+          zoom: e.target.value
+        }
+      return dispatchEdition('backgroundImages', [newVal])
+    }
+    const bgPosXDispatcher = e => {
+      const newVal = slide.backgroundImages &&
+      slide.backgroundImages[0]
+        ? { ...slide.backgroundImages[0],
+          position: {
+            x: e.target.value,
+            y: slide.backgroundImages[0].position
+              ? slide.backgroundImages[0].position.y
+              : 50
+          }
+        }
+        : { position: { x: e.target.value, y: 50 },
+          src: '',
+          zoom: 1080
+        }
+      return dispatchEdition('backgroundImages', [newVal])
+    }
+    const bgPosYDispatcher = e => {
+      const newVal = slide.backgroundImages &&
+      slide.backgroundImages[0]
+        ? { ...slide.backgroundImages[0],
+          position: {
+            x: slide.backgroundImages[0].position
+              ? slide.backgroundImages[0].position.x
+              : 50,
+            y: e.target.value
+          }
+        }
+        : {
+          position: { x: 50, y: e.target.value },
+          src: '',
+          zoom: 1080
+        }
       return dispatchEdition('backgroundImages', [newVal])
     }
     const imgSrcDispatcher = e => {
@@ -135,7 +178,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
       return dispatchEdition('title', newVal)
     }
     const hideTitleDispatcher = e => {
-      const newVal = { ...slide.title, hidden: parseInt(e.target.value) }
+      const newVal = { ...slide.title, hidden: parseInt(e.target.value, 10) }
       return dispatchEdition('title', newVal)
     }
     const textDispatcher = e => {
@@ -179,9 +222,17 @@ export default class LibeInstaSlideWysiwyg extends Component {
               ref={node => { this.inputs.bgImgSrc = node }}
               placeholder="Tapez ici l'url de l'image"
               onChange={bgSrcDispatcher} />
-            <RangeInput label='Position'
-              ref={node => { this.inputs.bgImgPos = node }}
-              onChange={bgPosDispatcher} />
+            <RangeInput label='Position horizontale'
+              ref={node => { this.inputs.bgImgXPos = node }}
+              onChange={bgPosXDispatcher} />
+            <RangeInput label='Position verticale'
+              ref={node => { this.inputs.bgImgYPos = node }}
+              onChange={bgPosYDispatcher} />
+            <RangeInput label='Zoom'
+              min={1080} max={8000} unit=' px'
+              defaultValue={1080}
+              ref={node => { this.inputs.bgImgZoom = node }}
+              onChange={bgZoomDispatcher} />
           </WysiwygEditor>
         </div>,
 
@@ -321,7 +372,9 @@ export default class LibeInstaSlideWysiwyg extends Component {
       } },
       inputs: {
         bgImgSrc,
-        bgImgPos,
+        bgImgXPos,
+        bgImgYPos,
+        bgImgZoom,
         coverDisplayTitle,
         coverDisplayTitleHide,
         coverDisplayContentPos,
@@ -339,7 +392,11 @@ export default class LibeInstaSlideWysiwyg extends Component {
     // Bg image fields
     if (backgroundImages && backgroundImages[0]) {
       if (bgImgSrc) bgImgSrc.setValue(backgroundImages[0].src)
-      if (bgImgPos) bgImgPos.setValue(backgroundImages[0].position)
+      if (backgroundImages[0].position) {
+        if (bgImgXPos) bgImgXPos.setValue(backgroundImages[0].position.x)
+        if (bgImgYPos) bgImgYPos.setValue(backgroundImages[0].position.y)
+      }
+      if (bgImgZoom) bgImgZoom.setValue(backgroundImages[0].zoom)
     }
     // Title fields
     if (title) {

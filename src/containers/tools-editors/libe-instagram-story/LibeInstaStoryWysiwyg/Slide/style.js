@@ -28,7 +28,6 @@ ${r}__background-image {
   width: 100%;
   height: 100%;
   flex-shrink: 1;
-  background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
 }

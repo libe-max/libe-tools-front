@@ -59,9 +59,11 @@ export default class LibeInstaSlide extends Component {
             key={i}
             className={`${r}__background-image`}
             style={{
-              height: `${100 / (backgroundImages.length || 1)}%`,
               backgroundImage: `url('${bgImg.src}')`,
-              backgroundPosition: `${bgImg.position || 50}% ${bgImg.position || 50}%`
+              backgroundSize: `${bgImg.zoom || 1080}px`,
+              backgroundPosition: `
+                ${bgImg.position.x ? 100 - bgImg.position.x : 50}%
+                ${bgImg.position.y || 50}%`
             }} />)}
         </div>
 
@@ -85,9 +87,11 @@ export default class LibeInstaSlide extends Component {
         <div className={`${r}__image-and-text-display`}>
           <div
             data-property='image'
-            className={`${r}__image`}>
-            <img src={image.src} />
-          </div>
+            className={`${r}__image`}>{
+            image.src
+              ? <img src={image.src} alt='Slide illustration' />
+              : ''
+          }</div>
           <div className={`${r}__title-and-text`}>
             <div
               data-property='title'
@@ -108,7 +112,7 @@ export default class LibeInstaSlide extends Component {
         {/* Quote on background image display */}
         <div className={`${r}__quote-on-bg-image-display`}>
           <div className={`${r}__quote-sign`}>
-            <img src={libeQuoteSign} />
+            <img src={libeQuoteSign} alt='Libé quote sign' />
           </div>
           <div className={`${r}__quote-and-author`}>
             <div
@@ -137,7 +141,7 @@ export default class LibeInstaSlide extends Component {
 
         {/* Icon signature */}
         <div className={`${r}__icon-signature`}>
-          <img src={libeIcon} />
+          <img src={libeIcon} alt='Logo Libé' />
         </div>
 
       </Wrapper>

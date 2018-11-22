@@ -39,7 +39,7 @@ export default class LibeInstaStoryActionsPanel extends Component {
       </div>
       <div className={`${r}__exporting-message`}>
         <Paragraph light small>Export en cours</Paragraph>
-        <img src='/images/loader.gif' />
+        <img src='/images/loader.gif' alt='Loader' />
       </div>
     </Wrapper>
   }
