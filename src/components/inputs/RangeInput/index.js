@@ -38,6 +38,7 @@ export default class RangeInput extends Component {
   setValue (val) {
     if (!parseInt(val, 10)) return
     this.input.value = parseInt(val, 10)
+    this.updateTextAndFakeRange()
     this.forceUpdate()
   }
 
@@ -56,7 +57,7 @@ export default class RangeInput extends Component {
     if (!input || !valueDisplayer || !fakeGauge) return
     const min = props.min || 0
     const max = props.max || 100
-    const ratio = input.value ? ((input.value - min) / max) : 0.5
+    const ratio = input.value ? ((input.value - min) / (max - min)) : 0.5
     fakeGauge.style.right = `${100 - 100 * ratio}%`
     valueDisplayer
       .querySelector('.paragraph')
