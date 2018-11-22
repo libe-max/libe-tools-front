@@ -11,7 +11,6 @@ import Wrapper from './style'
 
 // [WIP] Faire une notice
 // [WIP] Charger des fichiers plutôt que des liens vers les images
-// [WIP] Gérer le zoom sur l'image de fond
 // [WIP] Faire un autre display "text on bg img"
 
 export default class LibeInstaStoryWysiwyg extends Component {
