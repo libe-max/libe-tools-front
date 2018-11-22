@@ -380,7 +380,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
    *  Duplicate slide n
    *
    * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-  duplicateSlide (n) {  
+  duplicateSlide (n) {
     const props = this.props
     const { latestSettings, dispatchEdition } = props
     const { slides } = latestSettings

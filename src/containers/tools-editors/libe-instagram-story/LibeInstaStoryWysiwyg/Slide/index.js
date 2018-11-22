@@ -56,8 +56,8 @@ export default class LibeInstaSlide extends Component {
     })
 
     /* Placeholders used only in edition mode, not for rendering */
-    const bgImgPlaceholderStyle = !backgroundImages
-      || !backgroundImages.length
+    const bgImgPlaceholderStyle = !backgroundImages ||
+      !backgroundImages.length
       ? { backgroundImage: `url('${bgImgPlaceholderSrc}')` }
       : {}
     const imgPlaceholderStyle = !image || (image && !image.src)
@@ -68,25 +68,25 @@ export default class LibeInstaSlide extends Component {
       : {}
     const coverDisplayTitleOrPlaceholder = title.value
       ? titleValueWithBrs
-      : <span style={{color: 'white', opacity: 0.5}}>Titre</span>
+      : <span style={{ color: 'white', opacity: 0.5 }}>Titre</span>
     const imgAndTxtDisplayTitleOrPlaceholder = title.value
       ? titleValueWithBrs
-      : <span style={{color: 'white', opacity: 0.5}}>Titre</span>
+      : <span style={{ color: 'white', opacity: 0.5 }}>Titre</span>
     const quoteOnBgDisplayTitleOrPlaceholder = title.value
       ? titleValueWithBrs
-      : <span style={{color: '#999999'}}>Texte de la citation</span>
+      : <span style={{ color: '#999999' }}>Texte de la citation</span>
     const coverDisplayTextOrPlaceholder = text.value
       ? textValueWithBrs
-      : <span style={{color: '#999999'}}>Texte de la slide</span>
+      : <span style={{ color: '#999999' }}>Texte de la slide</span>
     const imgAndTxtDisplayTextOrPlaceholder = text.value
       ? textValueWithBrs
-      : <span style={{color: '#999999'}}>Texte de la slide</span>
+      : <span style={{ color: '#999999' }}>Texte de la slide</span>
     const quoteOnBgDisplayTextOrPlaceholder = text.value
       ? textValueWithBrs
-      : <span style={{color: '#999999'}}>Auteur de la citation</span>
+      : <span style={{ color: '#999999' }}>Auteur de la citation</span>
     const textOnBgDisplayTextOrPlaceholder = text.value
       ? textValueWithBrs
-      : <span style={{color: '#999999'}}>Texte de la slide</span>
+      : <span style={{ color: '#999999' }}>Texte de la slide</span>
 
     /* Display */
     return <ThemeProvider theme={theme}>
