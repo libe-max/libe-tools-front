@@ -17,7 +17,7 @@
     "standard-fix": "standard --fix --verbose | snazzy"
   },
   "dependencies": {
-    "chroma-js": "^1.4.0",
+    "chroma-js": "^2.0.3",
     "downloadjs": "^1.4.7",
     "hex-to-rgba": "^1.0.2",
     "history": "^4.7.2",
@@ -27,7 +27,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.5",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "styled-components": "^3.4.10"
@@ -40,5 +40,11 @@
       "CustomEvent"
     ]
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
