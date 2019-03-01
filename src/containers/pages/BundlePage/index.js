@@ -56,6 +56,7 @@ class BundlePage extends Component {
     const props = this.props
     const storedBundle = props.bundle
     const storedSettings = getBundleCurrentSettings(storedBundle)
+    const storedSettingsHistory = storedBundle.settings_history || []
     const unsavedSettings = props.changes
       ? Object.assign({}, storedSettings, { ...props.changes })
       : undefined
@@ -66,7 +67,7 @@ class BundlePage extends Component {
     const unsavedBundle = props.changes
       ? {
         ...storedBundle,
-        settings_history: [...storedSettings, unsavedSettings]
+        settings_history: [...storedSettingsHistory, unsavedSettings]
       }
       : undefined
     const latestSettings = unsavedSettings || storedSettings
