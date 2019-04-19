@@ -190,7 +190,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
       </div>
       <IfDomReady domIsReady={state.domIsReady}>{[
 
-        /* Background image */
+        /* All displays with a bg image – Background image  */
         <div key='Background image editor'
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de fond'
@@ -212,14 +212,16 @@ export default class LibeInstaSlideWysiwyg extends Component {
               min={1080} max={8000} unit=' px'
               defaultValue={1080}
               ref={node => { this.inputs.bgImgZoom = node }}
-              onChange={bgZoomDispatcher} />
-            <SelectList label='Masquer le logo'
-              onChange={hideLogoDispatcher}
-              ref={node => { this.inputs.bgImgLogoHide = node }}
-              options={[
-                { label: 'Afficher', value: '0', selected: true },
-                { label: 'Masquer', value: '1' } ]} />
-          </WysiwygEditor>
+              onChange={bgZoomDispatcher} />{
+            display !== 'bg-image'
+              ? ''
+              : <SelectList label='Masquer le logo'
+                onChange={hideLogoDispatcher}
+                ref={node => { this.inputs.bgImgLogoHide = node }}
+                options={[
+                  { label: 'Afficher', value: '0', selected: true },
+                  { label: 'Masquer', value: '1' } ]} />
+          }</WysiwygEditor>
         </div>,
 
         /* Cover display – Title and text */
