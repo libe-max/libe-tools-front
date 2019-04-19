@@ -16,6 +16,11 @@ const IfDomReady = props => props.domIsReady
   : ''
 
 export default class LibeInstaSlideWysiwyg extends Component {
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * CONSTRUCTOR
+   *
+   * * * * * * * * * * * * * * * * * * */
   constructor () {
     super()
     this.state = {
@@ -31,11 +36,21 @@ export default class LibeInstaSlideWysiwyg extends Component {
     window.addEventListener('resize', this.resize)
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * DID MOUNT
+   *
+   * * * * * * * * * * * * * * * * * * */
   componentDidMount () {
     window.setTimeout(this.resize, 50)
     this.setState({ domIsReady: true })
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * DID UPDATE
+   *
+   * * * * * * * * * * * * * * * * * * */
   componentDidUpdate () {
     window.setTimeout(this.resize(), 50)
     if (!this.state.domIsReady) return this.setState({ domIsReady: true })
@@ -49,11 +64,21 @@ export default class LibeInstaSlideWysiwyg extends Component {
     this.populateFields()
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * DID UNMOUNT
+   *
+   * * * * * * * * * * * * * * * * * * */
   componentWillUnmount () {
     window.clearInterval(this.interval)
     window.removeEventListener('resize', this.resize)
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * RENDER
+   *
+   * * * * * * * * * * * * * * * * * * */
   render () {
     const { props, state, $wrapper } = this
     const { slide, dispatchEdition } = props
@@ -120,6 +145,10 @@ export default class LibeInstaSlideWysiwyg extends Component {
         }
       return dispatchEdition('backgroundImages', [newVal])
     }
+    const hideLogoDispatcher = e => {
+      const newVal = { ...slide.logo, hidden: parseInt(e.target.value, 10) }
+      return dispatchEdition('logo', newVal)
+    }
     const imgSrcDispatcher = e => {
       const newVal = { ...slide.image, src: e.target.value }
       return dispatchEdition('image', newVal)
@@ -184,6 +213,12 @@ export default class LibeInstaSlideWysiwyg extends Component {
               defaultValue={1080}
               ref={node => { this.inputs.bgImgZoom = node }}
               onChange={bgZoomDispatcher} />
+            <SelectList label='Masquer le logo'
+              onChange={hideLogoDispatcher}
+              ref={node => { this.inputs.bgImgLogoHide = node }}
+              options={[
+                { label: 'Afficher', value: '0', selected: true },
+                { label: 'Masquer', value: '1' } ]} />
           </WysiwygEditor>
         </div>,
 
@@ -312,6 +347,11 @@ export default class LibeInstaSlideWysiwyg extends Component {
     </Wrapper>
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * POPULATE FIELDS
+   *
+   * * * * * * * * * * * * * * * * * * */
   populateFields () {
     const {
       props: { slide: {
@@ -319,13 +359,15 @@ export default class LibeInstaSlideWysiwyg extends Component {
         title,
         text,
         image,
-        contentPosition
+        contentPosition,
+        logo
       } },
       inputs: {
         bgImgSrc,
         bgImgXPos,
         bgImgYPos,
         bgImgZoom,
+        bgImgLogoHide,
         coverDisplayTitle,
         coverDisplayTitleHide,
         coverDisplayContentPos,
@@ -373,8 +415,17 @@ export default class LibeInstaSlideWysiwyg extends Component {
       if (coverDisplayContentPos) coverDisplayContentPos.setValue(contentPosition)
       if (textOnBgDisplayContentPos) textOnBgDisplayContentPos.setValue(contentPosition)
     }
+    // Logo fields
+    if (logo) {
+      if (bgImgLogoHide) bgImgLogoHide.setValue(logo.hidden || '0')
+    }
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * RESIZE
+   *
+   * * * * * * * * * * * * * * * * * * */
   resize () {
     const slideWidth = 1080
     const slideHeight = 1920
@@ -390,6 +441,11 @@ export default class LibeInstaSlideWysiwyg extends Component {
     $placeholder.style.transform = `matrix(${scX}, 0, 0, ${scY}, ${trX}, ${trY})`
   }
 
+  /* * * * * * * * * * * * * * * * * * * 
+   *
+   * UNACTIVATE ALL EDITORS
+   *
+   * * * * * * * * * * * * * * * * * * */
   unactivateAllEditors () {
     this.editors.forEach(editor => {
       editor.unactivate()
