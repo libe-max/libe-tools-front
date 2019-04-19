@@ -25,8 +25,8 @@ class WysiwygEditor extends Component {
     super(props)
     this.state = { active: false }
     this.initDomRootStyles = {
-      boxShadow: props.domRoot.style.boxShadow,
-      cursor: props.domRoot.style.cursor
+      boxShadow: props.domRoot ? props.domRoot.style.boxShadow : '',
+      cursor: props.domRoot ? props.domRoot.style.cursor : ''
     }
     this.setActiveStyle = this.setActiveStyle.bind(this)
     this.unsetActiveStyle = this.unsetActiveStyle.bind(this)
@@ -34,9 +34,11 @@ class WysiwygEditor extends Component {
     this.unactivate = this.unactivate.bind(this)
     this.handleMouseenterOnDomRoot = this.handleMouseenterOnDomRoot.bind(this)
     this.handleMouseleaveOnDomRoot = this.handleMouseleaveOnDomRoot.bind(this)
-    props.domRoot.addEventListener('mouseenter', this.handleMouseenterOnDomRoot)
-    props.domRoot.addEventListener('mouseleave', this.handleMouseleaveOnDomRoot)
-    props.domRoot.addEventListener('click', this.activate)
+    if (props.domRoot) {
+      props.domRoot.addEventListener('mouseenter', this.handleMouseenterOnDomRoot)
+      props.domRoot.addEventListener('mouseleave', this.handleMouseleaveOnDomRoot)
+      props.domRoot.addEventListener('click', this.activate)
+    }
   }
 
   componentDidMount () {
@@ -51,9 +53,11 @@ class WysiwygEditor extends Component {
 
   componentWillUnmount () {
     const { props } = this
-    props.domRoot.removeEventListener('mouseenter', this.setActiveStyle)
-    props.domRoot.removeEventListener('mouseleave', this.unsetActiveStyle)
-    props.domRoot.removeEventListener('click', this.activate)
+    if (props.domRoot) {
+      props.domRoot.removeEventListener('mouseenter', this.setActiveStyle)
+      props.domRoot.removeEventListener('mouseleave', this.unsetActiveStyle)
+      props.domRoot.removeEventListener('click', this.activate)
+    }
   }
 
   render () {
@@ -89,8 +93,10 @@ class WysiwygEditor extends Component {
 
   setActiveStyle () {
     const { props: { domRoot, theme } } = this
-    domRoot.style.boxShadow = theme.shadows.massiveFocus
-    domRoot.style.cursor = 'pointer'
+    if (domRoot) {
+      domRoot.style.boxShadow = theme.shadows.massiveFocus
+      domRoot.style.cursor = 'pointer'
+    }
   }
 
   unsetActiveStyle () {
@@ -98,8 +104,10 @@ class WysiwygEditor extends Component {
       initDomRootStyles,
       props: { domRoot }
     } = this
-    domRoot.style.boxShadow = initDomRootStyles.boxShadow
-    domRoot.style.cursor = initDomRootStyles.cursor
+    if (domRoot) {
+      domRoot.style.boxShadow = initDomRootStyles.boxShadow
+      domRoot.style.cursor = initDomRootStyles.cursor
+    }
   }
 
   activate () {
