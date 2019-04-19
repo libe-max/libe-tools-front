@@ -350,6 +350,11 @@ ${r}__text-on-bg-image-display {
     display: block;
 }
 
+&${r}_bg-image-display${r}_hidden-logo
+  ${r}__icon-signature {
+    display: none;
+}
+
 /* Quote on background image display */
 &${r}_quote-on-bg-image-display
   ${r}__background-images {

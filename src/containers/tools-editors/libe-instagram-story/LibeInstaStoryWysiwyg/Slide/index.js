@@ -19,11 +19,13 @@ export default class LibeInstaSlide extends Component {
     const image = props.image || {}
     const backgroundImages = props.backgroundImages || []
     const contentPosition = props.contentPosition
+    const logo = props.logo || {}
 
     /* Assign classes */
     const r = `libe-insta-slide`
     const classes = [r, `${r}_${display}-display`]
     if (title.hidden) classes.push(`${r}_hidden-title`)
+    if (logo.hidden) classes.push(`${r}_hidden-logo`)
 
     /* Inner logic */
     const coverContentPosStyle = (() => {
@@ -94,8 +96,7 @@ export default class LibeInstaSlide extends Component {
         className={classes.join(' ')}>
 
         {/* Background images */}
-        <div
-          data-property='background-images'
+        <div data-property='background-images'
           className={`${r}__background-images`}
           style={bgImgPlaceholderStyle}>
           {backgroundImages.map((bgImg, i) => <div
