@@ -39,7 +39,7 @@ grid-template-rows: auto 1fr auto;
 
 .bundle-page__bundle-preview-box {
   z-index: 1;
-  width: calc(100% - 400px);
+  width: calc(100% - 300px);
   height: 100%;
   overflow: hidden;
   background-color: ${p => p.theme.colors.baseBg};
@@ -48,7 +48,7 @@ grid-template-rows: auto 1fr auto;
 
 .bundle-page__bundle-settings-box {
   z-index: 2;
-  width: 400px;
+  width: 300px;
   overflow-y: scroll;
   overflow-scrolling: touch;
 }
