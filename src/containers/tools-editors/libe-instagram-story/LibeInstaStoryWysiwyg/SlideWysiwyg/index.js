@@ -16,7 +16,7 @@ const IfDomReady = props => props.domIsReady
   : ''
 
 export default class LibeInstaSlideWysiwyg extends Component {
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * CONSTRUCTOR
    *
@@ -36,7 +36,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     window.addEventListener('resize', this.resize)
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * DID MOUNT
    *
@@ -46,7 +46,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     this.setState({ domIsReady: true })
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * DID UPDATE
    *
@@ -64,7 +64,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     this.populateFields()
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * DID UNMOUNT
    *
@@ -74,7 +74,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     window.removeEventListener('resize', this.resize)
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * RENDER
    *
@@ -213,15 +213,15 @@ export default class LibeInstaSlideWysiwyg extends Component {
               defaultValue={1080}
               ref={node => { this.inputs.bgImgZoom = node }}
               onChange={bgZoomDispatcher} />{
-            display !== 'bg-image'
-              ? ''
-              : <SelectList label='Masquer le logo'
-                onChange={hideLogoDispatcher}
-                ref={node => { this.inputs.bgImgLogoHide = node }}
-                options={[
-                  { label: 'Afficher', value: '0', selected: true },
-                  { label: 'Masquer', value: '1' } ]} />
-          }</WysiwygEditor>
+              display !== 'bg-image'
+                ? ''
+                : <SelectList label='Masquer le logo'
+                  onChange={hideLogoDispatcher}
+                  ref={node => { this.inputs.bgImgLogoHide = node }}
+                  options={[
+                    { label: 'Afficher', value: '0', selected: true },
+                    { label: 'Masquer', value: '1' } ]} />
+            }</WysiwygEditor>
         </div>,
 
         /* Cover display – Title and text */
@@ -349,7 +349,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     </Wrapper>
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * POPULATE FIELDS
    *
@@ -423,7 +423,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     }
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * RESIZE
    *
@@ -443,7 +443,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     $placeholder.style.transform = `matrix(${scX}, 0, 0, ${scY}, ${trX}, ${trY})`
   }
 
-  /* * * * * * * * * * * * * * * * * * * 
+  /* * * * * * * * * * * * * * * * * * *
    *
    * UNACTIVATE ALL EDITORS
    *
