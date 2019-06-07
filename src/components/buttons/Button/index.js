@@ -40,7 +40,7 @@ export default class Button extends Component {
       onFocus={props.disabled ? () => this.node.blur() : null}
       onClick={!props.disabled ? props.onClick : null}
       tabIndex={!props.disabled ? props.tabIndex : -1}
-      innerRef={node => { this.node = node }}
+      ref={node => { this.node = node }}
       title={disabledMessage}
       className={classes}>
       {props.children}

@@ -183,7 +183,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
     /* Display */
     this.editors = []
     return <Wrapper
-      innerRef={node => { this.$wrapper = node }}
+      ref={node => { this.$wrapper = node }}
       className={classes.join(` `)}>
       <div className={`${r}__slide`}>
         <Slide {...slide} />
@@ -195,7 +195,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de fond'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__background-images`)}>
             <TextInput blurOnEnter
               label="Adresse de l'image"
@@ -229,7 +229,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Titre et texte de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__cover-display`)}>
             {(!slide.title || (slide.title && !slide.title.hidden))
               ? <TextInput blurOnEnter
@@ -260,7 +260,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Image de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__image-and-text-display .libe-insta-slide__image`)}>
             <TextInput blurOnEnter
               label="Adresse de l'image"
@@ -275,7 +275,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte et titre de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__image-and-text-display .libe-insta-slide__title-and-text`)}>
             <SelectList label='Masquer le titre'
               onChange={hideTitleDispatcher}
@@ -303,7 +303,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte de la citation'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote`)}>
             <TextInput blurOnEnter
               placeholder='Tapez ici la citation'
@@ -317,7 +317,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Auteur de la citation'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__quote-on-bg-image-display .libe-insta-slide__quote-author`)}>
             <TextInput blurOnEnter
               placeholder="Tapez ici l'auteur de la citation"
@@ -331,7 +331,7 @@ export default class LibeInstaSlideWysiwyg extends Component {
           className='libe-insta-slide-wysiwyg__editor'>
           <WysiwygEditor title='Texte de la slide'
             onActivate={this.unactivateAllEditors}
-            innerRef={node => { this.editors.push(node) }}
+            ref={node => { this.editors.push(node) }}
             domRoot={$(`.libe-insta-slide__text-on-bg-image-display .libe-insta-slide__text-panel`)}>
             <TextInput blurOnEnter
               placeholder='Tapez ici le texte de la slide'

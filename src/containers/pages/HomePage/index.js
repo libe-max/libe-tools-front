@@ -189,7 +189,7 @@ class HomePage extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
-      innerRef={node => { this.node = node }}>
+      ref={node => { this.node = node }}>
       <div className='home-page__header'><Header /></div>
       <div className='home-page__content'>
         <div className='home-page__notifications'><NotificationsPanel /></div>

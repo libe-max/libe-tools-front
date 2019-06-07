@@ -66,7 +66,7 @@ class WysiwygEditor extends Component {
     if (!this.state.active) classes.push(`${r}_inactive`)
     return <ThemeProvider theme={theme => theme._shade()}>
       <Wrapper
-        innerRef={node => { this.$wrapper = node }}
+        ref={node => { this.$wrapper = node }}
         className={classes.join(' ')}>
         <div className={`${r}__title`}>
           <ParagraphTitle>{this.props.title}</ParagraphTitle>

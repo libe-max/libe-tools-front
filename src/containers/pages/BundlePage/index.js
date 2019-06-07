@@ -121,7 +121,7 @@ class BundlePage extends Component {
     if (isSaved) classes.push('bundle-page_saved')
 
     /* Display */
-    return <Wrapper innerRef={node => { this.node = node }} className={classes.join(' ')}>
+    return <Wrapper ref={node => { this.node = node }} className={classes.join(' ')}>
       <div className='bundle-page__header'><Header /></div>
       <div className='bundle-page__content'>
         <div className='bundle-page__notifications'><NotificationsPanel /></div>

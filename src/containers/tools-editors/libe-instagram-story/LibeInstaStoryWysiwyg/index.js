@@ -167,7 +167,7 @@ export default class LibeInstaStoryWysiwyg extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
-      innerRef={node => { this.$wrapper = node }}>
+      ref={node => { this.$wrapper = node }}>
       <div className={`${rootClass}__slide-controls`}>
         <div className={`${rootClass}__slides-navigation`}>
           <div className={[

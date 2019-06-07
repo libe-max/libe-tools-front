@@ -12,7 +12,7 @@ import reducers from './reducers'
 // Routing
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory } from 'history'
 
 // Theme
 import { ThemeProvider } from 'styled-components'
@@ -28,7 +28,7 @@ import ComponentsPage from './containers/pages/ComponentsPage'
  *   Init router and store
  *
  * * * * * * * * * * * * * * * * * */
-const history = createHistory()
+const history = createBrowserHistory()
 const middleware = routerMiddleware(history)
 const logger = createLogger({
   collapsed: true,
@@ -54,7 +54,9 @@ const store = createStore(
 render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter
+        history={history}
+        store={store}>
         <div id='app'>
           <Switch>
             <Route path='/'component={HomePage} exact />

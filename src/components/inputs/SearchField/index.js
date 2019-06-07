@@ -40,7 +40,7 @@ export default class SearchField extends Component {
     /* Display */
     return <Wrapper
       className={classes.join(' ')}
-      innerRef={node => { this.node = node }}>
+      ref={node => { this.node = node }}>
       <TextInput
         value={props.value}
         onChange={props.onChange}
