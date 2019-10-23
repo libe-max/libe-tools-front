@@ -1,7 +1,6 @@
 // React
 import React from 'react'
 import { render } from 'react-dom'
-import registerServiceWorker from './registerServiceWorker'
 
 // Redux
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -54,14 +53,12 @@ const store = createStore(
 render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <ConnectedRouter
-        history={history}
-        store={store}>
+      <ConnectedRouter history={history} store={store}>
         <div id='app'>
           <Switch>
-            <Route path='/'component={HomePage} exact />
-            <Route path='/edit/:type/:id' component={BundlePage} exact />
-            <Route path='/components' component={ComponentsPage} exact />
+            <Route path='/'component={props => <HomePage {...props} />} exact />
+            <Route path='/edit/:type/:id' component={props => <BundlePage {...props} />} exact />
+            <Route path='/components' component={props => <ComponentsPage {...props} />} exact />
             <Redirect from='/' to='/' />
           </Switch>
         </div>
@@ -70,4 +67,3 @@ render(
   </Provider>,
   document.getElementById('root')
 )
-registerServiceWorker()
